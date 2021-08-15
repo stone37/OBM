@@ -1,0 +1,179 @@
+{% set url = app.request.getSchemeAndHttpHost()~''~app.request.requestUri %}
+{% set subject = 'Voici ma dernière trouvaille sur '~settings.name~': '~advert.title %}
+{% set messenger = 'http://www.facebook.com/dialog/send?app_id=891414371587153&amp;
+    link='~url~'&amp;redirect_uri='~url %}
+{% set sms = 'sms://;?body='~url %}
+{% set favoris = hasFavoris(advert) %}
+
+{% if is_mobile() %}
+    <div class="d-flex justify-content-between flex-wrap d-md-none btn-gestion">
+        <a class="btn btn-outline-grey facebook" data-sharer="facebook"
+           data-hashtag="{{ settings.name }}" data-url="{{ url }}">
+            <i class="fab fa-facebook-square"></i>
+        </a>
+        <a href="{{ messenger }}" class="btn btn-outline-grey messenger">
+            <i class="fab fa-facebook-messenger"></i>
+        </a>
+        <a class="btn btn-outline-grey whatsapp"
+           data-sharer="whatsapp" data-url="{{ url }}">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a class="btn btn-outline-grey twitter"
+           data-sharer="twitter"
+           data-hashtags="{{ settings.name }}"
+           data-url="{{ url }}">
+            <i class="fab fa-twitter"></i>
+        </a>
+        {#
+        <a href="sms://;?&body=Hello%20World">Only body</a>
+          <a href="sms://+15552345678;?&body=Hello%20World">one recipient only with body</a>
+        #}
+        <a class="btn btn-outline-grey sms" href="{{ sms }}">
+            <i class="fas fa-sms"></i>
+        </a>
+        <a class="btn btn-outline-deep-orange envelope"
+           data-sharer="email"
+           data-url="{{ url }}"
+           data-subject="{{ subject }}">
+            <i class="fas fa-envelope"></i>
+        </a>
+        {% if settings.activeAdFavorite %}
+            {% if not is_granted('create', advert) %}
+                <a id="{{ advert.id }}" href="" class="mt-2 ad-favorite btn btn-outline-grey
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-favoris{% endif %}
+                    {% if favoris %}active{% endif %}">
+                    <i class="{% if favoris %}fas{% else %}far{% endif %} fa-heart"></i>
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="d-none d-md-flex justify-content-between">
+        <div class="dropdown">
+            <a class="btn btn-primary dropdown-toggle d-none d-md-inline-block" id="userDropdownMenu" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-share-alt mr-1"></i>
+                Partager
+            </a>
+            <div class="dropdown-menu dropdown-primary"
+                 aria-labelledby="userDropdownMenu" style="margin-top: 1px !important;">
+                <a class="dropdown-item" data-sharer="facebook"
+                   data-hashtag="{{ settings.name }}" data-url="{{ url }}">
+                    <i class="fab fa-facebook-f mr-2"></i>
+                    Facebook
+                </a>
+                <a class="dropdown-item" href="{{ messenger }}">
+                    <i class="fab fa-facebook-messenger mr-2"></i>
+                    Messenger
+                </a>
+                <a class="dropdown-item"
+                   data-sharer="whatsapp"
+                   data-url="{{ url }}">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    Whatsapp
+                </a>
+                <a class="dropdown-item"
+                   data-sharer="twitter"
+                   data-hashtags="{{ settings.name }}"
+                   data-url="{{ url }}">
+                    <i class="fab fa-twitter mr-2"></i>
+                    Twitter
+                </a>
+                <a class="dropdown-item" href="{{ sms }}">
+                    <i class="fas fa-sms"></i>
+                    SMS
+                </a>
+                <a class="dropdown-item"
+                   data-sharer="email"
+                   data-url="{{ url }}"
+                   data-subject="{{ subject }}">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Envoyer à un ami
+                </a>
+            </div>
+        </div>
+        <div>
+            {% if settings.activeAdFavorite %}
+                {% if not is_granted('create', advert) %}
+                    <a id="{{ advert.id }}" href="" class="ad-favorite favoris btn btn-outline-grey
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-favoris{% endif %}
+                    {% if favoris %}active{% endif %}">
+                        <i class="{% if favoris %}fas{% else %}far{% endif %} fa-heart mr-1"></i>
+                        Favoris
+                    </a>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div>
+            <a href="" class="btn btn-amber app-ad-print">
+                <i class="fas fa-print mr-1"></i>
+                Imprimer
+            </a>
+        </div>
+    </div>
+{% else %}
+    <div class="d-flex justify-content-between mt-md-0">
+       <div class="dropdown">
+            <a class="btn btn-primary dropdown-toggle" id="userDropdownMenu" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-share-alt mr-1" ></i>
+                Partager l'annonce
+            </a>
+
+            <div class="dropdown-menu dropdown-primary"
+                 aria-labelledby="userDropdownMenu" style="margin-top: 1px !important;">
+                <a class="dropdown-item" data-sharer="facebook"
+                   data-hashtag="{{ settings.name|slug('')|lower }}" data-url="{{ url }}">
+                    <i class="fab fa-facebook-f mr-2"></i>
+                    Facebook
+                </a>
+                <a class="dropdown-item"
+                    href="{{ messenger }}">
+                    <i class="fab fa-facebook-messenger mr-2"></i>
+                    Messenger
+                </a>
+                <a class="dropdown-item"
+                   data-sharer="whatsapp"
+                   data-url="{{ url }}">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    Whatsapp
+                </a>
+                <a class="dropdown-item"
+                   data-sharer="twitter"
+                   data-hashtags="{{ settings.name }}"
+                   data-url="{{ url }}">
+                    <i class="fab fa-twitter mr-2"></i>
+                    Twitter
+                </a>
+                <a class="dropdown-item"
+                   data-sharer="email"
+                   data-url="{{ url }}"
+                   data-subject="{{ subject }}">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Envoyer à un ami
+                </a>
+            </div>
+        </div>
+        <div>
+            {% if settings.activeAdFavorite %}
+                {% if not is_granted('create', advert) %}
+                    <a id="{{ advert.id }}" href="" class="ad-favorite favoris btn btn-outline-grey
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-favoris{% endif %}
+                    {% if favoris %}active{% endif %}">
+                        <i class="{% if favoris %}fas{% else %}far{% endif %} fa-heart mr-1"></i>
+                        {% if favoris %}Retirer des favoris{% else %}Ajouter au favoris{% endif %}
+                    </a>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div>
+            <a href="" class="btn btn-amber app-ad-print">
+                <i class="fas fa-print mr-1"></i>
+                Imprimer l'annonce
+            </a>
+        </div>
+    </div>
+{% endif %}
+
+
+

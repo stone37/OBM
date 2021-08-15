@@ -1,0 +1,18 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Pack abonnements comptes pro | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/pack/index/_header.html.twig' %}
+
+    {% include 'admin/pack/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+

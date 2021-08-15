@@ -1,0 +1,40 @@
+app_admin_category_premium_index:
+    path: /categories/premium
+    methods: [GET]
+    controller: App\Controller\Admin\CategoryPremiumController::index
+
+app_admin_category_premium_create:
+    path: /categories/premium/create
+    methods: [GET, POST]
+    controller: App\Controller\Admin\CategoryPremiumController::create
+
+app_admin_category_premium_edit:
+    path: /categories/premium/{id}/edit
+    methods: [GET, POST]
+    controller: App\Controller\Admin\CategoryPremiumController::edit
+    requirements:
+        id: \d+
+
+app_admin_category_premium_delete:
+    path: /categories/premium/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\CategoryPremiumController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_category_premium_bulk_delete:
+    path: /categories/premium/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\CategoryPremiumController::deleteBulk
+    options:
+        expose: true
+
+app_admin_category_premium_move:
+    path: /categories/premium/{id}/move
+    methods: GET
+    controller: App\Controller\Admin\CategoryPremiumController::move
+    requirements:
+        id: \d+
+

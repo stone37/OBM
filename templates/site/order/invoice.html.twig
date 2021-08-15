@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Aloha!</title>
+
+    <style type="text/css">
+        * {
+            font-family: Verdana, Arial, sans-serif;
+        }
+        table{
+            font-size: x-small;
+        }
+        tfoot tr td{
+            font-weight: bold;
+            font-size: x-small;
+        }
+        .gray {
+            background-color: lightgray
+        }
+    </style>
+
+</head>
+<body>
+
+<table width="100%">
+    <tr>
+        <td valign="top"><img src="{{ vich_uploader_asset(settings, 'file')}}" alt="" width="150"/></td>
+        <td align="right">
+            <h1 style="color:#f72459; font-weight: 600;">{{ settings.name }}</h1>
+            <pre>
+                Facture N <strong style="font-weight: bold">{{ order.reference }}</strong> <br>
+                {% if settings.city %}{{ settings.city }} <br>{% endif %}
+                {% if settings.address %}{{ settings.address }} <br>{% endif %}
+                {% if settings.phone %}{{ settings.phone }} <br>{% endif %}
+                {% if settings.fax %}{{ settings.fax }} <br>{% endif %}
+                {% if settings.email %}{{ settings.email }} <br>{% endif %}
+            </pre>
+        </td>
+    </tr>
+
+</table>
+
+<table width="100%">
+    <tr>
+        <td><strong>De:</strong> {{ settings.name }}</td>
+        <td><strong>A:</strong> {{ order.user.firstName }} {{ order.user.lastName }}</td>
+    </tr>
+</table>
+
+<br/>
+
+<table width="100%">
+    <thead style="background-color: lightgray;">
+    <tr>
+        <th>#</th>
+        <th>Description</th>
+        <th>Quantité</th>
+        <th>Prix unitaire</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in order.items %}
+        <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{ app_product_name(item.product) }}</td>
+            <td align="right">{{ item.quantity }}</td>
+            <td align="right">{{ item.product.price }} CFA</td>
+            <td align="right">
+                {% set pq = item.product.price * item.quantity %}
+                {{ item.product.price * item.quantity }} CFA
+            </td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+
+    <tfoot>
+    <tr>
+        <td colspan="3"></td>
+        <td align="right">Total HT</td>
+        <td align="right">{{ order.priceTotal }} CFA</td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td align="right">Reduction</td>
+        <td align="right"></td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td align="right">Total des taxes</td>
+        <td align="right">{{ order.totalTva }} CFA</td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td align="right">Total TTC</td>
+        <td align="right" class="gray">€{{ order.priceTotalTva }} CFA</td>
+    </tr>
+    </tfoot>
+</table>
+
+<p><b>Date :</b> {{ order.createdAt|date('d/m/Y') }}</p>
+
+</body>
+</html>

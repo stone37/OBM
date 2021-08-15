@@ -1,0 +1,19 @@
+{% extends layout %}
+
+{% import "mails/macros.twig" as e %}
+
+{% set settings = config.get %}
+
+{% block body %}
+
+  {% apply markdown_email %}
+
+    Création de votre annonce {{ settings.name }}
+    ===============================
+
+    Votre annonce a été créer. Il doit etre valider avant d'etre visible dans la liste des annonces sur {{ settings.name }}. Délai de validation: moins de 8 heures.
+
+  {% endapply %}
+
+  {{ e.button('Voir mes annonces', url('app_dashboard_advert_index')) }}
+{% endblock %}

@@ -1,0 +1,123 @@
+<div class="row app-advert-show-info">
+    <div class="col-12">
+        <table class="table table-borderless table-responsive-sm">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Surface</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.surface }} m²</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Etat</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.immobilierState }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Accès</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.access %}
+                            {% for data in advert.access %}
+                                {{ data }} {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}NC{% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Extérieures</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.exterior %}
+                            {% for data in advert.exterior %}
+                                {{ data }} {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}NC{% endif %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Date de construction</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.dateConstruction %}{{ advert.dateConstruction }}{% else %}NC{% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Situation</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.situation %}{{ advert.situation }}{% else %}NC{% endif %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Standing</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.standing %}{{ advert.standing }}{% else %}NC{% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Intérieur</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.interior %}
+                            {% for data in advert.interior %}
+                                {{ data }} {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}NC{% endif %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Services inclus</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.serviceInclus %}
+                            {% for data in advert.serviceInclus %}
+                                {{ data }} {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}NC{% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Type de sol</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.typeSol %}
+                            {% for data in advert.typeSol %}
+                                {{ data }} {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}NC{% endif %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Proximité</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.proximite %}
+                            {% for data in advert.proximite %}
+                                {{ data }} {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}NC{% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Etat général</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.stateGenerale %}{{ advert.stateGenerale }}{% else %}NC{% endif %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Prix</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {{ advert.price }} <span class="text-primary font-weight-stone-600">CFA</span>
+                        {% if not advert.priceStatus %}
+                            - <span class="small font-weight-stone-600">à débattre</span>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+{% extends 'user/layout.html.twig' %}
+
+{% import 'site/advert/index/macro/__list.html.twig' as __advert  %}
+
+{% block title 'Mes favoris' %}
+{% block meta %}
+    <meta name="google" content="nositelinkssearchbox">
+{% endblock %}
+
+{% block app_cart %}{% endblock %}
+{% block app_mobile_cart %}{% endblock %}
+
+{% block app_breadcrumbs %}
+    <div class="mt-80 mt-md-7">
+        {{ breadcrumb('Tableau de bord', '/u/') }}
+        {{ breadcrumb('Mes annonces favoris') }}
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </div>
+{% endblock %}
+
+{% block app_body %}
+    <div class="row">
+        <div class="col-12">
+            <h3 class="h3-responsive font-weight-stone-600 mb-4">Mes annonces favoris</h3>
+        </div>
+    </div>
+    {% if favorites|length > 0 %}
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="row">
+                    {% for  favorite in favorites %}
+                        {% if adActive(favorite.advert) %}
+                            <div class="col-12">
+                                {{ __advert.list(favorite.advert, settings) }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12 col-md-8">
+
+            </div>
+        </div>
+    {% else %}
+        <div class="row app-user d-flex justify-content-center">
+            <div class="col-12 col-md-8 text-center mt-3 mt-md-5 mb-5">
+                <h4 class="text-primary h4-responsive font-weight-stone-600">
+                    Vous avez trouvé une annonce intéressante sur {{ config.get.name }} ?
+                    Cliquez simplement sur "Favoris" lorsque vous consultez une annonce sur {{ config.get.name }}.
+                </h4>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/advert/list.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+

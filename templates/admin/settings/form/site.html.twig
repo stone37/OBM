@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="field-group col-12">
+        <fieldset>
+            <legend class="with-icon">
+                Informations généraux
+            </legend>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group field-text">
+                        {{ form_label(form.name) }}
+                        <div class="form-widget">
+                            {{ form_widget(form.name) }}
+                            <small class="form-help">Champ est obligatoire</small>
+                        </div>
+                        <span class="error-message">{{ form_errors(form.name) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group field-text">
+                        {{ form_label(form.email) }}
+                        <div class="form-widget">
+                            {{ form_widget(form.email) }}
+                            <small class="form-help">Champ est obligatoire</small>
+                        </div>
+                        <span class="error-message">{{ form_errors(form.email) }}</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group field-text">
+                        {{ form_label(form.phone) }}
+                        <div class="form-widget">
+                            {{ form_widget(form.phone) }}
+                            <small class="form-help">Champ est obligatoire</small>
+                        </div>
+                        <span class="error-message">{{ form_errors(form.phone) }}</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group field-text">
+                        {{ form_label(form.fax) }}
+                        <div class="form-widget">
+                            {{ form_widget(form.fax) }}
+                        </div>
+                        <span class="error-message">{{ form_errors(form.fax) }}</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group field-text">
+                        {{ form_label(form.address) }}
+                        <div class="form-widget">
+                            {{ form_widget(form.address) }}
+                        </div>
+                        <span class="error-message">{{ form_errors(form.address) }}</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group field-text">
+                        {{ form_label(form.country) }}
+                        <div class="form-widget">
+                            {{ form_widget(form.country) }}
+                        </div>
+                        <span class="error-message">{{ form_errors(form.country) }}</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group field-text">
+                        {{ form_label(form.city) }}
+                        <div class="form-widget">
+                            {{ form_widget(form.city) }}
+                        </div>
+                        <span class="error-message">{{ form_errors(form.city) }}</span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group field-textarea">
+                        {{ form_label(form.description) }}
+                        <div class="form-widget">
+                            {{ form_widget(form.description) }}
+                        </div>
+                        <span class="error-message">{{ form_errors(form.description) }}</span>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="field-group col-12">
+        <fieldset>
+            <legend class="with-icon">
+                Media
+            </legend>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group field-text">
+                        {{ form_label(form.file) }}
+                        {% if settings.fileName|length %}
+                            <div>
+                                <img src="{{ vich_uploader_asset(settings, 'file') }}" class="img-thumbnail">
+                            </div>
+                        {% endif %}
+                        <div class="form-widget">
+                            {{ form_widget(form.file) }}
+                        </div>
+                        <span class="error-message">{{ form_errors(form.file) }}</span>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+
+

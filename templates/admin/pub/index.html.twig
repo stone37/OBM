@@ -1,0 +1,26 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    {% if type == 1 %}Publicité accueil
+    {% elseif type == 2 %}Publicité header accueil
+    {% elseif type == 3 %}Publicité header listing des annonces
+    {% elseif type == 4 %}Publicité listing des annonces
+    {% elseif type == 5 %}Publicité header page d'annonce
+    {% elseif type == 6 %}Publicité page d'annonce
+    {% else %}Publicité entre les annonces
+    {% endif %}
+    | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/pub/index/_header.html.twig' %}
+
+    {% include 'admin/pub/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

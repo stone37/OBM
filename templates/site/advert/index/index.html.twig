@@ -1,0 +1,136 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title %}
+    Annonces {{ category.name|lower }}
+    {% if category.parent|length > 0 %}| {{ category.parent.name }}{% endif %}
+{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="Vous cherchez {{ category.name|lower }} ? Nous avons des milliers de petites annonces dans laquelle vous pouvez votre bonheur..."/>
+    <meta property="og:description" content="Vous cherchez {{ category.name|lower }} ? Nous avons des milliers de petites annonces dans laquelle vous pouvez votre bonheur..." />
+    <meta property="og:url" content="{{ app.request.getUriForPath(app.request.requestUri) }}"/>
+{% endblock %}
+
+{% block app_cart %}{% endblock %}
+{% block app_mobile_cart %}{% endblock %}
+
+{% block app_navbar_second %}
+    {% if is_mobile() %}
+        <div class="jumbotron mobile color-primary d-block d-lg-none"
+             style="border-bottom-right-radius: 25px">
+            <div class="d-flex align-items-center h-100">
+                <div class="container text-center mx-3">
+                    {% block app_mobile_search_form %}
+                        {{ render(controller('App\\Controller\\SearchController::indexM')) }}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block app_breadcrumbs %}
+    <section class="d-flex justify-content-between pt-md-0 mt-page-n">
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb mt-2 mt-md-0',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </section>
+{% endblock %}
+
+{% block app_body %}
+    <section class="row">
+        <div id="alert-filter-scroll" class="col-12 d-none">
+            {% if is_mobile() %}
+                <div class="navbar fixed-bottom d-block d-md-none py-2 mobile"
+                     style="background-color: rgba(255, 255, 255, .8)">
+                    <div class="d-flex justify-content-between">
+                        <a href="" class="btn btn-grey btn-sm"
+                           data-toggle="modal" data-target=".app-advert-search-filter-modal">
+                            <i class="fas fa-filter mr-2"></i> Filter
+                        </a>
+
+                        {% if settings.activeAlert %}
+                            <a href="" class="btn btn-danger btn-sm app-alert
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-alert{% endif %}
+                                {% if hasAlert() %}disabled{% endif %}"
+                                data-category="{{ app.request.attributes.get('category_slug') }}"
+                                data-sub-category="{{ app.request.attributes.get('sub_category_slug') }}"
+                                data-sub-division="{{ app.request.attributes.get('sub_division_slug') }}">
+                                <i class="fas fa-bell mr-2"></i> M'alerter
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="d-none d-md-block">
+                <div id="btn-filter" class="fixed-action-filter"
+                     data-toggle="tooltip" title="Filter les resultats" data-placement="left">
+                    <a href="" class="btn-floating btn-grey btn-lg"
+                       data-toggle="modal" data-target=".app-advert-search-filter-modal" >
+                        <i class="fas fa-filter"></i>
+                    </a>
+                </div>
+
+                {% if settings.activeAlert %}
+                    <div id="btn-alert" class="fixed-action-alert">
+                        <a href="" class="btn-floating btn-danger btn-lg app-alert
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-alert{% endif %}
+                            {% if hasAlert() %}disabled{% endif %}"
+                            data-category="{{ app.request.attributes.get('category_slug') }}"
+                            data-sub-category="{{ app.request.attributes.get('sub_category_slug') }}"
+                            data-sub-division="{{ app.request.attributes.get('sub_division_slug') }}"
+                            data-toggle="tooltip" title="Créer une alerte" data-placement="left">
+                            <i class="fas fa-bell"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12">
+            <h4 class="h4-responsive font-weight-stone-600 mb-3">{{ category.name }}</h4>
+            <div class="grey-text font-weight-stone-500">
+                {{ adverts.totalItemCount }} annonces
+                <span class="border border-secondary text-secondary rounded px-2 py-1 ml-2 bg-white"
+                      style="border-width: 2px !important">{{ category.name }}</span>
+            </div>
+        </div>
+        <div class="">
+
+        </div>
+        <div class="col-12">
+            {% include 'site/advert/index/search.html.twig' %}
+        </div>
+    </section>
+    <section class="row">
+        <div class="col-12 col-lg-8">
+            {% include 'site/advert/index/content.html.twig'%}
+        </div>
+        <div class="col-12 col-lg-4">
+            {# vignette #}
+            {{ render(controller('App\\Controller\\VignetteController::index', {'request': app.request})) }}
+            {# vignette #}
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/advert/list.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        let category = '{{ category.slug }}',
+            brand = '{{ app.request.query.get("marque") }}',
+            model = '{{ app.request.query.get("model") }}';
+    </script>
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/advert/list.js'} %}
+
+{% endblock %}
+
+

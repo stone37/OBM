@@ -1,0 +1,25 @@
+app_dashboard_alert_index:
+    path: /alertes
+    methods: [GET]
+    controller: App\Controller\Account\AlertController::alert
+
+app_dashboard_alert_index_active:
+    path: /alertes/alerte-active
+    methods: [GET]
+    controller: App\Controller\Account\AlertController::alertActive
+
+app_dashboard_alert_status:
+    path: /alertes/{id}/status
+    methods: GET
+    controller: App\Controller\Account\AlertController::status
+    requirements:
+        id: \d+
+
+app_dashboard_alert_delete:
+    path: /alertes/{id}/delete
+    methods: [GET, POST]
+    controller: App\Controller\Account\AlertController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true

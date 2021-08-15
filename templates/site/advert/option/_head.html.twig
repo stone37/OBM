@@ -1,0 +1,10 @@
+{% import 'site/advert/index/macro/__list.html.twig' as __head  %}
+
+<section class="row mt-4">
+    {% for headers in headers %}
+        <div class="col-12">
+           {{ __head.list(headers, settings) }}
+        </div>
+    {% endfor %}
+</section>
+

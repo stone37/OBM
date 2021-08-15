@@ -1,0 +1,111 @@
+<div class="form-row mt-3">
+    <div class="col-12 col-md-4 mb-3">
+        <div class="grey-text pb-1">{{ form.activeMessage.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.activeMessage.vars.full_name }}" id="{{ form.activeMessage.vars.id }}"
+                       value="{{ form.activeMessage.vars.value }}" {% if form.activeMessage.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 mb-3">
+        <div class="grey-text pb-1">{{ form.activeAdFavorite.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.activeAdFavorite.vars.full_name }}" id="{{ form.activeAdFavorite.vars.id }}"
+                       value="{{ form.activeAdFavorite.vars.value }}" {% if form.activeAdFavorite.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 mb-3">
+        <div class="grey-text pb-1">{{ form.activeAlert.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.activeAlert.vars.full_name }}" id="{{ form.activeAlert.vars.id }}"
+                       value="{{ form.activeAlert.vars.value }}" {% if form.activeAlert.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 mb-3">
+        <div class="grey-text pb-1">{{ form.activeAdSimilar.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.activeAdSimilar.vars.full_name }}" id="{{ form.activeAdSimilar.vars.id }}"
+                       value="{{ form.activeAdSimilar.vars.value }}" {% if form.activeAdSimilar.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                 Oui
+            </label>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4 mb-3">
+        <div class="grey-text pb-1">{{ form.activeCredit.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.activeCredit.vars.full_name }}" id="{{ form.activeCredit.vars.id }}"
+                       value="{{ form.activeCredit.vars.value }}" {% if form.activeCredit.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 mb-3">
+        <div class="grey-text pb-1">{{ form.activeCardPayment.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.activeCardPayment.vars.full_name }}" id="{{ form.activeCardPayment.vars.id }}"
+                       value="{{ form.activeCardPayment.vars.value }}" {% if form.activeCardPayment.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 mb-3">
+        <div class="grey-text pb-1">{{ form.activeVignette.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.activeVignette.vars.full_name }}" id="{{ form.activeVignette.vars.id }}"
+                       value="{{ form.activeVignette.vars.value }}" {% if form.activeVignette.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 mb-3">
+        <div class="grey-text pb-1">{{ form.activePub.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.activePub.vars.full_name }}" id="{{ form.activePub.vars.id }}"
+                       value="{{ form.activePub.vars.value }}" {% if form.activePub.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="col-12 col-md-4">
+        {{ form_row(form.numberAdList) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.numberAdUserList) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.numberFavoriteUserList) }}
+    </div>
+</div>

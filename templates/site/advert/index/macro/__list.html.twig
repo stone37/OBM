@@ -1,0 +1,157 @@
+{% macro list(advert, settings) %}
+    {% set photo_principale = app_advert_photo(advert.images) %}
+    {% set favoris = hasFavoris(advert) %}
+    {% set urgent = advert.optionAdUrgents %}
+    {% set encadre = advert.optionAdEncadre %}
+
+    {% if advert.subDivision|length > 0 %}
+        {% set route = path('app_advert_show', {'category_slug': advert.category.slug, 'sub_category_slug': advert.subCategory.slug,
+            'sub_division_slug': advert.subDivision.slug, 'city': advert.location.name,
+            'reference': advert.reference, 'slug': advert.slug}) %}
+    {% else %}
+        {% set route = path('app_advert_show_s', {'category_slug': advert.category.slug, 'sub_category_slug': advert.subCategory.slug,
+            'city': advert.location.name, 'reference': advert.reference, 'slug': advert.slug}) %}
+    {% endif %}
+
+<div id="advert_{{ advert.id }}" class="card app-advert-list-block mb-4
+    {% if urgent %}urgent{% endif %} {% if encadre %}encadre{% endif %}">
+    {% if urgent %}<div class="ur-banner animated flash infinite">Urgent</div>{% endif %}
+    <div class="row no-gutters">
+        <div class="col-6 col-md-4 pr-md-4">
+            {% if photo_principale %}
+                <img src="{{ asset(photo_principale.webPath) }}" class="img-fluid advert-image" alt="{{ photo_principale.name }}" />
+            {% else %}
+                <img src="{{ asset('images/no_image.png') }}" class="img-fluid" alt="" />
+            {% endif %}
+            
+            {% if settings.activeAdFavorite %}
+                {% if not is_granted('create', advert) %}
+                    <div id="{{ advert.id }}"
+                         class="ad-favorite favoris px-2 py-1 rounded-circle mt-1 mr-1 mt-md-2 mr-md-4 z-depth-3 d-inline-block
+                          {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-favoris{% endif %}
+                          {% if favoris %}active{% endif %}">
+                        <i class="{% if favoris %}fas{% else %}far{% endif %} fa-heart dark-grey-text"></i>
+                    </div>
+                {% endif %}
+            {% endif %}
+            <div class="nbr-photo mb-md-2 mr-md-4 mr-1 amber-text">
+                <i class="fas fa-camera-retro"></i> {{ advert.images|length }}
+            </div>
+        </div>
+        <div class="col-6 col-md-8">
+            {# Petit telephone #}
+            <div class="card-body p-0 d-block d-md-none">
+                <div class="font-weight-stone-600 price d-flex justify-content-center text-default
+                        border border-default text-center mx-1 mb-2">
+                    <div class="number d-inline-block">{{ advert.price }}</div>
+                    <img src="{{ asset('images/devise.png') }}" class="devise d-inline-block" alt="devise">
+                </div>
+                <div class="text-muted font-weight-stone-500 location mx-1">
+                    <div class="mb-1">
+                        <i class="fas fa-map-marker-alt text-primary font-weight-bold"></i> {{ advert.location.name }}
+                        {% if advert.location.detail %}({{ advert.location.detail }}){% endif %}
+                    </div>
+                   {#  <div class=""><i class="far fa-clock text-primary font-weight-bold"></i> {{ advert.validatedAt|ago }}</div> #}
+
+                    <div class="data-info">
+                        <ul class="list-inline indigo-text">
+                            {% if advert.marque %}<li class="list-inline-item" title="Marque" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.marque }}</li>{% endif %}
+                            {% if advert.model %}<li class="list-inline-item" title="Modèle" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.model }}</li>{% endif %}
+                            {% if advert.autoYear %}<li class="list-inline-item" title="Année" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.autoYear }}</li>{% endif %}
+                            {% if advert.typeCarburant %}<li class="list-inline-item" title="Carburant" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.typeCarburant }}</li>{% endif %}
+                            {% if advert.boiteVitesse %}<li class="list-inline-item" title="Boite à vitesse" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.boiteVitesse }}</li>{% endif %}
+                            {% if advert.surface %}<li class="list-inline-item" title="Surface" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.surface }} m²</li>{% endif %}
+                            {% if advert.dateConstruction %}<li class="list-inline-item" title="Date de construction" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.dateConstruction }}</li>{% endif %}
+                            {% if advert.brand %}<li class="list-inline-item" title="Marque" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.brand }}</li>{% endif %}
+                            {% if advert.state %}<li class="list-inline-item" title="Etat" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.state }}</li>{% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {# Petit telephone #}
+            <div class="card-body px-2 pl-md-0 pr-md-2 pt-2 pt-md-1 pb-0 d-none d-md-block">
+                <div class="d-flex">
+                    <h6 class="font-weight-stone-600 title text-dark">{{ advert.title|u.truncate(30, '...') }}</h6>
+                    <div class="ml-auto font-weight-stone-500 d-flex price text-default">
+                        <div class="number">{{ advert.price }}</div><img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                    </div>
+                </div>
+                <div class="font-weight-stone-500 small location text-muted mt-1">
+                    <i class="fas fa-map-marker-alt mr-1 text-primary font-weight-bold"></i> {{ advert.location.name }}
+                    {% if advert.location.detail %}({{ advert.location.detail }}){% endif %}
+                    <span class="px-1 mb-0"> | </span>
+                    <i class="far fa-clock mr-1 text-primary font-weight-bold"></i> {{ advert.validatedAt|ago }}
+                </div>
+                <div class="data-info">
+                    <ul class="list-inline indigo-text">
+                        {% if advert.marque %}<li class="list-inline-item" title="Marque" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.marque }}</li>{% endif %}
+                        {% if advert.model %}<li class="list-inline-item" title="Modèle" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.model }}</li>{% endif %}
+                        {% if advert.autoYear %}<li class="list-inline-item" title="Année" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.autoYear }}</li>{% endif %}
+                        {% if advert.typeCarburant %}<li class="list-inline-item" title="Carburant" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.typeCarburant }}</li>{% endif %}
+                        {% if advert.boiteVitesse %}<li class="list-inline-item" title="Boite à vitesse" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.boiteVitesse }}</li>{% endif %}
+                        {% if advert.surface %}<li class="list-inline-item" title="Surface" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.surface }} m²</li>{% endif %}
+                        {% if advert.dateConstruction %}<li class="list-inline-item" title="Date de construction" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.dateConstruction }}</li>{% endif %}
+                        {% if advert.brand %}<li class="list-inline-item" title="Marque" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.brand }}</li>{% endif %}
+                        {% if advert.state %}<li class="list-inline-item" title="Etat" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.state }}</li>{% endif %}
+                    </ul>
+                </div>
+                <div class="content grey-text font-weight-stone-500 small-9 mt-2">
+                    {{ advert.description|u.truncate(125, ' ...') }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 pr-md-3 info {% if not advert.shop|length > 0 %}user{% endif %}">
+            {# Petit telephone #}
+            <div class="d-block d-md-none px-1">
+                <div class="small-8 text-dark font-weight-stone-500 pt-2 mb-1">{{ advert.title|u.truncate(40, '...') }}</div>
+                <div class="d-flex {% if advert.traitement %}justify-content-between{% else %}justify-content-end{% endif %} text-right pb-2">
+                    {% if advert.traitement %}
+                        <div class="traitement text-center small rounded">{{ advert.traitement }}</div>
+                    {% endif %}
+
+                    {% if advert.shop|length > 0 %}
+                        <div>
+                            <img src="{{ vich_uploader_asset(config.get, 'file') }}" alt="Logo du site" class="img-fluid"/>
+                        </div>
+                        <div class="ad pt-1">
+                            <a href="" class="">
+                                Toutes les annonces de 187MARKET
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="ad text-center rounded"><span>Particulier</span></div>
+                    {% endif %}
+                </div>
+            </div>
+            {# Petit telephone #}
+            <div class="d-none d-md-flex justify-content-md-between mt-1 mb-2">
+                <div class="">
+                    {% if advert.shop|length > 0 %}
+                        <div class="d-flex">
+                            <img src="{{ vich_uploader_asset(config.get, 'file') }}" alt="Logo du site" class="img-fluid"/>
+                            <div class="ad">
+                                <a href="" class="">
+                                    Toutes les annonces de 187MARKET <i class="fas fa-angle-right ml-1 text-primary"></i>
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="ad text-center small rounded"><span>Particulier</span></div>
+                    {% endif %}
+                </div>
+
+                {% if advert.traitement %}
+                    <div class="">
+                        <div class="traitement text-center small rounded">{{ advert.traitement }}</div>
+                    </div>
+                {% endif %}
+
+                <div class="">
+                    <a href="{{ route }}" class="btn btn-sm btn-primary btn-advert-show">Voir l'annonce</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+

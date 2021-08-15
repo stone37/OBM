@@ -1,0 +1,33 @@
+app_admin_credit_index:
+    path: /credits
+    methods: [GET]
+    controller: App\Controller\Admin\CreditController::index
+
+app_admin_credit_create:
+    path: /credits/create
+    methods: [GET, POST]
+    controller: App\Controller\Admin\CreditController::create
+
+app_admin_credit_edit:
+    path: /credits/{id}/edit
+    methods: [GET, POST]
+    controller: App\Controller\Admin\CreditController::edit
+    requirements:
+        id: \d+
+
+app_admin_credit_delete:
+    path: /credits/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\CreditController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_credit_bulk_delete:
+    path: /credits/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\CreditController::deleteBulk
+    options:
+        expose: true
+

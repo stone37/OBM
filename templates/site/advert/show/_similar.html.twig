@@ -1,0 +1,107 @@
+{% if settings.activeAdSimilar %}
+<div class="row">
+    <div class="col-12">
+        {% if adverts|length > 0 %}
+            <h5 class="h5-responsive font-weight-stone-500 text-primary mb-3">
+                {% if reference.subDivision %}{{ reference.subDivision.name|capitalize }}{% else %}{{ reference.subCategory.name|capitalize }}{% endif %}
+                {% if reference.type == "j'offre" %}à acheter
+                {% elseif reference.type == 'je recherche' %}rechercher
+                {% elseif reference.type == 'Troc' %}à troquer
+                {% else %}à donner{% endif %}
+                à {{ reference.location.name }} ({{ reference.location.detail }})
+            </h5>
+
+            <div class="row">
+                {% for advert in adverts %}
+                    {% set photo_principale = app_advert_photo(advert.images) %}
+
+                    {% if advert.subDivision|length > 0 %}
+                        {% set route = path('app_advert_show', {'category_slug': advert.category.slug, 'sub_category_slug': advert.subCategory.slug,
+                            'sub_division_slug': advert.subDivision.slug, 'city': advert.location.name,
+                            'reference': advert.reference, 'slug': advert.slug}) %}
+                    {% else %}
+                        {% set route = path('app_advert_show_s', {'category_slug': advert.category.slug, 'sub_category_slug': advert.subCategory.slug,
+                            'city': advert.location.name, 'reference': advert.reference, 'slug': advert.slug}) %}
+                    {% endif %}
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div id="advert_{{ advert.id }}" class="card app-advert-similar-block mb-4">
+                            <div class="view overlay">
+                                {% if photo_principale %}
+                                    <img class="card-img-top" src="{{ asset(photo_principale.webPath) }}" alt="Card image cap" />
+                                {% else %}
+                                    <img class="card-img-top" src="{{ asset('images/no_images.jpg') }}" alt="Card image cap" />
+                                {% endif %}
+                                <a href="#!">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+
+                            <div class="card-body px-2 py-2">
+                                <div class="font-weight-stone-500 text-primary mb-1">
+                                    {{ advert.title|u.truncate(28) }}
+                                </div>
+                                <div class="font-weight-stone-600 text-default mb-1">
+                                    {{ advert.price }} <span class="small font-weight-stone-600">CFA</span>
+                                </div>
+                                <div class="small grey-text font-weight-stone-500 mb-2">
+                                    <i class="fas fa-map-marker-alt"></i> {{ advert.location.name }} ({{ advert.location.detail }})
+                                </div>
+
+                                <div class="text-right">
+                                    <a href="{{ route }}" class="btn btn-sm btn-primary btn-advert-show">Voir</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row app-advert-similar-detail">
+    <div class="col-12 mb-4">
+        <h5 class="h5-responsive font-weight-stone-500 text-primary">
+            {{ reference.category.name }} à {{ reference.location.name|lower }}
+        </h5>
+        <div class="d-flex text-secondary data">
+            <div class=""><i class="fas fa-angle-right mr-2 d-inline-block" style="font-size: 1.3rem; position: relative; top: 1.3px;"></i></div>
+            <div>
+                <a href="{{ path('app_advert_index', {'category_slug': reference.category.slug, 'city': reference.location.name|lower}) }}" class="link">
+                    Annonces {{ reference.category.name|lower }} à {{ reference.location.name|lower }}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 mb-4">
+        <h5 class="h5-responsive font-weight-stone-500 text-primary">
+            {% if reference.subDivision|length > 0 %}{{ reference.subDivision.name }}{% else %}{{ reference.subCategory.name }}{% endif %}
+             à {{ reference.location.name|lower }}
+        </h5>
+        <div class="d-flex text-secondary data">
+            <div class=""><i class="fas fa-angle-right mr-2 d-inline-block" style="font-size: 1.3rem; position: relative; top: 1.3px;"></i></div>
+            <div>
+                {% if reference.subDivision|length > 0 %}
+                    {% set d_route = path('app_advert_index_ss',
+                        {'category_slug': reference.category.slug,
+                            'sub_category_slug': reference.subCategory.slug,
+                            'sub_division_slug': reference.subDivision.slug,
+                            'city': reference.location.name|lower}) %}
+                {% else %}
+                    {% set d_route = path('app_advert_index_s',
+                        {'category_slug': reference.category.slug,
+                            'sub_category_slug': reference.subCategory.slug,
+                            'city': reference.location.name|lower}) %}
+                {% endif %}
+
+                <a href="{{ d_route }}" class="link">
+                    Annonces {% if reference.subDivision|length > 0 %}{{ reference.subDivision.name }}{% else %}{{ reference.subCategory.name }}{% endif %}
+                    à {{ reference.location.name|lower }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

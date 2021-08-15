@@ -1,0 +1,47 @@
+app_advert_index:
+    path: /va/{category_slug}
+    methods: [GET, POST]
+    controller: App\Controller\AdvertController::index
+
+app_advert_index_s:
+    path: /va/{category_slug}/{sub_category_slug}
+    methods: [GET, POST]
+    controller: App\Controller\AdvertController::index
+    options:
+        expose: true
+
+app_advert_index_ss:
+    path: /va/{category_slug}/{sub_category_slug}/{sub_division_slug}
+    methods: [GET, POST]
+    controller: App\Controller\AdvertController::index
+    options:
+        expose: true
+
+app_advert_show:
+    path: /a/{category_slug}/{sub_category_slug}/{sub_division_slug}/{city}/{reference}/{slug}
+    methods: [GET, POST]
+    controller: App\Controller\AdvertController::show
+
+app_advert_show_s:
+    path: /a/{category_slug}/{sub_category_slug}/{city}/{reference}/{slug}
+    methods: [GET, POST]
+    controller: App\Controller\AdvertController::show
+
+app_advert_create:
+    path: /pa/{category_slug}/create
+    methods: [GET, POST]
+    controller: App\Controller\AdvertController::create
+    options:
+        expose: true
+
+app_advert_category:
+    path: /pa/passe-une-annonce-gratuite
+    methods: [GET]
+    controller: App\Controller\AdvertController::chooseCategory
+
+app_advert_search:
+    path: /pa/search/s
+    methods: [GET, POST]
+    controller: App\Controller\AdvertController::search
+    options:
+        expose: true

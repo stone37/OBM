@@ -1,0 +1,19 @@
+app_location_latlng_session:
+    path: /location/{lng}/{lat}/session
+    methods: [GET]
+    controller: App\Controller\LocationController::latlng
+    options:
+        expose: true
+
+app_location_zone:
+    path: /location/{city}/zone
+    controller: App\Controller\LocationController::zone
+    options:
+        expose: true
+
+app_location_session:
+    path: /location/{name}/{type}
+    methods: [GET]
+    controller: App\Controller\LocationController::locationSession
+    options:
+        expose: true

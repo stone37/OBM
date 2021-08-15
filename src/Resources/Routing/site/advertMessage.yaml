@@ -1,0 +1,8 @@
+app_advert_message_create:
+    path: /advert/{id}/messages
+    controller: App\Controller\AdvertMessageController::create
+    requirements:
+        id: \d+
+    options:
+        expose: true
+

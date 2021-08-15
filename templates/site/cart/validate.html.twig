@@ -1,0 +1,53 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title 'Valider mon panier' %}
+
+{% block app_advert_btn_post %}{% endblock %}
+{% block app_navbar_second %}{% endblock %}
+
+{% block app_cart %}
+    <li class="nav-item icon cart pt-1 pr-2">
+        <a href="#" class="grey-text app-cart" data-toggle="tooltip" data-placement="left" title="Votre panier">
+            <span class="badge badge-secondary">{{ app.session.get('app_cart')|length }}</span>
+            <i class="fas fa-shopping-basket"></i>
+        </a>
+    </li>
+{% endblock %}
+
+{% block app_mobile_cart %}
+    <a href="#" class="grey-text mr-3 mt-2 d-inline-block app-cart"
+       data-toggle="tooltip" data-placement="left" title="Votre panier">
+        <span class="badge badge-secondary" style="position:relative; bottom: 3px;">{{ app.session.get('app_cart')|length }}</span>
+        <i class="fas fa-shopping-basket" style="font-size: 1.4rem;"></i>
+    </a>
+{% endblock %}
+
+{% block app_breadcrumbs %}
+    <section class="mt-lg-90 mt-70">
+        {{ breadcrumb('Valider mon panier') }}
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </section>
+{% endblock %}
+
+{% block app_body %}
+    <div class="row d-flex justify-content-center my-4">
+        <div class="col-12">
+            {{ include('site/cart/validate/content.htnl.twig') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/cart.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/cart.js'} %}
+{% endblock %}
+
+

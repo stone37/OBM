@@ -1,0 +1,54 @@
+<section>
+    {% if premiums|length > 0 %}
+        {% for premium in premiums %}
+            <div class="row premium mb-5">
+                <div class="col-12 d-flex justify-content-between title">
+                    <h5 class="text-primary h5-responsive">Populaire dans {{ premium.name|lower }}</h5>
+                    <div class="d-none d-md-block">
+                        {% if premium.categories[0].parent.parent %}
+                            <a href="{{ path('app_advert_index', {'category_slug': premium.categories[0].parent.parent.slug}) }}" >
+                                Voir tout
+                                <i class="fas fa-angle-right d-none d-md-inline-block ml-1" style="position: relative; top: 1px"></i>
+                            </a>
+                        {% else %}
+                            <a href="{{ path('app_advert_index', {'category_slug': premium.categories[0].parent.slug}) }}" >
+                                Voir tout
+                                <i class="fas fa-angle-right d-none d-md-inline-block ml-1" style="position: relative; top: 1px"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% for category in premium.categories %}
+                    {% if category.parent.parent %}
+                        <div class="col-lg-3 col-md-6 col-6 content mt-3">
+                            <a href="{{ path('app_advert_index_ss',
+                                {'category_slug': category.parent.parent.slug,
+                                    'sub_category_slug': category.parent.slug,
+                                    'sub_division_slug': category.slug}) }}">
+                                <div class="card card-image text-center z-depth-1 px-3 d-flex justify-content-center align-items-center"
+                                     style="background-image: url({{ image_url(category, 200, 130) }});">
+                                    <div class="z-depth-2">
+                                        <h3>{{ category.name }}</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="col-lg-3 col-md-6 col-6 content mt-3">
+                            <a href="{{ path('app_advert_index_s',
+                                {'category_slug': category.parent.slug, 'sub_category_slug': category.slug}) }}">
+                                <div class="card card-image text-center z-depth-1 px-3 d-flex justify-content-center align-items-center"
+                                     style="background-image: url({{ image_url(category, 200, 130) }});">
+                                    <div class="z-depth-2">
+                                        <h3>{{ category.name }}</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endif %}
+</section>

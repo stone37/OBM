@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block app_navbar_first %}
+    <nav class="navbar navbar-expand-md navbar-light fixed-top d-none d-lg-block py-0">
+        <div class="container-fluid px-0">
+            <a class="navbar-brand py-0 pr-3" href="{{ path('app_home') }}">
+                <img src="{{ vich_uploader_asset(config.get, 'file') }}" alt="Logo du site" class="img-fluid logo py-0"/>
+            </a>
+
+            <div class="collapse navbar-collapse noPrint d-flex justify-content-end">
+                <div class="row px-0 d-flex justify-content-between mx-0">
+                    {% if not is_mobile() %}
+                        <div class="col-lg-7">
+                            <div class="d-flex align-items-center">
+                                {% block app_search_form %}
+                                    {{ render(controller('App\\Controller\\SearchController::index')) }}
+                                {% endblock %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="col-lg-3 d-flex justify-content-center align-items-center pb-1 px-0">
+                        <div>
+                            <ul class="navbar-nav ml-auto">
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    {% block app_cart %}{% endblock %}
+
+                                    {% block app_notify %}
+                                        <li class="nav-item notification pl-2 pr-2 d-none">
+                                            <a href="{{ path('app_notification_index') }}" class="text-center">
+                                                <span class="badge badge-secondary">4</span>
+                                                <i class="far fa-bell grey-text"></i>
+                                            </a>
+                                        </li>
+                                    {% endblock %}
+
+                                    {% if settings.activeCredit %}
+                                        <li class="nav-item pl-1 pr-3">
+                                            <a href="{{ path('app_dashboard_credit_index') }}" class="text-center d-flex align-items-center wallet white font-weight-stone-600"
+                                               title="Votre porte-feuille" data-toggle="tooltip" data-placement="left">
+                                                <i class="fas fa-wallet mr-2 d-inline-block"></i>
+                                                <span class="d-inline-block">{{ app.user.wallet.balance }}</span>
+                                                <img src="{{ asset('images/devise.png') }}" alt="" class="d-inline-block">
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {{ render(controller('App\\Controller\\MenuController::dropdownMenu')) }}
+                                {% else %}
+                                    <li class="nav-item pl-2 mb-2 mb-md-0">
+                                        <a href="{{ path('app_login') }}" type="button" class="btn btn-outline-primary waves-effect waves-light px-2 user-btn btn-md">Se connecter</a>
+                                    </li>
+                                    <li class="nav-item pl-2 mb-2 mb-md-0">
+                                        <a href="{{ path('app_register') }}" type="button" class="btn btn-primary waves-effect waves-light btn-md px-2 user-btn">S'inscrire</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    {% block app_advert_btn_post %}
+                    <div class="col-lg-2 pl-lg-0 d-flex justify-content-end align-items-center mx-0 px-0">
+                        <div class="">
+                            <a href="{{ path('app_advert_category') }}" type="button" class="btn btn-advert-post btn-default btn-navbar">
+                                Déposer <i class="fas fa-angle-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    {# Mobile #}
+    {{ render(controller('App\\Controller\\MenuController::sideNavBar', {'request': app.request})) }}
+
+    <nav class="navbar fixed-top navbar-expand-lg double-nav d-block d-lg-none py-0 noPrint">
+        <div class="float-left d-flex">
+            <a href="#" data-activates="slide-out"
+               class="button-collapse"><i class="fas fa-bars"></i>
+            </a>
+
+            <a class="navbar-mobile-image" href="{{ path('app_home') }}">
+                <img src="{{ asset('images/logo/mobile.png') }}" alt="Logo du site" class="img-fluid" />
+            </a>
+        </div>
+        <div class="float-right pr-md-5 pt-md-3 pt-2 app-mobile">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <div class="d-flex">
+                    <div>
+                        {% block app_mobile_cart %}{% endblock %}
+                    </div>
+                    <ul class="navbar-nav ml-auto">
+                        {{ render(controller('App\\Controller\\MenuController::dropdownMenu')) }}
+                    </ul>
+                </div>
+            {% else %}
+                <a href="{{ path('app_login') }}" type="button" class="btn btn-outline-primary btn-sm px-2">Se connecter</a>
+                <a href="{{ path('app_register') }}" type="button" class="btn btn-primary btn-sm">S'inscrire</a>
+            {% endif %}
+        </div>
+    </nav>
+    {# Mobile #}
+
+{% endblock %}
+
+{% block app_navbar_second %}
+    {{ render(controller('App\\Controller\\MenuController::megaNavBar', {'request': app.request})) }}
+
+    <div class="jumbotron mobile color-primary d-block d-lg-none noPrint"
+         style="border-bottom-right-radius: 25px">
+        <div class="d-flex align-items-center h-100">
+            <div class="container text-center mx-2">
+                {% block app_mobile_search_form %}
+                    {{ render(controller('App\\Controller\\SearchController::indexM')) }}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+
+

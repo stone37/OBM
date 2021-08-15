@@ -1,0 +1,26 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    Affichage d'une
+    {% if type == 1 %}annonce en attente de validation{% elseif type == 2 %}annonce validées
+    {% elseif type == 3 %}annonce refusées{% elseif type == 4 %}annonce retirées
+    {% else %}annonce expirées{% endif %}
+    |
+    {% if type == 1 %}Annonces en attente de validation{% elseif type == 2 %}Annonces validées
+    {% elseif type == 3 %}Annonces refusées{% elseif type == 4 %}Annonces retirées
+    {% else %}Annonces expirées{% endif %}
+    | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/advert/show/_header.html.twig' %}
+
+    {% include 'admin/advert/show/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

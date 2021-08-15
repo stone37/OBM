@@ -1,0 +1,16 @@
+app_category_by_parent:
+    path: /categories/{id}/parent
+    methods: [GET]
+    controller: App\Controller\CategoryController::byParent
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_category_by_parent_slug:
+    path: /categories/parent/{slug}
+    methods: [GET]
+    controller: App\Controller\CategoryController::byParentSlug
+    options:
+        expose: true
+

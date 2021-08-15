@@ -1,0 +1,19 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    Listes des annonces de {{ user.username|capitalize }} | {{ parent() }}
+{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/user/advert/index/_header.html.twig' %}
+
+    {% include 'admin/user/advert/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

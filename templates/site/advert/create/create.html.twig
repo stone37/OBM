@@ -1,0 +1,73 @@
+{% extends 'site/layout.html.twig' %}
+{# pixel facebook ici #}
+
+{% block title 'Passé une annonce gratuite' %}
+{% block meta %}
+    <meta name="google" content="nositelinkssearchbox">
+{% endblock %}
+
+{% block app_advert_btn_post %}{% endblock %}
+{% block app_navbar_second %}{% endblock %}
+{% block app_notify %}{% endblock %}
+
+{% block app_cart %}
+    <li class="nav-item icon cart pt-2 pr-2">
+        <a href="#" class="grey-text app-cart" data-toggle="tooltip" data-placement="left" title="Votre panier">
+            <span class="badge badge-secondary cart">{{ app.session.get('app_cart')|length }}</span>
+            <i class="fas fa-shopping-basket"></i>
+        </a>
+    </li>
+{% endblock %}
+
+{% block app_mobile_cart %}
+    <a href="#" class="grey-text mr-3 mt-2 d-inline-block app-cart"
+       data-toggle="tooltip" data-placement="left" title="Votre panier">
+        <span class="badge badge-secondary cart" style="position:relative; bottom: 3px;">{{ app.session.get('app_cart')|length }}</span>
+        <i class="fas fa-shopping-basket" style="font-size: 1.4rem;"></i>
+    </a>
+{% endblock %}
+
+{% block app_breadcrumbs %}
+    <div class="mt-lg-90 mt-70">
+        <a href="" class="btn btn-amber btn-sm mt-lg-3 btn-back">
+            <i class="fas fa-angle-left mr-2"></i>
+            Retour
+        </a>
+    </div>
+{% endblock %}
+
+{% block app_body %}
+    <section class="row d-flex justify-content-center my-4">
+        <div class="col-12">
+            {{ include('site/advert/create/content.htnl.twig') }}
+        </div>
+        <div class="col-12">
+            {{ include('site/cart/_modal.htnl.twig') }}
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/advert/advert.css'} %}
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/advert/create.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+
+    <script>
+        let photoFree = parseInt('{{ optionPhoto.photoFree }}'),
+            photoPay = parseInt('{{ optionPhoto.photoPaying }}'),
+            deviseImg = '{{ asset('images/devise.png') }}';
+    </script>
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/location.js'} %}
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/jquery.dm-uploader.min.js'} %}
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/advert/advert.js'} %}
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/advert/create.js'} %}
+{% endblock %}
+
+

@@ -1,0 +1,54 @@
+{% macro list(advert, settings) %}
+    {% set photo_principale = app_advert_photo(advert.images) %}
+
+    {% if advert.subDivision|length > 0 %}
+        {% set route = path('app_advert_show', {'category_slug': advert.category.slug, 'sub_category_slug': advert.subCategory.slug,
+            'sub_division_slug': advert.subDivision.slug, 'city': advert.location.name,
+            'reference': advert.reference, 'slug': advert.slug}) %}
+    {% else %}
+        {% set route = path('app_advert_show_s', {'category_slug': advert.category.slug, 'sub_category_slug': advert.subCategory.slug,
+            'city': advert.location.name, 'reference': advert.reference, 'slug': advert.slug}) %}
+    {% endif %}
+
+    <div class="card card-cascade narrower mb-4">
+        <div class="view view-cascade overlay">
+            {% if photo_principale %}
+                <img class="card-img-top" src="{{ image_ad_url(photo_principale, 200, 130) }}" alt="{{ photo_principale.name }}" />
+            {% else %}
+                <img class="card-img-top" src="{{ asset('images/no_image.png') }}"  alt="" />
+            {% endif %}
+            <a href="#">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+
+        <!-- Card content -->
+        <div class="card-body card-body-cascade pb-1 px-2">
+            <div class="font-weight-stone-500 text-primary mb-2">
+                {% if advert.subDivision %}{{ advert.subDivision }}
+                {% else %}{{ advert.subCategory }}
+                {% endif %}
+            </div>
+            <p class="card-text small-9">
+                {{ advert.description|u.truncate(120, ' ...') }}
+            </p>
+            <div class="my-3">
+                <div class="small grey-text">
+                    <i class="far fa-clock mr-1"></i> {{ advert.validatedAt|ago }} | <i class="fas fa-map-marker-alt mr-1"></i> {{ advert.location.name }}
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="font-weight-stone-500 d-flex price text-default">
+                    <div class="number font-weight-stone-600">{{ advert.price }}</div><img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                </div>
+                <div class="">
+                    <a href="{{ route }}" class="btn btn-primary btn-sm advert-show">Voir</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endmacro %}
+

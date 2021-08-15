@@ -1,0 +1,36 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    Edition d'option
+    {% if type == 1 %} annonce en tete de liste
+    {% elseif type == 2 %} annonce logo urgente
+    {% elseif type == 3 %} annonce galerie accueil
+    {% elseif type == 4 %} annonce en vedette
+    {% else %} annonce encadrée{% endif %}
+    |
+    {% if type == 1 %}Option annonce en tete de liste
+    {% elseif type == 2 %}Option annonce logo urgente
+    {% elseif type == 3 %}Option annonce galerie accueil
+    {% elseif type == 4 %}Option annonce en vedette
+    {% else %}Option annonce encadrée
+    {% endif %}
+    | {{ parent() }}
+{% endblock %}
+
+
+
+{% block app_body %}
+    {% include 'admin/option/edit/_header.html.twig' %}
+
+    {% include 'admin/option/edit/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/create.js'} %}
+{% endblock %}

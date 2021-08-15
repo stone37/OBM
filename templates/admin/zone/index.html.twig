@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Edition des zones | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/zone/index/_header.html.twig' %}
+
+    {% include 'admin/zone/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'site/layout.html.twig' %}
+{# pixel facebook ici #}
+
+{% block title %}
+    {{ advert.title }} | {% if advert.subDivision %}{{ advert.subDivision }} | {% endif %}
+    {{ advert.subCategory }} | {{ advert.category }}
+{% endblock %}
+
+{% block meta %}
+    {% set imgData = app_advert_photo(advert.images) %}
+    <meta name="description" content="{{ advert.description|u.truncate(300) }}"/>
+    <meta property="og:description" content="{{ advert.description|u.truncate(300) }}" />
+    <meta property="og:image" content="{{ app.request.getUriForPath('/'~imgData.webPath) }}"/>
+    <meta property="og:created_time" content="{{ advert.createdAt|date('c') }}"/>
+    <meta property="og:url" content="{{ app.request.getUriForPath(app.request.requestUri) }}"/>
+    <meta property="og:type" content="product"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@Oblackmarket_com" />
+    <meta name="twitter:title" content="{{ advert.title }} à {{ advert.price }} CFA" />
+    <meta name="twitter:description" content="{{ advert.description|u.truncate(300) }}" />
+    <meta name="twitter:image" content="{{ app.request.getUriForPath('/'~imgData.webPath) }}" />
+    <meta name="twitter:url" content="{{ app.request.getUriForPath(app.request.requestUri) }}" />
+{% endblock %}
+
+{% block app_cart %}{% endblock %}
+{% block app_mobile_cart %}{% endblock %}
+
+{% block app_breadcrumbs %}
+    <section class="mt-lg-4 pt-md-0 d-flex ml-lg-4 mt-page-n">
+        <div class="d-none d-md-block pt-md-1 noPrint">
+            <a href="" class="btn btn-amber btn-sm btn-back">
+                <i class="fas fa-angle-left d-none d-lg-inline-block mr-2"></i>
+                Retour
+            </a>
+        </div>
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb pl-md-4',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </section>
+{% endblock %}
+
+{% block app_body %}
+    <section class="row mx-lg-4">
+        <div class="col-12">
+            {% include 'site/advert/show/content.html.twig' %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/advert/show.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#<script>
+        $(document).ready(function() {
+            $.ajaxSetup({ cache: true });
+            $.getScript('https://connect.facebook.net/fr_CI/sdk.js', function(){
+                FB.init({
+                    appId: '891414371587153',
+                    version: 'v2.7' // or v2.1, v2.2, v2.3, ...
+                });
+
+                FB.ui({
+                    method: 'send',
+                    link: 'http://www.nytimes.com/interactive/2015/04/15/travel/europe-favorite-streets.html',
+                });
+
+                console.log(FB)
+            });
+        });
+    </script>  #}
+    <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/advert/show.js'} %}
+
+    <script>
+        $("#mdb-lightbox-ui").load("/assets/mdb-addons/mdb-lightbox-ui.html");
+    </script>
+{% endblock %}

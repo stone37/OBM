@@ -1,0 +1,264 @@
+{% import 'Ui/Macro/buttons.html.twig' as buttons %}
+
+<div class="row app-user mb-5">
+    <div class="col-12 mt-3">
+        <div class="h5-responsive">
+            <div class="badge badge-secondary d-inline-block mr-1" style="position: relative; bottom: 6px;">1</div>
+            <div class="text-secondary d-inline-block font-weight-stone-500">Information de générale</div>
+        </div>
+    </div>
+    <div class="col-12">
+        <table class="table table-borderless table-responsive-sm table-responsive-md">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Id</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.id }}</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Reference</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {{ advert.reference }}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Position</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.position }}</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Catégorie</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.category.name }}</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Sous catégorie</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.subCategory.name }}</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Sous division</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.subDivision|length > 0 %}
+                            {{ advert.subDivision.name }}
+                        {% else %}
+                            <span class="badge badge-grey">Aucune</span>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="title font-weight-stone-600 grey-text">Titre</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.title }}</div>
+                </td>
+                <td colspan="3">
+                    <div class="title font-weight-stone-600 grey-text">Description</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.description }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Type d'annonce</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.type }}</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Prix (CFA)</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.price }}</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Prix négociable</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.priceStatus %}
+                            <span class="badge badge-success">OUI</span>
+                        {% else %}
+                            <span class="badge badge-danger">NON</span>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Traitement</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.traitement %}
+                            {{ advert.traitement }}
+                        {% else %}
+                            <span class="badge badge-grey">Aucun</span>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Ville</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {{ advert.location.name }}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Zone</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {{ advert.location.detail }}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Longitude</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {{ advert.location.lng }}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Latitude</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {{ advert.location.lat }}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Annonçeur</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        <a href="" class="link">
+                            {{ advert.user.firstName|capitalize }} {{ advert.user.lastName|capitalize }}
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Date de création</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {{ advert.createdAt|date('d/m/Y H:i:s') }}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Dernière modification</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {{ advert.updatedAt|date('d/m/Y H:i:s') }}
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-12 mt-3">
+        <div class="h5-responsive">
+            <div class="badge badge-secondary d-inline-block mr-1" style="position: relative; bottom: 6px;">2</div>
+            <div class="text-secondary d-inline-block font-weight-stone-500">Status et photo de l'annonce</div>
+        </div>
+    </div>
+    <div class="col-12">
+        <table class="table table-borderless table-responsive-sm table-responsive-md">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="title font-weight-stone-600 grey-text">Valider</div>
+                        <div class="content text-primary font-weight-stone-600">
+                            {% if advert.validated %}
+                                <span class="badge badge-success">OUI</span>
+                            {% else %}
+                                <span class="badge badge-danger">NON</span>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title font-weight-stone-600 grey-text">Date de validation</div>
+                        <div class="content text-primary font-weight-stone-600">
+                            {% if advert.validatedAt %}
+                                {{ advert.validatedAt|date('d/m/Y H:i:s') }}
+                            {% else %}
+                                <span class="badge badge-grey">Aucun</span>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title font-weight-stone-600 grey-text">Refuser</div>
+                        <div class="content text-primary font-weight-stone-600">
+                            {% if advert.denied %}
+                                <span class="badge badge-success">OUI</span>
+                            {% else %}
+                                <span class="badge badge-danger">NON</span> <br>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title font-weight-stone-600 grey-text">Date de refus</div>
+                        <div class="content text-primary font-weight-stone-600">
+                            {% if advert.deniedAt %}
+                                {{ advert.deniedAt|date('d/m/Y H:i:s') }}
+                            {% else %}
+                                <span class="badge badge-grey">Aucun</span>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title font-weight-stone-600 grey-text">Retirer</div>
+                        <div class="content text-primary font-weight-stone-600">
+                            {% if advert.deleted %}
+                                <span class="badge badge-success">OUI</span>
+                            {% else %}
+                                <span class="badge badge-danger">NON</span> <br>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="title font-weight-stone-600 grey-text">Date de retrait</div>
+                        <div class="content text-primary font-weight-stone-600">
+                            {% if advert.deletedAt %}
+                                {{ advert.deletedAt|date('d/m/Y H:i:s') }}
+                            {% else %}
+                                <span class="badge badge-grey">Aucun</span>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12 mb-4">
+        {% if advert.images|length > 0 %}
+            <div class="row">
+                {% for image in advert.images %}
+                    <div class="col-4 col-md-2 col-lg-1 mb-2">
+                        <a href="{{ asset(image.webPath) }}" target="_blank" class="z-depth-2"><img src="{{ asset(image.webPath) }}" alt="{{ image.name }}" class="img-fluid"></a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h4 class="text-center my-5">Aucune photo</h4>
+        {% endif %}
+    </div>
+
+    {% include 'admin/advert/show/data.html.twig' %}
+</div>
+
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="d-flex justify-content-end mt-4">
+            <div class="text-center mr-3">{{ buttons.default(path('app_admin_advert_index', {'type': type}), 'Retour à la liste', 'app-entity-list-btn', 'fas fa-angle-left', 'btn-outline-primary') }}</div>
+
+            {% if type == 1 or type == 3 %}
+                <div class="text-center mr-3">
+                    <a class="btn btn-success entity-advert-validate" id="{{ advert.id }}"><i class="fas fa-reply mr-1"></i> Valider</a>
+                </div>
+            {% endif %}
+
+            {% if type == 1 or type == 2 %}
+                <div class="text-center mr-3">
+                    <a class="btn btn-amber entity-advert-denied" id="{{ advert.id }}"><i class="fas fa-share mr-1"></i> Refuser</a>
+                </div>
+            {% endif %}
+
+            <div class="text-center mr-3">
+                <a class="btn btn-default entity-advert-bannir" id="{{ advert.id }}"><i class="fas fa-bug mr-1"></i> Bannir</a>
+            </div>
+
+            {% if type == 1 or type == 2 %}
+                <div class="text-center mr-3">
+                    <a class="btn btn-danger entity-advert-soft-delete" id="{{ advert.id }}"><i class="fas fa-times mr-1"></i> Retirer</a>
+                </div>
+            {% endif %}
+
+            {% if type == 3 or type == 4 or type == 5 %}
+                <div class="text-center mr-3">
+                    <a class="btn btn-danger entity-advert-delete" id="{{ advert.id }}"><i class="fas fa-times mr-1"></i> Supprimer</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,59 @@
+{% extends layout %}
+
+{% import "mails/macros.twig" as e %}
+
+{% set settings = config.get %}
+
+{% if advert.subDivision|length > 0 %}
+    {% set category = advert.subDivision %}
+{% else %}
+    {% set category = advert.subCategory %}
+{% endif %}
+
+{% block body %}
+
+    {% apply markdown_email %}
+
+        Salut "{{ message.firstname }}",
+        ===============================
+
+        Liste des annonces similaires que vous aviez demander pour votre recherche dans <strong>{{ category.name }}</strong>.
+
+    {% endapply %}
+
+    {% for advert in adverts %}
+
+        {% if advert.subDivision|length > 0 %}
+            {% set route = url('app_advert_show', {
+                'category_slug': advert.category.slug,
+                'sub_category_slug': advert.subCategory.slug,
+                'sub_division_slug': advert.subDivision.slug,
+                'city': advert.location.name,
+                'reference': advert.reference,
+                'slug': advert.slug}) %}
+        {% else %}
+            {% set route = url('app_advert_show_s', {
+                'category_slug': advert.category.slug,
+                'sub_category_slug': advert.subCategory.slug,
+                'city': advert.location.name,
+                'reference': advert.reference, 'slug': advert.slug}) %}
+        {% endif %}
+
+        <table class="panel" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+                <td class="panel-content">
+                    <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                        <tr>
+                            <td class="panel-item">
+                                <a href="{{ route }}" class="">{{ advert.title }}</a>
+                            </td>
+                            <td class="panel-item" style="color: #FF6A00 !important">
+                                {{ advert.price }} CFA
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    {% endfor %}
+{% endblock %}

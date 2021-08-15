@@ -1,0 +1,34 @@
+<div id="app-advert-search-global-modal" class="modal fade app-advert-search-global-modal"
+     tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+     aria-hidden="true" style="z-index: 99999 !important">
+    <div class="modal-dialog modal-notify modal-primary">
+        <div class="modal-content">
+            <div class="modal-header text-white">
+                <p class="modal-title font-weight-stone-500" id="exampleModalLabel">
+                    Sélectionner un lieu
+                </p>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body py-2 pb-3 grey lighten-3">
+                <div class="z-depth-2 px-3 white" style="padding-top: 1px; padding-bottom: 1px;">
+                    <div id="algolia-location">
+                        <input type="text" id="app-global-city-name" value="" class="form-control form-control-lg" />
+                    </div>
+                    <div id="app-search-zone-global" class="d-none">
+                        <div class="md-form md-outline form-lg input-with-pre-icon">
+                            <i class="fas fa-search input-prefix"></i>
+                            <input type="text" id="app-global-zone-name" value=""
+                                   class="form-control form-control-lg" />
+                            <label for="app-global-zone-name">Zone de recherche</label>
+                        </div>
+                        <div id="suggesstion-zone-box" class="suggesstion-box mx-5 d-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

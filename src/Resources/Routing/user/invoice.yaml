@@ -1,0 +1,9 @@
+app_dashboard_invoice_index:
+  path: /invoices
+  methods: [GET]
+  controller: App\Controller\Account\InvoiceController::index
+
+app_dashboard_invoice_show:
+  path: /invoices/{id}
+  controller: App\Controller\Account\InvoiceController::show
+

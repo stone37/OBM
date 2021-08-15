@@ -1,0 +1,86 @@
+{% if settings.activeMessage %}
+    <form action="{{ path('app_advert_message_create', {'id': advert.id}) }}" method="POST" id="app-advert-message-form" class="app-advert-message-form">
+        <div id="app-advert-message-form-error"></div>
+
+        <div class="form-row">
+            <div class="col-12">
+                <div class="d-flex flex-wrap">
+                    <div class="select-outline position-relative w-100">
+                        <select class="mdb-select md-form md-outline colorful-select dropdown-primary mb-1" id="app-advert-message-motif">
+                            <option value="" disabled selected>Motif de contact</option>
+                            <option value="1">Question sur le bien</option>
+                            <option value="2">Photos supplémentaires</option>
+                            <option value="3">Prendre rendez-vous</option>
+                        </select>
+                        <label>Motif de contact</label>
+                    </div>
+                </div>
+            </div>
+
+            {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <div class="col-12">
+                    <div class="md-form md-outline mt-0 mb-0">
+                        <input type="text" id="firstname" name="firstname" class="form-control" />
+                        <label for="firstname">Votre prénom</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="md-form md-outline mb-0 mt-2">
+                        <input type="email" id="email" name="email" class="form-control"/>
+                        <label for="email">Votre email</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="md-form md-outline mb-1 mt-2">
+                        <input type="text" id="phone" name="phone" class="form-control"/>
+                        <label for="phone">Votre numéro de téléphone</label>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="col-12">
+                <div class="md-form md-outline mt-2">
+                    <textarea id="content" class="md-textarea form-control" name="content" rows="5"></textarea>
+                    <label for="content">Votre message</label>
+                </div>
+            </div>
+            {#
+            <div class="col-12 mb-2">
+                <div class="form-check pl-0">
+                    <input type="checkbox" class="form-check-input filled-in" id="notification"
+                           name="notification" checked />
+                    <label class="form-check-label small" for="notification">Être notifié en cas de réponse</label>
+                </div>
+            </div>#}
+            <div class="col-12">
+                <div class="form-check pl-0">
+                    <input type="checkbox" class="form-check-input filled-in" id="similar"
+                           name="similar" checked />
+                    <label class="form-check-label small" for="similar">M'envoyer par mail les annonces similaires</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <input type="hidden" id="message-token" name="_token" value="{{ csrf_token('advert-message') }}">
+            </div>
+            <div class="col-12">
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-block btn-primary">
+                        Envoyer
+                        <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="small font-weight-stone-500 mt-3 grey-text">
+                    Afin de prévenir et de détecter d'éventuelles fraudes, polluriels ou comportements
+                    suspects, nous nous réservons le droit de surveiller vos conversations. En envoyant
+                    ce message, vous acceptez nos
+                    <a href="{{ path('app_cgu') }}" class="font-weight-stone-600 link">Conditions d'utilisation</a>
+                    et notre
+                    <a href="{{ path('app_confidentialite') }}" class="font-weight-stone-600 link">Avis de confidentialité</a>.
+                </div>
+            </div>
+        </div>
+    </form>
+{% endif %}
+

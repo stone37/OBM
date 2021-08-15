@@ -1,0 +1,10 @@
+app_register:
+    path: /inscription
+    controller: App\Controller\RegistrationController::register
+
+app_register_confirm:
+    path: /inscription/confirmation/{id}
+    controller: App\Controller\RegistrationController::confirmToken
+    requirements:
+        id: \d+
+

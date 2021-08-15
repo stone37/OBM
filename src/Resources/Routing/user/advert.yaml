@@ -1,0 +1,54 @@
+app_dashboard_advert_index:
+    path: /annonces
+    methods: [GET]
+    controller: App\Controller\Account\AdvertController::advert
+
+app_dashboard_advert_index_active:
+    path: /annonces/annonce-en-ligne
+    methods: [GET]
+    controller: App\Controller\Account\AdvertController::advertPublished
+
+app_dashboard_advert_edit:
+    path: /annonces/{category_slug}/{id}/edit
+    methods: [GET, POST]
+    controller: App\Controller\Account\AdvertController::edit
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_dashboard_advert_image_add:
+    path: /annonces/{id}/images
+    methods: [GET, POST]
+    controller: App\Controller\Account\AdvertController::image
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_dashboard_advert_image_delete:
+    path: /annonces/images/{id}/delete
+    methods: [GET, POST]
+    controller: App\Controller\Account\AdvertController::imageDelete
+    options:
+        expose: true
+    requirements:
+        id: \d+
+
+app_dashboard_advert_image_principale:
+    path: /annonces/images/{id}/principale
+    methods: [GET, POST]
+    controller: App\Controller\Account\AdvertController::imagePrincipale
+    options:
+        expose: true
+    requirements:
+        id: \d+
+
+app_dashboard_advert_delete:
+    path: /annonces/{id}/delete
+    methods: [GET, POST]
+    controller: App\Controller\Account\AdvertController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true

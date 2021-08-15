@@ -1,0 +1,124 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Tableau de bord | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/dashboard/index/_header.html.twig' %}
+
+    {% include 'admin/dashboard/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        let $oDaily = '{{ days|json_encode|raw }}',
+            $oMonthly = '{{ months|json_encode|raw }}';
+
+        $(document).ready(function() {
+            // line order chart
+            let cODaily = document.getElementById("orderDailyLineChart").getContext('2d'),
+                cOMonthly = document.getElementById("orderMonthlyLineChart").getContext('2d'),
+                oDaily = JSON.parse($oDaily), oMonthly = JSON.parse($oMonthly);
+
+
+            let oDailyLineChart = new Chart(cODaily, {
+                type: 'line',
+                data: {
+                    labels: oDaily.map((point) => point["date"]),
+                    datasets: [{
+                        label: "30 derniers jours",
+                        data: oDaily.map((point) => point["amount"]),
+                        backgroundColor: ['rgba(105, 0, 132, .2)',],
+                        borderColor: ['rgba(200, 99, 132, .7)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    elements: {
+                        line: {
+                            tension: 0.3,
+                        },
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [
+                            {
+                                gridLines: {
+                                    drawOnChartArea: false,
+                                },
+                            },
+                        ],
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true,
+                                },
+                            },
+                        ],
+                    },
+                    animation: {
+                        duration: 0,
+                    },
+                    hover: {
+                        animationDuration: 0,
+                    },
+                    responsiveAnimationDuration: 0,
+                }
+            });
+
+            let oMonthlyLineChart = new Chart(cOMonthly, {
+                type: 'line',
+                data: {
+                    labels: oMonthly.map((point) => point["date"]),
+                    datasets: [{
+                        label: "24 derniers mois",
+                        data: oMonthly.map((point) => point["amount"]),
+                        backgroundColor: ['rgba(105, 0, 132, .2)',],
+                        borderColor: ['rgba(200, 99, 132, .7)',
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    elements: {
+                        line: {
+                            tension: 0.3,
+                        },
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [
+                            {
+                                gridLines: {
+                                    drawOnChartArea: false,
+                                },
+                            },
+                        ],
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true,
+                                },
+                            },
+                        ],
+                    },
+                    animation: {
+                        duration: 0,
+                    },
+                    hover: {
+                        animationDuration: 0,
+                    },
+                    responsiveAnimationDuration: 0,
+                }
+            });
+        });
+    </script>
+{% endblock %}

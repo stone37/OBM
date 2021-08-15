@@ -1,0 +1,23 @@
+vich_uploader:
+    db_driver: orm
+    mappings:
+        category:
+            uri_prefix: '%app.path.category%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            upload_destination: '%kernel.project_dir%/public%app.path.category%'
+        settings:
+            uri_prefix: '%app.path.settings%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            upload_destination: '%kernel.project_dir%/public%app.path.settings%'
+        user:
+            uri_prefix: '%app.path.user%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            upload_destination: '%kernel.project_dir%/public%app.path.user%'
+        pub:
+            uri_prefix: '%app.path.pub%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            upload_destination: '%kernel.project_dir%/public%app.path.pub%'
+        vignette:
+            uri_prefix: '%app.path.vignette%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            upload_destination: '%kernel.project_dir%/public%app.path.vignette%'

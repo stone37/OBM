@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-12 col-md-4">
+        <div class="md-form md-outline mb-2">
+            {{- form_widget(form.city, {'id': 'app-admin-zone-name', 'attr': {'class': 'form-control'}}) -}}
+            {{- form_label(form.city) -}}
+            {{- form_errors(form.city) -}}
+        </div>
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.zone) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4 mt-3">
+        <div class="grey-text pb-1">{{ form.enabled.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.enabled.vars.full_name }}" id="{{ form.enabled.vars.id }}"
+                       value="{{ form.enabled.vars.value }}" {% if form.enabled.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+</div>

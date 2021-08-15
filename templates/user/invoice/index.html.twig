@@ -1,0 +1,85 @@
+{% extends 'user/layout.html.twig' %}
+
+{% block title 'Mes factures' %}
+{% block meta %}
+    <meta name="google" content="nositelinkssearchbox">
+{% endblock %}
+
+{% block app_mobile_cart %}{% endblock %}
+{% block app_cart %}{% endblock %}
+
+{% block app_breadcrumbs %}
+    <div class="mt-80 mt-md-7">
+        {{ breadcrumb('Tableau de bord', '/u/') }}
+        {{ breadcrumb('Mes factures') }}
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </div>
+{% endblock %}
+
+{% block app_body %}
+    <div class="row">
+        <div class="col-12">
+            <h3 class="h3-responsive font-weight-stone-600 mb-4">Mes factures</h3>
+        </div>
+    </div>
+    {% if payments|length > 0 %}
+        <div class="row app-user mb-5">
+            <div class="col-12">
+                <table class="table table-responsive-sm">
+                    <thead class="text-primary">
+                    <tr>
+                        <th scope="col" class="font-weight-stone-500 text-center">#</th>
+                        <th scope="col" class="font-weight-stone-500 text-center">Date</th>
+                        <th scope="col" class="font-weight-stone-500 text-center">Description</th>
+                        <th scope="col" class="font-weight-stone-500 text-center">Montant</th>
+                        <th scope="col" class="font-weight-stone-500 text-center"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="list-checkbook-container">
+                    {% for payment in payments %}
+                        <tr>
+                            <td class="text-center">{{ loop.index }}</td>
+                            <td class="text-center">{{ payment.createdAt|date('d/m/Y H:i:s') }}</td>
+                            <td class="text-center">
+                                {% for item in payment.order.items %}
+                                    {{ app_product_name(item.product) }}
+                                    {% if not loop.last %}<br>{% endif %}
+                                {% endfor %}
+                            </td>
+                            <td class="text-center">{{ payment.price }} CFA</td>
+                            <td>
+                                <a target="_blank" href="{{ path('app_dashboard_invoice_show', {id: payment.id}) }}" class="btn btn-amber btn-sm">Télécharger&nbsp;<span class="d-none d-md-inline-block">la facture</span></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 d-flex justify-content-start mt-2">
+                <div class="font-weight-stone-500 text-secondary">{{ payments.totalItemCount }} resultats</div>
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-2">
+                {{ knp_pagination_render(payments, 'Ui/_pagination.html.twig') }}
+            </div>
+        </div>
+    {% else %}
+        <div class="row app-user d-flex justify-content-center">
+            <div class="col-12 col-md-8 text-center mt-3 mt-md-5 mb-5">
+                <h4 class="text-primary h4-responsive font-weight-stone-600">
+                    Vous n'avez aucune facture.
+                </h4>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+

@@ -1,0 +1,35 @@
+app_admin_option_index:
+    path: /options/{type}
+    methods: [GET]
+    controller: App\Controller\Admin\OptionController::index
+
+app_admin_option_create:
+    path: /options/create/{type}
+    methods: [GET, POST]
+    controller: App\Controller\Admin\OptionController::create
+
+app_admin_option_edit:
+    path: /options/{id}/edit/{type}
+    methods: [GET, POST]
+    controller: App\Controller\Admin\OptionController::edit
+    requirements:
+        id: \d+
+
+app_admin_option_delete:
+    path: /options/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\OptionController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_option_bulk_delete:
+    path: /options/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\OptionController::deleteBulk
+    options:
+        expose: true
+
+
+

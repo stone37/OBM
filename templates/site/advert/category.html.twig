@@ -1,0 +1,76 @@
+{% extends 'site/layout.html.twig' %}
+{# pixel facebook ici #}
+
+{% block title 'Passé une annonce gratuite - Sélectionner une catégorie' %}
+{% block meta %}
+    <meta name="google" content="nositelinkssearchbox">
+{% endblock %}
+
+{% block app_advert_btn_post %}{% endblock %}
+{% block app_navbar_second %}{% endblock %}
+{% block app_cart %}{% endblock %}
+{% block app_mobile_cart %}{% endblock %}
+
+{% block app_breadcrumbs %}
+    <div class="mt-lg-90 mt-70">
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </div>
+{% endblock %}
+
+{% block app_body %}
+    <section class="row d-flex justify-content-center page-content">
+        <div class="col-lg-5 col-md-7 col-12 app-choose-category">
+            <h3 class="h3-responsive text-primary text-center mb-4">Sélectionner une catégorie</h3>
+            <div class="list-group app-category-content-parent mb-4">
+                {% for category in categories %}
+                    {% set status = category.children|length > 0 %}
+                    <a {% if not status %}href="{{ path('app_advert_create', {'category_slug': category.slug}) }}"{% endif %} id="{{ category.id }}"
+                       class="list-group-item d-flex
+                     align-items-center {% if status > 0 %}children-0{% endif %}">
+                        <div class="md-v-line"></div><i class="{{ category.icon }} mr-3"></i>
+                        {{ category.name }}
+
+                        {% if not status %}<i class="fas fa-angle-right ml-auto"></i>{% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+
+            <div class="list-group app-category-content-parent-children-1 mb-4"></div>
+            <div class="list-group app-category-content-children-1"></div>
+
+            <div class="list-group app-category-content-parent-children-2 mb-4"></div>
+            <div class="list-group app-category-content-children-2"></div>
+
+            <div id="loader" class="d-flex justify-content-center">
+                <div class="preloader-wrapper big">
+                    <div class="spinner-layer spinner-primary-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/category.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/category.js'} %}
+{% endblock %}
+
+

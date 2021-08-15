@@ -1,0 +1,45 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title 'Contact' %}
+
+{% block app_cart %}{% endblock %}
+{% block app_mobile_cart %}{% endblock %}
+
+{% block app_navbar_second %}
+    {% if is_mobile() %}
+        <div class="jumbotron mobile color-primary d-block d-lg-none">
+            <div class="d-flex align-items-center h-100">
+                <div class="container text-center mx-3">
+                    {% block app_mobile_search_form %}
+                        {{ render(controller('App\\Controller\\SearchController::indexM')) }}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block app_breadcrumbs %}
+    <section class="pt-md-0 mt-page-n">
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </section>
+{% endblock %}
+
+{% block app_body %}
+    <div class="row d-flex justify-content-center mb-4">
+        <div class="col-12">
+            {% include 'site/contact/_content.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

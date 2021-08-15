@@ -1,0 +1,33 @@
+app_admin_pack_index:
+    path: /packs
+    methods: [GET]
+    controller: App\Controller\Admin\PackController::index
+
+app_admin_pack_create:
+    path: /packs/create
+    methods: [GET, POST]
+    controller: App\Controller\Admin\PackController::create
+
+app_admin_pack_edit:
+    path: /packs/{id}/edit
+    methods: [GET, POST]
+    controller: App\Controller\Admin\PackController::edit
+    requirements:
+        id: \d+
+
+app_admin_pack_delete:
+    path: /packs/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\PackController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_pack_bulk_delete:
+    path: /packs/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\PackController::deleteBulk
+    options:
+        expose: true
+

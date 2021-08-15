@@ -1,0 +1,9 @@
+app_admin_dashboard:
+    path: /
+    controller: App\Controller\Admin\DashboardController::index
+
+app_admin_mailtest:
+    path: /mailtester/
+    methods: [POST]
+    controller: App\Controller\Admin\DashboardController::index
+

@@ -1,0 +1,70 @@
+.skin-light .premium .title div {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.skin-light .premium .title div a {
+    font-size: .9rem;
+    font-weight: 500;
+    color: #ffc107;
+}
+
+.skin-light .premium .title div a:hover {
+    color: #ffa000;
+    text-decoration: underline;
+}
+
+.skin-light .premium .content .card {
+    cursor: pointer;
+    height: 130px;
+    border-radius: 0 !important;
+
+}
+
+@media (max-width: 767px) {
+    .skin-light .premium .content .card {
+        cursor: pointer;
+        height: 110px;
+        border-radius: 0 !important;
+    }
+
+    .skin-light .premium .title div {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+}
+
+.skin-light .premium .content .card div {
+    background-color: rgba(18, 102, 241, .9);
+    color: #ffffff;
+    padding-top: 7px;
+    padding-bottom: -1px;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.skin-light .premium .content .card div:hover {
+    background-color: rgba(255, 255, 255, .9);
+    color: #1266F1;
+}
+
+.skin-light .premium .content .card h3 {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
+@media (max-width: 767px) {
+    .skin-light .premium .content .card h3 {
+        font-size: .9rem !important;
+        font-weight: 500 !important;
+    }
+}
+
+
+
+
+
+
+
+
+

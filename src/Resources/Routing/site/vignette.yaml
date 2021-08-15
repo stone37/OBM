@@ -1,0 +1,7 @@
+app_vignette_create:
+    path: /pub/vignette
+    controller: App\Controller\VignetteController::create
+
+app_vignette_show:
+    path: /pub/vignette/{id}/show
+    controller: App\Controller\VignetteController::show

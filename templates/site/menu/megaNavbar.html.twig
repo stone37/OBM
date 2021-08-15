@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-md navbar-light second nav-black d-none d-lg-block py-0">
+    <div class="collapse navbar-collapse" id="{{ settings.name }}_navbarSecond">
+        {% set index = isActive('app_advert_index') %}
+
+        <ul class="navbar-nav mr-auto">
+            {% for category in categories %}
+                <li class="nav-item dropdown mega-dropdown 
+                    {% if request.attributes.get('category_slug') == category.slug %}active{% endif %}">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenu{{ category.id }}" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">{{ category.name }}
+                        <span class="sr-only">(current)</span>
+                    </a>
+                    <div class="dropdown-menu mega-menu"
+                         aria-labelledby="navbarDropdownMenu{{ category.id }}">
+                        <div class="row px-0">
+                            <div class="col-12">
+                                <div class="sub-menu second ml-lg-4">
+                                    <div class="content scrollbar-ripe-stone app-menu-second"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 sub-menu first mb-xl-0 mb-4 pt-2">
+                                <div class="content scrollbar-ripe-stone">
+                                    <h6 class="sub-title">
+                                        <a href="{{ path('app_advert_index', {'category_slug': category.slug}) }}">
+                                            Tout afficher dans {{ category.name }}
+                                        </a>
+                                    </h6>
+                                    {% if category.children|length > 0 %}
+                                        <ul class="list-unstyled">
+                                            {% for children in category.children %}
+                                                <li>
+                                                    {% set childStatus = children.children|length > 0 %}
+                                                    <a class="menu-item pl-2 {% if childStatus > 0 %}has-child{% else %}not-child{% endif %}"
+                                                       href="{{ path('app_advert_index_s',
+                                                           {'category_slug': category.slug, 'sub_category_slug': children.slug}) }}"
+                                                       id="{{ children.id }}">
+                                                        <span class="d-md-none d-lg-inline">{{ children.name|u.truncate(35) }}</span>
+                                                        <span class="d-lg-none d-md-inline">{{ children.name|u.truncate(32) }}</span>
+                                                        {% if childStatus > 0 %}<i class="fas fa-angle-right"></i>{% endif %}
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-8 sub-menu image"
+                                 style="background-image: url({{ vich_uploader_asset(category, 'file') }});
+                                         background-repeat: no-repeat; background-size: cover;">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>

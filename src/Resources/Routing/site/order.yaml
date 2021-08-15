@@ -1,0 +1,18 @@
+app_order_validate:
+    path: /api/banque
+    controller: App\Controller\OrderController::validateOrder
+
+app_order_credit_validate:
+    path: /api/credit
+    controller: App\Controller\OrderController::validateCreditOrder
+
+app_order_invoice:
+    path: /invoice/{id}
+    controller: App\Controller\OrderController::invoice
+    requirements:
+        id: \d+
+
+app_order_payment:
+    path: /order/payment
+    controller: App\Controller\OrderController::payment
+

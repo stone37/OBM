@@ -1,0 +1,19 @@
+{% extends layout %}
+
+{% import "mails/macros.twig" as e %}
+
+{% set settings = config.get %}
+
+{% block body %}
+
+    {% apply markdown_email %}
+
+        Nouveau message de "{{ message.firstname }}"
+        ===============================
+
+        Vous avez reçu un nouveau message.
+
+    {% endapply %}
+
+    {{ e.button('Mes messages', url('app_dashboard_message_receive')) }}
+{% endblock %}

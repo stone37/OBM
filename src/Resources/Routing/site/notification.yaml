@@ -1,0 +1,7 @@
+app_notification_index:
+    path: /notifications
+    controller: App\Controller\NotificationController::index
+
+app_notification_read:
+    path: /notifications/read
+    controller: App\Controller\NotificationController::readAll

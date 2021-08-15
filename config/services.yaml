@@ -4,6 +4,20 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    app.path.category: /uploads/images/categories
+    app.path.settings: /uploads/images/logo
+    app.path.user: /uploads/images/users
+    app.path.pub: /uploads/images/pubs
+    app.path.vignette: /uploads/images/vignettes
+    app.path.image_orphanage: '%kernel.cache_dir%/uploader/orphanage'
+    dkim_key: '%env(resolve:default::MAILER_DKIM)%'
+    image_resize_key: '%env(resolve:IMAGE_RESIZE_KEY)%'
+    typesense_key:    '%env(resolve:TYPESENSE_KEY)%'
+    typesense_host:   '%env(resolve:TYPESENSE_HOST)%'
+    maintenance:
+        path: '%kernel.project_dir%/public/.maintenance'
+        ipAuthorized: []
+
 
 services:
     # default configuration for services in *this* file
@@ -29,3 +43,34 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Mailing\Mailer:
+        class: App\Mailing\Mailer
+        arguments:
+            $dkimKey: '%dkim_key%'
+
+    App\Queue\FailedJobsService:
+        arguments: ['@messenger.transport.failed']
+
+    App\Service\ImageResizer:
+        arguments: ['%image_resize_key%']
+
+    App\Model\Typesense\TypesenseClient:
+        arguments: ['%typesense_host%', '%typesense_key%']
+
+    App\Model\IndexerInterface:
+        class: App\Model\Typesense\TypesenseIndexer
+
+    App\Model\SearchInterface:
+        class: App\Model\Typesense\TypesenseSearch
+
+    App\EventListener\MaintenanceListener:
+        arguments:
+            $maintenance: '%maintenance%'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
+
+    App\Service\CookieGenerator:
+        arguments:
+            $secret: '%env(resolve:MERCURE_SUBSCRIBER_KEY)%'
+

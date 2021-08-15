@@ -1,0 +1,31 @@
+<div class="row app-advert-show-info">
+    <div class="col-12">
+        <table class="table table-borderless table-responsive-sm">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Surface</div>
+                    <div class="content text-primary font-weight-stone-600">{{ advert.surface }} m²</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Etat</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.immobilierState %}{{ advert.immobilierState }}{% else %}NC{% endif %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Prix</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {{ advert.price }} <span class="text-primary font-weight-stone-600">CFA</span>
+                        {% if not advert.priceStatus %}
+                            - <span class="small font-weight-stone-600">à débattre</span>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

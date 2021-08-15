@@ -1,0 +1,19 @@
+{% extends layout %}
+
+{% import "mails/macros.twig" as e %}
+
+{% set settings = config.get %}
+
+{% block body %}
+
+  {% apply markdown_email %}
+
+    Validation de votre annonce "{{ advert.title }}"
+    ===============================
+
+    Votre annonce a été valider. Il est maintenant visible dans la liste des annonces sur {{ settings.name }}.
+
+  {% endapply %}
+
+  {{ e.button('Mes annonces validéss', url('app_dashboard_advert_index_active')) }}
+{% endblock %}

@@ -1,0 +1,14 @@
+app_admin_ad_newsletter:
+    path: /newsletter
+    methods: [GET, POST]
+    controller: App\Controller\Admin\NewsletterController::index
+
+app_admin_user_newsletter:
+    path: /newsletter/user
+    methods: [GET, POST]
+    controller: App\Controller\Admin\NewsletterController::user
+
+app_admin_user_pro_newsletter:
+    path: /newsletter/pro
+    methods: [GET, POST]
+    controller: App\Controller\Admin\NewsletterController::pro

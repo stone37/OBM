@@ -1,0 +1,4 @@
+app_admin_option_photo_index:
+    path: /options-phohto
+    controller: App\Controller\Admin\OptionPhotoController::index
+

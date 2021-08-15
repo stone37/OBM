@@ -1,0 +1,62 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title %}Témoignage des clients et utilisateur du site {{ settings.name }}{% endblock %}
+
+{% block app_cart %}{% endblock %}
+{% block app_mobile_cart %}{% endblock %}
+
+{% block app_navbar_second %}
+    {% if is_mobile() %}
+        <div class="jumbotron mobile color-primary d-block d-lg-none">
+            <div class="d-flex align-items-center h-100">
+                <div class="container text-center mx-3">
+                    {% block app_mobile_search_form %}
+                        {{ render(controller('App\\Controller\\SearchController::indexM')) }}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block app_breadcrumbs %}
+    <section class="pt-md-0 mt-page-n">
+        {{ breadcrumb('Vos avis') }}
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </section>
+{% endblock %}
+
+{% block app_body %}
+    <div class="row d-flex justify-content-center mb-4">
+        <div class="col-12 col-md-8 col-lg-9">
+            {% include 'site/avis/index/content.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfSnr0UAAAAAGgVbAAZQdtn8UdJ6CAMTf79myG_"></script>
+    <script>
+        let route = '{{ path('app_review_index') }}';
+
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LfSnr0UAAAAAGgVbAAZQdtn8UdJ6CAMTf79myG_', {action: route })
+                .then(function(token) {
+                    $('input.app-recaptchaToken').val(token);
+                });
+        });
+    </script>
+{% endblock %}
+
+
+
+

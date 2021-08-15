@@ -1,0 +1,78 @@
+app_admin_user_index:
+    path: /users
+    methods: [GET]
+    controller: App\Controller\Admin\UserController::index
+
+app_admin_user_pro_index:
+    path: /users/pro
+    methods: [GET]
+    controller: App\Controller\Admin\UserController::indexPro
+
+app_admin_user_no_confirm_index:
+    path: /users/no-comfirm
+    methods: [GET]
+    controller: App\Controller\Admin\UserController::indexN
+
+app_admin_user_deleted_index:
+    path: /users/deleted
+    methods: [GET]
+    controller: App\Controller\Admin\UserController::indexD
+
+app_admin_user_show:
+    path: /users/{id}/show/{type}
+    methods: [GET, POST]
+    controller: App\Controller\Admin\UserController::show
+    requirements:
+        id: \d+
+        type: \d+
+
+app_admin_user_ban:
+    path: /users/{id}/ban
+    methods: [DELETE, POST]
+    controller: App\Controller\Admin\UserController::ban
+    requirements:
+        id: \d+
+
+app_admin_user_clean:
+    path: /users/clean
+    controller: App\Controller\Admin\UserController::clean
+    methods: [GET, DELETE]
+    options:
+        expose: true
+
+app_admin_user_delete:
+    path: /users/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\UserController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_user_bulk_delete:
+    path: /users/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\UserController::deleteBulk
+    options:
+        expose: true
+
+app_admin_user_advert_index:
+    path: /users/{id}/advert
+    methods: [GET]
+    controller: App\Controller\Admin\UserAdvertController::index
+
+app_admin_user_advert_show:
+    path: /users/{id}/advert/show
+    methods: [GET]
+    controller: App\Controller\Admin\UserAdvertController::show
+
+app_admin_user_order_index:
+    path: /users/{id}/order
+    methods: [GET]
+    controller: App\Controller\Admin\UserOrderController::index
+
+app_admin_user_order_show:
+    path: /users/{id}/order/show
+    methods: [GET]
+    controller: App\Controller\Admin\UserOrderController::show
+

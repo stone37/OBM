@@ -1,0 +1,17 @@
+app_favorite_add:
+    path: /favorite/{id}/add
+    controller: App\Controller\FavoriteController::add
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_favorite_delete:
+    path: /favorite/{id}/delete
+    controller: App\Controller\FavoriteController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+

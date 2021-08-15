@@ -1,0 +1,39 @@
+{% extends layout %}
+
+{% import "mails/macros.twig" as e %}
+
+{% set settings = config.get %}
+
+{% if advert.subDivision|length > 0 %}
+    {% set route = url('app_advert_show', {
+        'category_slug': advert.category.slug,
+        'sub_category_slug': advert.subCategory.slug,
+        'sub_division_slug': advert.subDivision.slug,
+        'city': advert.location.name,
+        'reference': advert.reference,
+        'slug': advert.slug}) %}
+
+    {% set category = advert.subDivision %}
+{% else %}
+    {% set route = url('app_advert_show_s', {
+        'category_slug': advert.category.slug,
+        'sub_category_slug': advert.subCategory.slug,
+        'city': advert.location.name,
+        'reference': advert.reference, 'slug': advert.slug}) %}
+
+    {% set category = advert.subCategory %}
+{% endif %}
+
+{% block body %}
+
+    {% apply markdown_email %}
+
+        Salut "{{ alert.user.username }}",
+        ===============================
+
+        Vous avez une nouvelle alerte <a class="{{ absolute_url('/') }}">{{ settings.name }}</a> pour votre recherche dans <strong>{{ category.name }}</strong>.
+
+    {% endapply %}
+
+    {{ e.button('Voir l''annonce ', route) }}
+{% endblock %}

@@ -1,0 +1,30 @@
+<div class="card card-cascade narrower">
+    <div class="view view-cascade bg-primary text-white">
+        <h3 class="h3-responsive font-weight-stone-600 px-3 pt-3 pb-2">
+            Créer une annonce {{ advert.category.name }}
+            {% if advert.subCategory|length > 0 %}
+                - {{ advert.subCategory.name}}
+            {% endif %}
+        </h3>
+    </div>
+    <div class="card-body card-body-cascade px-lg-5">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'advert-form'}}) }}
+
+        {% include 'site/advert/create/form/'~view %}
+
+        {{ form_widget(form._token) }}
+        <div class="text-center mt-md-3">
+            <div class="mx-1 mx-md-4 small-9 dark-grey-text mb-3">
+                En publiant votre annonce, vous acceptez nos <a href="{{ path('app_cgu') }}" class="link font-weight-stone-500">conditions d'utilisation</a>,
+                notre <a href="{{ path('app_confidentialite') }}" class="link font-weight-stone-500">politique de confidentialité</a> et
+                la <a href="{{ path('app_advertiser_charte') }}" class="link font-weight-stone-500">charte du bon annonceur</a>.<br />
+                Veuillez ne pas publier d'annonces en double.
+            </div>
+            <button class="btn btn-primary btn-lg app-ad-submit-btn font-weight-stone-500" type="submit">
+                Publier votre annonce <i class="fas fa-paper-plane ml-2"></i>
+            </button>
+        </div>
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+</div>
+

@@ -1,0 +1,18 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Vignettes | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/vignette/index/_header.html.twig' %}
+
+    {% include 'admin/vignette/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+

@@ -1,0 +1,25 @@
+{% extends layout %}
+
+{% import "mails/macros.twig" as e %}
+
+{% set settings = config.get %}
+
+{% block body %}
+
+  {% apply markdown_email %}
+
+    Signalement d'une annonce {{ settings.name }}
+    ===============================
+
+    Votre annonce vient d'etre signaler. Voici les details du signalement: <br>
+    <strong>Email du plaignant</strong> <br>
+    {{ data.email }} <br>
+    <strong>Raison de la plaignant</strong> <br>
+    {{ data.reason }} <br>
+    <strong>Contenu de la plaignant</strong> <br>
+    {{ data.content }}
+
+  {% endapply %}
+
+  {{ e.button('Voir l\'annonce', url('app_admin_advert_show', {'id': data.advert.id, 'type': 2})) }}
+{% endblock %}

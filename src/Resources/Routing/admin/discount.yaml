@@ -1,0 +1,33 @@
+app_admin_discount_index:
+    path: /discounts
+    methods: [GET]
+    controller: App\Controller\Admin\DiscountController::index
+
+app_admin_discount_create:
+    path: /discounts/create
+    methods: [GET, POST]
+    controller: App\Controller\Admin\DiscountController::create
+
+app_admin_discount_edit:
+    path: /discounts/{id}/edit
+    methods: [GET, POST]
+    controller: App\Controller\Admin\DiscountController::edit
+    requirements:
+        id: \d+
+
+app_admin_discount_delete:
+    path: /discounts/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\DiscountController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_discount_bulk_delete:
+    path: /discounts/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\DiscountController::deleteBulk
+    options:
+        expose: true
+

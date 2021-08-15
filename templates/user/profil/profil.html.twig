@@ -1,0 +1,49 @@
+{% extends 'site/layout.html.twig' %}
+{# pixel facebook ici #}
+
+{% block title %}
+    Profil de {% if user.username %}
+    {{ user.username }}{% else %}{{ user.firstName}} {{ user.lastName }}{% endif %}
+{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="Profil de {{ user.username }}"/>
+    <meta property="og:description" content="Profil de {{ user.username }}" />
+{% endblock %}
+
+{% block app_advert_btn_post %}{% endblock %}
+{% block app_navbar_second %}{% endblock %}
+{% block app_notify %}{% endblock %}
+
+{% block app_breadcrumbs %}
+    <section class="mt-lg-90 mt-70">
+        <a href="" class="btn btn-amber btn-sm mt-lg-3 btn-back">
+            <i class="fas fa-angle-left mr-2"></i>
+            Retour
+        </a>
+    </section>
+{% endblock %}
+
+{% block app_body %}
+    {% include 'user/profil/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
+    <script>
+        let $bulk = $('#app-advert-bulk .card.narrower');
+
+        $bulk.click(function () {
+            let $link = $(this).find('.advert-show')[0];
+
+            $link.click();
+        });
+    </script>
+{% endblock %}
+

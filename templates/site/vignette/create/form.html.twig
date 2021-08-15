@@ -1,0 +1,107 @@
+{% form_theme form 'Ui/Form/theme.html.twig' %}
+
+<div class="form-row mt-3">
+    <div class="col-12">
+        <div class="h5-responsive border border-primary border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-primary d-inline-block mr-1" style="position: relative; bottom: 6px;">1</div>
+            <div class="text-primary d-inline-block font-weight-stone-500">Information</div>
+        </div>
+    </div>
+</div>
+
+<div class="form-row mt-3">
+    <div class="col-12 app-radio-block-parent">
+        <div class="font-weight-stone-600 dark-grey-text mb-2">Durée</div>
+        {% for el in products %}
+            <div class="app-radio-block grey-text text-center py-3 px-2 rounded mr-md-2 mb-3
+                    {% if el.id == product.id %}active{% endif %}">
+                <div class="mb-3 label font-weight-stone-600">{{ el.days }} Jours</div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input with-gap" id="product_{{ loop.index }}"
+                           value="{{ el.id }}" name="list_product" {% if el.id == product.id %}checked{% endif %} />
+                    <label class="form-check-label" for="product_{{ loop.index }}"></label>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.startDate) }}
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="d-flex flex-wrap">
+            <div class="select-outline position-relative w-100">
+                {{ form_widget(form.category) }}
+                <label>{{ form.category.vars.label }}</label>
+            </div>
+            <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(form.category) }}</div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="d-flex flex-wrap">
+            <div class="select-outline position-relative w-100">
+                {{ form_widget(form.subCategory) }}
+                <label>{{ form.subCategory.vars.label }}</label>
+            </div>
+            <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(form.subCategory) }}</div>
+        </div>
+    </div>
+    <div class="col-12 col-md-5">
+        <div class="md-form md-outline mb-2 mr-2">
+            {{ form_row(form.societyName) }}
+        </div>
+    </div>
+    <div class="col-12 col-md-7">
+        <div class="md-form md-outline">
+            {{ form_widget(form.description) }}
+            {{ form_label(form.description) }}
+            <div class="red-text font-weight-stone-500">{{ form_errors(form.description) }}</div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="font-weight-stone-600 dark-grey-text mb-2">Image <span class="small">dimensions 120x120</span></div>
+                <div class="file-field">
+                    <div class="btn btn-sm btn-mdb-color float-left">
+                        <span>Choisir une image</span>
+                        <input type="file" name="{{ form.file.children.file.vars.full_name }}" id="entity-image" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <img src="" alt="" class="img-fluid img-thumbnail vignette-image z-depth-2 mt-3 mt-md-0" id="image-view" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-row mt-4">
+    <div class="col-12">
+        <div class="h5-responsive border border-primary border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-primary d-inline-block mr-1" style="position: relative; bottom: 6px;">2</div>
+            <div class="text-primary d-inline-block font-weight-stone-500">Coordonnées</div>
+        </div>
+    </div>
+</div>
+<div class="form-row my-3">
+    <div class="col-12 col-md-4">
+        {{ form_row(form.siret) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.lastname) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.firstname) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.phone) }}
+    </div>
+    <div class="col-12 col-md-8">
+        {{ form_row(form.siteWeb) }}
+        <small id="app-advert-user-email-help" class="form-text text-muted">
+            Url de votre site web ou celui de votre page social (Facebook, Twitter, ...)
+        </small>
+    </div>
+</div>
+
+
+

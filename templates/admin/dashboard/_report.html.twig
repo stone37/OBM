@@ -1,0 +1,79 @@
+<div class="card mb-4">
+    <div class="card-body">
+        <h4 class="card-title h4-responsive text-center text-primary">Signalements  d'annonces</h4>
+        {% if reports|length > 0 %}
+            <ul class="list-group list-group-flush px-0">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="font-weight-600 grey-text">
+                        Detail
+                    </div>
+                    <div class=""></div>
+                </li>
+
+                {% for report in reports %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="">
+                            <div class="">
+                                L'annonce <strong><a href="{{ path('app_admin_advert_show', {'type': 2, 'id': report.advert.id}) }}" class="link">#{{ report.advert.reference }}</a></strong>
+                                a été signalé par <strong><a href="mailto:{{ report.email }}" class="link">{{ report.email }}</a></strong>
+                            </div>
+                            <div class="mt-2 small dark-grey-text">
+                                <span class="font-weight-stone-500 text-primary">Raison:</span> {{ report.reason }}
+                            </div>
+                            <div class=" small dark-grey-text">
+                                <span class="font-weight-stone-500 text-primary">Description:</span> {{ report.content }}
+                            </div>
+                            <div class="small font-weight-stone-500 grey-text mt-3">{{ report.createdAt|date('d/m/Y') }}</div>
+                        </div>
+                        <div class="d-flex justify-content-end align-items-end">
+                            <a href="{{ path('app_admin_report_delete', {'id': report.id}) }}"
+                               onclick="confirm('Être vous sur de vouloir supprimer cet signalement ?')"
+                               class="btn btn-danger btn-sm entity-report-delete"
+                                style="padding-left: 13px !important; padding-right: 13px !important;">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="grey-text text-center mt-4 mb-3">Aucun client pour le moment</div>
+        {% endif %}
+
+        {#
+        <div class="">
+            {% if reports|length > 0 %}
+                <ul class="list-group list-group-flush px-0">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="font-weight-600 grey-text">Detail</div>
+                        <div class=""></div>
+                    </li>
+
+                    {% for report in reports %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="small-9">
+                                    L'annonce <strong><a href="{{ path('app_admin_advert_show', {'type': 2, 'id': report.advert.id}) }}" class="link">#{{ report.advert.reference }}</a></strong>
+                                    a été signalé par <strong><a href="mailto:{{ report.email }}" class="link">{{ report.email }}</a></strong>
+                                </div>
+                                <p class="small-9">{{ report.reason }}</p>
+                                <div class="small font-weight-stone-500 grey-text">{{ report.createdAt|date('d/m/Y') }}</div>
+                            </div>
+                            <div class="d-flex justify-content-end align-items-end">
+                                <div class="d-flex justify-content-end align-items-end">
+                                    <a href="{{ path('app_admin_report_delete', {'id': report.id}) }}" class="btn btn-danger btn-sm entity-report-delete">
+                                        <i class="fas fa-trash mr-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="grey-text text-center mt-4 mb-3">Aucun signalement pour le moment</div>
+            {% endif %}
+        </div>
+        #}
+    </div>
+</div>
+

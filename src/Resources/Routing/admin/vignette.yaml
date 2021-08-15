@@ -1,0 +1,33 @@
+app_admin_vignette_index:
+    path: /vignettes
+    methods: [GET]
+    controller: App\Controller\Admin\VignetteController::index
+
+app_admin_vignette_create:
+    path: /vignettes/create
+    methods: [GET, POST]
+    controller: App\Controller\Admin\VignetteController::create
+
+app_admin_vignette_edit:
+    path: /vignettes/{id}/edit
+    methods: [GET, POST]
+    controller: App\Controller\Admin\VignetteController::edit
+    requirements:
+        id: \d+
+
+app_admin_vignette_delete:
+    path: /vignettes/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\VignetteController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_vignette_bulk_delete:
+    path: /vignettes/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\VignetteController::deleteBulk
+    options:
+        expose: true
+

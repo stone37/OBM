@@ -1,0 +1,27 @@
+app_env:
+  path: /a-propos
+  controller: App\Controller\PagesController::env
+
+app_confidentialite:
+  path: /politique-de-confidentialite
+  controller: App\Controller\PagesController::confidentialite
+
+app_help:
+  path: /centre-daide
+  controller: App\Controller\PagesController::help
+
+app_mention_legale:
+  path: /mentions-legales
+  controller: App\Controller\PagesController::mention
+
+app_cgu:
+  path: /condition-dutilisation
+  controller: App\Controller\PagesController:cgu
+
+app_advertiser_charte:
+  path: /charte-du-bon-annonceur
+  controller: App\Controller\PagesController::charte
+
+app_contact:
+  path: /contact/
+  controller: App\Controller\ContactController::index

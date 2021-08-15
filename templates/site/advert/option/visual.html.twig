@@ -1,0 +1,117 @@
+{% import 'site/advert/option/__bulk.html.twig' as __option  %}
+
+<div id="app-ad-option" class="form-row mt-4 mb-5 app-option">
+    <div class="col-12 col-lg-9">
+        <div class="form-row my-3">
+            <div class="col-12">
+                <div class="h5-responsive border border-primary border-top-0 border-left-0 border-right-0">
+                    <div class="badge badge-primary d-inline-block mr-1" style="position: relative; bottom: 6px;">5</div>
+                    <div class="text-primary d-inline-block font-weight-stone-600">Options pour promouvoir votre annonce</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row pr-lg-2">
+            <div class="col-12 d-flex justify-content-between bg-grey-light mb-4">
+                <div class="font-weight-stone-600 grey-text">Options</div>
+                <div class="font-weight-stone-600 grey-text">Prix</div>
+            </div>
+            <div class="col-12">
+                {% if vedettes|length > 0 %}
+                    {{ __option._data(vedettes) }}
+                {% endif %}
+
+                {% if headers|length > 0 %}
+                    {{ __option._data(headers) }}
+                {% endif %}
+
+                {% if urgents|length > 0 %}
+                    {{ __option._data(urgents) }}
+                {% endif %}
+
+                {% if gallery|length > 0 %}
+                    {{ __option._data(gallery) }}
+                {% endif %}
+
+                {% if encadres|length > 0 %}
+                    {{ __option._data(encadres) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div id="app-option-carousel" class="col-12 col-lg-3 pl-3 border border-top-0 border-right-0 border-bottom-0">
+        {% if not is_mobile() %}
+            <div id="carousel-example-1z" class="carousel slide carousel-fade mt-5" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    {% set status = false %}
+
+                    {% if vedettes|length > 0 %}
+                        {% set status = true %}
+                        {{ __option._carousel(vedettes, status) }}
+                    {% endif %}
+
+                    {% if headers|length > 0 %}
+                        {% if vedettes|length > 0 %}{% set status = false %}{% else %}{% set status = true %}{% endif %}
+                        {{ __option._carousel(headers, status) }}
+                    {% endif %}
+
+                    {% if urgents|length > 0 %}
+                        {{ __option._carousel(urgents, status) }}
+                    {% endif %}
+
+                    {% if gallery|length > 0 %}
+                        {{ __option._carousel(gallery, status) }}
+                    {% endif %}
+
+                    {% if encadres|length > 0 %}
+                        {{ __option._carousel(encadres, status) }}
+                    {% endif %}
+                </div>
+                <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon fas fa-angle-left fa-2x" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon fas fa-angle-right fa-2x" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-12">
+        {{ include('site/advert/option/_detail.html.twig') }}
+    </div>
+</div>
+
+<script>
+    let $donnees = [];
+
+    {% if vedettes|length > 0 %}
+        {% for vedette in vedettes %}
+            $donnees[{{ vedette.id }}] = {{ vedette.price }};
+        {% endfor %}
+    {% endif %}
+
+    {% if headers|length > 0 %}
+        {% for header in headers %}
+            $donnees[{{ header.id }}] = {{ header.price }};
+        {% endfor %}
+    {% endif %}
+
+    {% if urgents|length > 0 %}
+        {% for urgent in urgents %}
+            $donnees[{{ urgent.id }}] = {{ urgent.price }};
+        {% endfor %}
+    {% endif %}
+
+    {% if gallery|length > 0 %}
+        {% for gal in gallery %}
+            $donnees[{{ gal.id }}] = {{ gal.price }};
+        {% endfor %}
+    {% endif %}
+
+    {% if encadres|length > 0 %}
+        {% for encadre in encadres %}
+            $donnees[{{ encadre.id }}] = {{ encadre.price }};
+        {% endfor %}
+    {% endif %}
+</script>

@@ -1,0 +1,244 @@
+{% include 'site/advert/option/__gallery_modal.html.twig' %}
+
+{% if galleries|length > 0 %}
+    <section id="app-option-gallery" class="col-12 app-option-gallery">
+        <div class="d-flex justify-content-between">
+            <div class="">
+                <h5 class="h5-responsive d-inline-block font-weight-stone-500 text-primary mb-4"
+                    style="margin-left: -18px;">
+                    Galerie de la page d'accueil
+                </h5>
+                <i class="fas fa-question-circle grey-text question d-none d-md-inline-block" data-toggle="popover-click"></i>
+                <div id="popover_content_wrapper" style="display: none">
+                    <div class="font-weight-stone-600 text-primary h5-responsive">Voulez vous voir votre annonce ici ?</div>
+                    <div>
+                        Attacher votre annonce à l'option <span class="font-weight-bold text-default">Galerie page d'accueil</span>
+                        dès aujourd'hui pour une visibilité ultime ! <br>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none d-md-flex details">
+                <a href="" class="d-inline-block ad" data-toggle="modal" data-target="#optionGallery">En savoir plus</a>
+                {# <a href="" class="d-inline-block see-all">Voir tout</a>#}
+            </div>
+        </div>
+        <section>
+            <div class="row">
+                <div class="col-12 mb-md-4">
+                    <div class="text-center">
+                        <div class="row ">
+                            <div id="recipeCarousel2" class="carousel slide w-100" data-ride="carousel">
+                                <div class="carousel-inner w-100 vv-3" role="listbox">
+                                    {% dump(galleries) %}
+                                    {% for gallerie in galleries %}
+
+                                        {% set photo_principale = app_advert_photo(gallerie.images) %}
+
+                                        {% if gallerie.subDivision|length > 0 %}
+                                            {% set route = path('app_advert_show', {'category_slug': gallerie.category.slug,
+                                                'sub_category_slug': gallerie.subCategory.slug,
+                                                'sub_division_slug': gallerie.subDivision.slug,
+                                                'city': gallerie.location.name, 'reference': gallerie.reference,
+                                                'slug': gallerie.slug}) %}
+                                        {% else %}
+                                            {% set route = path('app_advert_show_s', {'category_slug': gallerie.category.slug,
+                                                'sub_category_slug': gallerie.subCategory.slug,
+                                                'city': gallerie.location.name, 'reference': gallerie.reference,
+                                                'slug': gallerie.slug}) %}
+                                        {% endif %}
+
+                                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <a href="{{ route }}" class="">
+                                                    <div class="card mb-2">
+                                                        {% if photo_principale %}
+                                                            <img class="card-img-top" src="{{ asset(photo_principale.webPath) }}" alt="Card image cap">
+                                                        {% else %}
+                                                            <img class="card-img-top" src="{{ asset('images/no_image.png') }}" alt="Card image cap">
+                                                        {% endif %}
+                                                        <div class="card-body px-2 pt-3 pb-0 text-left">
+                                                            <div class="title font-weight-stone-500">{{ gallerie.title|u.truncate(23) }}</div>
+                                                            <div class="price  text-default h5-responsive font-weight-stone-600 d-flex mt-4">
+                                                                <div class="number">{{ gallerie.price }}</div><img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        {##}
+
+                                         {# {% dump(gallerie) %}
+                                        {% set photo_principale = app_advert_photo(gallerie.images) %}
+
+                                        {% if gallerie.subDivision|length > 0 %}
+                                            {% set route = path('app_advert_show', {'category_slug': gallerie.category.slug,
+                                                'sub_category_slug': gallerie.subCategory.slug,
+                                                'sub_division_slug': gallerie.subDivision.slug,
+                                                'city': gallerie.location.name, 'reference': gallerie.reference,
+                                                'slug': gallerie.slug}) %}
+                                        {% else %}
+                                            {% set route = path('app_advert_show_s', {'category_slug': gallerie.category.slug,
+                                                'sub_category_slug': gallerie.subCategory.slug,
+                                                'city': gallerie.location.name, 'reference': gallerie.reference,
+                                                'slug': gallerie.slug}) %}
+                                        {% endif %}
+
+                                        <div class="carousel-item {% if loop.index %}active{% endif %}">
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <a href="{{ route }}" class="">
+                                                    <div class="card mb-2">
+                                                        {% if photo_principale %}
+                                                            <img class="card-img-top" src="{{ asset(photo_principale.webPath) }}" alt="Card image cap">
+                                                        {% else %}
+                                                            <img class="card-img-top" src="{{ asset('images/no_image.png') }}" alt="Card image cap">
+                                                        {% endif %}
+
+                                                        <div class="card-body px-2 pt-3 pb-0 text-left">
+                                                            <div class="title font-weight-stone-500">{{ gallerie.title|u.truncate(23) }}</div>
+                                                            <div class="price text-default h5-responsive font-weight-stone-600 d-flex mt-4">
+                                                                <div class="number">{{ gallerie.price }}</div><img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>#}
+                                    {% endfor %}
+
+
+
+                                    {#
+                                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="card mb-2">
+                                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/47.jpg"
+                                                         alt="Card image cap">
+                                                    <div class="card-body text-left px-2 pt-2 pb-3">
+                                                        <div class="title font-weight-stone-500">Card title quick example text</div>
+                                                        <div class="small grey-text font-weight-stone-500">(Abidjan)</div>
+                                                        <div class="price text-default font-weight-stone-600 mt-3 mt-md-4">
+                                                            10000000 <span class="small-9">CFA</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="carousel-item active">
+                                        <div class="col-6 col-md-3 col-lg-2">
+                                            <div class="card mb-2">
+                                                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/47.jpg"
+                                                     alt="Card image cap">
+                                                <div class="card-body text-left px-2 pt-2 pb-3">
+                                                    <div class="title font-weight-stone-500">Card title quick example text</div>
+                                                    <div class="small grey-text font-weight-stone-500">(Abidjan)</div>
+                                                    <div class="price text-default font-weight-stone-600 mt-3 mt-md-4">
+                                                        10000000 <span class="small-9">CFA</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="col-6 col-md-3 col-lg-2">
+                                            <div class="card mb-2">
+                                                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+                                                     alt="Card image cap">
+                                                <div class="card-body text-left px-2 pt-2 pb-3">
+                                                    <div class="title font-weight-stone-500">Card title</div>
+                                                    <div class="small grey-text font-weight-stone-500">(Abidjan)</div>
+                                                    <div class="price text-default font-weight-stone-600 mt-3 mt-md-4">
+                                                        10000000 <span class="small-9">CFA</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="col-6 col-md-3 col-lg-2">
+                                            <div class="card mb-2">
+                                                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/45.jpg"
+                                                     alt="Card image cap">
+                                                <div class="card-body text-left px-2 pt-2 pb-3">
+                                                    <div class="title font-weight-stone-500">Card title</div>
+                                                    <div class="small grey-text font-weight-stone-500">(Abidjan)</div>
+                                                    <div class="price text-default font-weight-stone-600 mt-3 mt-md-4">
+                                                        10000000 <span class="small-9">CFA</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                      <div class="carousel-item">
+                                        <div class="col-6 col-md-3 col-lg-3">
+                                            <div class="card mb-2">
+                                                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/39.jpg"
+                                                     alt="Card image cap">
+                                                <div class="card-body text-left px-2 pt-2 pb-3">
+                                                    <div class="title font-weight-stone-500">Card title</div>
+                                                    <div class="small grey-text font-weight-stone-500">(Abidjan)</div>
+                                                    <div class="price text-default font-weight-stone-600 mt-3 mt-md-4">
+                                                        10000000 <span class="small-9">CFA</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="col-6 col-md-3 col-lg-3">
+                                            <div class="card mb-2">
+                                                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/44.jpg"
+                                                     alt="Card image cap">
+                                                <div class="card-body text-left px-2 pt-2 pb-3">
+                                                    <div class="title font-weight-stone-500">Card title</div>
+                                                    <div class="small grey-text font-weight-stone-500">(Abidjan)</div>
+                                                    <div class="price text-default font-weight-stone-600 mt-3 mt-md-4">
+                                                        10000000 <span class="small-9">CFA</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="col-6 col-md-3 col-lg-3">
+                                            <div class="card mb-2">
+                                                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/40.jpg"
+                                                     alt="Card image cap">
+                                                <div class="card-body text-left px-2 pt-2 pb-3">
+                                                    <div class="title font-weight-stone-500">Card title</div>
+                                                    <div class="small grey-text font-weight-stone-500">(Abidjan)</div>
+                                                    <div class="price text-default font-weight-stone-600 mt-3 mt-md-4">
+                                                        10000000 <span class="small-9">CFA</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>#}
+
+
+
+
+                                </div>
+                                <a class="carousel-control-prev controls" href="#recipeCarousel2" role="button" data-slide="prev">
+                                    <i class="fas fa-chevron-left"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next controls" href="#recipeCarousel2" role="button" data-slide="next">
+                                    <i class="fas fa-chevron-right"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Grid column -->
+            </div>
+        </section>
+        <div class="d-block d-md-none">
+            {# <a href="" class="btn btn-amber btn-sm btn-block mb-1">Voir tout</a>#}
+            <a href="" class="btn btn-grey-dark btn-sm btn-block mb-4" data-toggle="modal" data-target="#optionGallery">En savoir plus</a>
+        </div>
+    </section>
+{% endif %}

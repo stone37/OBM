@@ -1,0 +1,32 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    {% if type == 1 %}
+        Annonces en attente de validation
+    {% elseif type == 2 %}
+        Annonces validées
+    {% elseif type == 3 %}
+        Annonces refusées
+    {% elseif type == 4 %}
+        Annonces retirées
+    {% else %}
+        Annonces expirées
+    {% endif %}
+    | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/advert/index/_header.html.twig' %}
+
+    {% include 'admin/advert/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/location.js'} %}
+{% endblock %}

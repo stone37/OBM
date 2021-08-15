@@ -1,0 +1,26 @@
+app_image_upload_add:
+    path: /upload/image
+    methods: [GET, POST]
+    controller: App\Controller\UploadController::add
+    options:
+        expose: true
+
+app_image_upload_delete:
+    path: /upload/image/{pos}/delete
+    methods: [GET, POST]
+    controller: App\Controller\UploadController::delete
+    options:
+        expose: true
+    requirements:
+        pos: \d+
+
+app_image_upload_principale:
+    path: /upload/image/principale
+    methods: [GET, POST]
+    controller: App\Controller\UploadController::principale
+    options:
+        expose: true
+    requirements:
+        pos: \d+
+
+

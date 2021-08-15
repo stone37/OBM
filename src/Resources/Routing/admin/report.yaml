@@ -1,0 +1,5 @@
+app_admin_report_delete:
+    path: /reports/{id}/delete
+    controller: App\Controller\Admin\ReportController::delete
+    requirements:
+        id: \d+

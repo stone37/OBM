@@ -1,0 +1,111 @@
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-center justify-content-md-between">
+        <div id="entity-list-delete-bulk-btn" class="mr-3 d-none entity-review-delete-bulk-btn">
+            {% include 'Ui/Grid/Action/delete.html.twig' with {'action': {'label': 'Supprimer'}} %}
+        </div>
+        {% if type == 'review' %}
+            <div class="d-flex ml-auto">
+                <div class="">
+                    {% include 'admin/review/filter.html.twig' with {'form': searchForm}  %}
+                </div>
+                <div class="mr-3">
+                    <a href="" class="btn btn-grey" data-toggle="modal" data-target="#entity-search">
+                        <i class="fas fa-filter mr-1" aria-hidden="true"></i> Filtres
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if reviews|length > 0 %}
+    <div class="row app-user">
+        <div class="col-12">
+            <table class="table table-responsive-sm">
+                <thead class="text-primary">
+                <tr>
+                    <th scope="col" class="text-center">
+                        <div class="" style="position: relative; right: 10px; top: 2px">
+                            <input type="checkbox" name="principal" class="form-check-input filled-in" id="principal-checkbox" value="" style="margin: 0 !important;" />
+                            <label class="form-check-label" for="principal-checkbox"
+                                   style="padding-left: 0!important; "></label>
+                        </div>
+                    </th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Prénom</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Email</th>
+                    {% if type == 'review' %}<th scope="col" class="font-weight-stone-500 text-center">Note (sur 5)</th>{% endif %}
+                    {% if type == 'subjection' %}<th scope="col" class="font-weight-stone-500 text-center">Sujet</th>{% endif %}
+                    <th scope="col" class="font-weight-stone-500 text-center">Description</th>
+                    {% if type == 'review' %}<th scope="col" class="font-weight-stone-500 text-center">Status</th>{% endif %}
+                    <th scope="col" class="font-weight-stone-500 text-center"></th>
+                </tr>
+                </thead>
+                <tbody id="list-checkbook-container">
+                {% for review in reviews %}
+                    <tr>
+                        <td class="text-center">
+                            <div class="" style="position: relative; right: 10px; top: 2px">
+                                <input type="checkbox" name="checkbox{{ loop.index }}" class="form-check-input filled-in list-checkbook"
+                                       id="checkbox{{ loop.index }}" value="{{ review.id }}" style="margin: 0 !important;" />
+                                <label class="form-check-label" for="checkbox{{ loop.index }}" style="padding-left: 0!important; "></label>
+                            </div>
+                        </td>
+                        <td class="text-center">{{ review.name }}</td>
+                        <td class="text-center">{{ review.email }}</td>
+                        {% if type == 'review' %}<td class="text-center">{{ review.note }}</td>{% endif %}
+                        {% if type == 'subjection' %}<td class="text-center">{{ review.subject }}</td>{% endif %}
+                        <td class="text-center">{{ review.description }}</td>
+                        {% if type == 'review' %}
+                            <td class="text-center">
+                                {% if review.enabled %}
+                                    <span class="badge badge-success">
+                                    <i class="fas fa-check mr-1"></i> Actif
+                                </span>
+                                {% else %}
+                                    <span class="badge badge-danger">
+                                    <i class="fas fa-times mr-1"></i> Inactif
+                                </span>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                        <td class="text-center">
+                            <div class="dropdown">
+                                <a href="" class="dropdown-toggle"><i class="fas fa-ellipsis-h"></i></a>
+                                <div class="dropdown-menu dropdown-primary dropdown-menu-right mt-0">
+                                    {% if type == 'review' %}
+                                        <a href="{{ path('app_admin_review_edit', {'id': review.id}) }}" class="dropdown-item">
+                                            <i class="fas fa-pencil-alt mr-1"></i> Editer
+                                        </a>
+                                    {% endif %}
+                                    <a class="dropdown-item entity-review-delete" id="{{ review.id }}">
+                                        <i class="fas fa-trash mr-1 text-danger"></i> Supprimer
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 d-flex justify-content-start mt-2">
+            <div class="font-weight-stone-500 text-secondary">{{ reviews.totalItemCount }} resultats</div>
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-2">
+            {{ knp_pagination_render(reviews, 'Ui/_pagination.html.twig') }}
+        </div>
+    </div>
+{% else %}
+    <div class="row app-user d-flex justify-content-center">
+        <div class="col-12 col-md-8 text-center mt-3 mt-md-5">
+            <h3 class="text-primary h3-responsive font-weight-stone-600">
+                {% if type == 'review' %}
+                    Vous n'avez aucun avis.
+                {% else %}
+                    Vous n'avez aucune suggestion.
+                {% endif %}
+            </h3>
+        </div>
+    </div>
+{% endif %}
+

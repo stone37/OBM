@@ -1,0 +1,41 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Edition d'une zone | Edition des zones | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/zone/edit/_header.html.twig' %}
+
+    {% include 'admin/zone/edit/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+    <script>
+        let $city = document.querySelector('#app-admin-zone-name');
+
+        let adminPlacesAutocomplete = places({
+            appId: 'plAFU47KNT9R',
+            apiKey: '82df8d2dee045f2337d35a00c7a868af',
+            container: $city,
+            type: 'city',
+            aroundLatLngViaIP: false,
+            language: 'fr',
+            countries: ['CI'],
+            templates: {
+                value: function(suggestion) {
+                    return suggestion.name;
+                }
+            }
+        });
+
+        adminPlacesAutocomplete.on('clear', function() {
+            $city.textContent = 'none';
+        });
+    </script>
+{% endblock %}

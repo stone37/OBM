@@ -1,0 +1,562 @@
+<div id="slide-out" class="side-nav sn-bg-4 fixed">
+    <ul class="custom-scrollbar">
+
+        <li class="logo-sn waves-effect py-3 mb-2">
+            <div class="text-center">
+                <a href="{{ path('app_admin_dashboard') }}" class="pl-0">
+                    <img src="{{ asset('images/logo/2.png') }}" style="width: 130px !important;" alt="Logo du site" />
+                </a>
+            </div>
+        </li>
+
+        {% set dashboard = isActive('app_admin_dashboard') %}
+
+        {# category #}
+        {% set category_index = isActive('app_admin_category_index') %}
+        {% set category_new   = isActive('app_admin_category_create') %}
+        {% set category_edit  = isActive('app_admin_category_edit') %}
+        {# category #}
+
+        {# category premium #}
+        {% set category_p_index = isActive('app_admin_category_premium_index') %}
+        {% set category_p_new   = isActive('app_admin_category_premium_create') %}
+        {% set category_p_edit  = isActive('app_admin_category_premium_edit') %}
+        {# category premium #}
+
+        {# advert #}
+        {% set advert_index = isActive('app_admin_advert_index') %}
+        {% set advert_show   = isActive('app_admin_advert_show') %}
+        {# advert #}
+
+        {# admin #}
+        {% set admin_index = isActive('app_admin_admin_index') %}
+        {% set admin_new   = isActive('app_admin_admin_create') %}
+        {% set admin_edit  = isActive('app_admin_admin_edit') %}
+        {# admin #}
+
+        {# user #}
+        {% set user_index = isActive('app_admin_user_index') %}
+        {% set user_index_pro = isActive('app_admin_user_pro_index') %}
+        {% set user_no_index = isActive('app_admin_user_no_confirm_index') %}
+        {% set user_d_index = isActive('app_admin_user_deleted_index') %}
+        {% set user_show  = isActive('app_admin_user_show') %}
+        {% set user_ad_index = isActive('app_admin_user_advert_index') %}
+        {% set user_ad_show = isActive('app_admin_user_advert_show') %}
+        {% set user_order_index = isActive('app_admin_user_order_index') %}
+        {% set user_order_show  = isActive('app_admin_user_order_show') %}
+        {# user #}
+
+        {# option #}
+        {% set option_index = isActive('app_admin_option_index') %}
+        {% set option_new   = isActive('app_admin_option_create') %}
+        {% set option_edit  = isActive('app_admin_option_edit') %}
+        {% set option_photo = isActive('app_admin_option_photo_index') %}
+        {# option #}
+
+        {# vignette #}
+        {% set vignette_index = isActive('app_admin_vignette_index') %}
+        {% set vignette_new   = isActive('app_admin_vignette_create') %}
+        {% set vignette_edit  = isActive('app_admin_vignette_edit') %}
+        {# vignette #}
+
+        {# vignette list #}
+        {% set vignette_list_index = isActive('app_admin_vignette_list_index') %}
+        {% set vignette_list_show  = isActive('app_admin_vignette_list_show') %}
+        {# vignette #}
+
+        {# pack #}
+        {% set pack_index = isActive('app_admin_pack_index') %}
+        {% set pack_new   = isActive('app_admin_pack_create') %}
+        {% set pack_edit  = isActive('app_admin_pack_edit') %}
+        {# pack #}
+
+        {# order #}
+        {% set order_index = isActive('app_admin_order_index') %}
+        {% set order_show  = isActive('app_admin_order_show') %}
+        {# order #}
+
+        {# Tax #}
+        {% set tax_index = isActive('app_admin_taxe_index') %}
+        {% set tax_new = isActive('app_admin_taxe_create') %}
+        {% set tax_edit = isActive('app_admin_taxe_edit') %}
+        {# Tax #}
+
+        {# credit #}
+        {% set credit_index = isActive('app_admin_credit_index') %}
+        {% set credit_new   = isActive('app_admin_credit_create') %}
+        {% set credit_edit  = isActive('app_admin_credit_edit') %}
+        {# credit #}
+
+        {# zone #}
+        {% set zone_index = isActive('app_admin_zone_index') %}
+        {% set zone_new   = isActive('app_admin_zone_create') %}
+        {% set zone_edit  = isActive('app_admin_zone_edit') %}
+        {# zone #}
+
+        {# discount #}
+        {% set discount_index = isActive('app_admin_discount_index') %}
+        {% set discount_new   = isActive('app_admin_discount_create') %}
+        {% set discount_edit  = isActive('app_admin_discount_edit') %}
+        {# discount #}
+
+        {# settings #}
+        {% set s_index = isActive('app_admin_settings_index') %}
+        {% set s_module_index = isActive('app_admin_settings_module_index') %}
+        {# settings #}
+
+        {# newsletter #}
+        {% set news_ad = isActive('app_admin_ad_newsletter') %}
+        {% set news_user = isActive('app_admin_user_newsletter') %}
+        {% set news_user_pro = isActive('app_admin_user_pro_newsletter') %}
+        {# newsletter #}
+
+        {# pub #}
+        {% set pub_index = isActive('app_admin_pub_index') %}
+        {% set pub_create = isActive('app_admin_pub_create') %}
+        {% set pub_edit = isActive('app_admin_pub_edit') %}
+        {# pub #}
+
+        {# payment #}
+        {% set payment_index = isActive('app_admin_payment_index') %}
+        {# payment #}
+
+        {# review and suggestion #}
+        {% set review_index = isActive('app_admin_review_index') %}
+        {% set suggestion_index = isActive('app_admin_suggestion_index') %}
+        {% set review_edit = isActive('app_admin_review_edit') %}
+        {# review and suggestion #}
+
+        {% set settings = config.get %}
+
+        <li>
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a href="{{ path('app_admin_dashboard') }}" class="waves-effect {% if dashboard %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-th-large"></i>
+                        Tableau de bord
+                    </a>
+                </li>
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if category_index or category_new or category_edit or
+                            category_p_index or category_p_new or category_p_edit %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-folder"></i> Catégories
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_category_index') }}" class="waves-effect
+                                {% if category_index or category_new or category_edit %}active{% endif %}">
+                                    <span class="sv-normal">Catégories et sous catégories</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_category_premium_index') }}" class="waves-effect
+                                {% if category_p_index or category_p_new or category_p_edit %}active{% endif %}">
+                                    <span class="sv-normal">Catégories premium</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if advert_index or advert_show %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-clipboard"></i> Gestion des annonces
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_advert_index', {'type': 1}) }}"
+                                   class="waves-effect {% if (type is defined) and type == 1 %}active{% endif %}">
+                                    <span class="sv-normal">An. en attente de validation</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_advert_index', {'type': 2}) }}"
+                                   class="waves-effect {% if (type is defined) and type == 2 %}active{% endif %}">
+                                    <span class="sv-normal">Annonces validées</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_advert_index', {'type': 3}) }}"
+                                   class="waves-effect {% if (type is defined) and type == 3 %}active{% endif %}">
+                                    <span class="sv-normal">Annonces refusées</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_advert_index', {'type': 4}) }}"
+                                   class="waves-effect {% if (type is defined) and type == 4 %}active{% endif %}">
+                                    <span class="sv-normal">Annonces retirées</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_advert_index', {'type': 5}) }}"
+                                   class="waves-effect {% if (type is defined) and type == 5 %}active{% endif %}">
+                                    <span class="sv-normal">Annonces expirées</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if user_index or user_no_index or user_d_index or user_show or
+                        user_index_pro or user_ad_index or user_ad_show or user_order_index
+                        or user_order_show %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-users"></i> Utilisateurs
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_user_index') }}" class="waves-effect
+                                    {% if user_index %}active{% endif %}">
+                                    <span class="sv-normal">Comptes clients actif</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_user_no_confirm_index') }}" class="waves-effect
+                                    {% if user_no_index %}active{% endif %}">
+                                    <span class="sv-normal">Comptes non confirmés</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_user_deleted_index') }}" class="waves-effect
+                                    {% if user_d_index %}active{% endif %}">
+                                    <span class="sv-normal">Comptes clients retirés</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_user_pro_index') }}" class="waves-effect
+                                    {% if user_index_pro %}active{% endif %}">
+                                    <span class="sv-normal">Comptes clients pro</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if zone_index or zone_new or zone_edit %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-map-signs"></i> Localisation
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_zone_index') }}"
+                                   class="waves-effect {% if zone_index or zone_new or zone_edit  %}active{% endif %}">
+                                    <span class="sv-normal">Editer des zones</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if review_index or review_edit or suggestion_index %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-comments"></i> Avis et suggestions
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_review_index') }}" class="waves-effect
+                                    {% if review_index or review_edit %}active{% endif %}">
+                                    <span class="sv-normal">Tous les avis</span>
+                                </a>
+                                <a href="{{ path('app_admin_suggestion_index') }}" class="waves-effect
+                                    {% if suggestion_index %}active{% endif %}">
+                                    <span class="sv-normal">Tous les suggestions</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if option_index or option_new or option_edit or option_photo %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-gem"></i> Options
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_option_index', {'type': 1}) }}" class="waves-effect">
+                                    <span class="sv-normal">Option annonce en tête de liste</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_option_index', {'type': 2}) }}" class="waves-effect">
+                                    <span class="sv-normal">Option annonce logo urgente</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_option_index', {'type': 3}) }}" class="waves-effect">
+                                    <span class="sv-normal">Option annonce galerie accueil</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_option_index', {'type': 4}) }}" class="waves-effect">
+                                    <span class="sv-normal">Option annonce en vedette</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_option_index', {'type': 5}) }}" class="waves-effect">
+                                    <span class="sv-normal">Option annonce encadrée</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_option_photo_index') }}" class="waves-effect">
+                                    <span class="sv-normal">Option photo</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if vignette_index or vignette_new or vignette_edit or vignette_list_index or
+                        vignette_list_show %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-ticket-alt"></i> Vignettes
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_vignette_list_index') }}"
+                                   class="waves-effect {% if vignette_list_index or vignette_list_show %}active{% endif %}">
+                                    <span class="sv-normal">Tous les vignettes</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_vignette_index') }}"
+                                   class="waves-effect {% if vignette_index or vignette_new or vignette_edit %}active{% endif %}">
+                                    <span class="sv-normal">Editer des vignettes</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if pack_index or pack_new or pack_edit %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-user-tie"></i> Packs abonnements
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_pack_index') }}"
+                                   class="waves-effect {% if pack_index or pack_new or pack_edit %}active{% endif %}">
+                                    <span class="sv-normal">Abonnements comptes pro</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if credit_index or credit_new or credit_edit %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-wallet"></i> Achats de crédits
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_credit_index') }}"
+                                   class="waves-effect {% if credit_index or credit_new or credit_edit  %}active{% endif %}">
+                                    <span class="sv-normal">Editer des crédits</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if discount_index or discount_new or discount_edit %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-magic"></i> Code de réduction
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_discount_index') }}"
+                                   class="waves-effect {% if discount_index or discount_new or discount_edit %}active{% endif %}">
+                                    <span class="sv-normal">Editer des codes de réduction</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                            {% if order_index or order_show %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-shopping-cart"></i> Commandes
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_order_index') }}" class="waves-effect active">
+                                    <span class="sv-normal">Tous les commandes</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r {% if payment_index %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-credit-card"></i> Paiements
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_payment_index') }}" class="waves-effect active">
+                                    <span class="sv-normal">Gérer les paiements</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if news_ad or news_user or news_user_pro %}active{% endif %}">
+                        <i class="sv-slim-icon far fa-newspaper"></i> Newsletter
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_ad_newsletter') }}"
+                                   class="waves-effect {% if news_ad %}active{% endif %}">
+                                    <span class="sv-normal">Envoyer aux annonceurs</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_user_newsletter') }}"
+                                   class="waves-effect {% if news_user %}active{% endif %}">
+                                    <span class="sv-normal">Envoyer aux utilisateurs</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_user_pro_newsletter') }}"
+                                   class="waves-effect {% if news_user_pro %}active{% endif %}">
+                                    <span class="sv-normal">Envoyer aux comptes premium</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                            {% if pub_index or pub_create or pub_edit %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-tv"></i> Publicité
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_pub_index', {'type': 1}) }}" class="waves-effect">
+                                    <span class="sv-normal">Pub accueil</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_pub_index', {'type': 2}) }}" class="waves-effect">
+                                    <span class="sv-normal">Pub header accueil</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_pub_index', {'type': 3}) }}" class="waves-effect">
+                                    <span class="sv-normal">Pub header listing annonces</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_pub_index', {'type': 4}) }}" class="waves-effect">
+                                    <span class="sv-normal">Pub listing des annonces</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_pub_index', {'type': 5}) }}" class="waves-effect">
+                                    <span class="sv-normal">Pub header page d'annonce</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_pub_index', {'type': 6}) }}" class="waves-effect">
+                                    <span class="sv-normal">Pub page d'annonce</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_pub_index', {'type': 7}) }}" class="waves-effect">
+                                    <span class="sv-normal">Pub entre les annonces</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if admin_index or admin_new or admin_edit or s_index or s_module_index %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-cogs"></i> Configurations
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_settings_index') }}" class="waves-effect
+                                    {% if s_index %}active{% endif %}">
+                                    <span class="sv-normal">Générale</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_settings_module_index') }}" class="waves-effect
+                                    {% if s_module_index %}active{% endif %}">
+                                    <span class="sv-normal">Modules du site</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_taxe_index') }}" class="waves-effect
+                                    {% if tax_index or tax_new or tax_edit %}active{% endif %}">
+                                    <span class="sv-normal">Taux de taxe</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_admin_index') }}" class="waves-effect
+                                    {% if admin_index or admin_new or admin_edit %}active{% endif %}">
+                                    <span class="sv-normal">Administrateurs</span>
+                                </a>
+                            </li>
+
+                            {#{% if is_granted("ROLE_SUPER_ADMIN") %}
+                                <li>
+                                    <a href="{{ path('app_admin_admin_index') }}" class="waves-effect
+                                    {% if admin_index or admin_new or admin_edit %}active{% endif %}">
+                                        <span class="sv-normal">Administrateurs</span>
+                                    </a>
+                                </li>
+                            {% endif %}#}
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+    <div class="sidenav-bg mask-strong"></div>
+</div>
+
+
+

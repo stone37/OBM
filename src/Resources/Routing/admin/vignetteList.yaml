@@ -1,0 +1,28 @@
+app_admin_vignette_list_index:
+    path: /vignettes/list
+    methods: [GET, POST]
+    controller: App\Controller\Admin\VignetteListController::index
+
+app_admin_vignette_list_show:
+    path: /vignettes/list/show/{id}
+    methods: [GET, POST]
+    controller: App\Controller\Admin\VignetteListController::show
+    requirements:
+        id: \d+
+
+app_admin_vignette_list_delete:
+    path: /vignettes/list/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\VignetteListController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_vignette_list_bulk_delete:
+    path: /vignettes/list/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\VignetteListController::deleteBulk
+    options:
+        expose: true
+

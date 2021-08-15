@@ -1,0 +1,265 @@
+{% if is_granted('create', advert) %}
+	<section class="row">
+		<div class="col-12 app-advert-user-detail mb-5">
+			<div class="card card-cascade">
+				<div class="view view-cascade gradient-card-header bg-primary pt-3 pb-2">
+					<h5 class="card-header-title h5-responsive">Informations sur l'annonce</h5>
+				</div>
+				<div class="card-body card-body-cascade text-center pt-4 pb-2 pr-0">
+					<div class="d-flex mb-3">
+						<div class="">
+							<i class="fas fa-eye"></i>
+						</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-600">Nombres de vue</div>
+						<div class="pl-3 text-default font-weight-stone-600 data">{{ advert.reads|length }}</div>
+					</div>
+
+					<div class="d-flex mb-3">
+						<div class="">
+							<i class="fas fa-image"></i>
+						</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-600">Nombres de photos</div>
+						<div class="pl-3 text-default font-weight-stone-600 data">{{ advert.images|length }}</div>
+					</div>
+					<div class="d-flex mb-3">
+						<div class="">
+							<i class="fas fa-heart"></i>
+						</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-600">Nombres de favoris</div>
+						<div class="pl-3 text-default font-weight-stone-600 data">{{ advert.favorites|length }}</div>
+					</div>
+					<div class="d-flex mb-3">
+						<div class="">
+							<i class="fas fa-envelope"></i>
+						</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-600">Nombres de message</div>
+						<div class="pl-3 text-default font-weight-stone-600 data">{{ advert.messageCount }}</div>
+					</div>
+					<div class="d-flex flex-wrap mb-3">
+						<div class="">
+							<i class="fas fa-calendar-alt"></i>
+						</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-600">Modification</div>
+						<div class="pl-3 text-default font-weight-stone-600 data date">{{ advert.updatedAt|date('d/m/Y à h:i')}}</div>
+					</div>
+					<div class="d-flex flex-wrap mb-3">
+						<div class="">
+							<i class="fas fa-calendar"></i>
+						</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-600">Date de création</div>
+						<div class="pl-3 text-default font-weight-stone-600 data date">{{ advert.createdAt|date('d/m/Y à h:i')}}</div>
+					</div>
+					{% if advert.validated %}
+						<div class="d-flex flex-wrap mb-3">
+						<div class="">
+							<i class="fas fa-calendar-check"></i>
+						</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-600">Date de validation</div>
+						<div class="pl-3 text-default font-weight-stone-600 data date">{{ advert.validatedAt|date('d/m/Y à h:i')}}</div>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 app-advert-option-detail mb-5">
+			<div class="card card-cascade">
+				<div class="view view-cascade gradient-card-header bg-secondary pt-3 pb-2">
+					<h5 class="card-header-title h5-responsive">Ajouter des options</h5>
+				</div>
+				<div class="card-body card-body-cascade pt-4 pb-3 pr-0">
+					{% if photo %}
+						<div class="d-flex mb-3">
+							<div class="">
+								<i class="fas fa-camera"></i>
+							</div>
+							<a class="pl-3 grey-text font-weight-stone-600 data"
+							   data-toggle="modal" data-target="#adOptionPhoto">
+								Option photo
+								{% if advert.optionPhoto %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
+							</a>
+						</div>
+					{% endif %}
+
+					{% if headers|length > 0  %}
+						<div class="d-flex mb-3">
+							<div class="">
+								<i class="fas fa-sort-numeric-up"></i>
+							</div>
+							<a class="pl-3 grey-text font-weight-stone-600 data"
+							   data-toggle="modal" data-target="#adOptionDetail{{ headers[0].type }}">
+								Annonce en tête
+								{% if advert.optionAdHead %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
+							</a>
+						</div>
+					{% endif %}
+
+					{% if gallery|length > 0 %}
+						<div class="d-flex mb-3">
+							<div class="">
+								<i class="fas fa-house-damage"></i>
+							</div>
+							<a class="pl-3 grey-text font-weight-stone-600 data"
+							   data-toggle="modal" data-target="#adOptionDetail{{ gallery[0].type }}">
+								Galerie accueil
+								{% if advert.optionAdGallery %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
+							</a>
+						</div>
+					{% endif %}
+
+					{% if vedettes|length > 0 %}
+						<div class="d-flex mb-3">
+							<div class="">
+								<i class="far fa-minus-square"></i>
+							</div>
+							<a class="pl-3 grey-text font-weight-stone-600 data"
+							   data-toggle="modal" data-target="#adOptionDetail{{ vedettes[0].type }}">
+								Annonce en vedette
+								{% if advert.optionAdVedette %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
+							</a>
+						</div>
+					{% endif %}
+
+					{% if urgents|length > 0 %}
+						<div class="d-flex mb-3">
+							<div class="">
+								<i class="fas fa-bullhorn"></i>
+							</div>
+							<a class="pl-3 grey-text font-weight-stone-600 data"
+							   data-toggle="modal" data-target="#adOptionDetail{{ urgents[0].type }}">
+								Logo urgent
+								{% if advert.optionAdUrgents %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
+							</a>
+						</div>
+					{% endif %}
+
+					{% if encadres|length > 0 %}
+						<div class="d-flex">
+							<div class="">
+								<i class="fas fa-border-style"></i>
+							</div>
+							<a class="pl-3 grey-text font-weight-stone-600 data"
+							   data-toggle="modal" data-target="#adOptionDetail{{ encadres[0].type }}" >
+								Annonce encadrée
+								{% if advert.optionAdEncadre %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
+							</a>
+						</div>
+					{% endif %}
+
+					{% include 'user/advert/option.html.twig' %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% else %}
+	<section class="row">
+		<div class="col-12 mb-4">
+			<div class="card card-cascade narrower mt-md-0">
+				<div class="view view-cascade gradient-card-header bg-primary">
+					<h5 class="mb-0">
+						Contacter
+						{% if advert.user.username %}
+							{{ advert.user.username }}
+						{% else %}
+							{{ advert.user.firstname }} {{ advert.user.lastname }}
+						{% endif %}
+					</h5>
+					{#  <a type="button" class="btn-floating btn-sm">
+						<i class="fab fa-facebook-f"></i>
+					</a>
+					<a type="button" class="btn-floating btn-sm">
+						<i class="fab fa-instagram"></i>
+					</a>
+					<a type="button" class="btn-floating btn-sm">
+						<i class="fab fa-linkedin-in"></i>
+					</a>#}
+				</div>
+				<div class="card-body card-body-cascade pt-3 app-advert-message-form-bulk">
+					<div class="small bg-danger text-center text-white p-1 font-weight-stone-500">
+						Soyez vigilant, refusez les transferts d'argent ou le versement d'acompte
+					</div>
+
+					{% include 'site/advert/show/__message_form.html.twig' %}
+
+					<div class="row">
+						<div class="col-12">
+							<div class="text-lg-right mt-4">
+								<a href="" class="small signal font-weight-stone-600 text-default"
+								   data-toggle="modal" data-target="#addReportModalSm">
+									<span class="border rounded-circle mr-1" style="padding: 5px;">
+										<i class="fas fa-flag" style="position: relative; left: 2px"></i>
+									</span>
+									Signalez cette annonce
+								</a>
+
+								{% include 'site/advert/show/__report.html.twig' %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 mb-4 app-advert-user-detail">
+			<div class="card">
+				<div class="card-body">
+					{% if advert.shop|length > 0 %}
+
+					{% else %}
+						<div class="d-flex mb-3">
+							<div class="">
+								<i class="fas fa-audio-description"></i>
+							</div>
+							<div class="pl-3 small-9 grey-text font-weight-stone-600">Annonceur particulier</div>
+						</div>
+					{% endif %}
+
+					<div class="d-flex mb-3">
+						<div class="">
+							<i class="far fa-calendar-minus"></i>
+						</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-600">
+							Membre de {{ config.get.name }} {{ advert.user.createdAt|ago('depuis') }}
+						</div>
+					</div>
+
+					<div class="d-flex mb-3">
+						<div class="">
+							<i class="fas fa-clipboard-check"></i>
+						</div>
+						<div class="pl-3 small-9 font-weight-stone-600">
+							<a href="{{ path('app_user_show', {'id': advert.user.id}) }}" class="link">
+							{% if advertiserAdNumber == 1 %}
+								Afficher son unique annonce
+							{% else %}
+								Afficher ces {{ advertiserAdNumber }} annonces
+							{% endif %}
+							</a>
+						</div>
+					</div>
+
+					{#
+					<div class="d-flex mb-3">
+						<div class="">
+							<i class="fas fa-globe"></i>
+						</div>
+						<div class="pl-3 small-9 font-weight-stone-600">
+							<a href="" class="link">Site web</a>
+						</div>
+					</div>#}
+
+					<div class="">
+						<a href="" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPhoneContactModalSm">
+							<i class="fas fa-phone-alt text-white mr-2 d-none d-lg-inline-block"></i>
+							Contacter par téléphone
+						</a>
+
+						{% include 'site/advert/show/__phone_contact.html.twig' %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endif %}
+

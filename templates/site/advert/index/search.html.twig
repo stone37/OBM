@@ -1,0 +1,281 @@
+{% form_theme form 'Ui/Form/theme.html.twig' %}
+
+<section class="mt-4 d-none d-lg-block">
+    <div class="row">
+        <div class="col-12">
+            {% if category.slug == 'ipad-et-tablettes' %}
+                <div class="mb-4 brand">
+                    <a href="{{ app.request.pathInfo }}?marque=Apple" class="mr-2">Apple</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Samsung" class="mr-2">Samsung</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Blackberry" class="mr-2">Blackberry</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Microsoft" class="mr-2">Microsoft</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Itel" class="mr-2">Itel</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Techno" class="mr-2">Techno</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Google" class="mr-2">Google</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Sony" class="mr-2">Sony</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Toshiba" class="mr-2">Toshiba</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Lenovo" class="mr-2">Lenovo</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Motorola" class="mr-2">Motorola</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Huawei" class="mr-2">Huawei</a>
+                </div
+            {% elseif category.slug == 'ordinateurs-de-bureau' %}
+                <div class="mb-4 brand">
+                    <a href="{{ app.request.pathInfo }}?marque=Apple" class="mr-2">Apple</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Acer" class="mr-2">Acer</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Asus" class="mr-2">Asus</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Samsung" class="mr-2">Samsung</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Compaq" class="mr-2">Compaq</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Dell" class="mr-2">Dell</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Hp" class="mr-2">Hp</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Sony" class="mr-2">Sony</a>
+                    <a href="{{ app.request.pathInfo }}?marque=MSI" class="mr-2">MSI</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Toshiba" class="mr-2">Toshiba</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Lenovo" class="mr-2">Lenovo</a>
+                </div>
+            {% elseif category.slug == 'portables' %}
+                <div class="mb-4 brand">
+                    <a href="{{ app.request.pathInfo }}?marque=Apple" class="mr-2">Apple</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Acer" class="mr-2">Acer</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Asus" class="mr-2">Asus</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Samsung" class="mr-2">Samsung</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Compaq" class="mr-2">Compaq</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Dell" class="mr-2">Dell</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Hp" class="mr-2">Hp</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Sony" class="mr-2">Sony</a>
+                    <a href="{{ app.request.pathInfo }}?marque=MSI" class="mr-2">MSI</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Toshiba" class="mr-2">Toshiba</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Lenovo" class="mr-2">Lenovo</a>
+                </div>
+            {% elseif category.slug == 'telephones-portables' %}
+                <div class="mb-4 brand">
+                    <a href="{{ app.request.pathInfo }}?marque=Alcatel" class="mr-2">Alcatel</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Apple" class="mr-2">Apple</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Blu" class="mr-2">Blu</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Asus" class="mr-2">Asus</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Samsung" class="mr-2">Samsung</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Infinix" class="mr-2">Infinix</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Blackberry" class="mr-2">Blackberry</a>
+                    <a href="{{ app.request.pathInfo }}?marque=LG" class="mr-2">LG</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Itel" class="mr-2">Itel</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Huawei" class="mr-2">Huawei</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Motorola" class="mr-2">Motorola</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Nokia" class="mr-2">Nokia</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Techno" class="mr-2">Techno</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Lenovo" class="mr-2">Lenovo</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Google" class="mr-2">Google</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Oneplus" class="mr-2">Oneplus</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Wiko" class="mr-2">Wiko</a>
+                    <a href="{{ app.request.pathInfo }}?marque=Xiaomi" class="mr-2">Xiaomi</a>
+                    <a href="{{ app.request.pathInfo }}?marque=ZTE" class="mr-2">ZTE</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-lg-4">
+            <button type="button" data-toggle="modal" data-target=".app-advert-search-filter-modal"
+                    class="btn btn-block btn-outline-grey d-flex justify-content-between">
+                <span class="font-weight-stone-600" style="font-size: 1rem;">Filter</span>
+                <i class="fas fa-filter text-primary" style="font-size: 1.2rem;"></i>
+            </button>
+        </div>
+        <div class="col-lg-4">
+            <div class="dropdown">
+                <button class="btn btn-block btn-outline-grey d-flex justify-content-between dropdown-toggle" type="button" id="dropdownAdvertSort"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="font-weight-stone-600" style="font-size: 1rem;">Trier</span>
+                    <i class="fas fa-sort text-primary" style="font-size: 1.2rem;"></i>
+                </button>
+
+                <div class="dropdown-menu dropdown-primary" style="width: 351px !important;">
+                    {% if app.request.query|length > 0 %}
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}&order=priceAsc">Du - cher au + cher</a>
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}&order=priceDesc">Du + cher au - cher</a>
+
+                        {% if category.slug == 'voiture-doccasion' or category.slug == 'location-de-voiture'
+                            or category.slug == 'motocross' or category.slug == 'scooters-et-minimotos'
+                            or category.slug == 'motos-sport' or category.slug == 'routieres'
+                            or category.slug == 'autres-motos' or category.slug == 'vedettes-et-bateaux-a-moteur'
+                            or category.slug == 'jet-ski-scooter-des-mers' or category.slug == 'equipement-agricole'
+                            or category.slug == 'camions-lourd' %}
+                            <a class="dropdown-item" href="{{ app.request.requestUri }}&order=yearAsc">Du - âgé au + âgé</a>
+                            <a class="dropdown-item" href="{{ app.request.requestUri }}&order=yearDesc">Du + âgé au - âgé</a>
+                        {% endif %}
+
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}&order=publishedAsc">Du - récent + récent</a>
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}&order=publishedDesc">Du + récent - récent</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}?order=priceAsc">Du - cher au + cher</a>
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}?order=priceDesc">Du + cher au - cher</a>
+
+                        {% if category.slug == 'voiture-doccasion' or category.slug == 'location-de-voiture'
+                            or category.slug == 'motocross' or category.slug == 'scooters-et-minimotos'
+                            or category.slug == 'motos-sport' or category.slug == 'routieres'
+                            or category.slug == 'autres-motos' or category.slug == 'vedettes-et-bateaux-a-moteur'
+                            or category.slug == 'jet-ski-scooter-des-mers' or category.slug == 'equipement-agricole'
+                            or category.slug == 'camions-lourd' %}
+                            <a class="dropdown-item" href="{{ app.request.requestUri }}?order=yearAsc">Du - âgé au + âgé</a>
+                            <a class="dropdown-item" href="{{ app.request.requestUri }}?order=yearDesc">Du + âgé au - âgé</a>
+                        {% endif %}
+
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}?order=publishedAsc">Du - récent + récent</a>
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}?order=publishedDesc">Du + récent - récent</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            {% if settings.activeAlert %}
+                <a href="" class="btn btn-block btn-danger app-alert d-flex justify-content-between
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-alert{% endif %}
+                {% if hasAlert() %}disabled{% endif %}"
+                data-category="{{ app.request.attributes.get('category_slug') }}"
+                data-sub-category="{{ app.request.attributes.get('sub_category_slug') }}"
+                data-sub-division="{{ app.request.attributes.get('sub_division_slug') }}">
+                    <span class="font-weight-stone-600" style="font-size: 1rem;">Créer une alerte</span>
+                    <i class="far fa-bell font-weight-stone-600" style="font-size: 1.2rem;"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{# Tablette et petit telephone #}
+{% if is_mobile() %}
+<section class="d-block d-lg-none mt-4">
+    <div class="btn-group btn-block title" role="group" aria-label="Basic example">
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-outline-grey waves-effect
+             px-2 px-md-4 dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                <span class="font-weight-stone-600" style="font-size: 1rem;">Trier</span>
+                <i class="fas fa-sort font-weight-stone-600 text-primary ml-4 ml-md-5 pl-md-5" style="font-size: 1.2rem;"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                {% if app.request.query|length > 0 %}
+                    <a class="dropdown-item" href="{{ app.request.requestUri }}&order=priceAsc">Du - cher au + cher</a>
+                    <a class="dropdown-item" href="{{ app.request.requestUri }}&order=priceDesc">Du + cher au - cher</a>
+
+                    {% if category.slug == 'voiture-doccasion' or category.slug == 'location-de-voiture'
+                        or category.slug == 'motocross' or category.slug == 'scooters-et-minimotos'
+                        or category.slug == 'motos-sport' or category.slug == 'routieres'
+                        or category.slug == 'autres-motos' or category.slug == 'vedettes-et-bateaux-a-moteur'
+                        or category.slug == 'jet-ski-scooter-des-mers' or category.slug == 'equipement-agricole'
+                        or category.slug == 'camions-lourd' %}
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}&order=yearAsc">Du - âgé au + âgé</a>
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}&order=yearDesc">Du + âgé au - âgé</a>
+                    {% endif %}
+
+                    <a class="dropdown-item" href="{{ app.request.requestUri }}&order=publishedAsc">Du - récent + récent</a>
+                    <a class="dropdown-item" href="{{ app.request.requestUri }}&order=publishedDesc">Du + récent - récent</a>
+                {% else %}
+                    <a class="dropdown-item" href="{{ app.request.requestUri }}?order=priceAsc">Du - cher au + cher</a>
+                    <a class="dropdown-item" href="{{ app.request.requestUri }}?order=priceDesc">Du + cher au - cher</a>
+
+                    {% if category.slug == 'voiture-doccasion' or category.slug == 'location-de-voiture'
+                        or category.slug == 'motocross' or category.slug == 'scooters-et-minimotos'
+                        or category.slug == 'motos-sport' or category.slug == 'routieres'
+                        or category.slug == 'autres-motos' or category.slug == 'vedettes-et-bateaux-a-moteur'
+                        or category.slug == 'jet-ski-scooter-des-mers' or category.slug == 'equipement-agricole'
+                        or category.slug == 'camions-lourd' %}
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}?order=yearAsc">Du - âgé au + âgé</a>
+                        <a class="dropdown-item" href="{{ app.request.requestUri }}?order=yearDesc">Du + âgé au - âgé</a>
+                    {% endif %}
+
+                    <a class="dropdown-item" href="{{ app.request.requestUri }}?order=publishedAsc">Du - récent + récent</a>
+                    <a class="dropdown-item" href="{{ app.request.requestUri }}?order=publishedDesc">Du + récent - récent</a>
+                {% endif %}
+            </div>
+        </div>
+        <button type="button" data-toggle="modal" data-target=".app-advert-search-filter-modal"
+                class="btn btn-outline-grey waves-effect d-flex justify-content-between px-2 px-md-4">
+            <span class="font-weight-stone-600" style="font-size: 1rem;">Filter</span>
+            <i class="fas fa-filter font-weight-stone-600 text-primary" style="font-size: 1.2rem;"></i>
+        </button>
+
+        {% if settings.activeAlert %}
+            <button type="button" class="btn btn-outline-grey app-alert waves-effect
+            d-flex justify-content-between px-2 px-md-4 font-weight-stone-600
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-alert{% endif %}
+            {% if hasAlert() %}disabled{% endif %}"
+            data-category="{{ app.request.attributes.get('category_slug') }}"
+            data-sub-category="{{ app.request.attributes.get('sub_category_slug') }}"
+            data-sub-division="{{ app.request.attributes.get('sub_division_slug') }}">
+                <span class="font-weight-stone-600" style="font-size: 1rem;">M'alerter</span>
+                <i class="far fa-bell font-weight-stone-600 text-primary" style="font-size: 1.2rem;"></i>
+            </button>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+{# Tablette et petit telephone #}
+
+<div class="modal fade app-advert-search-filter-modal {% if not is_mobile() %}right{% endif %}"
+     tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-primary modal-xl
+        {% if not is_mobile() %}modal-full-height modal-right{% endif %}">
+        <div class="modal-content">
+            <div class="modal-header text-white">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Filter
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body grey lighten-4 pl-lg-3 pr-lg-0 px-2">
+                {% if category.parent|length > 0 %}
+                    {% if not app.request.attributes.has('sub_division_slug') %}
+                        {% set parent_route = path('app_advert_index', {'category_slug': app.request.attributes.get('category_slug')}) %}
+                    {% else %}
+                        {% set parent_route = path('app_advert_index_s', {'category_slug': app.request.attributes.get('category_slug'),
+                            'sub_category_slug': app.request.attributes.get('sub_category_slug')}) %}
+                    {% endif %}
+
+                    <a href="{{ parent_route }}" class="btn btn-sm btn-primary py-1 px-2 mt-2 mr-2" data-toggle="tooltip"
+                       title="Toutes les catégories" data-placement="top"
+                       style="position: absolute; right: 0; top: 0">
+                        <i class="fas fa-level-up-alt"></i>
+                    </a>
+                {% endif %}
+
+                {% if category.children|length > 0 %}
+                    <div>
+                        <h5 class="h5-responsive font-weight-stone-600 dark-grey-text mb-3">Catégorie</h5>
+                        {% for children in category.children %}
+                            {% if app.request.attributes.has('sub_category_slug') %}
+                                {% set route = path('app_advert_index_ss', {'category_slug': app.request.attributes.get('category_slug'),
+                                    'sub_category_slug': app.request.attributes.get('sub_category_slug'),
+                                    'sub_division_slug': children.slug }) %}
+                            {% else %}
+                                {% set route = path('app_advert_index_s', {'category_slug': app.request.attributes.get('category_slug'),
+                                    'sub_category_slug': children.slug }) %}
+                            {% endif %}
+
+                            <a href="{{ route }}" class="card-link font-weight-stone-600">{{ children.name }}</a>
+                        {% endfor %}
+                    </div>
+
+                    <hr class="mt-3 mb-2">
+                {% endif %}
+
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'advert-search-form'}}) }}
+
+                {% include 'site/advert/index/search/'~view %}
+
+                <div class="text-center d-flex justify-content-around mt-3 mb-lg-5">
+                    <a class="btn btn-outline-default btn-md" href="{{ app.request.pathInfo }}">
+                        Réinitialiser
+                    </a>
+                    <button class="btn btn-primary btn-md btn-app-search" type="submit">
+                        Mettre à jour
+                    </button>
+                </div>
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

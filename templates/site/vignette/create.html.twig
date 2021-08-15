@@ -1,0 +1,45 @@
+{% extends 'site/layout.html.twig' %}
+{# pixel facebook ici #}
+
+{% block title 'Créer une vignette' %}
+{% block meta %}
+    <meta name="google" content="nositelinkssearchbox">
+    <meta name="description" content="Créer une vignette pour augmentez l’audience de votre site web ou de vos pages sur les réseaux sociaux"/>
+    <meta property="og:description" content="Créer un vignette pour augmentez l’audience de votre site web ou de vos pages sur les réseaux sociaux" />
+{% endblock %}
+
+{% block app_navbar_second %}{% endblock %}
+{% block app_cart %}{% endblock %}
+{% block app_mobile_cart %}{% endblock %}
+
+{% block app_breadcrumbs %}
+    <section class="mt-lg-90 mt-70 d-flex">
+        <div class="d-none d-md-block">
+            <a href="" class="btn btn-amber btn-sm mt-lg-3 btn-back">
+                <i class="fas fa-angle-left mr-2"></i>
+                Retour
+            </a>
+        </div>
+
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb pl-md-4 mt-md-3',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </section>
+{% endblock %}
+
+{% block app_body %}
+    {% include 'site/vignette/create/content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/vignette.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/vignette.js'} %}
+{% endblock %}
+
+

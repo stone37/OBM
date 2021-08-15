@@ -1,0 +1,91 @@
+app_admin_advert_index:
+    path: /adverts/{type}
+    methods: [GET, POST]
+    controller: App\Controller\Admin\AdvertController::index
+
+app_admin_advert_show:
+    path: /adverts/{type}/show/{id}
+    methods: [GET, POST]
+    controller: App\Controller\Admin\AdvertController::show
+    requirements:
+        id: \d+
+
+app_admin_advert_validate:
+    path: /adverts/{id}/validate
+    methods: [GET, PUT]
+    controller: App\Controller\Admin\AdvertController::validate
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_advert_bulk_validate:
+    path: /adverts/bulk/validate
+    methods: [GET, PUT]
+    controller: App\Controller\Admin\AdvertController::validateBulk
+    options:
+        expose: true
+
+app_admin_advert_denied:
+    path: /adverts/{id}/denied
+    methods: [GET, PUT]
+    controller: App\Controller\Admin\AdvertController::denied
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_advert_bulk_denied:
+    path: /adverts/bulk/denied
+    methods: [GET, PUT]
+    controller: App\Controller\Admin\AdvertController::deniedBulk
+    options:
+        expose: true
+
+app_admin_advert_delete:
+    path: /adverts/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\AdvertController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_advert_bulk_delete:
+    path: /adverts/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\AdvertController::deleteBulk
+    options:
+        expose: true
+
+app_admin_advert_soft_delete:
+    path: /adverts/{id}/soft/delete
+    methods: [GET, PUT]
+    controller: App\Controller\Admin\AdvertController::softDelete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_advert_banned:
+    path: /adverts/{id}/banned
+    methods: [GET, PUT]
+    controller: App\Controller\Admin\AdvertController::banned
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_advert_clean:
+    path: /adverts/{type}/clean
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\AdvertController::clean
+    options:
+        expose: true
+
+app_admin_advert_reload:
+    path: /adverts/reload
+    methods: [GET, POST]
+    controller: App\Controller\Admin\AdvertController::reload
+    options:
+        expose: true

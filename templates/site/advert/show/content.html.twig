@@ -1,0 +1,101 @@
+<section class="row show-header mb-3 mb-md-4">
+    <div class="col-12 col-md-8 col-lg-9">
+        <h2 class="h2-responsive text-primary font-weight-stone-600" style="line-height: normal!important;">{{ advert.title }}</h2>
+        <h4 class="h4-responsive font-weight-stone-600 price d-flex text-default">
+            <div class="number">{{ advert.price }}</div>
+            <div class="">
+                <img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                {% if advert.priceStatus %}<span class="font-weight-stone-500 small"
+                    style="position: relative; top: 5px">- à débattre</span>{% endif %}
+            </div>
+        </h4>
+    </div>
+    <div class="col-12 col-md-4 col-lg-3">
+        <div class="d-flex justify-content-md-end data pt-lg-2 pt-3 pt-md-0 pr-md-0 mr-md-0">
+            <div class="pr-3 text-primary data-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="location">
+                <div class="grey-text time font-weight-stone-500">Publiée {{ advert.validatedAt|ago }}</div>
+                <div class="small-9 font-weight-stone-500 mt-1 text-primary">
+                    {% if advert.location.detail %}{{ advert.location.detail }},{% endif %} {{ advert.location.name }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="row">
+    <div class="col-md-8">
+        <section class="row">
+            <div class="col-12">
+                {% include 'site/advert/show/_gestion.html.twig' %}
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-12">
+                {% include 'site/advert/show/_images.html.twig' %}
+            </div>
+        </section>
+        <section class="row mt-lg-3 mb-4 advert-info-detail">
+            <div class="col-12 col-lg-10">
+                {% include 'site/advert/show/'~view %}
+            </div>
+        </section>
+        <section class="row mb-5">
+            <div class="col-12">
+                <h4 class="h4-responsive font-weight-stone-600 text-primary mb-2">Description</h4>
+                <div class="grey-text">{{ advert.description }}</div>
+                <div class="mt-3 font-weight-stone-500 small-8">
+                    <span class="">RÉFÉRENCE:</span>
+                    <span class="">{{ advert.reference}}</span>
+                    - <span class="">Dernière mise à jour:</span>
+                    <span class="">{{ advert.updatedAt|date('d/m/Y à h:i')}}</span>
+                </div>
+            </div>
+            <div class="col-12 d-flex justify-content-between">
+                {% if not is_granted('create', advert) %}
+                    <div class="mt-1">
+                        <a href="" class="small signal font-weight-stone-600 text-default"
+                           data-toggle="modal" data-target="#addReportModalSm">
+                            <span class="border rounded-circle mr-1" style="padding: 5px;">
+                                <i class="fas fa-flag" style="position: relative; left: 2px"></i>
+                            </span>
+                            Signalez cette annonce
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if is_mobile() %}
+                    <div class="d-block d-md-none app-signal mt-3">
+                        <a href="" class="btn btn-outline-amber signal app-ad-print">
+                            <i class="fas fa-print"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+        <section class="row mb-4 noPrint">
+            <div class="col-12">
+                {{ render(controller('App\\Controller\\AdvertSimilarController::index', {'advert': advert, 'settings': settings})) }}
+            </div>
+        </section>
+    </div>
+    <div class="col-md-4 mt-3">
+        {% include 'site/advert/show/_advertiser.html.twig' %}
+    </div>
+</section>
+{% if is_mobile() and not is_granted('create', advert) %}
+    <div class="navbar fixed-bottom d-block d-md-none py-3" style="background-color: rgba(255, 255, 255, .8)">
+        <div class="d-flex">
+            <a href="" class="btn btn-outline-primary btn-sm mr-2 pt-3 pb-2" data-toggle="modal" data-target="#addPhoneContactModalSm">
+                <i class="fas fa-phone-alt" style="font-size: 1rem; position:relative; bottom: 3px;"></i>
+            </a>
+
+            {% if settings.activeMessage %}
+                <a href="#app-advert-message-form" class="btn btn-primary btn-block btn-sm pt-3 pb-2"><i class="fas fa-envelope mr-2"></i> Message</a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+

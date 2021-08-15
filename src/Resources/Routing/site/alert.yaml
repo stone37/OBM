@@ -1,0 +1,7 @@
+app_alert_add:
+    path: /alert/add
+    controller: App\Controller\AlertController::add
+    options:
+        expose: true
+
+

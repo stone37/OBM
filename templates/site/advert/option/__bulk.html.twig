@@ -1,0 +1,75 @@
+{% macro _data(products) %}
+    {% set type = products[0].type %}
+    {% set id = products[0].id %}
+    {% set firstPrice = products[0].price %}
+    {% set data = app_product_data(type) %}
+
+    <div class="row d-flex justify-content-start justify-content-md-between mb-3 mb-md-2 app-option-data-bulk">
+        <div class="col-8 col-md-8 col-lg-7">
+            <div class="app-option-data d-flex">
+                <div class="form-check pl-0">
+                    <input type="checkbox" class="form-check-input filled-in ov"
+                           id="option{{ type }}" value="{{ id }}" data-type="{{ type }}" />
+                    <label class="form-check-label" for="option{{ type }}"></label>
+                </div>
+                {% if data.url %}
+                    <div class="img-bulk d-none d-md-block">
+                        <img src="{{ asset(data.url) }}" class="img-fluid z-depth-2 mb-3" alt="" />
+                    </div>
+                {% endif %}
+                <div class="font-weight-stone-500 dark-grey-text text pl-0 pl-md-3">{{ data.name }}</div>
+                <div class="">
+                    <i class="fas fa-question-circle pl-md-1 text-grey"
+                       data-toggle="modal" data-target="#adOptionDetail{{ type }}"
+                       data-id="{{ type }}"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 col-lg-2 ">
+            <div class="d-flex flex-wrap durante">
+                {% if products|length == 1 %}
+                    {% for product in products %}
+                        <div class="font-weight-stone-600 data">{{ product.days }} jours</div>
+                    {% endfor %}
+                {% else %}
+                    <div class="select-outline position-relative w-100">
+                        <select id="selectOption{{ type }}" name="" data-type="{{ type }}"
+                                class="mdb-select md-outline md-form dropdown-stone option-select my-0">
+                            {% for product in products %}
+                                <option value="{{ product.id }}">{{ product.days }} jours</option>
+                            {% endfor %}
+                        </select>
+                        <label></label>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-6 col-md-2 col-lg-2">
+            <div class="font-weight-stone-600 h4-responsive text-right d-flex price text-default option-price
+                {% if products|length > 1 %}select{% endif %}">
+                
+                <div class="number">{{ firstPrice }}</div><img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+            </div>
+        </div>
+    </div> 
+{% endmacro %}
+
+{% macro _carousel(products, status) %}
+    {% set type = products[0].type %}
+    {% set data = app_product_data(type) %}
+    <div class="carousel-item text-center px-3 {% if status %}active{% endif %}">
+        <div class="font-weight-stone-600 dark-grey-text mb-3">{{ data.name }}</div>
+        <div class="img-bulk mb-3">
+            <img src="{{ asset(data.url) }}" alt="" class="img-fluid z-depth-3">
+        </div>
+        <div class="small-9 mb-3">{{ data.description|raw }}</div>
+        <div class="">
+            <a href="" class="btn btn-primary btn-block btn-option"
+               id="optionCarousel{{ type }}" data-type="{{ type }}">
+                Ajouter au panier
+            </a>
+        </div>
+    </div>
+{% endmacro %}
+
+

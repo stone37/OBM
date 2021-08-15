@@ -1,0 +1,3 @@
+app_dashboard_credit_index:
+  path: /credits
+  controller: App\Controller\Account\CreditController::index

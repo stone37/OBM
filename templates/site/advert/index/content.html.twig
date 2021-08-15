@@ -1,0 +1,20 @@
+{% import 'site/advert/index/macro/__list.html.twig' as __advert  %}
+
+{# Affichage des annonces en vedette #}
+{{ render(controller('App\\Controller\\OptionController::vedette', {'request': app.request})) }}
+
+{# Affichage des annonces en tete de liste #}
+{{ render(controller('App\\Controller\\OptionController::header', {'request': app.request})) }}
+
+<section class="row my-4">
+    {% for advert in adverts %}
+        <div class="col-12">
+           {{ __advert.list(advert, settings) }}
+        </div>
+    {% endfor %}
+
+    <div class="col-12 d-flex justify-content-center mt-2">
+        {{ knp_pagination_render(adverts, 'Ui/_pagination.html.twig') }}
+    </div>
+</section>
+

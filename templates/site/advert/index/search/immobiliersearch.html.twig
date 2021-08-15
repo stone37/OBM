@@ -1,0 +1,206 @@
+<div id="app-advert-search-form" class="form-row mb-4">
+    <div class="col-12">
+        <h6 class="font-weight-stone-600 dark-grey-text">{{ form.type.vars.label }}</h6>
+        <div class="btn-group" data-toggle="buttons">
+            {% for choices in form.type.vars.choices %}
+                <label for="{{ form.type.vars.id }}_{{ loop.index0 }}" class="btn btn-sm btn-amber form-check-label">
+                    <input class="form-check-input" type="radio" value="{{ form.type.vars.choices[loop.index0].value }}"
+                           name="{{ form.type.vars.full_name }}" id="{{ form.type.vars.id }}_{{ loop.index0 }}" autocomplete="off"
+                        {% if app.request.query.has("type") %}
+                            {% if app.request.query.get("type") == form.type.vars.choices[loop.index0].value %}checked{% endif %}
+                        {% endif %} >
+                    {{ form.type.vars.choices[loop.index0].label }}
+                </label>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-check pl-0 mt-4 pt-2">
+            <input type="checkbox" class="form-check-input filled-in" id="{{ form.urgent.vars.id }}"
+                   value="{{ form.urgent.vars.value }}" name="{{ form.urgent.vars.full_name }}"
+                    {% if app.request.query.has("urgent") %}
+                        {% if app.request.query.get("urgent") %}checked{% endif %}
+                    {% endif %} />
+            <label class="form-check-label font-weight-stone-500 dark-grey-text" for="{{ form.urgent.vars.id }}">{{ form.urgent.vars.label|raw }}
+                <i class="fas fa-question-circle ml-1 grey-text material-tooltip-main" data-placement="right" data-toggle="tooltip"
+                   title="Rechercher les annonces urgente"></i>
+            </label>
+        </div>
+    </div>
+</div>
+
+{% if not category.children|length > 0 %}
+    <div class="form-row">
+        {% if category.slug == 'appartement' or category.slug == 'maison' or category.slug == 'villa'
+            or category.slug == 'duplex-triplex' or category.slug == 'chambre' or category.slug == 'studio'
+            or category.slug == 'studio-americain' or category.slug == 'terrain' or category.slug == 'colocation'
+            or category.slug == 'espaces-commerciaux-et-bureaux' or category.slug == 'parking-garage'
+            or category.slug == 'autre' or category.slug == 'appartement-1' or category.slug == 'duplex-triplex-1'
+            or category.slug == 'maison-1' or category.slug == 'terrain-1' or category.slug == 'studio-1'
+            or category.slug == 'studio-americain-1' or category.slug == 'espaces-commerciaux-et-bureaux-1'
+            or category.slug == 'villa-1' or category.slug == 'autre-1' %}
+            <div class="col-12">
+                {% if category.slug == 'terrain' or category.slug == 'terrain-1' %}
+                    <h6 class="font-weight-stone-600 dark-grey-text" style="margin-bottom: -10px">Superficie</h6>
+                {% else %}
+                    <h6 class="font-weight-stone-600 dark-grey-text" style="margin-bottom: -10px">Surface</h6>
+                {% endif %}
+                <div class="d-flex align-items-center">
+                    {{ form_row(form.surfaceMin) }}
+                    <span class="px-2 mb-0 text-muted"> - </span>
+                    {{ form_row(form.surfaceMax) }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if category.slug == 'appartement' or category.slug == 'maison' or category.slug == 'villa'
+            or category.slug == 'duplex-triplex' or category.slug == 'chambre' or category.slug == 'studio'
+            or category.slug == 'studio-americain' or category.slug == 'colocation'
+            or category.slug == 'espaces-commerciaux-et-bureaux' or category.slug == 'parking-garage'
+            or category.slug == 'autre' or category.slug == 'appartement-1' or category.slug == 'duplex-triplex-1'
+            or category.slug == 'maison-1' or category.slug == 'studio-1' or category.slug == 'studio-americain-1'
+            or category.slug == 'espaces-commerciaux-et-bureaux-1' or category.slug == 'villa-1'
+            or category.slug == 'autre-1' %}
+            <div class="col-12">
+                <h6 class="font-weight-stone-600 dark-grey-text">{{ form.immobilierState.vars.label|capitalize }}</h6>
+                <div class="btn-group mt-2" data-toggle="buttons">
+                    {% for choices in form.immobilierState.vars.choices %}
+                        <label for="{{ form.immobilierState.vars.id }}_{{ loop.index0 }}" class="btn btn-sm btn-amber form-check-label">
+                            <input class="form-check-input" type="radio" value="{{ form.immobilierState.vars.choices[loop.index0].value }}"
+                                   name="{{ form.immobilierState.vars.full_name }}" id="{{ form.immobilierState.vars.id }}_{{ loop.index0 }}" autocomplete="off"
+                                {% if app.request.query.has("immobilierState") %}
+                                    {% if app.request.query.get("immobilierState") == form.immobilierState.vars.choices[loop.index0].value %}checked{% endif %}
+                                {% endif %} />
+                            {{ form.immobilierState.vars.choices[loop.index0].label }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if category.slug == 'appartement' or category.slug == 'maison' or category.slug == 'villa'
+            or category.slug == 'duplex-triplex' or category.slug == 'colocation' or category.slug == 'appartement-1'
+            or category.slug == 'duplex-triplex-1' or category.slug == 'maison-1' or category.slug == 'villa-1' %}
+            <div class="col-6 col-md-6">
+                <div class="d-flex flex-wrap">
+                    <div class="select-outline position-relative w-100">
+                        {{ form_widget(form.nbrePiece) }}
+                        <label>{{ form.nbrePiece.vars.label }}</label>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if category.slug == 'appartement' or category.slug == 'maison' or category.slug == 'villa'
+            or category.slug == 'duplex-triplex' or category.slug == 'colocation' or category.slug == 'appartement-1'
+            or category.slug == 'duplex-triplex-1' or category.slug == 'maison-1' or category.slug == 'villa-1' %}
+            <div class="col-6 col-md-6">
+                {{ form_row(form.nbreChambre) }}
+            </div>
+        {% endif %}
+
+        {% if category.slug == 'appartement' or category.slug == 'maison' or category.slug == 'villa'
+            or category.slug == 'duplex-triplex' or category.slug == 'colocation' or category.slug == 'appartement-1'
+            or category.slug == 'duplex-triplex-1' or category.slug == 'maison-1' or category.slug == 'villa-1' %}
+            <div class="col-6 col-md-6" style="margin-top: -20px !important">
+                {{ form_row(form.nbreSalleBain) }}
+            </div>
+        {% endif %}
+
+        {% if category.slug == 'appartement' or category.slug == 'chambre' or category.slug == 'colocation'
+            or category.slug == 'espaces-commerciaux-et-bureaux' or category.slug == 'appartement-1'
+            or category.slug == 'espaces-commerciaux-et-bureaux-1' %}
+            <div class="col-12 mt-2 mb-4">
+                <h6 class="font-weight-stone-600 dark-grey-text">{{ form.immobilierAcces.vars.label|capitalize }}</h6>
+                <div class="app-checkbox-field-bulk">
+                    {{ form_widget(form.immobilierAcces) }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if category.slug == 'appartement' or category.slug == 'maison' or category.slug == 'villa'
+            or category.slug == 'duplex-triplex' or category.slug == 'chambre'or category.slug == 'studio'
+            or category.slug == 'studio-americain' or category.slug == 'colocation'
+            or category.slug == 'espaces-commerciaux-et-bureaux' or category.slug == 'appartement-1'
+            or category.slug == 'duplex-triplex-1' or category.slug == 'maison-1'
+            or category.slug == 'studio-1' or category.slug == 'studio-americain-1'
+            or category.slug == 'espaces-commerciaux-et-bureaux-1' or category.slug == 'villa-1' %}
+            <div class="col-12 mb-4">
+                <h6 class="font-weight-stone-600 dark-grey-text">{{ form.proximite.vars.label|capitalize }}</h6>
+                <div class="app-checkbox-field-bulk">
+                    {{ form_widget(form.proximite) }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if category.slug == 'appartement' or category.slug == 'maison' or category.slug == 'villa'
+            or category.slug == 'duplex-triplex' or category.slug == 'chambre'or category.slug == 'studio'
+            or category.slug == 'studio-americain' or category.slug == 'colocation'
+            or category.slug == 'espaces-commerciaux-et-bureaux' or category.slug == 'appartement-1'
+            or category.slug == 'duplex-triplex-1' or category.slug == 'maison-1'
+            or category.slug == 'studio-1' or category.slug == 'studio-americain-1'
+            or category.slug == 'espaces-commerciaux-et-bureaux-1' or category.slug == 'villa-1' %}
+            <div class="col-12 mb-4">
+                <h6 class="font-weight-stone-600 dark-grey-text">{{ form.interior.vars.label|capitalize }}</h6>
+                <div class="app-checkbox-field-bulk">
+                    {{ form_widget(form.interior) }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if category.slug == 'appartement' or category.slug == 'maison' or category.slug == 'villa'
+            or category.slug == 'duplex-triplex' or category.slug == 'studio' or category.slug == 'studio-americain'
+            or category.slug == 'colocation' or category.slug == 'espaces-commerciaux-et-bureaux'
+            or category.slug == 'appartement-1' or category.slug == 'duplex-triplex-1' or category.slug == 'maison-1'
+            or category.slug == 'studio-1' or category.slug == 'studio-americain-1'
+            or category.slug == 'espaces-commerciaux-et-bureaux-1' or category.slug == 'villa-1' %}
+            <div class="col-12 mb-4">
+                <h6 class="font-weight-stone-600 dark-grey-text">{{ form.exterior.vars.label|capitalize }}</h6>
+                <div class="app-checkbox-field-bulk">
+                    {{ form_widget(form.exterior) }}
+                </div>
+                {#{% for choices in form.exterior.vars.choices %}
+                    <div class="form-check d-inline-block pl-0 pr-2">
+                        <input type="checkbox" name="{{ form.exterior.vars.full_name }}" class="form-check-input filled-in"
+                               id="{{ form.exterior.vars.id }}_{{ loop.index0 }}" value="{{ form.exterior.vars.choices[loop.index0].value }}" />
+                        <label class="form-check-label small font-weight-stone-600" for="{{ form.exterior.vars.id }}_{{ loop.index0 }}"
+                               style="padding-left: 25px; padding-top: 2px;" >{{ form.exterior.vars.choices[loop.index0].label }}</label>
+                    </div>
+                {% endfor %}#}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
+
+<div class="form-row">
+    <div class="col-12" style="margin-bottom: -10px">
+        <h6 class="font-weight-stone-600 dark-grey-text">Budget</h6>
+    </div>
+    <div class="d-flex align-items-center col-8 col-md-7 col-lg-8">
+        {{ form_row(form.priceMin) }}
+        <span class="px-2 mb-0 text-muted"> - </span>
+        {{ form_row(form.priceMax) }}
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="col-12" style="margin-bottom: -10px">
+        <h6 class="font-weight-stone-600 dark-grey-text">Lieu</h6>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="md-form md-outline mb-2 mr-2">
+            {{- form_widget(form.city, {'id': 'app-city-name', 'attr': {'class': 'form-control'}}) -}}
+            {{- form_label(form.city) -}}
+            {{- form_errors(form.city) -}}
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="md-form md-outline mb-2 mr-2">
+            {{- form_widget(form.zone, {'id': 'app-advert-search-zone', 'attr': {'class': 'form-control'}}) -}}
+            {{- form_label(form.zone) -}}
+            {{- form_errors(form.zone) -}}
+        </div>
+        <div class="search-advert-zone-suggestion-box"></div>
+    </div>
+</div>
+

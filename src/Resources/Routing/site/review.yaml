@@ -1,0 +1,9 @@
+app_review_index:
+    path: /avis
+    methods: [GET, POST]
+    controller: App\Controller\ReviewController::index
+
+app_suggestion_index:
+    path: /suggestion
+    methods: [GET, POST]
+    controller: App\Controller\ReviewController::suggestion

@@ -1,0 +1,13 @@
+app_image_resizer:
+    path: /media/resize/{width}/{height}/{path}
+    controller: App\Controller\ImageController::image
+    requirements:
+        width: \d+
+        height: \d+
+        path: .+
+
+app_image_jpg:
+    path: /media/convert/{path}
+    controller: App\Controller\ImageController::convert
+    requirements:
+        path: .+

@@ -1,0 +1,38 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    Nouvelle
+    {% if type == 1 %} publicité accueil
+    {% elseif type == 2 %} publicité header accueil
+    {% elseif type == 3 %} publicité header listing des annonces
+    {% elseif type == 4 %} publicité listing des annonces
+    {% elseif type == 5 %} publicité header page d'annonce
+    {% elseif type == 6 %} publicité page d'annonce
+    {% else %} publicité entre les annonces
+    {% endif %}
+    |
+    {% if type == 1 %}Publicité accueil
+    {% elseif type == 2 %}Publicité header accueil
+    {% elseif type == 3 %}Publicité header listing des annonces
+    {% elseif type == 4 %}Publicité listing des annonces
+    {% elseif type == 5 %}Publicité header page d'annonce
+    {% elseif type == 6 %}Publicité page d'annonce
+    {% else %}Publicité entre les annonces
+    {% endif %}
+    | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/pub/create/_header.html.twig' %}
+
+    {% include 'admin/pub/create/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/create.js'} %}
+{% endblock %}

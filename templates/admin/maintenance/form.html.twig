@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-center">
+    <div class="text-center">
+        <div class="font-weight-stone-600 grey-text pb-1">{{ form.status.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-2 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.status.vars.full_name }}" id="{{ form.status.vars.id }}"
+                       value="{{ form.status.vars.value }}" {% if form.status.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+app_admin_cache_clean:
+    path: /cache/clean
+    methods: [POST]
+    controller: App\Controller\Admin\CacheController::clean

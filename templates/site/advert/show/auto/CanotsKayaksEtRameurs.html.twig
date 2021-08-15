@@ -1,0 +1,28 @@
+<div class="row app-advert-show-info">
+    <div class="col-12">
+        <table class="table table-borderless table-responsive-sm">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Couleur</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if advert.autoColor %}{{ advert.autoColor }}{% else %}NC{% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Prix</div>
+                    <div class="content text-default d-flex flex-wrap price font-weight-stone-600">
+                        <div class="number">{{ advert.price }}</div>
+                        <div class="">
+                            <img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                            {% if advert.priceStatus %}
+                                <span class="font-weight-stone-500">- à débattre</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

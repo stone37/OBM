@@ -1,0 +1,46 @@
+<div class="modal fade" id="addPhoneContactModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary white-text">
+                <h4 class="title"><i class="fas fa-headset text-white"></i> Contacter l'annonceur par téléphone</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body pt-1 mb-0">
+                <div class="small-9 font-weight-stone-500 grey-text">
+                    <span class="font-weight-stone-600">
+                        {% if advert.type == "j'offre" %}Vente
+                        {% elseif advert.type == 'je recherche' %}Recherche
+                         {% else %}{{ advert.type|capitalize }}{% endif %}
+                    </span>
+                    {% if advert.subDivision %}{{ advert.subDivision.name|lower }}{% else %}{{ advert.subCategory.name|lower }}{% endif %}
+                    à {{ advert.location.name }} -
+
+                    <div class="d-inline-block price">
+                        <div class="number d-inline-block text-default font-weight-stone-600">{{ advert.price }}</div>
+                        <img src="{{ asset('images/devise.png') }}" class="devise d-inline-block" alt="">
+                    </div>
+                </div>
+                <div class="font-weight-stone-600 mt-2">
+                    Annonceur: {{ advert.user.firstname|upper }} {{ advert.user.lastname|upper }} (PARTICULIER)
+                </div>
+
+                <div class="small mt-3">
+                    Appelez de la part de {{ settings.name }} (réf: {{ advert.reference }} )
+                </div>
+
+                <div class="text-center mt-4 h1-responsive font-weight-stone-600 text-primary">
+                    <strong>{{ advert.user.phone }}</strong>
+
+                    {% if advert.user.phoneStatus %}
+                        <span class="d-inline-block" style="position: relative; bottom: 1.6rem; right: 10px;"
+                              data-toggle="tooltip" title="Numero whatsapp">
+                            <i class="fab fa-whatsapp" style="color: #25d366 !important; font-size: 1.8rem !important;"></i>
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

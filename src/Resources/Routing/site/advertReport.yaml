@@ -1,0 +1,7 @@
+app_advert_report_create:
+    path: /advert/{id}/report
+    controller: App\Controller\AdvertReportController::create
+    requirements:
+        id: \d+
+    options:
+      expose: true

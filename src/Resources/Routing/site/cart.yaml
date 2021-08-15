@@ -1,0 +1,47 @@
+app_cart_index:
+    path: /cart
+    methods: [GET]
+    controller: App\Controller\CartController::index
+    options:
+        expose: true
+
+app_cart_add:
+    path: /cart/{id}/add
+    methods: [GET, POST]
+    controller: App\Controller\CartController::add
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_cart_replace:
+    path: /cart/{id}/replace/{newId}
+    methods: [GET, POST]
+    controller: App\Controller\CartController::replace
+    requirements:
+        id: \d+
+        newId: \d+
+    options:
+        expose: true
+
+app_cart_delete:
+    path: /cart/{id}/delete
+    methods: [GET, POST]
+    controller: App\Controller\CartController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_cart_validate:
+    path: /cart/validate
+    methods: [GET, POST]
+    controller: App\Controller\CartController::validate
+
+app_cart_discount:
+    path: /cart/discount
+    controller: App\Controller\CartController::discount
+    options:
+        expose: true
+
+

@@ -1,0 +1,39 @@
+app_admin_pub_index:
+    path: /publicites/{type}
+    methods: [GET]
+    controller: App\Controller\Admin\PubController::index
+
+app_admin_pub_create:
+    path: /publicites/{type}/create
+    methods: [GET, POST]
+    controller: App\Controller\Admin\PubController::create
+
+app_admin_pub_edit:
+    path: /publicites/{type}/{id}/edit
+    methods: [GET, POST]
+    controller: App\Controller\Admin\PubController::edit
+    requirements:
+        id: \d+
+
+app_admin_pub_delete:
+    path: /publicites/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\PubController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_pub_bulk_delete:
+    path: /publicites/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\PubController::deleteBulk
+    options:
+        expose: true
+
+app_admin_pub_move:
+    path: /publicites/{id}/{type}/move
+    methods: GET
+    controller: App\Controller\Admin\PubController::move
+    requirements:
+        id: \d+

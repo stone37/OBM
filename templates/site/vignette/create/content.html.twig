@@ -1,0 +1,59 @@
+<section>
+    <div class="row mb-5">
+        <div class="col-12 col-md-8 col-lg-9">
+            <section>
+                <div class="card card-cascade narrower mb-5">
+                    <div class="view view-cascade bg-primary text-white">
+                        <h3 class="h3-responsive font-weight-stone-600 px-3 pt-3 pb-2">
+                            Créer une vignette
+                        </h3>
+                    </div>
+                    <div class="card-body card-body-cascade px-lg-5">
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'vignette-form'}}) }}
+
+                        {% include 'site/vignette/create/form.html.twig' %}
+
+                        {{ form_row(form.productId) }}
+                        {{ form_widget(form._token) }}
+
+                        <div class="text-center mt-md-4">
+                            <button class="btn btn-primary btn-lg app-ad-submit-btn font-weight-stone-500" type="submit">
+                                Publier ma vignette <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                            <div class="mx-1 mx-md-4 small dark-grey-text mt-3">
+                                En cliquant sur <span class="text-primary font-weight-stone-500">Publier ma vignette</span>,
+                                j'accepte les <a href="{{ path('app_cgu') }}" class="link font-weight-stone-500">CGU</a> et
+                                <a href="{{ path('app_advertiser_charte') }}" class="link font-weight-stone-500">charte du bon annonceur</a>.
+                            </div>
+                        </div>
+                        {{ form_end(form, {'render_rest': false}) }}
+                    </div>
+                </div>
+
+            </section>
+        </div>
+        <div class="col-12 col-md-4 col-lg-3">
+            <section>
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <h5 class="text-primary font-weight-stone-600 text-center mb-3">Offre</h5>
+                        <ul class="list-unstyled small-9 font-weight-stone-500 dark-grey-text">
+                            <li class="mb-2"><i class="fas fa-eye amber-text mr-1"></i> Créez une vignette à votre image pour vous mettre en valeur</li>
+                            <li class="mb-2"><i class="fas fa-clipboard-list amber-text mr-1"></i> Publiez dans votre univers</li>
+                            <li class="mb-2"><i class="fas fa-chart-line amber-text mr-1"></i> Générer du trafic vers votre site internet</li>
+                        </ul>
+
+                        <h5 class="text-primary font-weight-stone-600 text-center my-3">Tarification</h5>
+                        {% for element in products %}
+                            <div id="data_{{ element.id }}" class="d-flex justify-content-between vignette-tarif
+                                    small-9 {% if element.id == product.id %}active{% endif %}">
+                                <div class="days">{{ element.days }} Jours</div>
+                                <div class="price text-default">{{ element.price }} <span class="devise small">CFA</span></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

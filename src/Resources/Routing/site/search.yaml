@@ -1,0 +1,16 @@
+app_search_index:
+    path: /a/search
+    methods: [GET, POST]
+    controller: App\Controller\SearchController::index
+
+app_search_index_m:
+    path: /a/search/m
+    methods: [GET, POST]
+    controller: App\Controller\SearchController::indexM
+
+app_search_result:
+    path: /a/search/results
+    methods: [GET, POST]
+    controller: App\Controller\SearchController::result
+
+
