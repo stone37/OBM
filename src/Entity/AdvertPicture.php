@@ -142,7 +142,7 @@ class AdvertPicture
     public function preRemoveUpload(): self
     {
         // On sauvegarde temporairement le nom du fichier, car il dépend de l'id
-        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->extension;
+        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->id . '.' . $this->extension;
 
         return $this;
     }

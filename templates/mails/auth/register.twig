@@ -11,7 +11,7 @@
     Bienvenue sur {{ settings.name|upper }} !
     ===============================
 
-    Vous venez de créer un compte sur {{ settings.name }}.com. Pour activer votre compte il vous suffit de cliquer sur ce lien
+    Vous venez de créer un compte sur {{ settings.name|slug('')|lower }}.com. Pour activer votre compte il vous suffit de cliquer sur ce lien
 
   {% endapply %}
 

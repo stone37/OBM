@@ -51,7 +51,8 @@ class AuthSubscriber implements EventSubscriberInterface
         ])
             ->to($event->getUser()->getEmail())
             ->subject($this->settings->getName().' | Réinitialisation de votre mot de passe');
-        $this->mailer->send($email);
+
+        $this->mailer->sendNow($email);
     }
 
     /**
@@ -72,7 +73,7 @@ class AuthSubscriber implements EventSubscriberInterface
             ->to($event->getUser()->getEmail())
             ->subject($this->settings->getName().' | Confirmation du compte');
 
-        $this->mailer->send($email);
+        $this->mailer->sendNow($email);
     }
 
     /**
@@ -89,6 +90,7 @@ class AuthSubscriber implements EventSubscriberInterface
         ])
             ->to($event->getUser()->getEmail())
             ->subject($this->settings->getName().' | Suppression de votre compte');
-        $this->mailer->send($email);
+
+        $this->mailer->sendNow($email);
     }
 }
