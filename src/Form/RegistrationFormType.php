@@ -21,13 +21,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, ['label' => "Nom d'utilisateur"])
-            ->add('firstName', TextType::class, ['label' => 'Prénom'])
-            ->add('lastName', TextType::class, ['label' => 'Nom'])
             ->add('phone', TextType::class, ['label' => 'Téléphone'])
-            ->add('phoneStatus', CheckboxType::class, [
-                'label' => 'Numéro whatsApp (facultatif)',
-                'required' => false,
-            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'Accepter les conditions d\'utilisations',
                 'mapped' => false,
@@ -44,6 +38,14 @@ class RegistrationFormType extends AbstractType
 
         if ($user && empty($user->getEmail())) {
             $builder->add('email', EmailType::class, ['label' => 'Adresse e-mail']);
+        }
+
+        if ($user && empty($user->getFirstName())) {
+            $builder->add('firstName', TextType::class, ['label' => 'Prénom']);
+        }
+
+        if ($user && empty($user->getLastName())) {
+            $builder->add('lastName', TextType::class, ['label' => 'Nom']);
         }
 
         if ($user && !$user->useOauth()) {
@@ -66,6 +68,10 @@ class RegistrationFormType extends AbstractType
                     ],
                     'first_options' => ['label' => 'Mot de passe', 'attr' => $passwordAttrs],
                     'second_options' => ['label' => 'Confirmer le mot de passe', 'attr' => $passwordAttrs],
+                ])
+                ->add('phoneStatus', CheckboxType::class, [
+                    'label' => 'Numéro whatsApp (facultatif)',
+                    'required' => false,
                 ]);
         }
     }

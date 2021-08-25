@@ -34,6 +34,7 @@ class SocialLoginService
     public function hydrate(User $user): bool
     {
         $oauthData = $this->session->get(self::SESSION_KEY);
+        dump($oauthData);
 
         if (null === $oauthData || !isset($oauthData['email'])) {
             return false;
@@ -43,6 +44,8 @@ class SocialLoginService
         $user->setGoogleId($oauthData['google_id'] ?? null);
         $user->setFacebookId($oauthData['facebook_id'] ?? null);
         $user->setUsername($oauthData['username']);
+        $user->setLastName($oauthData['lastName']);
+        $user->setFirstName($oauthData['firstName']);
         $user->setConfirmationToken(null);
 
         return true;

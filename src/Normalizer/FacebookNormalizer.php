@@ -13,9 +13,11 @@ class FacebookNormalizer extends Normalizer
     {
         return [
             'email' => $object->getEmail(),
-            'github_id' => $object->getId(),
+            'facebook_id' => $object->getId(),
             'type' => 'Facebook',
             'username' => $object->getName(),
+            'firstName' => $object->getFirstName(),
+            'lastName' => $object->getLastName(),
         ];
     }
 

@@ -14,7 +14,8 @@
 
                 {% if oauth_registration %}
                     <div class="alert alert-info" role="alert">
-                        Vous y êtes presque, il ne vous reste plus qu'à renseigner quelque information
+                        Vous y êtes presque, il ne vous reste plus qu'à choisir votre
+                        nom d'utilisateur et votre numero de telephone
                     </div>
                 {% endif %}
 
@@ -38,65 +39,83 @@
                             Ce champ est obligatoire
                         </small>
                     </div>
-                    <div class="col-12 col-md-6 ">
-                        {{ form_row(form.lastName) }}
-                        <small class="form-text text-muted" style="margin-top: -4px">
-                            Ce champ est obligatoire
-                        </small>
-                    </div>
-                    <div class="col-12 col-md-6 ">
-                        {{ form_row(form.firstName) }}
-                        <small class="form-text text-muted" style="margin-top: -4px">
-                            Ce champ est obligatoire
-                        </small>
-                    </div>
-                    <div class="col-12 col-md-6 ">
-                        {{ form_row(form.email) }}
-                        <small class="form-text text-muted" style="margin-top: -4px">
-                            Ce champ est obligatoire
-                        </small>
-                    </div>
+
+                    {% if form.lastName is defined %}
+                        <div class="col-12 col-md-6">
+                            {{ form_row(form.lastName) }}
+                            <small class="form-text text-muted" style="margin-top: -4px">
+                                Ce champ est obligatoire
+                            </small>
+                        </div>
+                    {% endif %}
+
+                    {% if form.firstName is defined %}
+                        <div class="col-12 col-md-6 ">
+                            {{ form_row(form.firstName) }}
+                            <small class="form-text text-muted" style="margin-top: -4px">
+                                Ce champ est obligatoire
+                            </small>
+                        </div>
+                    {% endif %}
+
+                    {% if form.email is defined %}
+                        <div class="col-12 col-md-6 ">
+                            {{ form_row(form.email) }}
+                            <small class="form-text text-muted" style="margin-top: -4px">
+                                Ce champ est obligatoire
+                            </small>
+                        </div>
+                    {% endif %}
+
                     <div class="col-12 col-md-6">
                         {{ form_row(form.phone) }}
                         <small class="form-text text-muted" style="margin-top: -4px">
                             Ce champ est obligatoire
                         </small>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <div class="form-check pl-md-0 mt-md-4 mt-3 ml-0">
-                            <input type="checkbox" class="form-check-input filled-in" id="{{ form.phoneStatus.vars.id }}"
-                                   value="{{ form.phoneStatus.vars.value }}" name="{{ form.phoneStatus.vars.full_name }}" />
-                            <label class="form-check-label small-9 font-weight-stone-500 dark-grey-text" for="{{ form.phoneStatus.vars.id }}">{{ form.phoneStatus.vars.label }}
-                                <i class="fas fa-question-circle ml-1 grey-text material-tooltip-main" data-toggle="tooltip"
-                                   title="Il sera signifier dans vos annonces que votre numéro de telephone est sur WhatsApp"></i></label>
+
+                    {% if form.phoneStatus is defined %}
+                        <div class="col-12 col-md-6">
+                            <div class="form-check pl-md-0 mt-md-4 mt-3 ml-0">
+                                <input type="checkbox" class="form-check-input filled-in" id="{{ form.phoneStatus.vars.id }}"
+                                       value="{{ form.phoneStatus.vars.value }}" name="{{ form.phoneStatus.vars.full_name }}" />
+                                <label class="form-check-label small-9 font-weight-stone-500 dark-grey-text" for="{{ form.phoneStatus.vars.id }}">{{ form.phoneStatus.vars.label }}
+                                    <i class="fas fa-question-circle ml-1 grey-text material-tooltip-main" data-toggle="tooltip"
+                                       title="Il sera signifier dans vos annonces que votre numéro de telephone est sur WhatsApp"></i></label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-6 ">
-                        <div class="md-form md-outline input-with-post-icon mb-0">
-                            <i class="fas fa-eye input-prefix"></i>
-                            <input type="password" id="{{ form.plainPassword.first.vars.id }}"
-                                   value="{{ form.plainPassword.first.vars.value }}"
-                                   name="{{ form.plainPassword.first.vars.full_name }}" required
-                                   class="form-control"  />
-                            <label for="{{ form.plainPassword.first.vars.id }}">{{ form.plainPassword.first.vars.label|trans }}</label>
+                    {% endif %}
+
+                    {% if form.plainPassword is defined %}
+                        <div class="col-12 col-md-6 ">
+                            <div class="md-form md-outline input-with-post-icon mb-0">
+                                <i class="fas fa-eye input-prefix"></i>
+                                <input type="password" id="{{ form.plainPassword.first.vars.id }}"
+                                       value="{{ form.plainPassword.first.vars.value }}"
+                                       name="{{ form.plainPassword.first.vars.full_name }}" required
+                                       class="form-control"  />
+                                <label for="{{ form.plainPassword.first.vars.id }}">{{ form.plainPassword.first.vars.label|trans }}</label>
+                            </div>
+                            <small class="form-text text-muted" style="margin-top: -4px">
+                                Ce champ est obligatoire
+                            </small>
                         </div>
-                        <small class="form-text text-muted" style="margin-top: -4px">
-                            Ce champ est obligatoire
-                        </small>
-                    </div>
-                    <div class="col-12 col-md-6 ">
-                        <div class="md-form md-outline input-with-post-icon mb-0">
-                            <i class="fas fa-eye input-prefix"></i>
-                            <input type="password" id="{{ form.plainPassword.second.vars.id }}"
-                                   value="{{ form.plainPassword.second.vars.value }}"
-                                   name="{{ form.plainPassword.second.vars.full_name }}" required
-                                   class="form-control"  />
-                            <label for="{{ form.plainPassword.second.vars.id }}">{{ form.plainPassword.second.vars.label|trans }}</label>
+
+                        <div class="col-12 col-md-6 ">
+                            <div class="md-form md-outline input-with-post-icon mb-0">
+                                <i class="fas fa-eye input-prefix"></i>
+                                <input type="password" id="{{ form.plainPassword.second.vars.id }}"
+                                       value="{{ form.plainPassword.second.vars.value }}"
+                                       name="{{ form.plainPassword.second.vars.full_name }}" required
+                                       class="form-control"  />
+                                <label for="{{ form.plainPassword.second.vars.id }}">{{ form.plainPassword.second.vars.label|trans }}</label>
+                            </div>
+                            <small class="form-text text-muted" style="margin-top: -4px">
+                                Ce champ est obligatoire
+                            </small>
                         </div>
-                        <small class="form-text text-muted" style="margin-top: -4px">
-                            Ce champ est obligatoire
-                        </small>
-                    </div>
+                    {% endif %}
+
                     <div class="col-12">
                         <div class="switch stone-switch mt-4 ml-md-2">
                             <label class="font-weight-500">

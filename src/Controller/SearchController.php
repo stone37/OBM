@@ -97,7 +97,7 @@ class SearchController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             if ($search->getCategory()) {
                 $category = $em->getRepository(Category::class)->find((int)$search->getCategory());
 
