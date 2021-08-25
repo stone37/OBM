@@ -1,0 +1,3 @@
+app_invitation:
+  path: /parrainage
+  controller: App\Controller\InvitationController::index

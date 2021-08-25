@@ -1,6 +1,9 @@
 {% form_theme setDiscountForm 'Ui/Form/theme.html.twig' %}
 
 {% if order.items %}
+
+    {% set first = order.items.first() %}
+
 <section class="mb-4 mx-2 mx-md-3">
     <div class="row">
         <div class="col-12">
@@ -154,9 +157,8 @@
                                 </div>
                             {% endif %}
 
-
                             {% if settings.activeCredit %}
-                                {% if not (order.items.first().product.category == 'credit') %}
+                                {% if not (first.product.category == 'credit') %}
                                     {% if order.order.user.wallet.balance > order.amountPaid %}
                                         <div class="col-12 col-md-6">
                                             <div class="card app-payment-type method mb-4">
@@ -184,7 +186,7 @@
                                         </div>
                                     {% else %}
                                         <div class="col-12 col-md-6">
-                                            <div class="card app-payment-type">
+                                            <div class="card app-payment-type mb-4">
                                                 <div class="card-body text-center">
                                                     <h5 class="h5-responsive font-weight-stone-600 grey-text mb-3">Paiement par crédit</h5>
                                                     <p class="grey-text">
@@ -196,7 +198,7 @@
                                                         sur votre compte
                                                     </p>
                                                     <div class="">
-                                                        <a href="{{ path('app_dashboard_credit_index') }}" class="btn btn-grey mt-2">
+                                                        <a id="btn-credit-add" href="{{ path('app_dashboard_credit_index') }}" class="btn btn-grey mt-2">
                                                             <i class="fas fa-wallet mr-1"></i>
                                                             Acheter du crédit
                                                         </a>
@@ -224,110 +226,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-{#
-        <div class="col-12 col-md-9 col-lg-8">
-            <div class="row mt-4">
-                <div class="col-12 d-flex justify-content-between mb-4">
-                    <h4 class="h4-responsive text-primary font-weight-stone-600">
-                        Sélectionnez votre mode de paiement
-                    </h4>
-                    <div class="" data-toggle="tooltip" title="Paiement sécurisé">
-                        <i class="fas fa-lock text-primary" style="font-size: 1.7rem;"></i>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <div class="card">
-                                <div class="card-body text-center">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="card">
-                                <div class="card-body text-center">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="mt-3">
-                        <form action="{{ path('app_order_validate', {'id': order.id}) }}" method="POST">
-                            <button type="submit" class="btn btn-primary btn-block" >
-                                <span class="h4-responsive font-weight-stone-600 d-inline-block">
-                                    Payer
-                                </span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="h5-responsive font-weight-stone-600 text-primary mb-3">
-                                Paiement mobile ou par carte bancaire
-                            </h5>
-
-                            <div class="d-flex flex-wrap app-brand-logo justify-content-between mb-4 mt-4">
-                                <img src="{{ asset('images/brand/orange.jpg') }}" class="img-fluid z-depth-1 orange" alt="Orange money logo">
-                                <img src="{{ asset('images/brand/mtn.jpg') }}" class="img-fluid mtn" alt="MTN mobile money logo">
-                                <img src="{{ asset('images/brand/moov.png') }}" class="img-fluid moov" alt="Moov money logo">
-                                <img src="{{ asset('images/brand/visa.png') }}" class="img-fluid visa" alt="Visa logo">
-                                <img src="{{ asset('images/brand/masterCard.png') }}" class="img-fluid mc" alt="Master card logo">
-                                <img src="{{ asset('images/brand/wari.png') }}" class="img-fluid wari" alt="Wari logo">
-                                <img src="{{ asset('images/brand/yup.jpg') }}" class="img-fluid yup" alt="Yup logo">
-                            </div>
-                            <div class="mt-3">
-                                <form action="{{ path('app_order_validate', {'id': order.id}) }}" method="POST">
-                                    <button type="submit" class="btn btn-primary btn-block" >
-                                        <span class="h4-responsive font-weight-stone-600 d-inline-block">
-                                            Payer
-                                        </span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="h5-responsive font-weight-stone-600 grey-text mb-3">Paiement par crédit</h5>
-                            <p class="grey-text">
-                                Vous avez
-                                <span class="h4-responsive font-weight-stone-600 text-default">
-                                    0<span class="pl-1 font-weight-stone-600" style="font-size: 1.1rem;">CFA</span>
-                                </span>
-                                sur votre compte
-                            </p>
-                            <div class="">
-                                <a href="{{ path('app_dashboard_credit_index') }}" class="btn btn-grey mt-2">
-                                    <i class="fas fa-wallet mr-1"></i>
-                                    Acheter du crédit
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>#}
-
 {% else %}
     <div class="row my-5">
         <div class="col-12 text-center">

@@ -24,35 +24,35 @@ class Wallet
      *
      * @ORM\Column(type="bigint", options={"unsigned": true})
      */
-    private $deposit = 0;
+    private $deposit = 0; // depot
 
     /**
      * @var int
      *
      * @ORM\Column(type="bigint", options={"unsigned": true})
      */
-    private $spent = 0;
+    private $spent = 0; // depence
 
     /**
      * @var int
      *
      * @ORM\Column(type="bigint", options={"unsigned": true})
      */
-    private $balance = 0;
+    private $balance = 0; // solde
 
     /**
      * @var Payment
      *
      * @ORM\OneToMany(targetEntity=Payment::class, mappedBy="inWallet")
      */
-    private $deposits;
+    private $deposits; // Depot paye
 
     /**
      * @var Payment
      *
      * @ORM\OneToMany(targetEntity=Payment::class, mappedBy="outWallet")
      */
-    private $purchases;
+    private $purchases; // Achat paye
 
     /**
      * @var User

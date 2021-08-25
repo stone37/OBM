@@ -35,11 +35,15 @@ class SettingsModuleType extends AbstractType
                 'required' => false
             ])
             ->add('activeCardPayment', CheckboxType::class, [
-                'label' => 'Activer le paiement par carte et mobile',
+                'label' => 'Activer le paiement par carte bancaire et mobile',
                 'required' => false
             ])
             ->add('activeVignette', CheckboxType::class, [
                 'label' => 'Activer les vignettes',
+                'required' => false
+            ])
+            ->add('activeParrainage', CheckboxType::class, [
+                'label' => 'Activer les parrainages',
                 'required' => false
             ])
             ->add('activePub', CheckboxType::class, [
@@ -56,6 +60,18 @@ class SettingsModuleType extends AbstractType
             ])
             ->add('numberFavoriteUserList', IntegerType::class, [
                 'label' => 'Nombre favoris par page - dashboard',
+                'required' => false
+            ])
+            ->add('parrainCredit', IntegerType::class, [
+                'label' => 'Credit offert au parrain',
+                'required' => false
+            ])
+            ->add('fioleCredit', IntegerType::class, [
+                'label' => 'Credit offert au fiole',
+                'required' => false
+            ])
+            ->add('parrainageAd', IntegerType::class, [
+                'label' => 'Nombre d\'annonce pour avoir les recompenses',
                 'required' => false
             ]);
     }

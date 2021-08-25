@@ -6,7 +6,7 @@ use App\Entity\Advert;
 use App\Entity\Alert;
 use App\Entity\Favorite;
 use App\Entity\Command;
-use App\Entity\Message;
+use App\Entity\Invitation;
 use App\Entity\Wallet;
 use DateTime;
 use DateTimeImmutable;
@@ -168,6 +168,13 @@ trait UserTrait
     private $wallet;
 
     /**
+     * @var Invitation
+     *
+     * @ORM\OneToOne(targetEntity=Invitation::class)
+     */
+    private $invitation;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
@@ -236,6 +243,13 @@ trait UserTrait
      * @ORM\Column(type="string", nullable=true)
      */
     private $address;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $drift = false;
 
     public function __constructUser()
     {
@@ -716,6 +730,42 @@ trait UserTrait
     public function __toString()
     {
         return (string) ucfirst($this->getFirstName()) . ' ' . ucfirst($this->getLastName());
+    }
+
+    /**
+     * @return Invitation
+     */
+    public function getInvitation(): ?Invitation
+    {
+        return $this->invitation;
+    }
+
+    /**
+     * @param Invitation $invitation
+     */
+    public function setInvitation(?Invitation $invitation): self
+    {
+        $this->invitation = $invitation;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDrift(): ?bool
+    {
+        return $this->drift;
+    }
+
+    /**
+     * @param bool $drift
+     */
+    public function setDrift(?bool $drift): self
+    {
+        $this->drift = $drift;
+
+        return $this;
     }
 }
 

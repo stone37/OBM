@@ -47,7 +47,7 @@ class SearchController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             if ($session->has('app_user_search_city') &&
                 !empty($session->get('app_user_search_city'))) {
                 $search->setCity($session->get('app_user_search_city'));

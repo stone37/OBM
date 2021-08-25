@@ -1,0 +1,36 @@
+{% extends 'user/layout.html.twig' %}
+
+{% block title 'Invitez vos amis sur '~settings.name %}
+{% block meta %}
+    <meta name="google" content="nositelinkssearchbox">
+{% endblock %}
+
+{% block app_cart %}{% endblock %}
+{% block app_mobile_cart %}{% endblock %}
+
+{% block app_breadcrumbs %}
+    <div class="mt-80 mt-md-7">
+        {{ breadcrumb('Tableau de bord', '/u/') }}
+        {{ breadcrumb('Invitez mes amis') }}
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </div>
+{% endblock %}
+
+{% block app_body %}
+    {% include 'user/invitation/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/advert/list.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>let $link = "{{ absolute_url(path('app_register', {'code': invitation.code})) }}";</script>
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
+{% endblock %}
+

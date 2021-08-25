@@ -1,17 +1,13 @@
-<div class="form-row mt-3">
-    <div class="col-12 col-md-4 mb-3">
-        <div class="grey-text pb-1">{{ form.activeMessage.vars.label|trans }}</div>
-        <div class="switch stone-switch mt-1 ml-md-2">
-            <label>
-                Non
-                <input type="checkbox" name="{{ form.activeMessage.vars.full_name }}" id="{{ form.activeMessage.vars.id }}"
-                       value="{{ form.activeMessage.vars.value }}" {% if form.activeMessage.vars.checked %}checked="checked{% endif %}">
-                <span class="lever"></span>
-                Oui
-            </label>
+<div class="form-row">
+    <div class="col-12">
+        <div class="h5-responsive border border-secondary border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-secondary d-inline-block mr-1" style="position: relative; bottom: 6px;">1</div>
+            <div class="text-secondary d-inline-block font-weight-stone-600">Annonce</div>
         </div>
     </div>
-    <div class="col-12 col-md-4 mb-3">
+</div>
+<div class="form-row mt-3">
+    <div class="col-12 col-md-4 col-lg-3 mb-3">
         <div class="grey-text pb-1">{{ form.activeAdFavorite.vars.label|trans }}</div>
         <div class="switch stone-switch mt-1 ml-md-2">
             <label>
@@ -23,7 +19,19 @@
             </label>
         </div>
     </div>
-    <div class="col-12 col-md-4 mb-3">
+    <div class="col-12 col-md-4 col-lg-3 mb-3">
+        <div class="grey-text pb-1">{{ form.activeMessage.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.activeMessage.vars.full_name }}" id="{{ form.activeMessage.vars.id }}"
+                       value="{{ form.activeMessage.vars.value }}" {% if form.activeMessage.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 col-lg-3 mb-3">
         <div class="grey-text pb-1">{{ form.activeAlert.vars.label|trans }}</div>
         <div class="switch stone-switch mt-1 ml-md-2">
             <label>
@@ -35,7 +43,7 @@
             </label>
         </div>
     </div>
-    <div class="col-12 col-md-4 mb-3">
+    <div class="col-12 col-md-4 col-lg-3 mb-3">
         <div class="grey-text pb-1">{{ form.activeAdSimilar.vars.label|trans }}</div>
         <div class="switch stone-switch mt-1 ml-md-2">
             <label>
@@ -47,7 +55,26 @@
             </label>
         </div>
     </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.numberAdList) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.numberAdUserList) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.numberFavoriteUserList) }}
+    </div>
+</div>
 
+<div class="form-row mt-4">
+    <div class="col-12">
+        <div class="h5-responsive border border-secondary border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-secondary d-inline-block mr-1" style="position: relative; bottom: 6px;">2</div>
+            <div class="text-secondary d-inline-block font-weight-stone-600">Paiement</div>
+        </div>
+    </div>
+</div>
+<div class="form-row mt-3">
     <div class="col-12 col-md-4 mb-3">
         <div class="grey-text pb-1">{{ form.activeCredit.vars.label|trans }}</div>
         <div class="switch stone-switch mt-1 ml-md-2">
@@ -72,6 +99,17 @@
             </label>
         </div>
     </div>
+</div>
+
+<div class="form-row mt-3">
+    <div class="col-12">
+        <div class="h5-responsive border border-secondary border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-secondary d-inline-block mr-1" style="position: relative; bottom: 6px;">3</div>
+            <div class="text-secondary d-inline-block font-weight-stone-600">Publicité</div>
+        </div>
+    </div>
+</div>
+<div class="form-row mt-3">
     <div class="col-12 col-md-4 mb-3">
         <div class="grey-text pb-1">{{ form.activeVignette.vars.label|trans }}</div>
         <div class="switch stone-switch mt-1 ml-md-2">
@@ -98,14 +136,40 @@
     </div>
 </div>
 
-<div class="form-row">
-    <div class="col-12 col-md-4">
-        {{ form_row(form.numberAdList) }}
-    </div>
-    <div class="col-12 col-md-4">
-        {{ form_row(form.numberAdUserList) }}
-    </div>
-    <div class="col-12 col-md-4">
-        {{ form_row(form.numberFavoriteUserList) }}
+<div class="form-row mt-4">
+    <div class="col-12">
+        <div class="h5-responsive border border-secondary border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-secondary d-inline-block mr-1" style="position: relative; bottom: 6px;">4</div>
+            <div class="text-secondary d-inline-block font-weight-stone-600">Parrainage</div>
+        </div>
     </div>
 </div>
+
+<div class="form-row mt-3">
+    <div class="col-12 col-md-4 mb-2">
+        <div class="grey-text pb-1">{{ form.activeParrainage.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.activeParrainage.vars.full_name }}" id="{{ form.activeParrainage.vars.id }}"
+                       value="{{ form.activeParrainage.vars.value }}" {% if form.activeParrainage.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-12 col-md-4">
+        {{ form_row(form.parrainageAd) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.parrainCredit) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.fioleCredit) }}
+    </div>
+</div>
+
+
+

@@ -73,7 +73,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_dashboard_index');
         }
 
-        $user = $this->manager->createUser();
+        $user = $this->manager->createUser($request);
 
         $rootErrors = [];
         // Si l'utilisateur provient de l'oauth, on préremplit ses données

@@ -2,9 +2,15 @@
 
 namespace App\Manager;
 
+use App\Entity\Invitation;
 use App\Entity\User;
 use App\Entity\Wallet;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserManager
@@ -14,17 +20,37 @@ class UserManager
      */
     private $em;
 
-    public function __construct(EntityManagerInterface $em)
+    private $bag;
+
+    private $url;
+
+    public function __construct(EntityManagerInterface $em, FlashBagInterface $bag, UrlGeneratorInterface $urlGenerator)
     {
         $this->em = $em;
+        $this->bag = $bag;
+        $this->url = $urlGenerator;
     }
 
     /**
-     * @return User
+     * @param string|null $code
+     * @return User|RedirectResponse
      */
-    public function createUser()
+    public function createUser(Request $request)
     {
         $user = (new User())->setWallet(new Wallet());
+
+        if ($request->query->has('code')) {
+            try {
+                $invitation = $this->verifyCode($request->query->get('code'));
+            } catch (Exception $e) {
+                $this->bag->add('error', $e->getMessage());
+
+                return new RedirectResponse($this->url->generate('app_register'));
+            }
+
+            $user->setInvitation($invitation);
+        }
+
         return $user;
     }
 
@@ -55,5 +81,21 @@ class UserManager
     {
         $this->em->remove($user);
         $this->em->flush();
+    }
+
+    /**
+     * @param $code
+     * @return Invitation|null
+     * @throws Exception
+     */
+    private function verifyCode(string $code): ?Invitation
+    {
+        $invitation = $this->em->getRepository(Invitation::class)->findOneByCode($code);
+
+        if (!$invitation) {
+            throw new Exception("Code d'invitation erroné.");
+        }
+
+        return $invitation;
     }
 }

@@ -104,8 +104,8 @@
         </div>
 
         {% if settings.activeCredit %}
-            <div class="col-12 col-md-6 col-lg-4 mb-5">
-                <div class="card">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card mb-5">
                     <div class="card-body text-center">
                         <p class="">Facilité vos achats d'options pour vos annonces par l'utilisation de vos crédits.</p>
 
@@ -115,6 +115,18 @@
                         </a>
                     </div>
                 </div>
+                {% if settings.activeParrainage %}
+                    <div class="card mb-5 z-depth-3" style="border: 2px solid #673ab7 !important">
+                        <div class="card-body text-center">
+                            <p class="dark-grey-text font-weight-stone-600">Invitez vos amis et gagnez du credit</p>
+
+                            <a href="{{ path('app_invitation') }}" class="btn btn-sm btn-deep-purple mt-2">
+                                <i class="fas fa-gift mr-1"></i>
+                                Inviter
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         {% endif %}
     </div>

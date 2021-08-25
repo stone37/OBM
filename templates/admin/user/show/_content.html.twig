@@ -114,6 +114,16 @@
                         {% endif %}
                     </div>
                 </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Parrain</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if user.invitation %}
+                            <a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="">@{{ user.invitation.owner.username }}</a>
+                        {% else %}
+                            <span class="badge badge-grey">Aucun</span>
+                        {% endif %}
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>

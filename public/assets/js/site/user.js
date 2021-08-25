@@ -168,4 +168,22 @@ var modal = (element, route, elementRacine) => {
         $link.click();
     });
 
+    $('#app-parrainage-btn-link-copy').click(function(e) {
+        e.preventDefault();
+
+        navigator.clipboard.writeText($link);
+
+        notification('', 'Lien copié', {}, 'success');
+    });
+
+    $('#app-parrainage-btn-generate').click(function(e) {
+        e.preventDefault();
+
+        $('#app-parrainage-gestion').removeClass('d-none');
+        $(this).addClass('disabled');
+
+        notification('', 'Lien générez', {}, 'success');
+    });
+
+
 })();

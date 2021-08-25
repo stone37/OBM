@@ -197,6 +197,34 @@ trait SettingsTrait
     private $activePub = true;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $activeParrainage;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $parrainCredit;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $fioleCredit;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $parrainageAd;
+
+    /**
      * @var File
      *
      * @Assert\File(maxSize="10M")
@@ -568,6 +596,24 @@ trait SettingsTrait
     }
 
     /**
+     * @return bool
+     */
+    public function isActiveParrainage(): ?bool
+    {
+        return $this->activeParrainage;
+    }
+
+    /**
+     * @param bool $activeParrainage
+     */
+    public function setActiveParrainage(?bool $activeParrainage): self
+    {
+        $this->activeParrainage = $activeParrainage;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getNumberAdList(): ?int
@@ -699,6 +745,60 @@ trait SettingsTrait
     public function setActivePub(?bool $activePub): self
     {
         $this->activePub = $activePub;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParrainCredit(): ?int
+    {
+        return $this->parrainCredit;
+    }
+
+    /**
+     * @param int $parrainCredit
+     */
+    public function setParrainCredit(?int $parrainCredit): self
+    {
+        $this->parrainCredit = $parrainCredit;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFioleCredit(): ?int
+    {
+        return $this->fioleCredit;
+    }
+
+    /**
+     * @param int $fiolCredit
+     */
+    public function setFioleCredit(?int $fioleCredit): self
+    {
+        $this->fioleCredit = $fioleCredit;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParrainageAd(): ?int
+    {
+        return $this->parrainageAd;
+    }
+
+    /**
+     * @param int $parrainageAd
+     */
+    public function setParrainageAd(?int $parrainageAd): self
+    {
+        $this->parrainageAd = $parrainageAd;
 
         return $this;
     }

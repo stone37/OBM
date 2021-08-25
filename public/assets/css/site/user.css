@@ -421,7 +421,6 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 
 }
 
-
 .skin-light .app-user-advert-block img.devise {
     padding: 0 !important;
 }
@@ -462,4 +461,160 @@ label.btn input[type="radio"].with-gap:checked+label:after {
         margin-left: 2.5px;
     }
 }
+
+#app-parrainage .gestion {
+    border: 2px solid #1266f1;
+    border-radius: 0;
+    padding: 20px 7px 17px 24px;
+}
+
+#app-parrainage .gestion .share a {
+    width: 50px;
+    height: 47px;
+    margin-right: 18px;
+    margin-bottom: 11px;
+    border-radius: 0;
+}
+
+#app-parrainage .gestion .share a i {
+    font-size: 1.3rem;
+    position: relative;
+    right: 6px;
+    top: 3px
+}
+
+#app-parrainage .gestion .share a.whatsapp i {
+    font-size: 1.5rem;
+    position: relative;
+    right: 6px;
+    top: 0;
+}
+
+#app-parrainage .gestion .share a.sms i {
+    font-size: 1.5rem;
+    position: relative;
+    right: 7px;
+    top: 2px;
+}
+
+#app-parrainage .gestion .share a.facebook i {
+    right: 2px;
+}
+
+#app-parrainage .gestion .share a.facebook {
+    color: #fff !important;
+    background-color: #4267B2 !important;
+}
+
+#app-parrainage .gestion .share a.messenger {
+    color: #fff !important;
+    background-color: #0084ff !important;
+}
+
+#app-parrainage .gestion .share a.twitter {
+    color: #fff !important;
+    background-color: #1da1f2 !important;
+}
+
+#app-parrainage .gestion .share a.whatsapp {
+    color: #fff !important;
+    background-color: #25d366 !important;
+}
+
+#app-parrainage .gestion .share a.sms {
+    color: #fff !important;
+    background-color: #616161 !important;
+}
+
+#app-parrainage .gestion .share a.envelope {
+    color: #fff !important;
+    background-color: #ff7043 !important;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    #app-parrainage .gestion .share a {
+        width: 30px;
+        height: 40px;
+        margin-right: 18px;
+        margin-bottom: 11px;
+        border-radius: 0;
+    }
+
+    #app-parrainage .gestion .share a i {
+        font-size: 1.1rem;
+        position: relative;
+        right: 8px;
+        top: 0;
+    }
+
+    #app-parrainage .gestion .share a.whatsapp i {
+        font-size: 1.2rem;
+        position: relative;
+        right: 8px;
+        top: .5px;
+    }
+
+    #app-parrainage .gestion .share a.sms i {
+        font-size: 1rem;
+        position: relative;
+        right: 8px;
+        top: .5px;
+    }
+
+    #app-parrainage .gestion .share a.facebook i {
+        right: 4px;
+    }
+}
+
+@media (max-width: 767px) {
+    #app-parrainage .gestion ul li {
+        font-size: .85rem;
+    }
+
+    #app-parrainage .gestion ul li i {
+        position: relative;
+        bottom: 1px;
+        font-size: .8rem;
+    }
+
+    #app-parrainage .gestion .share a {
+        width: 30px;
+        height: 40px;
+        margin-right: 18px;
+        margin-bottom: 11px;
+        border-radius: 0;
+    }
+
+    #app-parrainage .gestion .share a i {
+        font-size: 1.1rem;
+        position: relative;
+        right: 8px;
+        top: 0;
+    }
+
+    #app-parrainage .gestion .share a.whatsapp i {
+        font-size: 1.2rem;
+        position: relative;
+        right: 8px;
+        top: .5px;
+    }
+
+    #app-parrainage .gestion .share a.sms i {
+        font-size: 1rem;
+        position: relative;
+        right: 8px;
+        top: .5px;
+    }
+
+    #app-parrainage .gestion .share a.facebook i {
+        right: 4px;
+    }
+}
+
+#app-parrainage .title i {
+    font-size: 1.2rem !important;
+    cursor: pointer;
+}
+
+
 
