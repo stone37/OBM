@@ -46,7 +46,7 @@ app_dashboard_advert_image_principale:
 
 app_dashboard_advert_delete:
     path: /annonces/{id}/delete
-    methods: [GET, POST]
+    methods: [GET, DELETE]
     controller: App\Controller\Account\AdvertController::delete
     requirements:
         id: \d+

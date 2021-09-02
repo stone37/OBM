@@ -73,6 +73,7 @@ class RegisterDriftSubscriber implements EventSubscriberInterface
                 ->setBalance($user->getWallet()->getBalance()+$amount)
                 ->setDeposit($user->getWallet()->getDeposit()+$amount);
         $user->setWallet($wallet);
+        $user->setDrift(true);
 
         $this->em->flush();
 

@@ -32,7 +32,11 @@
                         <i class="fas fa-map-marker-alt text-primary font-weight-bold"></i> {{ advert.location.name }}
                         {% if advert.location.detail %}({{ advert.location.detail }}){% endif %}
                     </div>
-                    <div class=""><i class="far fa-clock text-primary font-weight-bold"></i> {{ advert.validatedAt|ago }}</div>
+                    {% if advert.validatedAt %}
+                        <div class="">
+                            <i class="far fa-clock text-primary font-weight-bold"></i>{{ advert.validatedAt|ago }}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             {# Petit telephone #}

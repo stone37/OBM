@@ -188,8 +188,6 @@ class CartController extends AbstractController
 
         $setPaymentForm->handleRequest($request);
 
-        dump($order);
-
         if ($setPaymentForm->isSubmitted() && $setPaymentForm->isValid()){
             $em->flush();
 

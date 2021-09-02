@@ -79,4 +79,16 @@
     <script>
         $("#mdb-lightbox-ui").load("/assets/mdb-addons/mdb-lightbox-ui.html");
     </script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfSnr0UAAAAAGgVbAAZQdtn8UdJ6CAMTf79myG_"></script>
+    <script>
+        let route = '{{ path('app_advert_message_create', {'id': advert.id}) }}';
+
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LfSnr0UAAAAAGgVbAAZQdtn8UdJ6CAMTf79myG_', {action: route})
+                .then(function(token) {
+                    $('input.app-recaptchaToken').val(token);
+                });
+        });
+    </script>
 {% endblock %}

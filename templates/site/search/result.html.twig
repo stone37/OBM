@@ -8,7 +8,8 @@
 
 {% block app_navbar_second %}
     {% if is_mobile() %}
-        <div class="jumbotron mobile color-primary d-block d-lg-none">
+        <div class="jumbotron mobile color-primary d-block d-lg-none"
+             style="border-bottom-right-radius: 25px">
             <div class="d-flex align-items-center h-100">
                 <div class="container text-center mx-3">
                     {% block app_mobile_search_form %}
@@ -18,28 +19,15 @@
             </div>
         </div>
     {% else %}
-        <nav class="navbar navbar-expand-md navbar-light second nav-black d-none d-lg-block py-0">
-            <div class="collapse navbar-collapse" id="{{ settings.name }}_navbarSecond">
-                <ul class="navbar-nav mr-auto">
-                    {% for category in categories %}
-                        <li class="nav-item dropdown mega-dropdown activ">
-                            <a href="{{ path('app_advert_index', {'category_slug': category.slug}) }}" class="nav-link" id="navbarMenu{{ category.id }}"
-                               aria-haspopup="true" aria-expanded="false">{{ category.name }}
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </nav>
+        {{ parent() }}
     {% endif %}
 {% endblock %}
 
 {% block app_breadcrumbs %}
-    <div class="d-flex justify-content-between mt-90 mt-md-70">
-        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+    <section class="d-flex justify-content-between pt-md-0 mt-page-n">
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb mt-2 mt-md-0',
             itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
-    </div>
+    </section>
 {% endblock %}
 
 {% block app_body %}

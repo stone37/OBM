@@ -63,7 +63,7 @@ class AdminController extends AbstractController
         UserPasswordEncoderInterface $passwordEncoder,
         EventDispatcherInterface $dispatcher)
     {
-        $admin = $manager->createUser();
+        $admin = $manager->createUser($request);
 
         $form = $this->createForm(RegistrationAdminType::class, $admin);
 

@@ -23,5 +23,5 @@ app_advertiser_charte:
   controller: App\Controller\PagesController::charte
 
 app_contact:
-  path: /contact/
+  path: /contact
   controller: App\Controller\ContactController::index

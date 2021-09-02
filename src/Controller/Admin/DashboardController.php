@@ -61,6 +61,7 @@ class DashboardController extends AbstractController
             ->to($request->get('email'))
             ->subject('O\'blackmarket | Confirmation du compte');
         $mailer->sendNow($email);
+
         $this->addFlash('success', "L'email de test a bien été envoyé");
 
         return $this->redirectToRoute('app_admin_dashboard');

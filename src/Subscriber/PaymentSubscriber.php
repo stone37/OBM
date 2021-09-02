@@ -51,7 +51,7 @@ class PaymentSubscriber implements EventSubscriberInterface
      */
     public function onPayment(PaymentEvent $event)
     {
-        $user = $event->getOrder()->getUser();
+        //$user = $event->getOrder()->getUser();
 
         $email = $this->mailer->createEmail('mails/order/validate.twig', [
             'order' => $event->getOrder(),
@@ -59,7 +59,7 @@ class PaymentSubscriber implements EventSubscriberInterface
             ->to($event->getOrder()->getUser()->getEmail())
             ->subject($this->settings->getName().' | Validation de votre commande');
 
-        $this->mailer->send($email);
+        $this->mailer->sendNow($email);
 
         /*$wording = 'Votre achat a bien été valider';
         $this->service->notifyUser($user, $wording, $event->getPayment());*/

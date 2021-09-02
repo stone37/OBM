@@ -19,9 +19,9 @@
     <div class="row no-gutters">
         <div class="col-6 col-md-4 pr-md-4">
             {% if photo_principale %}
-                <img src="{{ asset(photo_principale.webPath) }}" class="img-fluid advert-image" alt="{{ photo_principale.name }}" />
+                <img src="/public{{ asset(photo_principale.webPath) }}" class="img-fluid advert-image" alt="{{ photo_principale.name }}" />
             {% else %}
-                <img src="{{ asset('images/no_image.png') }}" class="img-fluid" alt="" />
+                <img src="{{ asset('public/images/no_image.png') }}" class="img-fluid" alt="" />
             {% endif %}
             
             {% if settings.activeAdFavorite %}
@@ -44,7 +44,7 @@
                 <div class="font-weight-stone-600 price d-flex justify-content-center text-default
                         border border-default text-center mx-1 mb-2">
                     <div class="number d-inline-block">{{ advert.price }}</div>
-                    <img src="{{ asset('images/devise.png') }}" class="devise d-inline-block" alt="devise">
+                    <img src="{{ asset('public/images/devise.png') }}" class="devise d-inline-block" alt="devise">
                 </div>
                 <div class="text-muted font-weight-stone-500 location mx-1">
                     <div class="mb-1">
@@ -73,7 +73,7 @@
                 <div class="d-flex">
                     <h6 class="font-weight-stone-600 title text-dark">{{ advert.title|u.truncate(30, '...') }}</h6>
                     <div class="ml-auto font-weight-stone-500 d-flex price text-default">
-                        <div class="number">{{ advert.price }}</div><img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                        <div class="number">{{ advert.price }}</div><img src="{{ asset('public/images/devise.png') }}" class="devise" alt="">
                     </div>
                 </div>
                 <div class="font-weight-stone-500 small location text-muted mt-1">

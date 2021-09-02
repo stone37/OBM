@@ -9,6 +9,7 @@ use App\Event\MessageCreatedEvent;
 use App\Event\PreMessageCreatedEvent;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use ReCaptcha\ReCaptcha;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,7 +34,8 @@ class AdvertMessageController extends AbstractController
         EntityManagerInterface $em,
         EventDispatcherInterface $dispatcher,
         ValidatorInterface $validator,
-        Advert $advert
+        Advert $advert,
+        ReCaptcha $reCaptcha
     )
     {
         if (!$request->isXmlHttpRequest()) $this->createNotFoundException('Resource introuvable');
@@ -61,6 +63,10 @@ class AdvertMessageController extends AbstractController
 
         if (!$this->isCsrfTokenValid('advert-message', $request->request->get('_token'))) {
             $errors[] = 'Le jeton CSRF est invalide.';
+        }
+
+        if (!$reCaptcha->verify($request->request->get('recaptchaToken'))->isSuccess()) {
+            $errors[] = 'Erreur pendant l\'envoi de votre message';
         }
 
         if (!count($errors)) {

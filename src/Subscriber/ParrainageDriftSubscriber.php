@@ -60,6 +60,10 @@ class ParrainageDriftSubscriber implements EventSubscriberInterface
             return;
         }
 
+        if ($user->isParrainageDrift()) {
+            return;
+        }
+
         $search = (new Search())->setUser($user);
         $number = $this->em->getRepository(Advert::class)->getUserAdvertActiveNumber($search);
 
@@ -73,6 +77,7 @@ class ParrainageDriftSubscriber implements EventSubscriberInterface
                 ->setBalance($user->getWallet()->getBalance()+$this->settings->getFioleCredit())
                 ->setDeposit($user->getWallet()->getDeposit()+$this->settings->getFioleCredit());
         $user->setWallet($wallet);
+        $user->setParrainageDrift(true);
 
         // Gestion du parrain
         /** @var User $parrain */

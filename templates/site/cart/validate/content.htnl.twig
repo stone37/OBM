@@ -25,7 +25,7 @@
                                        Montant à payer:
                                        <span class="text-default h4-responsive price font-weight-stone-600">
                                            <div class="number d-inline-block py-0 my-0">{{ order.amountPaid }}</div>
-                                           <img src="{{ asset('images/devise.png') }}" alt="" class="devise d-inline-block">
+                                           <img src="{{ asset('public/images/devise.png') }}" alt="" class="devise d-inline-block">
                                        </span>
                                        <i class="fas fa-angle-down rotate-icon blue-grey-text mt-2" style=""></i>
                                    </h4>
@@ -41,7 +41,7 @@
                                            <div>{{ app_product_name(item.product) }}:</div>
                                            <div class="font-weight-stone-600 price item d-flex">
                                                <div class="number">{{ item.priceTotal }}</div>
-                                               <img src="{{ asset('images/devise_dark.png') }}" class="devise item" alt="" />
+                                               <img src="{{ asset('public/images/devise_dark.png') }}" class="devise item" alt="" />
                                            </div>
                                        </div>
                                    {% endfor %}
@@ -50,14 +50,14 @@
                                        <div class="font-weight-stone-600 h5-responsive">Total HT: </div>
                                        <div class="h4-responsive font-weight-stone-600 price total d-flex">
                                            <div class="number">{{ order.priceItemsBeforeDiscount }}</div>
-                                           <img src="{{ asset('images/devise_dark.png') }}" class="devise" alt="" />
+                                           <img src="{{ asset('public/images/devise_dark.png') }}" class="devise" alt="" />
                                        </div>
                                    </div>
                                    <div class="d-flex justify-content-between">
                                        <div class="font-weight-stone-600 h5-responsive">Total des taxes: </div>
                                        <div class="h4-responsive font-weight-stone-600 price total d-flex">
                                            <div class="number">{{ order.tvaPriceTotal }}</div>
-                                           <img src="{{ asset('images/devise_dark.png') }}" class="devise" alt="" />
+                                           <img src="{{ asset('public/images/devise_dark.png') }}" class="devise" alt="" />
                                        </div>
                                    </div>
 
@@ -65,7 +65,7 @@
                                        <div class="font-weight-stone-600 h5-responsive">Reduction: </div>
                                        <div class="h4-responsive font-weight-stone-600 price total d-flex">
                                            <div class="number">{{ order.discount }}</div>
-                                           <img src="{{ asset('images/devise_dark.png') }}" class="devise" alt="" />
+                                           <img src="{{ asset('public/images/devise_dark.png') }}" class="devise" alt="" />
                                        </div>
                                    </div>
 
@@ -73,7 +73,7 @@
                                        <div class="font-weight-stone-600 h5-responsive">Total TTC: </div>
                                        <div class="h4-responsive font-weight-stone-600 text-default price ttc d-flex">
                                            <div class="number">{{ order.amountPaid }}</div>
-                                           <img src="{{ asset('images/devise.png') }}" class="devise" alt="" />
+                                           <img src="{{ asset('public/images/devise.png') }}" class="devise" alt="" />
                                        </div>
                                    </div>
                                </div>
@@ -159,7 +159,7 @@
 
                             {% if settings.activeCredit %}
                                 {% if not (first.product.category == 'credit') %}
-                                    {% if order.order.user.wallet.balance > order.amountPaid %}
+                                    {% if order.order.user.wallet.balance >= order.amountPaid %}
                                         <div class="col-12 col-md-6">
                                             <div class="card app-payment-type method mb-4">
                                                 <div class="card-body">
@@ -177,7 +177,7 @@
                                                         Vous avez
                                                         <span class="h4-responsive font-weight-stone-600 text-default h4-responsive price">
                                                             <span class="number d-inline-block py-0 my-0">{{ app.user.wallet.balance }}</span>
-                                                            <img src="{{ asset('images/devise.png') }}" alt="" class="devise d-inline-block">
+                                                            <img src="{{ asset('public/images/devise.png') }}" alt="" class="devise d-inline-block">
                                                         </span>
                                                         sur votre compte
                                                     </p>
@@ -193,7 +193,7 @@
                                                         Vous avez
                                                         <span class="h4-responsive font-weight-stone-600 text-default h4-responsive price">
                                                             <span class="number d-inline-block py-0 my-0">{{ app.user.wallet.balance }}</span>
-                                                            <img src="{{ asset('images/devise.png') }}" alt="" class="devise d-inline-block">
+                                                            <img src="{{ asset('public/images/devise.png') }}" alt="" class="devise d-inline-block">
                                                         </span>
                                                         sur votre compte
                                                     </p>

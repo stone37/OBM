@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use League\Glide\Filesystem\FileNotFoundException;
 
 class ImageController extends AbstractController
 {
@@ -32,8 +33,10 @@ class ImageController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function image(int $width, int $height, string $path, Request $request): Response
+    public function image(string $path, Request $request): Response
     {
+        $parameters = $request->query->all();
+
         $server = ServerFactory::create([
             'source' => $this->publicPath,
             'cache' => $this->cachePath,
@@ -46,16 +49,28 @@ class ImageController extends AbstractController
             ],
         ]);
 
-        [$url] = explode('?', $request->getRequestUri());
-        $parameters = $request->query->all();
+        if (count($parameters) > 0) {
+            try {
+                $parameters = [
+                    'w' => $parameters['w'],
+                    'h' => $parameters['h'],
+                    'fm' => $parameters['fm'],
+                    's' => $parameters['s'],
+                ];
+
+                SignatureFactory::create($this->resizeKey)->validateRequest($path, $parameters);
+            } catch (SignatureException $e) {
+                throw $this->createNotFoundException('', $e);
+            }
+        }
 
         try {
-            SignatureFactory::create($this->resizeKey)->validateRequest($url, $parameters);
-
-            return $server->getImageResponse($path, ['w' => $width, 'h' => $height, 'fit' => 'crop']);
-        } catch (SignatureException $exception) {
-            throw new HttpException(403, 'Signature invalide');
+            $response = $server->getImageResponse($path, $parameters);
+        } catch (\InvalidArgumentException | FileNotFoundException $e) {
+            throw $this->createNotFoundException('', $e);
         }
+
+        return $response;
     }
 
     /**

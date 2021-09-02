@@ -112,6 +112,8 @@ class AdvertController extends AbstractController
 
             $manager->updateAdvert($advert);
 
+            $this->addFlash('success', 'Votre annonce a été crée. Il sera valider dans quelque instant.');
+
             if (null === $response = $event->getResponse()) {
                 $url = $this->generateUrl('app_home');
                 $response = new RedirectResponse($url);

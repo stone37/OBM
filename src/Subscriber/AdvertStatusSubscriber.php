@@ -65,7 +65,7 @@ class AdvertStatusSubscriber implements EventSubscriberInterface
             ->to($event->getAdvert()->getUser()->getEmail())
             ->subject($this->settings->getName().' | Validation de votre annonce');
 
-        $this->mailer->send($email);
+        $this->mailer->sendNow($email);
 
         $userName = $advert->getUser()->getUsername() ?
             htmlentities($advert->getUser()->getUsername()) : htmlentities($advert->getUser()->getFirstName());
@@ -98,7 +98,7 @@ class AdvertStatusSubscriber implements EventSubscriberInterface
             ->to($event->getAdvert()->getUser()->getEmail())
             ->subject($this->settings->getName().' | Rejet de votre annonce');
 
-        $this->mailer->send($email);
+        $this->mailer->sendNow($email);
 
         $userName = $advert->getUser()->getUsername() ?
             htmlentities($advert->getUser()->getUsername()) : htmlentities($advert->getUser()->getFirstName());
@@ -132,7 +132,7 @@ class AdvertStatusSubscriber implements EventSubscriberInterface
             ->to($event->getAdvert()->getUser()->getEmail())
             ->subject($this->settings->getName().' | Création de votre annonce');
 
-        $this->mailer->send($email);
+        $this->mailer->sendNow($email);
 
         $message = "Création d'une nouvelle annonce !<br> <strong>{$event->getAdvert()->getTitle()}</strong>";
 
@@ -159,7 +159,7 @@ class AdvertStatusSubscriber implements EventSubscriberInterface
             ->to($advert->getUser()->getEmail())
             ->subject($this->settings->getName().' | Suppression de votre annonce');
 
-        $this->mailer->send($email);
+        $this->mailer->sendNow($email);
 
         $userName = $advert->getUser()->getUsername() ?
             htmlentities($advert->getUser()->getUsername()) : htmlentities($advert->getUser()->getFirstName());

@@ -5,5 +5,5 @@ app_admin_dashboard:
 app_admin_mailtest:
     path: /mailtester/
     methods: [POST]
-    controller: App\Controller\Admin\DashboardController::index
+    controller: App\Controller\Admin\DashboardController::testMail
 

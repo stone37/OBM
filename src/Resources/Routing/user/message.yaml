@@ -10,7 +10,7 @@ app_dashboard_message_receive:
 
 app_dashboard_message_delete:
     path: /messages/{id}/delete
-    methods: [GET, POST]
+    methods: [GET, DELETE]
     controller: App\Controller\Account\MessageController::delete
     requirements:
       id: \d+

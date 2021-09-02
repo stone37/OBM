@@ -2,6 +2,8 @@
 
 {% import "mails/macros.twig" as e %}
 
+{% set settings = config.get %}
+
 {% block body %}
 
   {% apply markdown_email %}

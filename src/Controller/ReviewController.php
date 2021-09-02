@@ -9,7 +9,7 @@ use App\Form\SuggestionType;
 use App\Service\SettingsManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-//use ReCaptcha\ReCaptcha;
+use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,8 +29,8 @@ class ReviewController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
-        SettingsManager $manager)
-        //ReCaptcha $reCaptcha)
+        SettingsManager $manager,
+        ReCaptcha $reCaptcha)
     {
         $review = (new Review())->setType(Review::REVIEW);
 
@@ -52,12 +52,15 @@ class ReviewController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()
-            /*&& $reCaptcha->verify($form['recaptchaToken']->getData())->isSuccess()*/) {
-            $em->persist($review);
-            $em->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($reCaptcha->verify($form['recaptchaToken']->getData())->isSuccess()) {
+                $em->persist($review);
+                $em->flush();
 
-            $this->addFlash('info', 'Merci pour votre témoignage');
+                $this->addFlash('success', 'Merci pour votre témoignage');
+            } else {
+                $this->addFlash('error', 'Erreur pendant l\'envoi de votre témoignage');
+            }
 
             return $this->redirectToRoute('app_review_index');
         }
@@ -97,7 +100,7 @@ class ReviewController extends AbstractController
             $em->persist($review);
             $em->flush();
 
-            $this->addFlash('info', 'Merci pour la suggestion');
+            $this->addFlash('success', 'Merci pour la suggestion');
 
             $url = $request->request->get('referer');
             $response = new RedirectResponse($url);

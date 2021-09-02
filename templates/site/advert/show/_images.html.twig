@@ -7,7 +7,6 @@
             <div class="col-12">
                 <div class="mdb-lightbox mt-4 pl-2">
                     <div class="row">
-                        {% dump(photo_principale) %}
                         <figure class="col-12 principale">
                             <a href="{{ image_ad_url(photo_principale, 1400, 1067) }}" data-size="1400x1067">
                                 <img id="principale" src="{{ image_ad_url(photo_principale, 1400, 1067) }}"
@@ -17,7 +16,6 @@
 
                         {% for image in advert.images %}
                             {% if image != photo_principale %}
-                                {% dump(image) %}
                                 <figure class="col-md-3 d-none">
                                     <a href="{{ image_ad_url(image, 1400, 1067) }}" data-size="1400x1067">
                                         <img {% if loop.index == 2 %}id="img-plus"{% endif %}
@@ -69,14 +67,14 @@
             </div>
         </div>
     {% else %}
-        <div class="row">
+        <div class="row mx-lg-3">
             <div class="col-lg-10">
                 <div class="mdb-lightbox mt-4 pl-2">
                     <div class="row">
                         <figure class="col-md-12 principale">
                             <a href="{{ image_ad_url(photo_principale, 1400, 1067) }}" data-size="1400x1067">
                                 <img id="principale" src="{{ image_ad_url(photo_principale, 1400, 1067) }}"
-                                     class="img-fluid" alt="{{ photo_principale.name }}" />
+                                     class="img-fluid z-depth-2" alt="{{ photo_principale.name }}" />
                             </a>
                         </figure>
                         {% for image in advert.images %}
@@ -103,14 +101,14 @@
                         {% if image != photo_principale %}
                             {% if key <= 2 %}
                                 <figure class="col-lg-12 children">
-                                    <a href="{{ image_ad_url(image, 1400, 1067) }}" data-size="1400x1067">
-                                        <img src="{{ image_ad_url(image, 1400, 1067) }}" class="img-fluid z-depth-3" alt="{{ image.name }}" />
+                                    <a href="/public{{ image_ad_url(image, 1400, 1067) }}" data-size="1400x1067">
+                                        <img src="/public{{ image_ad_url(image, 1400, 1067) }}" class="img-fluid z-depth-3" alt="{{ image.name }}" />
                                     </a>
                                 </figure>
                             {% else %}
                                 <figure class="col-lg-12 d-none">
-                                    <a href="{{ image_ad_url(image, 1400, 1067) }}" data-size="1400x1067">
-                                        <img src="{{ image_ad_url(image, 1400, 1067) }}" class="img-fluid" alt="{{ image.name }}" />
+                                    <a href="/public{{ image_ad_url(image, 1400, 1067) }}" data-size="1400x1067">
+                                        <img src="/public{{ image_ad_url(image, 1400, 1067) }}" class="img-fluid" alt="{{ image.name }}" />
                                     </a>
                                 </figure>
                             {% endif %}
@@ -134,7 +132,7 @@
     {% endif %}
 {% else %}
     <div class="card card-image text-center d-flex justify-content-center align-items-center"
-         style="background-image: url({{ asset('images/no_image.jpg') }});">
+         style="background-image: url({{ asset('images/no_image.png') }});">
     </div>
 {% endif %}
 

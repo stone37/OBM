@@ -39,7 +39,6 @@ class CreditPaymentSubscriber implements EventSubscriberInterface
             /** @var Wallet $wallet */
             $wallet = ($user->getWallet())->addPurchase($event->getPayment());
             $user->setWallet($wallet);
-
         } else {
             /** @var Product $product */
             $product = $event->getOrder()->getItems()->first()->getProduct();

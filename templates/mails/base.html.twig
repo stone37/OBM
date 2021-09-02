@@ -25,6 +25,8 @@
   }
 </style>
 
+{% set settings = config.get %}
+
 <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
   <tr>
     <td align="center">
@@ -56,7 +58,6 @@
                 <td class="content-cell" align="center">
                   <table border="0" width="300" align="left" cellpadding="0" cellspacing="0"
                          style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-
                     <tr>
                       <td align="left">
                         <a href="{{ absolute_url('/') }}" style="display: inline-block;">
@@ -83,7 +84,6 @@
 
                   <table border="0" width="200" align="right" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
                          class="container590">
-
                     <tr>
                       <td class="hide" height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
                     </tr>

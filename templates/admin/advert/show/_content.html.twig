@@ -213,7 +213,7 @@
             <div class="row">
                 {% for image in advert.images %}
                     <div class="col-4 col-md-2 col-lg-1 mb-2">
-                        <a href="{{ asset(image.webPath) }}" target="_blank" class="z-depth-2"><img src="{{ asset(image.webPath) }}" alt="{{ image.name }}" class="img-fluid"></a>
+                        <a href="/public{{ asset(image.webPath) }}" target="_blank" class="z-depth-2"><img src="/public{{ asset(image.webPath) }}" alt="{{ image.name }}" class="img-fluid"></a>
                     </div>
                 {% endfor %}
             </div>

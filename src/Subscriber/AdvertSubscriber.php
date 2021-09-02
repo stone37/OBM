@@ -277,7 +277,7 @@ class AdvertSubscriber implements EventSubscriberInterface
             ])->to($alert->getUser())
                 ->subject($this->settings->getName().' alerts | Dernières annonces '.$event->getAdvert()->getCategory());
 
-            $this->mailer->send($email);
+            $this->mailer->sendNow($email);
         }
     }
 }

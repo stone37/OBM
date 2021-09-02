@@ -42,7 +42,7 @@ class ProfileSubscriber implements EventSubscriberInterface
             ->to($event->emailVerification->getEmail())
             ->priority(Email::PRIORITY_HIGH)
             ->subject('Mise à jour de votre adresse mail');
-        $this->mailer->send($email);
+        $this->mailer->sendNow($email);
 
         // On notifie l'utilisateur concernant le changement
         $email = $this->mailer->createEmail('mails/profile/email-notification.twig', [
@@ -51,6 +51,6 @@ class ProfileSubscriber implements EventSubscriberInterface
         ])
             ->to($event->emailVerification->getAuthor()->getEmail())
             ->subject("Demande de changement d'email en attente");
-        $this->mailer->send($email);
+        $this->mailer->sendNow($email);
     }
 }

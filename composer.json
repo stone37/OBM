@@ -22,6 +22,7 @@
         "friendsofsymfony/ckeditor-bundle": "^2.3",
         "friendsofsymfony/jsrouting-bundle": "^2.7",
         "geertw/ip-anonymizer": "^1.1",
+        "google/recaptcha": "^1.2",
         "hwi/oauth-bundle": "dev-master#b042ddd",
         "knplabs/knp-paginator-bundle": "^5.4",
         "knpuniversity/oauth2-client-bundle": "^2.8",

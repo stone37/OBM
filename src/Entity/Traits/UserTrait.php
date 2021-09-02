@@ -251,6 +251,13 @@ trait UserTrait
      */
     private $drift = false;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $parrainageDrift = false;
+
     public function __constructUser()
     {
         $this->createdAt = new DateTime();
@@ -764,6 +771,24 @@ trait UserTrait
     public function setDrift(?bool $drift): self
     {
         $this->drift = $drift;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isParrainageDrift(): ?bool
+    {
+        return $this->parrainageDrift;
+    }
+
+    /**
+     * @param bool $parrainageDrift
+     */
+    public function setParrainageDrift(?bool $parrainageDrift): self
+    {
+        $this->parrainageDrift = $parrainageDrift;
 
         return $this;
     }

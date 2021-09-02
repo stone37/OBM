@@ -79,7 +79,7 @@ class Mailer
     public function sendNow(Email $email): void
     {
         if ($this->dkimKey) {
-            $dkimSigner = new DkimSigner("file://{$this->dkimKey}", $this->settings->getName().'.com', 'default');
+            $dkimSigner = new DkimSigner("file://{$this->dkimKey}", 'oblackmarket.com', 'default');
             // On signe un message en attendant le fix https://github.com/symfony/symfony/issues/40131
             $message = new Message($email->getPreparedHeaders(), $email->getBody());
             $email = $dkimSigner->sign($message, []);

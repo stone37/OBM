@@ -17,7 +17,7 @@ app_dashboard_alert_status:
 
 app_dashboard_alert_delete:
     path: /alertes/{id}/delete
-    methods: [GET, POST]
+    methods: [GET, DELETE]
     controller: App\Controller\Account\AlertController::delete
     requirements:
         id: \d+

@@ -39,8 +39,8 @@
     color: #ffffff;
     padding-top: 7px;
     padding-bottom: -1px;
-    padding-left: 9px;
-    padding-right: 9px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .skin-light .premium .content .card div:hover {
@@ -49,13 +49,13 @@
 }
 
 .skin-light .premium .content .card h3 {
-    font-size: 1rem !important;
+    font-size: .95rem !important;
     font-weight: 500 !important;
 }
 
 @media (max-width: 767px) {
     .skin-light .premium .content .card h3 {
-        font-size: .9rem !important;
+        font-size: .85rem !important;
         font-weight: 500 !important;
     }
 }
