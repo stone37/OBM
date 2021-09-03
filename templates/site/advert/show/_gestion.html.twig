@@ -1,14 +1,12 @@
 {% set url = app.request.getSchemeAndHttpHost()~''~app.request.requestUri %}
 {% set subject = 'Voici ma dernière trouvaille sur '~settings.name~': '~advert.title %}
-{% set messenger = 'http://www.facebook.com/dialog/send?app_id=891414371587153&amp;
-    link='~url~'&amp;redirect_uri='~url %}
-{% set sms = 'sms://;?body='~url %}
+{% set messenger = 'http://www.facebook.com/dialog/send?app_id=891414371587153&amp;link='~url~'&amp;redirect_uri='~url %}
 {% set favoris = hasFavoris(advert) %}
 
 {% if is_mobile() %}
     <div class="d-flex justify-content-between flex-wrap d-md-none btn-gestion">
         <a class="btn btn-outline-grey facebook" data-sharer="facebook"
-           data-hashtag="{{ settings.name }}" data-url="{{ url }}">
+           data-hashtag="{{ settings.name|slug('')|lower }}" data-url="{{ url }}">
             <i class="fab fa-facebook-square"></i>
         </a>
         <a href="{{ messenger }}" class="btn btn-outline-grey messenger">
@@ -20,26 +18,30 @@
         </a>
         <a class="btn btn-outline-grey twitter"
            data-sharer="twitter"
-           data-hashtags="{{ settings.name }}"
+           data-hashtags="{{ settings.name|slug('')|lower }}"
            data-url="{{ url }}">
             <i class="fab fa-twitter"></i>
         </a>
         {#
         <a href="sms://;?&body=Hello%20World">Only body</a>
           <a href="sms://+15552345678;?&body=Hello%20World">one recipient only with body</a>
-        #}
+
+        <a href="sms:?&body={{ url }}">Text Message</a>
         <a class="btn btn-outline-grey sms" href="{{ sms }}">
             <i class="fas fa-sms"></i>
-        </a>
+        </a>#}
+        <a class="btn btn-outline-grey sms" href="sms:?&body={{ url }}"><i class="fas fa-sms"></i></a>
         <a class="btn btn-outline-deep-orange envelope"
            data-sharer="email"
            data-url="{{ url }}"
-           data-subject="{{ subject }}">
+           data-subject="{{ subject }}"
+           data-to=""
+           data-title="">
             <i class="fas fa-envelope"></i>
         </a>
         {% if settings.activeAdFavorite %}
             {% if not is_granted('create', advert) %}
-                <a id="{{ advert.id }}" href="" class="mt-2 ad-favorite btn btn-outline-grey
+                <a id="{{ advert.id }}" href="" class="ad-favorite btn btn-outline-grey
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-favoris{% endif %}
                     {% if favoris %}active{% endif %}">
                     <i class="{% if favoris %}fas{% else %}far{% endif %} fa-heart"></i>
@@ -58,7 +60,7 @@
             <div class="dropdown-menu dropdown-primary"
                  aria-labelledby="userDropdownMenu" style="margin-top: 1px !important;">
                 <a class="dropdown-item" data-sharer="facebook"
-                   data-hashtag="{{ settings.name }}" data-url="{{ url }}">
+                   data-hashtag="{{ settings.name|slug('')|lower }}" data-url="{{ url }}">
                     <i class="fab fa-facebook-f mr-2"></i>
                     Facebook
                 </a>
@@ -74,19 +76,21 @@
                 </a>
                 <a class="dropdown-item"
                    data-sharer="twitter"
-                   data-hashtags="{{ settings.name }}"
+                   data-hashtags="{{ settings.name|slug('')|lower }}"
                    data-url="{{ url }}">
                     <i class="fab fa-twitter mr-2"></i>
                     Twitter
                 </a>
-                <a class="dropdown-item" href="{{ sms }}">
+                <a class="dropdown-item" href="sms:?&body={{ url }}">
                     <i class="fas fa-sms"></i>
                     SMS
                 </a>
                 <a class="dropdown-item"
                    data-sharer="email"
                    data-url="{{ url }}"
-                   data-subject="{{ subject }}">
+                   data-subject="{{ subject }}"
+                   data-to=""
+                   data-title="">
                     <i class="fas fa-envelope mr-2"></i>
                     Envoyer à un ami
                 </a>
@@ -127,8 +131,7 @@
                     <i class="fab fa-facebook-f mr-2"></i>
                     Facebook
                 </a>
-                <a class="dropdown-item"
-                    href="{{ messenger }}">
+                <a class="dropdown-item advert-share-btn" href="">
                     <i class="fab fa-facebook-messenger mr-2"></i>
                     Messenger
                 </a>
@@ -140,7 +143,7 @@
                 </a>
                 <a class="dropdown-item"
                    data-sharer="twitter"
-                   data-hashtags="{{ settings.name }}"
+                   data-hashtags="{{ settings.name|slug('')|lower }}"
                    data-url="{{ url }}">
                     <i class="fab fa-twitter mr-2"></i>
                     Twitter
@@ -148,7 +151,9 @@
                 <a class="dropdown-item"
                    data-sharer="email"
                    data-url="{{ url }}"
-                   data-subject="{{ subject }}">
+                   data-subject="{{ subject }}"
+                   data-to=""
+                   data-title="">
                     <i class="fas fa-envelope mr-2"></i>
                     Envoyer à un ami
                 </a>

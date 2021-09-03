@@ -96,7 +96,6 @@
                     <div id="imgUpload-list" class="mt-2">
                         <div id="imgUpload-add" class="row imgUpload-add show">
                             {% for image in advert.images %}
-                                {% dump(image) %}
                                 <div id="{{ image.id }}" class="col-lg-3 col-md-4 col-12 scale-up-ver-top
                                         {% if image.principale %}principale{% endif %}">
                                     <div class="img-bloc mx-4 z-depth-4">

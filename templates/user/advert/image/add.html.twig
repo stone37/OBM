@@ -15,7 +15,7 @@
 
 {% block app_breadcrumbs %}
     <div class="mt-lg-90 mt-70">
-        <a href="" class="btn btn-amber btn-sm mt-lg-3 ml-md-4">
+        <a href="" class="btn btn-amber btn-sm mt-lg-3 ml-md-4 btn-back">
             <i class="fas fa-angle-left mr-2"></i>
             Retour
         </a>
@@ -25,7 +25,7 @@
 {% block app_body %}
     <div class="row d-flex justify-content-center mt-4 mb-5 mx-md-4">
         <div class="col-12">
-            <div class="card card-cascade narrower">
+            <div class="card card-cascade narrower mb-5">
                 <div class="view view-cascade bg-grey-dark text-white">
                     <h3 class="h3-responsive font-weight-stone-600 px-3 pt-3 pb-2">
                         Editer les photos de votre annonce
@@ -37,7 +37,7 @@
                     {{ include('user/advert/image/add_content.htnl.twig') }}
 
                     {{ form_widget(form._token) }}
-                    <div class="text-center mt-3">
+                    <div class="text-center mt-3 mb-3">
                         <button class="btn btn-grey-dark btn-lg app-ad-submit-btn" type="submit">
                             Valider mes modifications <i class="fas fa-paper-plane d-none d-md-inline ml-2"></i>
                         </button>

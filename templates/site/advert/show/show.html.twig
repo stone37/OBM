@@ -80,7 +80,7 @@
         $("#mdb-lightbox-ui").load("/assets/mdb-addons/mdb-lightbox-ui.html");
     </script>
 
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfSnr0UAAAAAGgVbAAZQdtn8UdJ6CAMTf79myG_"></script>
+    {#  <script src="https://www.google.com/recaptcha/api.js?render=6LfSnr0UAAAAAGgVbAAZQdtn8UdJ6CAMTf79myG_"></script>
     <script>
         let route = '{{ path('app_advert_message_create', {'id': advert.id}) }}';
 
@@ -90,5 +90,34 @@
                     $('input.app-recaptchaToken').val(token);
                 });
         });
+    </script>#}
+
+    <script>
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId            : '201549255366519',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v11.0'
+            });
+
+            /*FB.ui({
+                method: 'share',
+                href: 'https://developers.facebook.com/docs/'
+            }, function(response){});*/
+
+            $('.advert-share-btn').click(function (e) {
+                e.preventDefault();
+
+                FB.ui({
+                    display: 'popup',
+                    method: 'share',
+                    redirectUri: '{{ app.request.getSchemeAndHttpHost()~''~app.request.requestUri }}',
+                    href: 'https://developers.facebook.com/docs/',
+                }, function(response){});
+            })
+        };
     </script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js"></script>
 {% endblock %}

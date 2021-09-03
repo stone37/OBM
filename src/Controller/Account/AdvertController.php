@@ -296,11 +296,12 @@ class AdvertController extends AbstractController
         if (!$request->isXmlHttpRequest()) $this->createNotFoundException('Mauvais requête');
 
         $picture->setAdvert(null);
+        $id = $picture->getId();
 
         $em->remove($picture);
         $em->flush();
 
-        return new JsonResponse(['id' => $picture->getId()]);
+        return new JsonResponse(['id' => $id]);
     }
 
     /**

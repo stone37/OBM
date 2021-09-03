@@ -1,4 +1,4 @@
-<div class="card card-cascade narrower">
+<div class="card card-cascade narrower mb-5">
     <div class="view view-cascade bg-primary text-white">
         <h3 class="h3-responsive font-weight-stone-600 px-3 pt-3 pb-2">
             Editer une annonce {{ advert.category.name }}
@@ -13,7 +13,7 @@
         {% include 'user/advert/edit/form/'~view %}
 
         {{ form_widget(form._token) }}
-        <div class="text-center mt-3">
+        <div class="text-center mt-3 mb-4">
             <button class="btn btn-primary btn-lg app-ad-submit-btn" type="submit">
                 Editer votre annonce <i class="fas fa-pen ml-2"></i>
             </button>

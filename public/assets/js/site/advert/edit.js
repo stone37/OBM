@@ -23,14 +23,18 @@ $(document).ready(function() {
     /**
      * Supprime une image d'annonce
      */
-    $('button.remove').click(() => {
+    $('button.remove').click(function(e){
         $('#loader .preloader-wrapper').addClass('active');
         $(".page-content").addClass('disabled');
+
+        e.preventDefault();
 
         $.ajax({
             url: Routing.generate('app_dashboard_advert_image_delete', {'id':  $(this).attr('data-id')}),
             success: (data) => {
-                let $data = $.parseJSON(data), element = $('#'+$data.id);
+                //let $data = $.parseJSON(data), element = $('#'+$data.id);
+
+                let element = $('#'+data.id);
 
                 if (element.hasClass('principale')) {
                     $('#imgUpload-list .imgUpload-add > div:eq(1)').addClass('principale');

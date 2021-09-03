@@ -197,6 +197,13 @@ class AdvertSubscriber implements EventSubscriberInterface
         if (!$advert->getImages()) { return; }
 
         foreach ($advert->getImages() as $image) {
+
+            if (!$this->session->get('app_image_pos')) {
+                return;
+            }
+
+            $image->setPrincipale(false);
+
             if ($image->getId() == $this->session->get('app_image_pos')) {
                 $image->setPrincipale(true);
             }
