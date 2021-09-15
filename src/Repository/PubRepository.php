@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Pub;
 use App\Model\Admin\PubSearch;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,8 +25,7 @@ class PubRepository extends ServiceEntityRepository
 
     public function getOneAdmin($type)
     {
-        try
-        {
+        try {
             $qb = $this->createQueryBuilder('p')
                 ->where('p.type = :type')
                 ->setParameter('type', $type)
@@ -52,6 +52,39 @@ class PubRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getHome($type)
+    {
+        $qb = $this->createQueryBuilder('p')
+                ->where('p.type = :type')
+                ->andWhere('p.enabled = 1')
+                ->andWhere('p.startDate <= :start')
+                ->andWhere('p.endDate >= :end')
+                ->setParameter('type', $type)
+                ->setParameter('start', new DateTime())
+                ->setParameter('end', new DateTime())
+                ->orderBy('p.position', 'asc');
 
+        return $qb->getQuery()->getResult();
+    }
 
+    public function getListing($category_slug, $type)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.categories', 'categories')
+            ->addSelect('categories')
+            ->where('p.type = :type')
+            ->andWhere('p.enabled = 1')
+            ->andWhere('p.startDate <= :start')
+            ->andWhere('p.endDate >= :end')
+            ->andWhere('categories.slug = :category_slug')
+            ->setParameter('type', $type)
+            ->setParameter('start', new DateTime())
+            ->setParameter('end', new DateTime())
+            ->setParameter('category_slug', $category_slug)
+            ->orderBy('p.position', 'asc');
+
+        return $qb->getQuery()->getResult();
+    }
 }
+
+

@@ -58,5 +58,7 @@ $(document).ready(function() {
 
         window.history.back();
     })
+
+    new WOW().init();
 });
 

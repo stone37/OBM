@@ -59,7 +59,7 @@ final class VignetteManager
     public function getList(Request $request)
     {
         $category_slug     = $request->attributes->get('category_slug');
-        $sub_category_slug = $request->query->get('sub_category_slug');
+        $sub_category_slug = $request->attributes->get('sub_category_slug');
 
         return $this->em->getRepository(Vignette::class)->getEnabled($category_slug, $sub_category_slug);
     }

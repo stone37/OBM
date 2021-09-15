@@ -13,6 +13,11 @@
 
 {% block app_body %}
     <section class="row mt-lg-3 pt-lg-1 mb-5 pr-lg-3 mt-page-n">
+        <div class="col-12">
+            {# Pub #}
+            {{ render(controller('App\\Controller\\PubController::index', {'type': 2})) }}
+            {# Pub #}
+        </div>
         <section class="col-12">
             <div class="font-weight-stone-500 text-center dark-grey-text small-9 mb-3 d-block d-lg-none">
                 Trouvez la bonne affaire parmi des milliers de petites annonces {{ settings.name }}
@@ -43,11 +48,10 @@
         <div class="col-lg-9 col-md-8 col-12 mt-3">
             {{ render(controller('App\\Controller\\CategoryPremiumController::premium')) }}
         </div>
-        <div class="col-lg-3 col-md-4 col-12">
-            {# pub #}
-
-
-
+        <div class="col-lg-3 col-md-4 col-12 mt-4">
+            {# Pub #}
+            {{ render(controller('App\\Controller\\PubController::index', {'type': 1})) }}
+            {# Pub #}
         </div>
     </section>
 {% endblock %}
@@ -60,4 +64,14 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+    <script>
+        const $categoryPremium = $('.skin-light .premium .content a .view').tilt({
+            maxTilt: 20,
+            speed: 500,
+            perspective: 600,
+            scale: 1.1
+        });
+    </script>
 {% endblock %}

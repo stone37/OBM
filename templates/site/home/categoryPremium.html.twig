@@ -21,27 +21,47 @@
 
                 {% for category in premium.categories %}
                     {% if category.parent.parent %}
-                        <div class="col-lg-3 col-md-6 col-6 content mt-3">
+                        <div class="col-lg-3 col-md-4 col-6 content mt-3">
                             <a href="{{ path('app_advert_index_ss',
                                 {'category_slug': category.parent.parent.slug,
                                     'sub_category_slug': category.parent.slug,
                                     'sub_division_slug': category.slug}) }}">
-                                <div class="card card-image text-center z-depth-1 px-3 d-flex justify-content-center align-items-center"
-                                     style="background-image: url({{ image_url(category, 200, 130) }});">
+                                {#  <div class="card card-image text-center z-depth-2 px-3 d-flex justify-content-center
+                                            align-items-center wow fadeInRight"
+                                     style="background-image: url({{ image_url(category, 200, 135) }});">
                                     <div class="z-depth-2">
                                         <h3>{{ category.name }}</h3>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <h3 class="p-2">{{ category.name }}</h3>
+                                    <img src="{{ image_url(category, 200, 135) }}"
+                                         class="img-fluid wow fadeInRight z-depth-2" alt="{{ category.name }}">
+                                </div>#}
+                                <div class="view wow fadeInRight">
+                                    <img src="/public{{ vich_uploader_asset(category, 'file') }}" class="img-fluid" alt="">
+                                    <div class="mask flex-center">
+                                        <p class="text-center z-depth-2 mx-2">{{ category.name }}</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
                     {% else %}
-                        <div class="col-lg-3 col-md-6 col-6 content mt-3">
+                        <div class="col-lg-3 col-md-4 col-6 content mt-3">
                             <a href="{{ path('app_advert_index_s',
                                 {'category_slug': category.parent.slug, 'sub_category_slug': category.slug}) }}">
-                                <div class="card card-image text-center z-depth-1 px-3 d-flex justify-content-center align-items-center"
-                                     style="background-image: url({{ image_url(category, 200, 130) }});">
+                                {#  <div class="card card-image text-center z-depth-2 px-3 d-flex justify-content-center
+                                            align-items-center wow fadeInRight"
+                                     style="background-image: url({{ image_url(category, 200, 135) }});">
                                     <div class="z-depth-2">
                                         <h3>{{ category.name }}</h3>
+                                    </div>
+                                </div>#}
+
+                                <div class="view wow fadeInRight">
+                                    <img src="/public{{ vich_uploader_asset(category, 'file') }}" class="img-fluid" alt="">
+                                    <div class="mask flex-center">
+                                        <p class="text-center z-depth-3 mx-2">{{ category.name }}</p>
                                     </div>
                                 </div>
                             </a>

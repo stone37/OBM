@@ -1,0 +1,14 @@
+{% if settings.activePub %}
+    {% if pubs|length > 0 %}
+        <section class="row {% if type == 4 %}mt-5 mx-3{% endif %}">
+            {% for pub in pubs %}
+                <div class="col-12 mb-4">
+                    <a href="{{ pub.url }}" target="_blank" class="">
+                        <img src="{{ vich_uploader_asset(pub, 'file') }}" alt="{{ pub.name }}"
+                             class="img-fluid z-depth-2 pub animated bounce slower " style="border-radius: 5px !important">
+                    </a>
+                </div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endif %}

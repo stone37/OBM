@@ -23,7 +23,7 @@ class WalletService
         $user = $order->getUser();
         $summary = $this->manager->summary();
 
-        if ($user->getWallet()->getBalance() > $summary->amountPaid()) {
+        if ($user->getWallet()->getBalance() >= $summary->amountPaid()) {
             $user = $this->payment($user, $summary->amountPaid());
             $order->setUser($user);
 

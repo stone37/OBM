@@ -89,15 +89,17 @@
             </div>
         </div>
         <div class="col-12">
+            {# Pub #}
+            {{ render(controller('App\\Controller\\PubController::listing', {'request': app.request, 'type': 3})) }}
+            {# Pub #}
+        </div>
+        <div class="col-12">
             <h4 class="h4-responsive font-weight-stone-600 mb-3">{{ category.name }}</h4>
             <div class="grey-text font-weight-stone-500">
                 {{ adverts.totalItemCount }} annonces
                 <span class="border border-secondary text-secondary rounded px-2 py-1 ml-2 bg-white"
                       style="border-width: 2px !important">{{ category.name }}</span>
             </div>
-        </div>
-        <div class="">
-
         </div>
         <div class="col-12">
             {% include 'site/advert/index/search.html.twig' %}
@@ -111,6 +113,10 @@
             {# vignette #}
             {{ render(controller('App\\Controller\\VignetteController::index', {'request': app.request})) }}
             {# vignette #}
+
+            {# Pub #}
+            {{ render(controller('App\\Controller\\PubController::listing', {'request': app.request, 'type': 4})) }}
+            {# Pub #}
         </div>
     </section>
 {% endblock %}
