@@ -1,0 +1,34 @@
+app_admin_help_index:
+  path: /helps
+  methods: [GET]
+  controller: App\Controller\Admin\HelpController::index
+
+app_admin_help_create:
+  path: /helps/create
+  methods: [GET, POST]
+  controller: App\Controller\Admin\HelpController::create
+
+app_admin_help_edit:
+  path: /helps/{id}/edit
+  methods: [GET, POST]
+  controller: App\Controller\Admin\HelpController::edit
+  requirements:
+    id: \d+
+
+app_admin_help_delete:
+  path: /helps/{id}/delete
+  methods: [GET, DELETE]
+  controller: App\Controller\Admin\HelpController::delete
+  requirements:
+    id: \d+
+  options:
+    expose: true
+
+app_admin_help_bulk_delete:
+  path: /helps/bulk/delete
+  methods: [GET, DELETE]
+  controller: App\Controller\Admin\HelpController::deleteBulk
+  options:
+    expose: true
+
+

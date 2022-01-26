@@ -16,6 +16,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -42,6 +44,8 @@ class User implements UserInterface, Serializable
     use PremiumTrait;
 
     /**
+     * @Groups({"read:user", "write:user", "update:user", "read:advert"})
+     *
      * @ORM\Column(type="string", length=180, unique=true)
      *
      * @Assert\NotBlank(
@@ -65,11 +69,15 @@ class User implements UserInterface, Serializable
     private $email;
 
     /**
+     * @Groups({"read:user", "write:user", "update:user", "read:advert"})
+     *
      * @ORM\Column(type="string", length=255, nullable=true, unique=true)
      */
     private $username = '';
 
     /**
+     * @Groups({"read:user"})
+     *
      * @ORM\Column(type="json")
      */
     private $roles = ['ROLE_USER'];
@@ -80,6 +88,21 @@ class User implements UserInterface, Serializable
      * @ORM\Column(type="string")
      */
     private $password = '';
+
+
+    /**
+     * @Groups("write:user", "update:user", "delete:user")
+     *
+     * @Assert\Length(
+     *     min="8",
+     *     max="4096",
+     *     minMessage="Votre mot de passe doit comporter au moins {{ limit }} caractères",
+     *     groups={"API"})
+     * @Assert\NotBlank(groups={"API"})
+     *
+     * @SerializedName("password")
+     */
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="boolean")
@@ -92,16 +115,22 @@ class User implements UserInterface, Serializable
     private $bannedAt = null;
 
     /**
+     * @Groups("read:user")
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $confirmationToken = null;
 
     /**
+     * @Groups("read:user")
+     *
      * @ORM\Column(type="string", options={"default": null}, nullable=true)
      */
     private $lastLoginIp = null;
 
     /**
+     * @Groups("read:user")
+     *
      * @ORM\Column(type="datetime", options={"default": null}, nullable=true)
      */
     private $lastLoginAt = null;
@@ -191,7 +220,25 @@ class User implements UserInterface, Serializable
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 
     public function isVerified(): ?bool

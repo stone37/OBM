@@ -43,4 +43,14 @@ class CategoryPremiumRepository extends ServiceEntityRepository
 
         return $qb;
     }
+
+    public function findForApi(): array
+    {
+        $qb = $this->createQueryBuilder('cp');
+
+        $qb->where('cp.enabled = 1')
+            ->orderBy('cp.position', 'asc');
+
+        return $qb->getQuery()->getResult();
+    }
 }

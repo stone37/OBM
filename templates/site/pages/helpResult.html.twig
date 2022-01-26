@@ -1,0 +1,28 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title %}
+    Resultat de recherche | Centre d'aide
+{% endblock %}
+
+{% block app_cart %}{% endblock %}
+{% block app_mobile_cart %}{% endblock %}
+{% block app_navbar_second %}{% endblock %}
+{% block app_breadcrumbs %}{% endblock %}
+
+{% block app_body %}
+    <div class="row d-flex justify-content-center mb-4">
+        <div class="col-12">
+            {% include 'site/pages/helpResult/_content.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+

@@ -22,6 +22,8 @@ trait CategoryTrait
     /**
      * @var string
      *
+     * @Groups({"read:category", "read:advert"})
+     *
      * @Assert\NotBlank()
      * @Assert\Length(min="2", max="100")
      *
@@ -32,12 +34,16 @@ trait CategoryTrait
     /**
      * @var string|null
      *
+     * @Groups({"read:category"})
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
+     *
+     * @Groups({"read:category", "read:advert"})
      *
      * @ORM\Column(type="text", nullable=true)
      */
@@ -46,6 +52,8 @@ trait CategoryTrait
     /**
      * @var Category
      *
+     * @Groups({"read:category"})
+     *
      * @ORM\OneToMany(targetEntity=Category::class, mappedBy="parent", cascade={"ALL"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
@@ -53,6 +61,8 @@ trait CategoryTrait
 
     /**
      * @var string
+     *
+     * @Groups({"read:category", "read:advert"})
      *
      * @Gedmo\Slug(fields={"name"}, unique=true)
      *
@@ -73,6 +83,8 @@ trait CategoryTrait
 
     /**
      * @var Category
+     *
+     * @Groups({"read:category"})
      *
      * @Gedmo\TreeParent()
      * @Gedmo\SortableGroup()

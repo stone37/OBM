@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Advert;
 use App\Entity\User;
+use App\Entity\Category;
 use App\Model\Admin\AdvertSearch;
 use App\Model\Search;
 use DateTime;
@@ -91,7 +92,6 @@ class AdvertRepository extends ServiceEntityRepository
                 ->andWhere('a.denied = 0')
                 ->andWhere('a.deleted = 0')
                 ->andWhere('a.validatedAt >= :date')
-                ->andWhere('a.optionAdHeadEnd IS NULL')
                 ->setParameter('date', (new DateTime())->modify('-6 month'));
 
         $qb = $this->searchWhereByDataFilter($qb, $search);
@@ -142,9 +142,6 @@ class AdvertRepository extends ServiceEntityRepository
 
         if ($search->getAutoYearMax())
             $qb->andWhere('a.autoYear <= :autoYearMax')->setParameter('autoYearMax', (int)$search->getAutoYearMax());
-
-        if ($search->getUrgent())
-            $qb->andWhere($qb->expr()->isNotNull('a.optionAdUrgentsEnd'));
 
         if ($search->getSurfaceMin())
             $qb->andWhere('a.surface >= :surfaceMin')->setParameter('surfaceMin', (int)$search->getSurfaceMin());
@@ -651,7 +648,15 @@ class AdvertRepository extends ServiceEntityRepository
      */
     public function getValideNumber()
     {
-        $qb = $this->valide()->select('count(a.id)');
+        $date = (new DateTime())->modify('-6 month');
+
+        $qb = $this->createQueryBuilder('a')
+            ->select('count(a.id)')
+            ->where('a.validated = 1')
+            ->andWhere('a.denied = 0')
+            ->andWhere('a.deleted = 0')
+            ->andWhere('a.validatedAt >= :date')
+            ->setParameter('date', $date);
 
         try {
             $qb = $qb->getQuery()->getSingleScalarResult();
@@ -787,6 +792,73 @@ class AdvertRepository extends ServiceEntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function apiUserAdvertActive(User $user)
+    {
+        $qb = $this->jointed()
+            ->where('a.validated = 1')
+            ->andWhere('a.denied = 0')
+            ->andWhere('a.deleted = 0')
+            ->andWhere('a.user = :user')
+            ->setParameter('user', $user);
+
+        $qb->andWhere('a.validatedAt >= :date')
+            ->setParameter('date', (new DateTime())->modify('-6 month'));
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Recupere les annonces d'un utilisateur
+     *
+     * @param Search $search
+     * @return mixed
+     */
+    public function apiUserAdvert(User $user)
+    {
+        $qb = $this->jointed()
+            ->where('a.validated = 0')
+            ->andWhere('a.denied = 0')
+            ->andWhere('a.deleted = 0')
+            ->andWhere('a.user = :user')
+            ->setParameter('user', $user);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function apiCountByCategory(Category $category)
+    {
+        $date = (new DateTime())->modify('-6 month');
+
+        $qb = $this->createQueryBuilder('a')
+            ->select('count(a.id)')
+            ->where('a.validated = 1')
+            ->andWhere('a.denied = 0')
+            ->andWhere('a.deleted = 0')
+            ->andWhere('a.validatedAt >= :date')
+            ->setParameter('date', $date);
+
+        if ($category->getLevelDepth() == 0) {
+            $qb->andWhere('a.category = :category')
+                ->setParameter('category', $category);
+        }
+
+        if ($category->getLevelDepth() == 1) {
+            $qb->andWhere('a.subCategory = :sub_category')
+                ->setParameter('sub_category', $category);
+        }
+
+        if ($category->getLevelDepth() == 2) {
+            $qb->andWhere('a.subDivision = :sub_division')
+                ->setParameter('sub_division', $category);
+        }
+
+        try {
+            $qb = $qb->getQuery()->getSingleScalarResult();
+        } catch (NonUniqueResultException $exception) {} catch (NoResultException $e) {}
+
+        return $qb;
     }
 
     private function valide(): QueryBuilder

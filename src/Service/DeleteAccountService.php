@@ -27,7 +27,7 @@ class DeleteAccountService
         $this->authService = $authService;
     }
 
-    /**
+    /** 
      * @param User $user
      * @param Request $request
      * @throws \Exception

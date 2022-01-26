@@ -36,7 +36,7 @@ class MercureCookieMiddleware implements EventSubscriberInterface
         $response = $event->getResponse();
         $request = $event->getRequest();
 
-        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType() ||
+        if (HttpKernelInterface::MAIN_REQUEST !== $event->getRequestType() ||
             !in_array('text/html', $request->getAcceptableContentTypes()) ||
             !($user = $this->security->getUser()) instanceof User
         ) {

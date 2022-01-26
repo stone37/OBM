@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\Traits\ControllerTrait;
+use App\Entity\City;
 use App\Entity\Zone;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,6 +50,15 @@ class LocationController extends AbstractController
         return new JsonResponse(true);
     }
 
+    public function index(EntityManagerInterface $em)
+    {
+        $cities = $em->getRepository(City::class)->getEnabledCitiesByCountryCode('ci');
+
+        return $this->render('site/search/location.html.twig', [
+            'cities' => $cities
+        ]);
+    }
+
     /**
      * @param Request $request
      * @param EntityManagerInterface $em
@@ -63,7 +73,7 @@ class LocationController extends AbstractController
         $encoder = new JsonEncoder();
         $defaultContext = [
             AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-                return $object->getName();
+                return $object->getId();
             },
         ];
         $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);

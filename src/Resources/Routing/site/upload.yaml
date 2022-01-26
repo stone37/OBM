@@ -20,7 +20,5 @@ app_image_upload_principale:
     controller: App\Controller\UploadController::principale
     options:
         expose: true
-    requirements:
-        pos: \d+
 
 

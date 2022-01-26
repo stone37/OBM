@@ -1,6 +1,25 @@
-<div class="row app-advert-show-info">
+<div class="row app-advert-show-info mt-md-3">
+    <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="text-primary">Surface</div>
+        <div class="grey-text">{{ advert.surface }} m²</div>
+    </div>
+    <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="text-primary">Nombre de pièces</div>
+        <div class="grey-text">{{ advert.nombrePiece }}</div>
+    </div>
+    <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="text-primary">Nombre de pièces</div>
+        <div class="grey-text">{{ advert.nombrePiece }}</div>
+    </div>
+    <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="text-primary">Nombre de pièces</div>
+        <div class="grey-text">{{ advert.nombrePiece }}</div>
+    </div>
+
     <div class="col-12">
-        <table class="table table-borderless table-responsive-sm">
+
+
+        <table class="table table-responsive-sm">
             <tbody>
             <tr>
                 <td>
@@ -12,7 +31,7 @@
                     <div class="content text-primary font-weight-stone-600">{{ advert.nombrePiece }}</div>
                 </td>
             </tr>
-            <tr>
+            {#  <tr>
                 <td>
                     <div class="title font-weight-stone-600 grey-text">Etat</div>
                     <div class="content text-primary font-weight-stone-600">{{ advert.immobilierState }} m²</div>
@@ -161,7 +180,7 @@
                         {% endif %}
                     </div>
                 </td>
-            </tr>
+            </tr>#}
             </tbody>
         </table>
     </div>

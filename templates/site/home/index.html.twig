@@ -7,7 +7,7 @@
     {% set content = "O'blackmarket: petites annonces en Côte d'Ivoire. Achetez un véhicule, trouvez un emploi, une maison ou un appartement, des meubles, appareils électroménagers et plus !" %}
     <meta name="description" content="{{ content }}"/>
     <meta property="og:description" content="{{ content }}" />
-{% endblock %}
+{% endblock %} 
 
 {% block app_cart %}{% endblock %}
 
@@ -64,14 +64,4 @@
 
 {% block javascripts %}
     {{ parent() }}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
-    <script>
-        const $categoryPremium = $('.skin-light .premium .content a .view').tilt({
-            maxTilt: 20,
-            speed: 500,
-            perspective: 600,
-            scale: 1.1
-        });
-    </script>
 {% endblock %}

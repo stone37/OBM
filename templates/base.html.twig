@@ -38,19 +38,30 @@
         {% include 'Ui/_search_confirmation.html.twig' %}
         {% include 'Ui/_top_scroll.html.twig' %}
         {% include 'Ui/_confirmation.html.twig' %}
+        {% include 'Ui/_cookieconsent.html.twig' %}
         {% include '_footer.html.twig' %}
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
         {% block javascripts %}
             {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/jquery.js'} %}
             {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/popper.js'} %}
             {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/bootstrap.js'} %}
             {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/mdb.js'} %}
             {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/init.js'} %}
-            <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
             {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/script.js'} %}
         {% endblock %}
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery.cookie-consent/dist/jquery.cookie-consent.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#cookieConsent').cookieConsent({
+                    //testing: true,
+                    consentStyle: 'font-weight:bold;'
+                });
+            });
+        </script>
     </body>
 </html>
 

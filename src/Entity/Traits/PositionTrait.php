@@ -4,6 +4,7 @@ namespace App\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Trait PositionTrait
@@ -13,6 +14,8 @@ trait PositionTrait
 {
     /**
      * @var int
+     *
+     * @Groups({"read:advert"})
      *
      * @Gedmo\SortablePosition()
      *

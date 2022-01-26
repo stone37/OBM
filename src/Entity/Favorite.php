@@ -7,6 +7,8 @@ use App\Entity\Traits\TimestampableTrait;
 use App\Repository\FavoriteRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=FavoriteRepository::class)
@@ -19,6 +21,8 @@ class Favorite
     /**
      * @var User
      *
+     * @Groups({"read:favorite"})
+     *
      * @ORM\ManyToOne(User::class, inversedBy="favorites")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -26,6 +30,8 @@ class Favorite
 
     /**
      * @var Advert
+     *
+     * @Groups({"read:favorite"})
      *
      * @ORM\ManyToOne(targetEntity=Advert::class, inversedBy="favorites")
      * @ORM\JoinColumn(nullable=false)

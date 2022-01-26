@@ -22,20 +22,21 @@ class ZoneRepository extends ServiceEntityRepository
     /**
      * Recherche une zone
      *
-     * @param $city
-     * @param $query
+     * @param string $city
+     * @param string $query
      * @return int|mixed|string
      */
-    public function getZone($city, $query)
+    public function getZone(string $city, string $query)
     {
         $qb = $this->createQueryBuilder('z')
+                ->leftJoin('z.city', 'city')
+                ->addSelect('city')
                 ->where('z.enabled = 1')
-                ->andWhere('z.city = :city')
+                ->andWhere('city.name = :city')
                 ->andWhere('z.zone LIKE :q')
-                ->setParameter('city', $city)
                 ->setParameter('q', '%'.$query.'%')
                 ->setParameter('city', $city)
-                ->setMaxResults(6);
+                ->setMaxResults(7);
 
         return $qb->getQuery()->getResult();
     }

@@ -45,6 +45,23 @@ class AlertManager
     }
 
     /**
+     * Créer une entité alerte
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Alert
+     */
+    public function createApiAlert(Alert $alert, Category $category, Category $subCategory = null, Category $subDivision = null): Alert
+    {
+        $alert->setCategory($category)
+            ->setSubCategory($subCategory)
+            ->setSubDivision($subDivision)
+            ->setUser($this->security->getUser());
+
+        return $alert;
+    }
+
+    /**
      * @param Category $category
      * @param Category|null $subCategory
      * @param Category|null $subDivision

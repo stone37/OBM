@@ -9,13 +9,45 @@ security:
             entity:
                 class: App\Entity\User
                 property: username
+        api_user_provider:
+            id: App\Security\UserApiProvider
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login:
+            pattern: ^/api/login
+            stateless: true
+            anonymous: true
+            provider: api_user_provider
+            user_checker: App\Security\UserChecker
+            json_login:
+                check_path: /api/login
+                #username_path: username
+                #password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            logout:
+                path: api_logout
+        api:
+            pattern: ^/api/
+            stateless: true
+            anonymous: true
+            provider: api_user_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+            logout:
+                path: api_logout
+        refresh:
+            pattern: ^/api/token/refresh
+            stateless: true
+            anonymous: true
         main:
             entry_point: App\Security\AuthenticationEntryPoint
             anonymous: true
+            provider: app_user_provider
             lazy: true
             user_checker: App\Security\UserChecker
             switch_user: { role: CAN_SWITCH_USER, parameter: _ninja }
@@ -44,3 +76,7 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY } # Allows accessing the Swagger UI
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/api/users, roles: IS_AUTHENTICATED_FULLY }

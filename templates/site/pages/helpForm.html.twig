@@ -1,0 +1,23 @@
+<section class="row mt-lg-90 mt-70">
+    <div class="col-12">
+        <div class="jumbotron jumbotron-fluid bg-primary rounded mb-0 mt-lg-4">
+            <div class="container text-center app-help-search pt-4 pb-0 pt-md-5 pb-md-4">
+                <h2 class="font-weight-stone-600 text-white h2-responsive d-none d-md-block">Centre d'aide, foire aux questions - {{ settings.name }}</h2>
+                <h4 class="font-weight-stone-600 text-white h4-responsive d-block d-md-none">Centre d'aide, foire aux questions - {{ settings.name }}</h4>
+                <div class="d-flex justify-content-center">
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-inline app-help-search-form'}}) }}
+                    <div class="md-form md-outline form-lg input-with-pre-icon">
+                        <i class="fas fa-search input-prefix" style="bottom: 5px !important;"></i>
+                        <input type="text" id="help-input" class="form-control form-control-lg"
+                               name="{{ form.title.vars.full_name }}" value="{{ form.title.vars.value }}"
+                               placeholder="Poser une question recherche ou recherche un mot clé" />
+                        <label for="help-input"></label>
+                    </div>
+                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    {{ form_end(form, {'render_rest': false}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

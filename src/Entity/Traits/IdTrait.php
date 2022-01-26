@@ -3,6 +3,7 @@
 namespace App\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Trait IdTrait
@@ -11,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait IdTrait
 {
     /**
+     * @Groups({"read:category", "read:user", "read:premium", "read:advert",
+     *          "read:picture", "read:favorite", "read:city", "read:zone", "read:alert"})
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")

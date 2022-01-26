@@ -3,6 +3,7 @@
 namespace App\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,6 +14,8 @@ trait LocationTrait
 {
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert"})
      *
      * @Assert\NotBlank()
      *
@@ -36,6 +39,8 @@ trait LocationTrait
 
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert"})
      *
      * @ORM\Column(type="string", nullable=true)
      */

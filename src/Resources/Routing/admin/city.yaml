@@ -1,0 +1,40 @@
+app_admin_city_index:
+    path: /cities
+    methods: [GET]
+    controller: App\Controller\Admin\CityController::index
+
+app_admin_city_create:
+    path: /cities/create
+    methods: [GET, POST]
+    controller: App\Controller\Admin\CityController::create
+
+app_admin_city_edit:
+    path: /cities/{id}/edit
+    methods: [GET, POST]
+    controller: App\Controller\Admin\CityController::edit
+    requirements:
+        id: \d+
+
+app_admin_city_delete:
+    path: /cities/{id}/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\CityController::delete
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+app_admin_city_bulk_delete:
+    path: /cities/bulk/delete
+    methods: [GET, DELETE]
+    controller: App\Controller\Admin\CityController::deleteBulk
+    options:
+        expose: true
+
+app_admin_city_move:
+    path: /cities/{id}/move
+    methods: GET
+    controller: App\Controller\Admin\CityController::move
+    requirements:
+        id: \d+
+

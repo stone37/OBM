@@ -107,7 +107,7 @@ class AdvertController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $event = new AdvertPreCreatedEvent($advert, $request);
-
+ 
             $dispatcher->dispatch($event);
 
             $manager->updateAdvert($advert);

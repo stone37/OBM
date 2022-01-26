@@ -1,0 +1,90 @@
+{% include 'site/pages/helpForm.html.twig' %}
+
+<section>
+    {% if category %}
+        {{ breadcrumb("Centre d'aide", "/centre-daide") }}
+        {{ breadcrumb(category) }}
+    {% else %}
+        {{ breadcrumb("Centre d'aide") }}
+    {% endif %}
+
+    {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb mb-0',
+        itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+
+    {% if category %}
+        <div class="mb-3">
+            <a href="{{ path('app_help') }}" class="btn btn-amber btn-sm"><i class="fas fa-angle-left mr-2"></i>Retour</a>
+        </div>
+    {% endif %}
+</section>
+
+
+{% if category %}
+    {% if categories|length > 0 %}
+        <section class="row mt-2 mb-5 app-help">
+            <div class="col-12">
+                <h4 class="font-weight-stone-600 text-primary text-center mb-4">{{ category }}</h4>
+            </div>
+            {% for category in categories %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="accordion md-accordion" id="accordionEx{{ loop.index }}" role="tablist" aria-multiselectable="true">
+                        <div class="card">
+                            <div class="card-header px-0" role="tab" id="headingThree{{ loop.index }}">
+                                <a class="collapsed dark-grey-text" data-toggle="collapse" data-parent="#accordionEx{{ loop.index }}" href="#collapseThree{{ loop.index }}"
+                                   aria-expanded="false" aria-controls="collapseThree{{ loop.index }}">
+                                    <div class="mb-0 font-weight-stone-500 text-uppercase">
+                                        {{ category }} <i class="fas fa-angle-down rotate-icon"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="collapseThree{{ loop.index }}" class="collapse" role="tabpanel" aria-labelledby="headingThree3"
+                                 data-parent="#accordionEx{{ loop.index }}">
+                                <div class="card-body px-0 py-1">
+                                    {% if category.helps|length > 0 %}
+                                        <ul class="list-unstyled">
+                                            {% for help in category.helps %}
+                                                <li class="py-1">
+                                                    <a href="{{ path('app_help_show', {'category_slug': category.parent.slug ,'slug': help.slug}) }}" class="text-default">{{ help.title }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% else %}
+    {% if categories|length > 0 %}
+        <section class="row mt-2 mb-5 app-help">
+            <div class="col-12">
+                <h4 class="h4-responsive font-weight-stone-600 dark-grey-text text-center">Que pouvons-nous faire pour vous ?</h4>
+                <p class="text-center mb-5">
+                    Toutes les questions fréquentes ont leur réponse ci-après. Si vous avez un besoin spécifique,
+                    <a href="{{ path('app_contact') }}" class="link font-weight-stone-500">contactez-nous</a>.
+                </p>
+            </div>
+
+            <div class="col-12">
+                <div class="row d-flex justify-content-center mb-5">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div>
+                            <div class="list-group">
+                                {% for category in categories %}
+                                    <a href="{{ path('app_help_s', {'category_slug': category.slug}) }}"
+                                       class="list-group-item list-group-item-action py-3 px-4 d-flex justify-content-between align-items-center z-depth-1">
+                                        <span><i class="fas fa-clone mr-2"></i> {{ category.name }}</span>
+                                        <i class="fas fa-long-arrow-alt-right ml-4"></i>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endif %}

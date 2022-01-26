@@ -7,6 +7,8 @@ use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampableTrait;
 use App\Repository\ZoneRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ZoneRepository::class)
@@ -18,23 +20,32 @@ class Zone
     use EnabledTrait;
 
     /**
-     * @var string
+     * @var City
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"read:zone"})
+     *
+     * @Assert\NotBlank()
+     *
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="zones")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $city;
 
     /**
      * @var string
      *
+     * @Groups({"read:zone"})
+     *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $zone;
 
     /**
-     * @return string
+     * @return City
      */
-    public function getCity(): ?string
+    public function getCity(): ?City
     {
         return $this->city;
     }
@@ -42,7 +53,7 @@ class Zone
     /**
      * @param string $city
      */
-    public function setCity(?string $city): self
+    public function setCity(?City $city): self
     {
         $this->city = $city;
 

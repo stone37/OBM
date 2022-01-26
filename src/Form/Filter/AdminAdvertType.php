@@ -3,10 +3,10 @@
 namespace App\Form\Filter;
 
 use App\Entity\Category;
+use App\Entity\City;
 use App\Model\Admin\AdvertSearch;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,6 +17,7 @@ class AdminAdvertType extends AbstractType
     {
         $em = $options['em'];
         $categories = $em->getRepository(Category::class)->getAdminCategoryParentNull();
+        $cities = $em->getRepository(City::class)->getCitiesByCountryCode('ci');
 
         $builder
             ->add('type', ChoiceType::class, [
@@ -61,10 +62,14 @@ class AdminAdvertType extends AbstractType
                 'required' => false,
                 'placeholder' => 'Sous divisions',
             ])
-            ->add('city', SearchType::class, [
-                'label' => false,
-                'attr' => ['placeholder' => 'Ville'],
+            ->add('city', ChoiceType::class, [
+                'choices' => $cities,
+                'label' => 'Ville',
+                'attr' => [
+                    'class' => 'mdb-select md-outline md-form dropdown-stone',
+                ],
                 'required' => false,
+                'placeholder' => 'Ville',
             ]);
 
         $builder->get('city')->resetViewTransformers();

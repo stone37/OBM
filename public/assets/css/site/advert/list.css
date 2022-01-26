@@ -43,19 +43,22 @@
 /** ========================================================== ***/
 .skin-light .app-advert-list-block {
     cursor: pointer;
-    border-radius: 0 !important;
+    border-radius: 30px !important;
 }
 
 .skin-light .app-advert-list-block:hover {
     -webkit-box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
     box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
-    border-radius: 0 !important;
+    border-radius: 30px !important;
 }
-
 
 .skin-light .app-advert-list-block img {
     width: 100%;
     height: 150px;
+}
+
+.skin-light .app-advert-list-block img.advert-image {
+    border-top-left-radius: 30px !important;
 }
 
 @media (max-width: 767px) {
@@ -162,7 +165,7 @@
     .skin-light .app-advert-list-block .info .traitement {
         font-size: .67rem !important;
         font-weight: 500;
-        color: #1266F1 !important;
+        color: #0032FF !important;
         background-color: #bbdefb;
         height: 20px;
         margin-right: 3px;
@@ -210,21 +213,9 @@
         bottom: 3px;
     }
 
-    /*.skin-light .app-advert-list-block .price {
-        font-size: 1.4rem;
-    }
-
-    .skin-light .app-advert-list-block .price span {
-        font-size: 1.1rem !important;
-    }
-
-    .skin-light .app-advert-list-block .content {
-        font-size: 1rem !important
-    }*/
-
     .skin-light .app-advert-list-block .info img {
         height: 58px;
-        border-radius: 0;
+        border-radius: 30px;
         padding-top: 8px;
         padding-bottom: 6px;
         padding-left: 10px;
@@ -233,7 +224,7 @@
 
     .skin-light .app-advert-list-block .info.user img {
         height: 53px;
-        border-radius: 0;
+        border-radius: 30px;
         padding-top: 8px;
         padding-bottom: 10px;
         padding-left: 10px;
@@ -277,7 +268,7 @@
 
     .skin-light .app-advert-list-block .info .traitement {
         font-weight: 500;
-        color: #1266F1 !important;
+        color: #0032FF !important;
         background-color: #bbdefb;
         height: 25px;
         margin-top: 10px;
@@ -464,7 +455,7 @@
 }
 
 .skin-light .app-vignette-create-bulk .card h6 {
-    color: #1266f1 !important;
+    color: #0032FF !important;
     font-size: .9rem !important;
 }
 

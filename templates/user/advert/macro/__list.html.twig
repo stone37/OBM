@@ -21,20 +21,21 @@
         </div>
         <div class="col-6 col-md-8">
             {# Petit telephone #}
-            <div class="card-body p-0 d-block d-md-none">
+            <div class="card-body pb-0 pt-2 px-1 d-block d-md-none">
                 <div class="font-weight-stone-600 price d-flex justify-content-center text-default
-                        border border-default text-center mx-1 mb-2">
+                        border border-default text-center mx-1 mb-2"
+                     style="border-width: 1.6px !important; border-top-right-radius: 20px !important">
                     <div class="number d-inline-block">{{ advert.price }}</div>
                     <img src="{{ asset('images/devise.png') }}" class="devise d-inline-block" alt="devise">
                 </div>
                 <div class="text-muted font-weight-stone-500 location mx-1">
-                    <div class="mb-1">
-                        <i class="fas fa-map-marker-alt text-primary font-weight-bold"></i> {{ advert.location.name }}
+                    <div class="my-1">
+                        <i class="fas fa-map-marker-alt text-primary"></i> {{ advert.location.name }}
                         {% if advert.location.detail %}({{ advert.location.detail }}){% endif %}
                     </div>
                     {% if advert.validatedAt %}
-                        <div class="">
-                            <i class="far fa-clock text-primary font-weight-bold"></i>{{ advert.validatedAt|ago }}
+                        <div class="mt-2">
+                            <i class="far fa-clock text-primary"></i> {{ advert.validatedAt|ago }}
                         </div>
                     {% endif %}
                 </div>
@@ -76,12 +77,12 @@
         <div class="col-12 pr-md-3 info {% if not advert.shop|length > 0 %}user{% endif %}">
             {# Petit telephone #}
             <div class="d-block d-md-none px-2">
-                <div class="small-8 text-dark font-weight-stone-500 my-1">{{ advert.title|u.truncate(40, '...') }}</div>
+                <div class="small-8 font-weight-stone-600 text-primary mt-3">{{ advert.title|u.truncate(40, '...') }}</div>
                 <div class="text-default font-weight-stone-600 mt-2 small-8">
-                    {{ advert.category }} <i class="fas fa-angle-right mx-1"></i>
+                    {{ advert.category }} <i class="fas fa-angle-right"></i>
                     {{ advert.subCategory }}
                     {% if advert.subDivision %}
-                        <i class="fas fa-angle-right mx-1"></i> {{ advert.subDivision }}
+                        <i class="fas fa-angle-right"></i> {{ advert.subDivision }}
                     {% endif %}
                 </div>
                 <p class="content grey-text font-weight-stone-500 small my-2">
@@ -94,7 +95,7 @@
                 </div>
             </div>
             {# Petit telephone #}
-            <div class="d-none d-md-flex justify-content-end mb-3 mx-1">
+            <div class="d-none d-md-flex justify-content-end mb-3 mx-2">
                 {#  {% include 'user/advert/details/button.html.twig' %}#}
 
                 {{ _self.btn(advert, route, settings, photo, headers, vedettes, encadres, urgents, gallery) }}

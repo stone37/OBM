@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -27,12 +28,14 @@ trait UserTrait
     /**
      * @var string
      *
+     * @Groups({"read:user", "write:user", "update:user", "read:advert"})
+     *
      * @Assert\NotBlank(
      *     message="Entrez un prénom s'il vous plait.",
      *     groups={"Registration", "Profile"}
      * )
      *
-     * @Assert\Length(
+     * @Assert\Length( 
      *     min="2",
      *     max="180",
      *     minMessage="Le prénom est trop court.",
@@ -46,6 +49,8 @@ trait UserTrait
 
     /**
      * @var string
+     *
+     * @Groups({"read:user", "write:user", "update:user", "read:advert"})
      *
      * @Assert\NotBlank(
      *     message="Entrez un prénom s'il vous plait.",
@@ -67,6 +72,8 @@ trait UserTrait
     /**
      * @var string
      *
+     * @Groups({"read:user", "write:user", "update:user", "read:advert"})
+     *
      * @Assert\NotBlank(
      *     message="Entrez un numéro de téléphone s''il vous plait.",
      *     groups={"Registration", "Profile"}
@@ -86,6 +93,8 @@ trait UserTrait
 
     /**
      * @var bool
+     *
+     * @Groups({"read:user", "write:user", "update:user", "read:advert"})
      *
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -114,19 +123,32 @@ trait UserTrait
     private $file;
 
     /**
+     * @var string|null
+     *
+     * @Groups({"read:user", "read:advert"})
+     */
+    private $fileUrl;
+
+    /**
      * @var DateTime
+     *
+     * @Groups({"read:user", "read:advert"})
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
     /**
+     * @Groups({"read:user"})
+     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt = null;
 
     /**
      * @var string
+     *
+     * @Groups({"read:user", "update:user", "read:advert"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -163,12 +185,16 @@ trait UserTrait
     /**
      * @var Wallet
      *
+     * @Groups("read:user")
+     *
      * @ORM\OneToOne(targetEntity=Wallet::class, inversedBy="user", cascade={"ALL"})
      */
     private $wallet;
 
     /**
      * @var Invitation
+     *
+     * @Groups("read:user")
      *
      * @ORM\OneToOne(targetEntity=Invitation::class)
      */
@@ -240,6 +266,8 @@ trait UserTrait
     /**
      * @var string
      *
+     * @Groups({"read:user", "update:user", "read:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $address;
@@ -247,12 +275,16 @@ trait UserTrait
     /**
      * @var bool
      *
+     * @Groups({"read:user"})
+     *
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $drift = false;
 
     /**
      * @var bool
+     *
+     * @Groups({"read:user"})
      *
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -265,6 +297,7 @@ trait UserTrait
         $this->orders  = new ArrayCollection();
         $this->favorites = new ArrayCollection();
         $this->alerts  = new ArrayCollection();
+        $this->wallet = new Wallet();
     }
 
     /**
@@ -502,6 +535,24 @@ trait UserTrait
         if (null !== $image) {
             $this->updatedAt = new DateTimeImmutable();
         }
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFileUrl(): ?string
+    {
+        return $this->fileUrl;
+    }
+
+    /**
+     * @param string|null $fileUrl
+     */
+    public function setFileUrl(?string $fileUrl): self
+    {
+        $this->fileUrl = $fileUrl;
 
         return $this;
     }

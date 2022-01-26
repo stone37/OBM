@@ -3,6 +3,7 @@
 namespace App\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,9 +15,9 @@ trait AdvertAutoTrait
     /**
      * @var string
      *
-     * @Assert\NotBlank(
-     *     groups={"VO", "LV", "MC", "MS", "MR", "VBM", "JSSM"}
-     * )
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
+     * @Assert\NotBlank(groups={"VO", "LV", "MC", "MS", "MR", "VBM", "JSSM"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -25,9 +26,9 @@ trait AdvertAutoTrait
     /**
      * @var string
      *
-     * @Assert\NotBlank(
-     *     groups={"VO", "LV"}
-     * )
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
+     * @Assert\NotBlank(groups={"VO", "LV"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -36,9 +37,9 @@ trait AdvertAutoTrait
     /**
      * @var string
      *
-     * @Assert\NotBlank(
-     *     groups={"VO", "LV", "MS", "MR", "CL"}
-     * )
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
+     * @Assert\NotBlank(groups={"VO", "LV", "MS", "MR", "CL"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -47,9 +48,9 @@ trait AdvertAutoTrait
     /**
      * @var string
      *
-     * @Assert\NotBlank(
-     *     groups={"VO", "LV"}
-     * )
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
+     * @Assert\NotBlank(groups={"VO", "LV"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -58,9 +59,9 @@ trait AdvertAutoTrait
     /**
      * @var string
      *
-     * @Assert\NotBlank(
-     *     groups={"VO", "MC", "MS", "MR"}
-     * )
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
+     * @Assert\NotBlank(groups={"VO", "MC", "MS", "MR"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -69,9 +70,9 @@ trait AdvertAutoTrait
     /**
      * @var integer
      *
-     * @Assert\NotBlank(
-     *     groups={"VO", "MS", "MR", "CL"}
-     * )
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
+     * @Assert\NotBlank(groups={"VO", "MS", "MR", "CL"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -80,12 +81,16 @@ trait AdvertAutoTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $boiteVitesse;
 
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -94,12 +99,16 @@ trait AdvertAutoTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $autoColor;
 
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -108,12 +117,16 @@ trait AdvertAutoTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $nombrePorte;
 
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -122,12 +135,16 @@ trait AdvertAutoTrait
     /**
      * @var array
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="array", nullable=true)
      */
     private $autreInformation;
 
     /**
      * @var int
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -136,12 +153,16 @@ trait AdvertAutoTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="array", nullable=true)
      */
     private $autoSecurity;
 
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="array", nullable=true)
      */

@@ -94,8 +94,7 @@ class ParrainageDriftSubscriber implements EventSubscriberInterface
         $this->senderFiole($user);
         $this->senderParrain($parrain);
 
-        $userName = $user->getUsername() ?
-            htmlentities($user->getUsername()) : htmlentities($user->getFirstName());
+        $userName = $user->getUsername() ? htmlentities($user->getUsername()) : htmlentities($user->getFirstName());
 
         $wording = '%s vous avez reçu un credit de %s';
 
@@ -120,7 +119,7 @@ class ParrainageDriftSubscriber implements EventSubscriberInterface
         ])->to($user->getEmail())
             ->subject($this->settings->getName().' | Cadeau de parrainage');
 
-        $this->mailer->send($email);
+        $this->mailer->sendNow($email);
     }
 
     private function senderParrain(User $user)
@@ -131,6 +130,6 @@ class ParrainageDriftSubscriber implements EventSubscriberInterface
         ])->to($user->getEmail())
             ->subject($this->settings->getName().' | Cadeau de parrainage');
 
-        $this->mailer->send($email);
+        $this->mailer->sendNow($email);
     }
 }

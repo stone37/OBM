@@ -2,17 +2,34 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Traits\TimestampableTrait;
 use App\Repository\WalletRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\IdTrait;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Action\NotFoundAction;
 
 /**
  * Class Wallet
  * @package App\Entity
  *
  * @ORM\Entity(repositoryClass=WalletRepository::class)
+ *
+ * @ApiResource(
+ *     collectionOperations={},
+ *     itemOperations={
+        "get"={
+ *          "controller"=NotFoundAction::class,
+*           "openapi_context"={
+                "summary"="hidden"
+*           },
+*             "read"=false,
+*             "output"=false,
+ *         },
+ *     }
+ * )
  */
 class Wallet
 {
@@ -22,6 +39,8 @@ class Wallet
     /**
      * @var int
      *
+     * @Groups("read:user")
+     *
      * @ORM\Column(type="bigint", options={"unsigned": true})
      */
     private $deposit = 0; // depot
@@ -29,12 +48,16 @@ class Wallet
     /**
      * @var int
      *
+     * @Groups("read:user")
+     *
      * @ORM\Column(type="bigint", options={"unsigned": true})
      */
     private $spent = 0; // depence
 
     /**
      * @var int
+     *
+     * @Groups("read:user")
      *
      * @ORM\Column(type="bigint", options={"unsigned": true})
      */

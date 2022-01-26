@@ -1,0 +1,499 @@
+App\Entity\User:
+    collectionOperations:
+        get:
+            security: is_granted("ROLE_USER")
+            pagination_client_items_per_page: true
+            normalization_context:
+                groups: ['read:user']
+            openapi_context:
+                security:
+                    - bearerAuth: []
+        post:
+            normalization_context:
+                groups: ['read:user']
+            denormalization_context:
+                groups: ['write:user']
+                swagger_definition_name: 'UserCreate'
+            openapi_context:
+                summary: Crée un nouveau utilisateur
+            validation_groups: ['Default', 'Registration', 'API']
+        getMe:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:user']
+            method: GET
+            path: /users/get
+            controller: App\Api\Controller\UserAccount
+            openapi_context:
+                summary: Recupere d'utilisateur connecter
+                security:
+                    -  bearerAuth: []
+    itemOperations:
+        get:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:user']
+            openapi_context:
+                security:
+                    - bearerAuth: []
+        put:
+            security: is_granted("ROLE_USER")
+            denormalization_context:
+                groups: ['update:user']
+            normalization_context:
+                groups: ['read:user']
+            openapi_context:
+                security:
+                    - bearerAuth: []
+            validation_groups: ['Default', 'Profile']
+        soft_delete:
+            security: is_granted("ROLE_USER")
+            denormalization_context:
+                groups: ['delete:user']
+            normalization_context:
+                groups: ['read:user']
+            method: PATCH
+            path: /users/{id}/delete
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserAccountDelete
+            openapi_context:
+                summary: Retire un utilisateur
+                security:
+                    - bearerAuth: []
+        soft_delete_cancel:
+            security: is_granted("ROLE_USER")
+            denormalization_context:
+                groups: ['cancel:user']
+            normalization_context:
+                groups: ['read:user']
+            method: PUT
+            path: /users/{id}/delete/cancel
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserAccountCancel
+            openapi_context:
+                summary: Annule le retrait d''un utilisateur
+                security:
+                    - bearerAuth: []
+        change_password:
+            security: is_granted("ROLE_USER")
+            denormalization_context:
+                groups: ['delete:user']
+            normalization_context:
+                groups: ['read:user']
+            method: PATCH
+            path: /users/{id}/password-change
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserAccountChangePassword
+            openapi_context:
+                summary: Modifie le mot de passe d''un utilisateur
+                security:
+                    - bearerAuth: []
+        image:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:user']
+            method: PATCH
+            path: /users/{id}/image
+            requirements:
+                id: \d+
+            deserialize: false
+            controller: App\Api\Controller\UserAccountImage
+            openapi_context:
+                security:
+                    - bearerAuth: []
+                requestBody:
+                    content:
+                        multipart/form-data:
+                            schema:
+                                type: object
+                                properties:
+                                    file:
+                                        type: string
+                                        format: binary
+                summary: Modifie le mot de passe d''un utilisateur
+
+
+App\Entity\Advert:
+    collectionOperations:
+        get:
+            pagination_client_items_per_page: true
+            paginationMaximumItemsPerPage: 30
+            paginationItemsPerPage: 15
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:advert']
+            filters: ['advert.category_filter', 'advert.price_filter', 'advert.location_filter', 'advert.type_filter', 'advert.sort_filter', 'advert.data_search_filter', 'advert.data_range_filter', 'advert.urgent_filter']
+        post:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:advert']
+            denormalization_context:
+                groups: ['write:advert']
+            path: /adverts/create
+            controller: App\Api\Controller\AdvertCreate
+            validation_groups:
+                - App\Entity\Advert
+                - validationGroups
+            openapi_context:
+                security:
+                    - bearerAuth: []
+        image_cache_clear:
+            security: is_granted("ROLE_USER")
+            method: GET
+            path: /adverts/image/clear
+            controller: App\Api\Controller\AdvertImageCacheClear
+            openapi_context:
+                summary: Supprime les images orpheline du serveur
+                security:
+                    - bearerAuth: []
+        image_add:
+            security: is_granted("ROLE_USER")
+            method: POST
+            path: /adverts/image/add
+            controller: App\Api\Controller\AdvertImageAdd
+            deserialize: false
+            openapi_context:
+                summary: Ajouter des images du serveur
+                security:
+                    - bearerAuth: []
+                requestBody:
+                    content:
+                        multipart/form-data:
+                            schema:
+                                type: object
+                                properties:
+                                    file:
+                                        type: string
+                                        format: binary
+        image_delete:
+            security: is_granted("ROLE_USER")
+            method: DELETE
+            path: /adverts/image/{position}/delete
+            controller: App\Api\Controller\AdvertImageDelete
+            openapi_context:
+                summary: Supprime une image du serveur
+                security:
+                    - bearerAuth: []
+        image_principale:
+            security: is_granted("ROLE_USER")
+            method: GET
+            path: /adverts/image/{position}/principale
+            controller: App\Api\Controller\AdvertImagePrincipale
+            openapi_context:
+                summary: Definis une image comme principale
+                security:
+                    - bearerAuth: []
+        advert_active:
+            security: is_granted("ROLE_USER")
+            pagination_client_items_per_page: true
+            paginationMaximumItemsPerPage: 20
+            paginationItemsPerPage: 10
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:advert']
+            method: GET
+            path: /users/{id}/adverts/enabled
+            controller: App\Api\Controller\AdvertUserEnabled
+            openapi_context:
+                summary: Recupere les annonces active d'un utilisateur
+                security:
+                    - bearerAuth: []
+        advert_inactive:
+            security: is_granted("ROLE_USER")
+            pagination_client_items_per_page: true
+            paginationMaximumItemsPerPage: 20
+            paginationItemsPerPage: 10
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:advert']
+            method: GET
+            path: /users/{id}/adverts
+            controller: App\Api\Controller\AdvertUser
+            openapi_context:
+                summary: Recupere les annonces inactive d'un utilisateur
+                security:
+                    - bearerAuth: []
+        advert_similar:
+            pagination_client_items_per_page: true
+            paginationMaximumItemsPerPage: 20
+            paginationItemsPerPage: 10
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:advert']
+            method: GET
+            path: /adverts/{id}/similar
+            controller: App\Api\Controller\AdvertSimilar
+            openapi_context:
+                summary: Recupere les annonces similaire
+    itemOperations:
+        get:
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:advert']
+            openapi_context:
+                security:
+                    - bearerAuth: []
+        put:
+            security: is_granted("ROLE_USER")
+            denormalization_context:
+                groups: ['update:advert']
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:advert']
+            openapi_context:
+                security:
+                    - bearerAuth: []
+            validation_groups:
+                - App\Entity\Advert
+                - validationGroups
+        soft_delete:
+            security: is_granted("ROLE_USER")
+            denormalization_context:
+                groups: ['delete:advert']
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:advert']
+            method: PATCH
+            path: /adverts/{id}/delete
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\AdvertDelete
+            openapi_context:
+                summary: Retire une annonce
+                security:
+                    - bearerAuth: []
+        delete_favoris:
+            security: is_granted("ROLE_USER")
+            method: GET
+            path: /adverts/{id}/favorites/
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserAdvertFavoriteDelete
+            openapi_context:
+                summary: Supprime une annonce des favoris d'un utilisateur
+                security:
+                    - bearerAuth: []
+        check_favoris:
+            security: is_granted("ROLE_USER")
+            method: GET
+            path: /adverts/{id}/favorites/check
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserAdvertFavoriteCheck
+            openapi_context:
+                summary: Verifie si une annonce est dans les favoris d'un utilisateur
+                security:
+                    - bearerAuth: []
+
+App\Entity\AdvertPicture:
+    shortName: AdvertPicture
+    collectionOperations: []
+    itemOperations:
+        get:
+            controller: 'NotFoundAction'
+            openapi_context:
+                summary: hidden
+                security:
+                    - bearerAuth: []
+            read: false
+            output: false
+        put:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:picture']
+            method: PUT
+            path: /adverts/image/{id}/edit
+            controller: App\Api\Controller\AdvertImageEdit
+            deserialize: false
+            openapi_context:
+                summary: Modifie une image d''une annonce
+                security:
+                    - bearerAuth: []
+                requestBody:
+                    content:
+                        multipart/form-data:
+                            schema:
+                                type: object
+                                properties:
+                                    file:
+                                        type: string
+                                        format: binary
+        delete:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:picture']
+            method: DELETE
+            path: /adverts/image/{id}/delete
+            controller: App\Api\Controller\AdvertImageRemove
+            openapi_context:
+                summary: Supprime une image d''une annonce
+                security:
+                    - bearerAuth: []
+
+App\Entity\Favorite:
+    collectionOperations:
+        get:
+            security: is_granted("ROLE_USER")
+            pagination_client_items_per_page: true
+            paginationMaximumItemsPerPage: 20
+            paginationItemsPerPage: 10
+            normalization_context:
+                groups: ['read:favorite', 'read:advert', 'read:user']
+            path: /users/{id}/favorites
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserAdvertFavorite
+            openapi_context:
+                summary: Recupére les favoris d''annonce d'utilisateur
+                security:
+                    - bearerAuth: []
+                parameters:
+                    - { name: id, in: path, description: "Identifiant de l'utilisateur", type: integer, required: true}
+        post:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:favorite', 'read:advert', 'read:user']
+            denormalization_context:
+                groups: ['write:favorite']
+            path: /users/favorites/{id}
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserAdvertFavoriteCreate
+            openapi_context:
+                summary: Crée une nouvelle favoris d'annonce
+                security:
+                    - bearerAuth: []
+                parameters:
+                    - { name: id, in: path, description: "Identifiant de l'annonce", type: integer, required: true }
+    itemOperations:
+        get:
+            controller: 'NotFoundAction'
+            openapi_context:
+                summary: hidden
+            read: false
+            output: false
+
+App\Entity\Alert:
+    collectionOperations:
+        post:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:alert', 'read:category']
+            denormalization_context:
+                groups: ['write:alert']
+            path: /users/alerts/{id}/create
+            requirements:
+                id: \d+
+                category_id: \d+
+            controller: App\Api\Controller\UserAlertCreate
+            openapi_context:
+                summary: Crée une nouvelle alerte
+                security:
+                    - bearerAuth: []
+                parameters:
+                    - { name: id, in: path, description: "Identifiant de la catégorie", type: integer, required: true }
+        alert_active:
+            security: is_granted("ROLE_USER")
+            pagination_client_items_per_page: true
+            paginationMaximumItemsPerPage: 20
+            paginationItemsPerPage: 10
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:alert', 'read:category']
+            method: GET
+            path: /users/{id}/alerts/enabled
+            controller: App\Api\Controller\UserAlertEnabled
+            openapi_context:
+                summary: Recupere les alertes active d'un utilisateur
+                security:
+                    - bearerAuth: []
+        alert_inactive:
+            security: is_granted("ROLE_USER")
+            pagination_client_items_per_page: true
+            paginationMaximumItemsPerPage: 20
+            paginationItemsPerPage: 10
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:alert', 'read:category']
+            method: GET
+            path: /users/{id}/alerts
+            controller: App\Api\Controller\UserAlert
+            openapi_context:
+                summary: Recupere les alertes inactive d'un utilisateur
+                security:
+                    - bearerAuth: []
+    itemOperations:
+        get:
+            controller: 'NotFoundAction'
+            openapi_context:
+                summary: hidden
+            read: false
+            output: false
+        delete_alert:
+            security: is_granted("ROLE_USER")
+            method: GET
+            path: /users/alerts/{id}/delete
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserAlertDelete
+            openapi_context:
+                summary: Supprime une alert d'un utilisateur
+                security:
+                    - bearerAuth: [ ]
+        status_alert:
+            security: is_granted("ROLE_USER")
+            method: GET
+            path: /users/alerts/{id}/status
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserAlertStatus
+            openapi_context:
+                summary: Change le status d'une alerte d'un utilisateur
+                security:
+                    - bearerAuth: [ ]
+
+
+App\Entity\City:
+    collectionOperations:
+        get:
+            pagination_client_items_per_page: true
+            paginationMaximumItemsPerPage: 20
+            paginationItemsPerPage: 10
+            normalization_context:
+                groups: ['read:city']
+            filters: ['city.name_filter']
+    itemOperations:
+        get:
+            controller: 'NotFoundAction'
+            openapi_context:
+                summary: hidden
+            read: false
+            output: false
+
+
+App\Entity\Zone:
+    collectionOperations:
+        get:
+            pagination_client_items_per_page: true
+            paginationMaximumItemsPerPage: 20
+            paginationItemsPerPage: 10
+            normalization_context:
+                groups: ['read:zone']
+            filters: ['zone.city_filter', 'zone.name_filter']
+    itemOperations:
+        get:
+            controller: 'NotFoundAction'
+            openapi_context:
+                summary: hidden
+            read: false
+            output: false
+
+
+
+
+
+

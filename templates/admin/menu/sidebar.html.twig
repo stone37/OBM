@@ -87,6 +87,12 @@
         {% set credit_edit  = isActive('app_admin_credit_edit') %}
         {# credit #}
 
+        {# city #}
+        {% set city_index = isActive('app_admin_city_index') %}
+        {% set city_new   = isActive('app_admin_city_create') %}
+        {% set city_edit  = isActive('app_admin_city_edit') %}
+        {# city #}
+
         {# zone #}
         {% set zone_index = isActive('app_admin_zone_index') %}
         {% set zone_new   = isActive('app_admin_zone_create') %}
@@ -102,6 +108,7 @@
         {# settings #}
         {% set s_index = isActive('app_admin_settings_index') %}
         {% set s_module_index = isActive('app_admin_settings_module_index') %}
+        {% set maintenance_index = isActive('app_admin_maintenance_index') %}
         {# settings #}
 
         {# newsletter #}
@@ -125,6 +132,18 @@
         {% set suggestion_index = isActive('app_admin_suggestion_index') %}
         {% set review_edit = isActive('app_admin_review_edit') %}
         {# review and suggestion #}
+
+        {# help #}
+        {% set help_index = isActive('app_admin_help_index') %}
+        {% set help_create = isActive('app_admin_help_create') %}
+        {% set help_edit = isActive('app_admin_help_edit') %}
+        {# help #}
+
+        {# help category #}
+        {% set help_category_index = isActive('app_admin_help_category_index') %}
+        {% set help_category_create = isActive('app_admin_help_category_create') %}
+        {% set help_category_edit = isActive('app_admin_help_category_edit') %}
+        {# help category #}
 
         {% set settings = config.get %}
 
@@ -240,12 +259,18 @@
                 </li>
                 <li>
                     <a class="collapsible-header waves-effect arrow-r
-                        {% if zone_index or zone_new or zone_edit %}active{% endif %}">
+                        {% if city_index or city_new or city_edit or zone_index or zone_new or zone_edit %}active{% endif %}">
                         <i class="sv-slim-icon fas fa-map-signs"></i> Localisation
                         <i class="fas fa-angle-down rotate-icon"></i>
                     </a>
                     <div class="collapsible-body">
                         <ul>
+                            <li>
+                                <a href="{{ path('app_admin_city_index') }}"
+                                   class="waves-effect {% if city_index or city_new or city_edit %}active{% endif %}">
+                                    <span class="sv-normal">Editer des villes</span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="{{ path('app_admin_zone_index') }}"
                                    class="waves-effect {% if zone_index or zone_new or zone_edit  %}active{% endif %}">
@@ -509,7 +534,33 @@
 
                 <li>
                     <a class="collapsible-header waves-effect arrow-r
-                        {% if admin_index or admin_new or admin_edit or s_index or s_module_index %}active{% endif %}">
+                        {% if help_index or help_create or help_edit or
+                        help_category_index or help_category_create or help_category_edit %}active{% endif %}">
+                        <i class="sv-slim-icon fas fa-hands-helping"></i> Centre d'aide
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_admin_help_index') }}"
+                                   class="waves-effect {% if help_index or help_create or help_edit %}active{% endif %}">
+                                    <span class="sv-normal">Editer des aides</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_help_category_index') }}"
+                                   class="waves-effect {% if help_category_index or help_category_create
+                                       or help_category_edit %}active{% endif %}">
+                                    <span class="sv-normal">Editer des catégories</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="collapsible-header waves-effect arrow-r
+                        {% if admin_index or admin_new or admin_edit or s_index or s_module_index or maintenance_index %}active{% endif %}">
                         <i class="sv-slim-icon fas fa-cogs"></i> Configurations
                         <i class="fas fa-angle-down rotate-icon"></i>
                     </a>
@@ -531,6 +582,12 @@
                                 <a href="{{ path('app_admin_taxe_index') }}" class="waves-effect
                                     {% if tax_index or tax_new or tax_edit %}active{% endif %}">
                                     <span class="sv-normal">Taux de taxe</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_admin_maintenance_index') }}" class="waves-effect
+                                    {% if maintenance_index %}active{% endif %}">
+                                    <span class="sv-normal">Maintenance</span>
                                 </a>
                             </li>
                             <li>

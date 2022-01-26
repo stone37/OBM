@@ -16,49 +16,29 @@
 
 .skin-light .premium .content a .view {
     cursor: pointer;
-    border-radius: 5px !important;
+    border-radius: 30px !important;
     transform-style: preserve-3d;
 }
 
 .skin-light .premium .content a .view p {
-    background-color: rgba(18, 102, 241, .8);
+    background-color: rgba(0, 50, 255, .8);
     color: #ffffff;
     font-size: .95rem;
     font-weight: 400;
     line-height: normal;
     padding: 7px 10px 7px 10px;
-    border-radius: 5px !important;
+    border-radius: 30px !important;
 }
 
 .skin-light .premium .content a .view:hover p {
     background-color: rgba(255, 255, 255, .9);
-    color: #1266F1;
+    color: #0032FF;
 }
-
-/*.skin-light .premium .content .card {
-    cursor: pointer;
-    border-radius: 5px !important;
-    transform-style: preserve-3d;
-}
-
-.skin-light .premium .content .card:hover div {
-    background-color: rgba(255, 255, 255, 1);
-    color: #1266F1;
-}*/
 
 @media (max-width: 767px) {
-    /*.skin-light .premium .content .card {
-        cursor: pointer;
-        border-radius: 5px !important;
-    }
-
-    .skin-light .premium .title div {
-        font-size: 1rem;
-        font-weight: 500;
-    }*/
 
     .skin-light .premium .content a .view p {
-        background-color: rgba(18, 102, 241, 1);
+        background-color: #0032FF;
         color: #ffffff;
         font-size: .8rem;
         font-weight: 500;
@@ -70,7 +50,7 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .skin-light .premium .content a .view p {
-        background-color: rgba(18, 102, 241, 1);
+        background-color: #0032FF;
         color: #ffffff;
         font-size: .9rem;
         font-weight: 500;
@@ -79,37 +59,4 @@
         border-radius: 5px !important;
     }
 }
-
-/*.skin-light .premium .content .card div {
-    background-color: rgba(18, 102, 241, 1);
-    color: #ffffff;
-    padding-top: 7px;
-    padding-bottom: -1px;
-    padding-left: 8px;
-    padding-right: 8px;
-    border-radius: 5px !important;
-    transform: translateZ(20px);
-}
-
-.skin-light .premium .content .card div:hover {
-    background-color: rgba(255, 255, 255, 1);
-    color: #1266F1;
-}
-
-.skin-light .premium .content .card h3 {
-    font-size: .95rem !important;
-    font-weight: 500 !important;
-}
-
-@media (max-width: 767px) {
-    .skin-light .premium .content .card h3 {
-        font-size: .85rem !important;
-        font-weight: 500 !important;
-    }
-}*/
-
-
-
-
-
 

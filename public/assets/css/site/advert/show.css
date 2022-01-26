@@ -7,7 +7,7 @@
     height: 300px !important;
     -webkit-box-shadow: 0 10px 20px 0 rgba(0,0,0,0.05);
     box-shadow: 0 10px 20px 0 rgba(0,0,0,0.05);
-    border-radius:.375rem
+    border-radius: 30px
 }
 
 @media (max-width: 767px) {
@@ -16,7 +16,7 @@
         height: 150px !important;
         -webkit-box-shadow: 0 10px 20px 0 rgba(0,0,0,0.05);
         box-shadow: 0 10px 20px 0 rgba(0,0,0,0.05);
-        border-radius:.375rem
+        border-radius: 30px
     }
 }
 
@@ -26,7 +26,7 @@
         height: 180px !important;
         -webkit-box-shadow: 0 10px 20px 0 rgba(0,0,0,0.05);
         box-shadow: 0 10px 20px 0 rgba(0,0,0,0.05);
-        border-radius:.375rem
+        border-radius:30px
     }
 }
 
@@ -35,7 +35,7 @@
     height: 70px;
     -webkit-box-shadow:0 10px 20px 0 rgba(0,0,0,0.05);
     box-shadow:0 10px 20px 0 rgba(0,0,0,0.05);
-    border-radius:.375rem;
+    border-radius: 20px;
 }
 
 /*.skin-light .lightbox-plus {
@@ -70,9 +70,9 @@
 
 .skin-light .app-advert-show-info .title {
     font-size: 1.2rem;
-    color: #1266f1;
+    color: #0032FF;
     display: inline-block;
-    border-bottom: 1px solid #1266f1;
+    border-bottom: 1px solid #0032FF;
     font-weight: 500;
 }
 
@@ -81,14 +81,17 @@
     padding-bottom: 8px !important;
 }
 
-.skin-light .app-advert-show-info table td div.title {
-    font-size: 1rem;
+.skin-light .app-advert-show-info table td div.title.font-weight-stone-600 {
+    font-size: 1.1rem;
+    font-weight: 500 !important;
     border: none;
 }
 
-.skin-light .app-advert-show-info table td div.content {
-    font-size: .9rem;
+.skin-light .app-advert-show-info table td div.content.font-weight-stone-600 {
+    font-size: 1rem;
+    font-weight: 400 !important;
 }
+
 
 .skin-light .app-advert-show-info table td div.content span {
     font-size: .7rem;
@@ -104,7 +107,7 @@
 
 .skin-light .app-advert-user-detail i {
     font-size: 1.2rem;
-    color: #1266f1;
+    color: #0032FF;
 }
 
 /*.skin-light .app-advert-user-detail .data.date {
@@ -208,7 +211,7 @@
 }
 
 .skin-light .app-advert-similar-block img {
-    height: 160px;
+    height: 120px !important;
 }
 
 

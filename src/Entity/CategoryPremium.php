@@ -10,6 +10,7 @@ use App\Repository\CategoryPremiumRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -29,6 +30,8 @@ class CategoryPremium
     /**
      * @var string
      *
+     * @Groups({"read:premium"})
+     *
      * @Assert\NotBlank()
      * @Assert\Length(min="2", max="100")
      *
@@ -38,6 +41,8 @@ class CategoryPremium
 
     /**
      * @var Category
+     *
+     * @Groups({"read:premium"})
      *
      * @Assert\Valid()
      *

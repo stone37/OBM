@@ -76,7 +76,8 @@ class PasswordController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $service->updatePassword($data->getPassword(), $token);
-            $this->addFlash('success', 'Votre mot de passe a bien été réinitialisé');
+            $this->addFlash('success', 'Votre mot de passe a bien été réinitialisé; 
+            vous pouvez vous connecter via l\'application mobile ou le site web');
 
             return $this->redirectToRoute('app_login');
         }

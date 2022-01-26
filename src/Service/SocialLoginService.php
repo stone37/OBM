@@ -34,7 +34,6 @@ class SocialLoginService
     public function hydrate(User $user): bool
     {
         $oauthData = $this->session->get(self::SESSION_KEY);
-        dump($oauthData);
 
         if (null === $oauthData || !isset($oauthData['email'])) {
             return false;

@@ -139,10 +139,6 @@ $(document).ready(function() {
             type: "POST",
             url: Routing.generate('app_advert_search'),
             data: {'q': $q},
-            beforeSend: function(){
-                //$background = "#FFF url("+$loading+") 403px 8px no-repeat"
-                //$zone.css("background", $background);
-            },
             success: function(data){
                 let $result = $.parseJSON(data);
 
@@ -171,99 +167,76 @@ $(document).ready(function() {
     });
 
     // Localisation
-    let $city = document.querySelector('#app-global-city-name'),
-        $zone = $("#app-global-zone-name"), $zoneSubjection = $('#suggesstion-zone-box');
+    let $citySelect = $('select.app-location-search-city'),
+        $zone = $("#app-global-zone-name"),
+        $zoneSubjection = $('#suggesstion-zone-box');
 
-    let placesAutocomplete = places({
-        appId: 'plAFU47KNT9R',
-        apiKey: '82df8d2dee045f2337d35a00c7a868af',
-        container: $city,
-        type: 'city',
-        aroundLatLngViaIP: false,
-        language: 'fr',
-        countries: ['CI'],
-        templates: {
-            value: function(suggestion) {
-                return suggestion.name;
-            }
+    $citySelect.on("change", function() {
+        let $this = $(this);
+
+        if ($this.val()) {
+            //$city.textContent = e.suggestion.value;
+            $inputLocation.val($this.val());
+            $('#app-location-mobile-input').val($this.val());
+
+            $zone.val("");
+            $('#app-search-zone-global').removeClass('d-none');
+
+            $.ajax({
+                url: Routing.generate('app_location_session', {
+                    name: $this.val(),
+                    type: 1
+                }),
+                type: 'GET',
+            });
         }
     });
 
-    placesAutocomplete.on('change', e => {
-        $city.textContent = e.suggestion.value;
-        $inputLocation.val(e.suggestion.value);
-        $('#app-location-mobile-input').val(e.suggestion.value);
-
-        $zone.val("");
-        $('#app-search-zone-global').removeClass('d-none');
-
-        $.ajax({
-            url: Routing.generate('app_location_session', {
-                name: e.suggestion.value,
-                type: 1
-            }),
-            type: 'GET',
-        });
-    });
-
-    placesAutocomplete.on('clear', function() {
-        $city.textContent = 'none';
-    });
-
-    let $placeBulk = $('#algolia-location .algolia-places'),
-        $label = $('<label for="app-global-city-name">Ville</label>');
-
-    $placeBulk.addClass('d-block md-form md-outline form-lg');
-    $placeBulk.append($label)
-    $('#algolia-location .algolia-places input.ap-input').addClass('form-control form-control-lg');
-
     $zone.keyup(function(){
-        $.ajax({
-            type: "POST",
-            url: Routing.generate('app_location_zone', {'city': $city.textContent}),
-            data: {'q': $(this).val()},
-            beforeSend: function(){
-                //$background = "#FFF url("+$loading+") 403px 8px no-repeat"
-                //$zone.css("background", $background);
-            },
-            success: function(data){
-                let $result = $.parseJSON(data);
+        if ($citySelect.val()) {
+            $.ajax({
+                type: "POST",
+                url: Routing.generate('app_location_zone', {'city': $citySelect.val()}),
+                data: {'q': $(this).val()},
+                success: function(data){
+                    let $result = $.parseJSON(data);
 
-                if ($result.length && $zone.val()) {
-                    let $container = $('<ul class="list-unstyled pb-0 mb-0"></ul>'),
-                        $title = $('<div class="title small-9 font-weight-stone-500 dark-grey-text pt-3 pl-3 mb-1">Suggestion de lieu</div>');
+                    if ($result.length && $zone.val()) {
+                        let $container = $('<ul class="list-unstyled pb-0 mb-0"></ul>'),
+                            $title = $('<div class="title small-9 font-weight-stone-500 text-primary pt-3 pl-3 mb-1">Suggestion de lieu</div>');
 
-                    $.each($result, function(index, element){
-                        let $content = $('<li class="item-pin"><i class="fas fa-map-pin mx-2"></i>'+element.zone+'</li>')
+                        $.each($result, function(index, element){
+                            let $content = $('<li class="item-pin"><i class="fas fa-map-pin mx-2"></i>'+element.zone+'</li>')
 
-                        $container.append($content);
-                    });
-
-                    $zoneSubjection.html("");
-                    $zoneSubjection.append($title);
-                    $zoneSubjection.append($container);
-                    $zoneSubjection.removeClass('d-none');
-                    $zone.css("background","#FFF")
-
-                    $('.item-pin').click(function(){
-                        let $this = $(this);
-                        $zone.val($this.text());
-                        $zoneSubjection.addClass('d-none');
-
-                        $.ajax({
-                            url: Routing.generate('app_location_session', {
-                                name: $this.text(),
-                                type: 0,
-                            }),
-                            type: 'GET',
+                            $container.append($content);
                         });
-                    })
-                } else {
-                    $zoneSubjection.html("");
-                    $zone.css("background","#FFF")
+
+                        $zoneSubjection.html("");
+                        $zoneSubjection.append($title);
+                        $zoneSubjection.append($container);
+                        $zoneSubjection.removeClass('d-none');
+                        $zone.css("background","#FFF")
+
+                        $('.item-pin').click(function(){
+                            let $this = $(this);
+                            $zone.val($this.text());
+                            $zoneSubjection.addClass('d-none');
+
+                            $.ajax({
+                                url: Routing.generate('app_location_session', {
+                                    name: $this.text(),
+                                    type: 0,
+                                }),
+                                type: 'GET',
+                            });
+                        })
+                    } else {
+                        $zoneSubjection.html("");
+                        $zone.css("background","#FFF")
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
     $(document).click(function(){$zoneSubjection.addClass('d-none');});
@@ -370,7 +343,6 @@ $(document).ready(function() {
         updateText(date, element, terms);
     });
 
-
     // Carousel
     $('.carousel .carousel-inner.vv-3 .carousel-item').each(function () {
         var next = $(this).next();
@@ -390,8 +362,6 @@ $(document).ready(function() {
 
         $('.carousel').carousel('cycle');
     });
-
-
 
     // Popover
     $('[data-toggle="popover-click"]').popover({

@@ -1,0 +1,27 @@
+{% include 'site/pages/helpForm.html.twig' %}
+
+<section class="row mt-4 mb-5 app-help">
+    <div class="">
+        <div class="mb-4 ml-3">
+            <a href="" class="btn btn-amber btn-sm btn-back"><i class="fas fa-angle-left mr-2"></i>Retour</a>
+        </div>
+    </div>
+    {% if helps|length > 0 %}
+        {% for help in helps %}
+            <div class="col-12">
+                <div class="list-group mb-2">
+                    <a href="{{ path('app_help_show', {'slug': help.slug, 'category_slug': help.category.parent.slug }) }}"
+                       class="list-group-item list-group-item-action">
+                        {{ help.title }}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <h5 class="h5-responsive">Aucun resultat</h5>
+        </div>
+    {% endif %}
+</section>
+
+

@@ -8,6 +8,7 @@ use App\Entity\Traits\TimestampableTrait;
 use App\Repository\AlertRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -22,6 +23,8 @@ class Alert
     /**
      * @var Category
      *
+     * @Groups({"read:alert"})
+     *
      * @Assert\Valid()
      *
      * @ORM\ManyToOne(targetEntity=Category::class)
@@ -31,6 +34,8 @@ class Alert
     /**
      * @var Category
      *
+     * @Groups({"read:alert"})
+     *
      * @ORM\ManyToOne(targetEntity=Category::class)
      */
     private $subCategory;
@@ -38,12 +43,16 @@ class Alert
     /**
      * @var Category
      *
+     * @Groups({"read:alert"})
+     *
      * @ORM\ManyToOne(targetEntity=Category::class)
      */
     private $subDivision;
 
     /**
      * @var User|UserInterface
+     *
+     * @Groups({"read:alert"})
      *
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="alerts")
      * @ORM\JoinColumn(nullable=true)

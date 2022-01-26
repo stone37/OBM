@@ -67,7 +67,7 @@ class AdvertController extends AbstractController
         OrderSessionStorage $storage,
         PaginatorInterface $paginator)
     {
-        $settings = $this->settings;
+        $settings = $this->settings; 
 
         $storage->remove();
         $session->set('app_cart', []);

@@ -1,0 +1,65 @@
+{% include 'site/pages/helpForm.html.twig' %}
+
+<section class="row">
+    <div class="col-12">
+        {{ breadcrumb("Centre d'aide", "/centre-daide") }}
+        {{ breadcrumb(category, "/centre-daide/"~category.slug) }}
+        {{ breadcrumb(help.title) }}
+
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb mb-0',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+
+        {% if category %}
+            <div class="mb-3">
+                <a href="{{ path('app_help_s', {'category_slug': category.slug}) }}" class="btn btn-amber btn-sm"><i class="fas fa-angle-left mr-2"></i>Retour</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+<section class="row mt-4 mb-5 app-help">
+    <div class="col-12 col-md-4 pr-lg-5 pr-md-4">
+        <h3 class="font-weight-stone-600 text-primary h3-responsive mb-4">{{ category.name }}</h3>
+
+        <hr class="mb-0">
+
+        {% for children in category.children %}
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+                <div class="card">
+                    <div class="card-header px-0" role="tab" id="headingTwo{{ loop.index }}">
+                        <a class="collapsed dark-grey-text" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo{{ loop.index }}"
+                           aria-expanded="false" aria-controls="collapseTwo{{ loop.index }}">
+                            <div class="mb-0 font-weight-stone-500 text-uppercase">
+                                {{ children.name }} <i class="fas fa-angle-down rotate-icon"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <div id="collapseTwo{{ loop.index }}" class="collapse {% if help.category.id == children.id  %}show{% endif %}" role="tabpanel" aria-labelledby="headingTwo1"
+                         data-parent="#accordionEx1">
+                        <div class="card-body py-1 px-0">
+                            {% if children.helps|length > 0 %}
+                                <ul class="list-unstyled">
+                                    {% for help in children.helps %}
+                                        <li class="py-1">
+                                            <a href="{{ path('app_help_show', {'category_slug': children.parent.slug ,'slug': help.slug}) }}"
+                                               class="text-default {% if help.slug == app.request.attributes.get('slug')  %}active{% endif %}">
+                                                {{ help.title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-12 col-md-8 app-help-show">
+        <h3 class="h3-responsive font-weight-stone-600 text-primary mb-4 mt-4 mt-md-1">{{ help.title }}</h3>
+
+        <hr class="d-none d-md-block">
+
+        {{ help.content|raw }}
+    </div>
+</section>
+

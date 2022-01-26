@@ -13,4 +13,16 @@ app_user:
     type: directory
     prefix: /u/
 
+authentication_token:
+    path: /api/login
+    methods: [POST]
+
+gesdinet_jwt_refresh_token:
+    path: /api/token/refresh
+    controller: gesdinet.jwtrefreshtoken::refresh
+
+api_password_reset:
+    path: /api/password-reset
+    controller: App\Api\Controller\AuthController::reset
+    methods: [POST]
 

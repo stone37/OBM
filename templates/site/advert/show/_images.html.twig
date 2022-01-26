@@ -67,7 +67,7 @@
             </div>
         </div>
     {% else %}
-        <div class="row mx-lg-3">
+        <div class="row">
             <div class="col-lg-10">
                 <div class="mdb-lightbox mt-4 pl-2">
                     <div class="row">
@@ -131,8 +131,8 @@
         </div>
     {% endif %}
 {% else %}
-    <div class="card card-image text-center d-flex justify-content-center align-items-center"
-         style="background-image: url({{ asset('images/no_image.png') }});">
+    <div class="card card-image text-center d-flex justify-content-center align-items-center mt-4 mt-md-5 mb2">
+        <img src="{{ asset('images/no_image.png') }}" alt="advert image" class="img-fluid" style="height: 300px">
     </div>
 {% endif %}
 

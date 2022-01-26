@@ -10,7 +10,7 @@
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and settings.activeCredit %}
             <li class="text-center mt-4">
-                <a href="" class="text-center wallet white mx-3 px-2 mb-2 text-center
+                <a href="{{ path('app_dashboard_credit_index') }}" class="text-center wallet white mx-3 px-2 mb-2 text-center
                     d-flex align-items-center justify-content-center">
                     <i class="fas fa-wallet mr-2 d-inline-block"></i>
                     <span class="d-inline-block font-weight-stone-600">{{ app.user.wallet.balance }}</span>

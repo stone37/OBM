@@ -4,6 +4,7 @@ namespace App\Entity\Traits;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Trait AdvertStatusTrait
@@ -42,12 +43,16 @@ trait AdvertStatusTrait
     /**
      * @var bool
      *
+     * @Groups({"read:advert"})
+     *
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $validated = false;
 
     /**
      * @var DateTime
+     *
+     * @Groups({"read:advert"})
      *
      * @ORM\Column(type="datetime", nullable=true)
      */

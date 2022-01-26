@@ -33,15 +33,18 @@
         {{ form_row(form.priceMax) }}
     </div>
 </div>
+
 <div class="form-row">
     <div class="col-12" style="margin-bottom: -10px">
         <h6 class="font-weight-stone-600 dark-grey-text">Lieu</h6>
     </div>
     <div class="col-12 col-md-6">
-        <div class="md-form md-outline mb-2 mr-2">
-            {{- form_widget(form.city, {'id': 'app-city-name', 'attr': {'class': 'form-control'}}) -}}
-            {{- form_label(form.city) -}}
-            {{- form_errors(form.city) -}}
+        <div class="d-flex flex-wrap">
+            <div class="select-outline position-relative w-100">
+                {{ form_widget(form.city) }}
+                <label>{{ form.city.vars.label }}</label>
+            </div>
+            <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(form.city) }}</div>
         </div>
     </div>
     <div class="col-12 col-md-6">
@@ -53,6 +56,5 @@
         <div class="search-advert-zone-suggestion-box"></div>
     </div>
 </div>
-
 
 

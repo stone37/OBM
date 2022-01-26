@@ -39,33 +39,6 @@ class SettingsController extends AbstractController
         ]);
     }
 
-    public function meta(Request $request, EntityManagerInterface $em): Response
-    {
-        $settings = $em->getRepository(Settings::class)->getSettings();
-
-        if (null === $settings) {
-            $settings = new Settings();
-        }
-
-        $form = $this->createForm(SettingsType::class, $settings);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $em->persist($settings);
-            $em->flush();
-
-            $this->addFlash('info', 'Les paramètres meta tags ont été mise à jour');
-
-            return $this->redirectToRoute('app_admin_settings_meta_tags_index');
-        }
-
-        return $this->render('admin/settings/meta.html.twig', [
-            'form' => $form->createView(),
-            'settings' => $settings,
-        ]);
-    }
-
     public function module(Request $request, EntityManagerInterface $em)
     {
         $settings = $em->getRepository(Settings::class)->getSettings();

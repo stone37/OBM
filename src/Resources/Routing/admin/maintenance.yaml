@@ -1,0 +1,5 @@
+app_admin_maintenance_index:
+    path: /settings/maintenance
+    methods: [GET, POST]
+    controller: App\Controller\Admin\MaintenanceController::index
+

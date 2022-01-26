@@ -3,6 +3,7 @@
 namespace App\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,10 +15,11 @@ trait AdvertImmobilierTrait
     /**
      * @var int
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @Assert\NotBlank(
      *     groups={"Appart", "Maison", "Chambre", "Duplex", "Studio", "StudioA", "Terrain",
-     *     "Colocation", "Villa", "Bureaux", "Parking", "Autre"}
-     * )
+     *     "Colocation", "Villa", "Bureaux", "Parking", "Autre"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -26,9 +28,9 @@ trait AdvertImmobilierTrait
     /**
      * @var string
      *
-     * @Assert\NotBlank(
-     *     groups={"Appart", "Maison", "Duplex", "Villa"}
-     * )
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
+     * @Assert\NotBlank(groups={"Appart", "Maison", "Duplex", "Villa"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -37,10 +39,11 @@ trait AdvertImmobilierTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @Assert\NotBlank(
      *     groups={"Appart", "Maison", "Chambre", "Duplex", "Studio", "StudioA", "Colocation",
-     *     "Villa", "Bureaux"}
-     * )
+     *     "Villa", "Bureaux"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -49,6 +52,8 @@ trait AdvertImmobilierTrait
     /**
      * @var array
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="array", nullable=true)
      */
     private $access;
@@ -56,9 +61,9 @@ trait AdvertImmobilierTrait
     /**
      * @var int
      *
-     * @Assert\NotBlank(
-     *     groups={"Appart", "Maison", "Duplex", "Villa"}
-     * )
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
+     * @Assert\NotBlank(groups={"Appart", "Maison", "Duplex", "Villa"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -67,9 +72,9 @@ trait AdvertImmobilierTrait
     /**
      * @var int
      *
-     * @Assert\NotBlank(
-     *     groups={"Appart", "Maison", "Duplex", "Villa"}
-     * )
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
+     * @Assert\NotBlank(groups={"Appart", "Maison", "Duplex", "Villa"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -78,12 +83,16 @@ trait AdvertImmobilierTrait
     /**
      * @var int
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private $surfaceBalcon;
 
     /**
      * @var array
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="array", nullable=true)
      */
@@ -92,12 +101,16 @@ trait AdvertImmobilierTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $dateConstruction;
 
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -106,12 +119,16 @@ trait AdvertImmobilierTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $standing;
 
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -120,12 +137,16 @@ trait AdvertImmobilierTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $salleManger;
 
     /**
      * @var int
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -134,12 +155,16 @@ trait AdvertImmobilierTrait
     /**
      * @var array
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="array", nullable=true)
      */
     private $interior;
 
     /**
      * @var array
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="array", nullable=true)
      */
@@ -148,12 +173,16 @@ trait AdvertImmobilierTrait
     /**
      * @var array
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="array", nullable=true)
      */
     private $typeSol;
 
     /**
      * @var array
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="array", nullable=true)
      */
@@ -162,6 +191,8 @@ trait AdvertImmobilierTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $stateGenerale;
@@ -169,12 +200,16 @@ trait AdvertImmobilierTrait
     /**
      * @var array
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="array", nullable=true)
      */
     private $facade;
 
     /**
      * @var array
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @ORM\Column(type="array", nullable=true)
      */

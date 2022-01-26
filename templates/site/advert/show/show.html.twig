@@ -10,7 +10,9 @@
     {% set imgData = app_advert_photo(advert.images) %}
     <meta name="description" content="{{ advert.description|u.truncate(300) }}"/>
     <meta property="og:description" content="{{ advert.description|u.truncate(300) }}" />
-    <meta property="og:image" content="{{ app.request.getUriForPath('/'~imgData.webPath) }}"/>
+    {% if imgData %}
+        <meta property="og:image" content="{{ app.request.getUriForPath('/'~imgData.webPath) }}"/>
+    {% endif %}
     <meta property="og:created_time" content="{{ advert.createdAt|date('c') }}"/>
     <meta property="og:url" content="{{ app.request.getUriForPath(app.request.requestUri) }}"/>
     <meta property="og:type" content="product"/>
@@ -18,7 +20,9 @@
     <meta name="twitter:site" content="@Oblackmarket_com" />
     <meta name="twitter:title" content="{{ advert.title }} à {{ advert.price }} CFA" />
     <meta name="twitter:description" content="{{ advert.description|u.truncate(300) }}" />
-    <meta name="twitter:image" content="{{ app.request.getUriForPath('/'~imgData.webPath) }}" />
+    {% if imgData %}
+        <meta name="twitter:image" content="{{ app.request.getUriForPath('/'~imgData.webPath) }}" />
+    {% endif %}
     <meta name="twitter:url" content="{{ app.request.getUriForPath(app.request.requestUri) }}" />
 {% endblock %}
 

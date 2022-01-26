@@ -249,4 +249,29 @@ class CategoryRepository extends ServiceEntityRepository
 
         return $qb;
     }
+
+    public function findForApi(): array
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        return $qb->where($qb->expr()->isNull('c.parent'))
+            ->andWhere('c.enabled = 1')
+            ->leftJoin('c.children', 'children')
+            ->addSelect('children')
+            ->orderBy('c.position', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findPartial(int $id): ?Category
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.id = :id')
+            ->andWhere('c.enabled = 1')
+            ->leftJoin('c.children', 'children')
+            ->addSelect('children')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

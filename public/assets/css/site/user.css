@@ -1,11 +1,3 @@
-@media (max-width: 767px) {
-
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-
-}
-
 .skin-light .dropdown-menu.menu {
     min-width: 5rem;
 }
@@ -23,13 +15,13 @@
 
 .skin-light .navbar.second.user .nav-item .nav-link:hover,
 .skin-light .navbar.second.user .nav-item.active .nav-link {
-    color: #1266f1 !important;
+    color: #0032FF !important;
 }
 
 .skin-light .navbar .nav-item.active>.nav-link,
 .skin-light .navbar .nav-item.selected>.nav-link {
     background-color: transparent !important;
-    border-bottom-color: #1266f1;
+    border-bottom-color: #0032FF;
 }
 
 .skin-light .navbar.navbar-transparent .navbar-nav .nav-item .nav-link {
@@ -38,7 +30,7 @@
 
 .skin-light .navbar .navbar-nav .nav-item.active>.nav-link {
     background-color: transparent;
-    color: #1266f1
+    color: #0032FF
 }
 
 .skin-light .navbar .mega-dropdown .nav-link {
@@ -55,7 +47,7 @@
 }
 
 .skin-light .navbar .mega-dropdown .nav-link:hover {
-    border-bottom: 2px solid #1266f1;
+    border-bottom: 2px solid #0032FF;
 }
 
 @media (max-width: 767px) {
@@ -71,24 +63,12 @@
 .skin-light .btn-group.title a.btn:hover,
 .skin-light .btn-group.title a.btn:focus,
 .skin-light .btn-group.title a.btn.active {
-    border-bottom: 2px solid #1266f1 !important;
+    border-bottom: 2px solid #0032FF !important;
 }
 
 .skin-light .app-user .info i.fa-whatsapp {
     position: relative;
     bottom: 6px;
-}
-
-.skin-light .app-user .info li a {
-
-}
-
-.skin-light .app-user {
-
-}
-
-.skin-light .app-user {
-
 }
 
 .skin-light .app-advert-list-block {
@@ -110,7 +90,7 @@
 
 .skin-light .app-advert-message-bulk {
     cursor: pointer;
-    border-radius: 0 !important;
+    border-radius: 30px !important;
 }
 
 .skin-light .app-advert-message-bulk .contact div {
@@ -155,15 +135,15 @@
 }
 
 .skin-light .app-credit-bulk .credit {
-    border-radius: 5px !important;
+    border-radius: 30px !important;
     color: #4f4f4f !important;
     border: 1.5px solid #b0bec5 !important;
 }
 
 .skin-light .app-credit-bulk .credit:hover,
 .skin-light .app-credit-bulk .credit.active {
-    -webkit-box-shadow: 0 5px 11px 0 rgba(255, 102, 106, 0.18), 0 4px 15px 0 rgba(255, 102, 106, 0.15) !important;
-    box-shadow: 0 5px 11px 0 rgba(255, 102, 106, 0.18), 0 4px 15px 0 rgba(255, 102, 106, 0.15) !important;
+    -webkit-box-shadow: 0 16px 28px 0 rgba(255, 102, 106, 0.22), 0 25px 55px 0 rgba(255, 102, 106, 0.21) !important;
+    box-shadow: 0 16px 28px 0 rgba(255, 102, 106, 0.22), 0 25px 55px 0 rgba(255, 102, 106, 0.21) !important;
     color: #FF6A00 !important;
     border: 1.5px solid #FF6A00 !important;
 }
@@ -174,8 +154,8 @@
 }
 
 .skin-light .app-credit-bulk .credit .offre {
-    border-bottom-left-radius: 5px !important;
-    border-bottom-right-radius: 5px !important;
+    border-bottom-left-radius: 29px !important;
+    border-bottom-right-radius: 29px !important;
     margin-left: -.6px !important;
     margin-right: -.6px !important;
     margin-bottom: -.5px !important;
@@ -286,7 +266,7 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     margin-right: 30px;
     padding-bottom: 10px;
     padding-top: 13px;
-    border-bottom: 4px solid #1266f1;
+    border-bottom: 4px solid #0032FF;
 }
 
 .skin-light .jumbotron.mobile .navbar-container a:hover,
@@ -312,12 +292,17 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     height: 115px;
 }
 
+.skin-light .app-alert-list-block {
+    border-radius: 30px !important;
+}
+
 .skin-light .app-alert-list-block .category div {
     border: 1.6px solid #e91e63;
     cursor: pointer;
     display: inline-block;
     padding: 4px 9px 2px 9px;
     color: #e91e63;
+    border-radius: 15px !important;
 }
 
 .skin-light .app-alert-list-block .category div:hover,
@@ -330,23 +315,25 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 
 .skin-light .app-user-advert-block {
     cursor: pointer;
-    border-radius: 0 !important;
+    border-radius: 30px !important;
 }
 
 .skin-light .app-user-advert-block:hover {
     -webkit-box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
     box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
-    border-radius: 0 !important;
+    border-radius: 30px !important;
 }
 
 .skin-light .app-user-advert-block img {
     width: 100%;
     height: 150px;
+    border-top-left-radius: 30px !important;
 }
 
 @media (max-width: 767px) {
     .skin-light .app-user-advert-block img {
         height: 110px;
+        border-top-left-radius: 30px !important;
     }
 
     .skin-light .app-user-advert-block .nbr-photo {
@@ -363,7 +350,6 @@ label.btn input[type="radio"].with-gap:checked+label:after {
         right: 0;
         background-color: #ffffff;
     }
-
 
     .skin-light .app-user-advert-block .location {
         font-size: .75rem !important;
@@ -463,7 +449,7 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 }
 
 #app-parrainage .gestion {
-    border: 2px solid #1266f1;
+    border: 2px solid #0032FF;
     border-radius: 0;
     padding: 20px 7px 17px 24px;
 }

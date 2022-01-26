@@ -51,7 +51,7 @@ class UserController extends AbstractController
         $number = $em->getRepository(Advert::class)->getUserAdvertActiveNumber($search);
         $adverts = $em->getRepository(Advert::class)->getUserAdvertActive($search);
 
-        $adverts = $paginator->paginate($adverts, $request->query->getInt('page', 1), 20);
+        $adverts = $paginator->paginate($adverts, $request->query->getInt('page', 1), 9);
 
         return $this->render('user/profil/profil.html.twig', [
             'user' => $user,

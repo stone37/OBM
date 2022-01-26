@@ -26,6 +26,7 @@ class FavoriteRepository extends ServiceEntityRepository
             ->leftJoin('f.advert', 'advert')
             ->addSelect('advert')
             ->where('f.user = :user')
+            ->andWhere('advert.deleted = 0')
             ->setParameter('user', $user)
             ->orderBy('f.createdAt', 'desc');
 

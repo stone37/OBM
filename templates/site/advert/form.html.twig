@@ -175,14 +175,16 @@
     {% block app_advert_location %}
         <div class="form-row">
             <div class="col-12 col-md-7 col-lg-5">
-                <div class="md-form md-outline mb-2 mr-2">
-                    {{- form_widget(form.location.name, {'id': 'app-city-name', 'attr': {'class': 'form-control'}}) -}}
-                    {{- form_label(form.location.name) -}}
-                    {{- form_errors(form.location.name) -}}
+                <div class="d-flex flex-wrap">
+                    <div class="select-outline position-relative w-100">
+                        {{ form_widget(form.location.name) }}
+                        <label>{{ form.location.name.vars.label }}</label>
+                    </div>
+                    <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(form.location.name) }}</div>
                 </div>
             </div>
         </div>
-        <div class="form-row mb-4">
+        <div class="form-row mb-4" style="margin-top: -1.5rem !important">
             <div class="col-12 col-md-7 col-lg-5">
                 <div class="md-form md-outline mb-2 mr-2">
                     {{- form_widget(form.location.detail, {'id': 'app-advert-search-zone', 'attr': {'class': 'form-control'}}) -}}
@@ -196,8 +198,6 @@
             </div>
         </div>
     {% endblock %}
-
-
 
     <div class="form-row my-3">
         <div class="col-12">

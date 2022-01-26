@@ -58,9 +58,7 @@ class AdvertController extends AbstractController
      * @param $id
      * @return Response
      */
-    public function show(
-        EntityManagerInterface $em,
-        $type, $id)
+    public function show(EntityManagerInterface $em, $type, $id)
     {
         $advert = $em->getRepository(Advert::class)->find($id);
 

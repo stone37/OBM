@@ -41,10 +41,12 @@
                 </div>
             </div>
             <div class="col-12 col-md-6" style="margin-top: -20px !important;">
-                <div class="md-form md-outline">
-                    {{- form_widget(form.city, {'id': 'app-city-name', 'attr': {'class': 'form-control'}}) -}}
-                    {{- form_label(form.city) -}}
-                    {{- form_errors(form.city) -}}
+                <div class="d-flex flex-wrap">
+                    <div class="select-outline position-relative w-100">
+                        {{ form_widget(form.city) }}
+                        <label>{{ form.city.vars.label }}</label>
+                    </div>
+                    <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(form.city) }}</div>
                 </div>
             </div>
         </div>

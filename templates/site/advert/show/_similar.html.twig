@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-12">
         {% if adverts|length > 0 %}
-            <h5 class="h5-responsive font-weight-stone-500 text-primary mb-3">
+            <h5 class="h5-responsive font-weight-stone-500 text-primary mb-4 mb-md-3 text-center text-md-left">
                 {% if reference.subDivision %}{{ reference.subDivision.name|capitalize }}{% else %}{{ reference.subCategory.name|capitalize }}{% endif %}
                 {% if reference.type == "j'offre" %}à acheter
                 {% elseif reference.type == 'je recherche' %}rechercher
@@ -11,7 +11,7 @@
                 à {{ reference.location.name }} ({{ reference.location.detail }})
             </h5>
 
-            <div class="row">
+            <div class="row d-flex justify-content-center justify-content-md-start">
                 {% for advert in adverts %}
                     {% set photo_principale = app_advert_photo(advert.images) %}
 
@@ -24,24 +24,25 @@
                             'city': advert.location.name, 'reference': advert.reference, 'slug': advert.slug}) %}
                     {% endif %}
 
-                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="col-10 col-md-6 col-lg-4">
                         <div id="advert_{{ advert.id }}" class="card app-advert-similar-block mb-4">
                             <div class="view overlay">
                                 {% if photo_principale %}
                                     <img class="card-img-top" src="{{ asset(photo_principale.webPath) }}" alt="Card image cap" />
                                 {% else %}
-                                    <img class="card-img-top" src="{{ asset('images/no_images.jpg') }}" alt="Card image cap" />
+                                    <img class="card-img-top" src="{{ asset('images/no_image.png') }}" alt="Card image cap" />
                                 {% endif %}
-                                <a href="#!">
+                                <a href="#">
                                     <div class="mask rgba-white-slight"></div>
                                 </a>
                             </div>
 
-                            <div class="card-body px-2 py-2">
-                                <div class="font-weight-stone-500 text-primary mb-1">
-                                    {{ advert.title|u.truncate(28) }}
-                                </div>
-                                <div class="font-weight-stone-600 text-default mb-1">
+                            <div class="card-body px-2 py-2 py-md-3">
+                                <h5 class="font-weight-stone-500 text-primary mb-1 h5-responsive">
+                                    {{ advert.title|u.truncate(20, '...') }}
+                                </h5>
+
+                                <div class="font-weight-stone-600 text-default mb-1 h5-responsive">
                                     {{ advert.price }} <span class="small font-weight-stone-600">CFA</span>
                                 </div>
                                 <div class="small grey-text font-weight-stone-500 mb-2">
@@ -61,7 +62,7 @@
 </div>
 
 <div class="row app-advert-similar-detail">
-    <div class="col-12 mb-4">
+    <div class="col-12 my-4">
         <h5 class="h5-responsive font-weight-stone-500 text-primary">
             {{ reference.category.name }} à {{ reference.location.name|lower }}
         </h5>
@@ -75,7 +76,7 @@
         </div>
     </div>
 
-    <div class="col-12 mb-4">
+    <div class="col-12 mb-5">
         <h5 class="h5-responsive font-weight-stone-500 text-primary">
             {% if reference.subDivision|length > 0 %}{{ reference.subDivision.name }}{% else %}{{ reference.subCategory.name }}{% endif %}
              à {{ reference.location.name|lower }}

@@ -1,0 +1,30 @@
+<div class="row d-flex justify-content-center justify-content-md-start">
+    <div class="col-12 col-md-4">
+        {{ form_row(form.name) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.lat) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.lng) }}
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="col-12 col-md-4 my-3">
+        <div class="grey-text pb-1">{{ form.enabled.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.enabled.vars.full_name }}" id="{{ form.enabled.vars.id }}"
+                       value="{{ form.enabled.vars.value }}" {% if form.enabled.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+</div>
+

@@ -3,6 +3,7 @@
 namespace App\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,6 +15,8 @@ trait AdvertAchatVenteTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @Assert\NotBlank(groups={"AchatVente"})
      *
      * @ORM\Column(type="string", nullable=true)
@@ -23,12 +26,16 @@ trait AdvertAchatVenteTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $aType;
 
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @Assert\NotBlank(groups={"Ipad", "Obureau", "Oportable"})
      *

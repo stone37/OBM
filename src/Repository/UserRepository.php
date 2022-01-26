@@ -126,6 +126,19 @@ class UserRepository extends AbstractRepository implements PasswordUpgraderInter
         return $qb;
     }
 
+    public function refreshUser($id)
+    {
+        try
+        {
+            $qb = $this->createQueryBuilder('u')
+                ->where('u.id = :id')
+                ->setParameter('id', (int)$id)
+                ->getQuery()->getOneOrNullResult();
+        } catch (NonUniqueResultException $exception) {}
+
+        return $qb;
+    }
+
     /**
      * Requête permettant de récupérer le nombre total d'utilisateur
      *

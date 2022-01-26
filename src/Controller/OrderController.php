@@ -4,11 +4,9 @@ namespace App\Controller;
 
 use App\Controller\Traits\ControllerTrait;
 use App\Entity\Command;
-use App\Entity\Order;
 use App\Entity\Payment;
 use App\Entity\Product;
 use App\Event\PaymentEvent;
-use App\Exception\PaymentFailedException;
 use App\Manager\OrderManager;
 use App\Manager\SettingsManager;
 use App\Service\CinetPayService;
@@ -16,35 +14,42 @@ use App\Service\Summary;
 use App\Service\UniqueSuiteNumberGenerator;
 use App\Service\WalletService;
 use App\Storage\OrderSessionStorage;
-use CinetPay\CinetPay;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-use Exception;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 
 class OrderController extends AbstractController
 {
     use ControllerTrait;
 
+    private $em;
+    private $session;
     private $settings;
     private $storage;
+    private $manager;
 
-    public function __construct(SettingsManager $settings, OrderSessionStorage $storage)
+    public function __construct(
+        EntityManagerInterface $em,
+        SessionInterface $session,
+        SettingsManager $settings,
+        OrderSessionStorage $storage,
+        OrderManager $manager)
     {
+        $this->em = $em;
+        $this->session = $session;
         $this->settings = $settings->get();
         $this->storage = $storage;
+        $this->manager = $manager;
     }
 
-    public function invoice(EntityManagerInterface $em, $id)
+    public function invoice($id)
     {
-        $order = $em->getRepository(Command::class)->find($id);
+        $order = $this->em->getRepository(Command::class)->find($id);
 
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
@@ -70,26 +75,26 @@ class OrderController extends AbstractController
      * @param SessionInterface $session
      * @return Response
      */
-    public function prepareOrder(EntityManagerInterface $em, OrderManager $manager, SessionInterface $session)
+    public function prepareOrder()
     {
-        $manager->clearItems();
+        $this->manager->clearItems();
 
         $totalHT = 0;
         $totalTVA = 0;
 
-        $products = $em->getRepository(Product::class)
-                        ->findArray(array_values($session->get('app_cart')));
+        $products = $this->em->getRepository(Product::class)
+                        ->findArray(array_values($this->session->get('app_cart')));
 
         foreach ($products as $product) {
             $priceTTC = ((($product->getPrice() * $product->getTva()->getValue())/100)+$product->getPrice());
 
-            $manager->addItem($product, $priceTTC);
+            $this->manager->addItem($product, $priceTTC);
 
             $totalHT += $product->getPrice();
             $totalTVA += $priceTTC - $product->getPrice();
         }
 
-        $order = $manager->getCurrent();
+        $order = $this->manager->getCurrent();
 
         $order->setUser($this->getUser());
         $order->setValidated(false);
@@ -100,10 +105,10 @@ class OrderController extends AbstractController
         $order->setPriceTotalTva($totalHT+$totalTVA);
 
         if (!$this->storage->has()) {
-            $em->persist($order);
+            $this->em->persist($order);
         }
 
-        $em->flush();
+        $this->em->flush();
 
         $this->storage->set($order->getId());
 
@@ -119,11 +124,9 @@ class OrderController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function validateCreditOrder(
-        EntityManagerInterface $em,
         WalletService $service,
         EventDispatcherInterface $dispatcher,
-        UniqueSuiteNumberGenerator $generator,
-        SessionInterface $session)
+        UniqueSuiteNumberGenerator $generator)
     {
         $response = $service->execute();
         
@@ -146,15 +149,15 @@ class OrderController extends AbstractController
                 ->setTax($order->getTotalTva())
                 ->setEnabled(true);
 
-            $em->persist($payment);
-            $em->flush();
+            $this->em->persist($payment);
+            $this->em->flush();
 
             $dispatcher->dispatch(new PaymentEvent($payment, $order));
 
-            $session->remove('orderId');
-            $session->remove('app_cart');
-            $session->remove('app_advert');
-            $session->remove('app_vignette');
+            $this->session->remove('orderId');
+            $this->session->remove('app_cart');
+            $this->session->remove('app_advert');
+            $this->session->remove('app_vignette');
 
             $this->addFlash('success', 'Felicitation, votre paiement a été effectué avec succès');
 
@@ -186,11 +189,9 @@ class OrderController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function payment(
-        EntityManagerInterface $em,
         OrderManager $manager,
         EventDispatcherInterface $dispatcher,
-        UniqueSuiteNumberGenerator $generator,
-        SessionInterface $session)
+        UniqueSuiteNumberGenerator $generator)
     {
         $order = $manager->getCurrent();
 
@@ -209,15 +210,15 @@ class OrderController extends AbstractController
             ->setTax($order->getTotalTva())
             ->setEnabled(true);
 
-        $em->persist($payment);
-        $em->flush();
+        $this->em->persist($payment);
+        $this->em->flush();
 
         $dispatcher->dispatch(new PaymentEvent($payment, $order));
 
-        $session->remove('orderId');
-        $session->remove('app_cart');
-        $session->remove('app_advert');
-        $session->remove('app_vignette');
+        $this->session->remove('orderId');
+        $this->session->remove('app_cart');
+        $this->session->remove('app_advert');
+        $this->session->remove('app_vignette');
 
         $this->addFlash('success', 'Felicitation, votre paiement a été effectué avec succès');
 

@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\City;
 use App\Model\Search;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -13,8 +15,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchType extends AbstractType
 {
+    private EntityManagerInterface $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $cities = $this->em->getRepository(City::class)->getEnabledCitiesByCountryCode('ci');
+
         $builder
             ->add('type', ChoiceType::class, [
                 'choices' => [
@@ -26,9 +37,14 @@ class SearchType extends AbstractType
                 'label' => 'Type d\'annonce',
                 'required' => false,
             ])
-            ->add('city', TextType::class, [
-                'label' => false,
-                'attr' => ['placeholder' => 'Ville']
+            ->add('city', ChoiceType::class, [
+                'choices' => $cities,
+                'label' => 'Ville',
+                'attr' => [
+                    'class' => 'mdb-select md-outline md-form dropdown-stone app-advert-location-city',
+                ],
+                'required' => false,
+                'placeholder' => 'Ville',
             ])
             ->add('zone', TextType::class, [
                 'label' => 'Zone de recherche',

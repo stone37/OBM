@@ -10,8 +10,8 @@
             'city': advert.location.name, 'reference': advert.reference, 'slug': advert.slug}) %}
     {% endif %}
 
-    <div class="card card-cascade narrower mb-4">
-        <div class="view view-cascade overlay">
+    <div class="card card-cascade narrower mb-4 mb-md-4">
+        <div class="view view-cascade overlay bg-white">
             {% if photo_principale %}
                 <img class="card-img-top" src="{{ image_ad_url(photo_principale, 200, 130) }}" alt="{{ photo_principale.name }}" />
             {% else %}
@@ -23,14 +23,14 @@
         </div>
 
         <!-- Card content -->
-        <div class="card-body card-body-cascade pb-1 px-2">
-            <div class="font-weight-stone-500 text-primary mb-2">
+        <div class="card-body card-body-cascade pb-3 px-3">
+            <h5 class="font-weight-stone-600 text-primary mb-2 h5-responsive">
                 {% if advert.subDivision %}{{ advert.subDivision }}
                 {% else %}{{ advert.subCategory }}
                 {% endif %}
-            </div>
+            </h5>
             <p class="card-text small-9">
-                {{ advert.description|u.truncate(120, ' ...') }}
+                {{ advert.description|u.truncate(100, ' ...') }}
             </p>
             <div class="my-3">
                 <div class="small grey-text">

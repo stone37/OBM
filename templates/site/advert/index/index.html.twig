@@ -135,6 +135,7 @@
             brand = '{{ app.request.query.get("marque") }}',
             model = '{{ app.request.query.get("model") }}';
     </script>
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/location.js'} %}
     {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/advert/list.js'} %}
 
 {% endblock %}

@@ -160,6 +160,11 @@ $(document).ready(function() {
     bulkModals($('.entity-tax-delete-bulk-btn a.btn-danger'), $checkbookContainer,
         'app_admin_taxe_bulk_delete', $container);
 
+    // City
+    simpleModals($('.entity-city-delete'), 'app_admin_city_delete', $container);
+    bulkModals($('.entity-city-delete-bulk-btn a.btn-danger'), $checkbookContainer,
+        'app_admin_city_bulk_delete', $container);
+
     // Zone
     simpleModals($('.entity-zone-delete'), 'app_admin_zone_delete', $container);
     bulkModals($('.entity-zone-delete-bulk-btn a.btn-danger'), $checkbookContainer,
@@ -179,6 +184,16 @@ $(document).ready(function() {
     simpleModals($('.entity-vignette-list-delete'), 'app_admin_vignette_list_delete', $container);
     bulkModals($('.entity-vignette-list-delete-bulk-btn a.btn-danger'), $checkbookContainer,
         'app_admin_vignette_list_bulk_delete', $container);
+
+    // Help
+    simpleModals($('.entity-help-delete'), 'app_admin_help_delete', $container);
+    bulkModals($('.entity-help-delete-bulk-btn a.btn-danger'), $checkbookContainer,
+        'app_admin_help_bulk_delete', $container);
+
+    // Help category
+    simpleModals($('.entity-help-category-delete'), 'app_admin_help_category_delete', $container);
+    bulkModals($('.entity-help-category-delete-bulk-btn a.btn-danger'), $checkbookContainer,
+        'app_admin_help_category_bulk_delete', $container);
 
     // Advert clean
     $('.advert-clean').click(function (e) {
@@ -252,8 +267,6 @@ $(document).ready(function() {
                 type: 'GET',
                 success: function(data){
                     let $result = $.parseJSON(data);
-
-                    console.log($result);
 
                     let $subCategoryTitle = $("<option>").attr({value: "", selected: "selected"})
                             .text("Sous catégories"),

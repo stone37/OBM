@@ -17,7 +17,7 @@
         </h2>
     </div>
     <div class="col-12 col-md-4 ">
-        <div class="card testimonial-card mx-lg-4 mb-5">
+        <div class="card testimonial-card mx-lg-4 mb-5 z-depth-3">
             <div class="card-up bg-primary"></div>
             <div class="avatar mx-auto white">
                 {% if vich_uploader_asset(user, 'file') %}
@@ -36,23 +36,23 @@
                         {{ user.firstName}} {{ user.lastName }}
                     {% endif %}
                 </h3>
-                <hr>
+                <hr class="my-4">
                 <div class="text-left">
                     <ul class="list-unstyled">
                         <li class="mb-1 mb-lg-2">
-                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            <i class="fas fa-map-marker-alt text-primary mr-1"></i>
                             {% if user.city %}{{ user.city }}{% else %}
                                 <span class="badge badge-grey">Aucun</span>
                             {% endif %}
                         </li>
                         <li class="mb-1 mb-lg-2">
-                            <i class="fas far fa-clock mr-1"></i>
+                            <i class="fas far fa-clock mr-1 text-primary"></i>
                             Membre <span class="font-weight-stone-600">{{ user.createdAt|ago('depuis') }}</span>
                         </li>
                         <li class="mb-1 mb-lg-2">
-                            <i class="fas fa-calendar-check mr-1"></i>
+                            <i class="fas fa-calendar-check text-primary mr-1"></i>
                             Dernière connexion:
-                            <span class="font-weight-stone-600">
+                            <span class="font-weight-stone-600 text-primary">
                                 {{ user.lastLoginAt|date_french(1, 1) }}
                             </span>
                         </li>
@@ -131,7 +131,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <div id="app-advert-bulk" class="row app-advert-bulk">
+                <div id="app-advert-bulk" class="row app-advert-bulk mb-5">
                     {% for advert in adverts %}
                         <div class="col-12 col-md-6 col-lg-4">
                             {{ __advert.list(advert, settings) }}

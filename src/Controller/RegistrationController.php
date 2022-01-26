@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Auth\Authenticator;
 use App\Entity\User;
-use App\Entity\Wallet;
 use App\Event\UserCreatedEvent;
 use App\Form\RegistrationFormType;
 use App\Manager\UserManager;
@@ -88,10 +87,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 ) : ''
             );
-            $user->setCreatedAt(new DateTime());
+
             $user->setConfirmationToken($isOauthUser ? null : $tokenGenerator->generate(60));
             $user->setNotificationsReadAt(new DateTimeImmutable());
-            $user->setWallet(new Wallet());
 
             $this->manager->updateUser($user);
 

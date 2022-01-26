@@ -2,9 +2,13 @@
     font-weight: 600 !important;
 }
 
+.skin-light .app-choose-category .list-group {
+    border-radius: 30px !important;
+}
+
 .skin-light .app-choose-category .list-group a {
     background-color: #ffffff !important;
-    color: #1266F1;
+    color: #0032FF;
 }
 
 .skin-light .app-choose-category .list-group a i {

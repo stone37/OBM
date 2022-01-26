@@ -1,0 +1,6 @@
+scheduler:
+    start_date: '2021-11-09 14:46:00'
+    end_date: '2021-11-10 20:00:00'
+ips:
+    - 127.0.0.1
+custom_message: '<h1>Le site est en maintenance</h1>'

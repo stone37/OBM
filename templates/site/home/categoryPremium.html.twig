@@ -39,7 +39,7 @@
                                          class="img-fluid wow fadeInRight z-depth-2" alt="{{ category.name }}">
                                 </div>#}
                                 <div class="view wow fadeInRight">
-                                    <img src="/public{{ vich_uploader_asset(category, 'file') }}" class="img-fluid" alt="">
+                                    <img src="{{ vich_uploader_asset(category, 'file') }}" class="img-fluid" alt="">
                                     <div class="mask flex-center">
                                         <p class="text-center z-depth-2 mx-2">{{ category.name }}</p>
                                     </div>
@@ -59,7 +59,7 @@
                                 </div>#}
 
                                 <div class="view wow fadeInRight">
-                                    <img src="/public{{ vich_uploader_asset(category, 'file') }}" class="img-fluid" alt="">
+                                    <img src="{{ vich_uploader_asset(category, 'file') }}" class="img-fluid" alt="">
                                     <div class="mask flex-center">
                                         <p class="text-center z-depth-3 mx-2">{{ category.name }}</p>
                                     </div>

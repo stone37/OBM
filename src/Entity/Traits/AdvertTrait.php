@@ -13,6 +13,7 @@ use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -25,6 +26,8 @@ trait AdvertTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @Assert\NotBlank()
      * @Assert\Length(min="8", max="120")
      *
@@ -35,6 +38,8 @@ trait AdvertTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert"})
+     *
      * @Gedmo\Slug(fields={"title"}, unique=true)
      *
      * @ORM\Column(name="slug", type="string", length=100)
@@ -43,6 +48,8 @@ trait AdvertTrait
 
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @Assert\NotBlank()
      * @Assert\Length(min="10")
@@ -54,21 +61,27 @@ trait AdvertTrait
     /**
      * @var int
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @Assert\NotBlank()
      *
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $price;
+    private $price = 0;
 
     /**
      * @var bool
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $priceStatus;
+    private $priceStatus = false;
 
     /**
      * @var string
+     *
+     * @Groups({"read:advert", "write:advert"})
      *
      * @Assert\NotBlank()
      *
@@ -81,6 +94,8 @@ trait AdvertTrait
      *
      * @Assert\NotBlank()
      *
+     * @Groups({"read:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $reference;
@@ -88,12 +103,16 @@ trait AdvertTrait
     /**
      * @var string
      *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $traitement;
 
     /**
      * @var Category
+     *
+     * @Groups({"read:advert"})
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -106,6 +125,8 @@ trait AdvertTrait
     /**
      * @var Category
      *
+     * @Groups({"read:advert"})
+     *
      * @Assert\Valid()
      *
      * @ORM\ManyToOne(targetEntity=Category::class)
@@ -115,6 +136,8 @@ trait AdvertTrait
     /**
      * @var Category
      *
+     * @Groups({"read:advert"})
+     *
      * @Assert\Valid()
      *
      * @ORM\ManyToOne(targetEntity=Category::class)
@@ -123,6 +146,8 @@ trait AdvertTrait
 
     /**
      * @var Location
+     *
+     * @Groups({"read:advert", "write:advert", "update:advert"})
      *
      * @Assert\Valid()
      *
@@ -134,12 +159,16 @@ trait AdvertTrait
     /**
      * @var ArrayCollection|AdvertPicture
      *
+     * @Groups({"read:advert"})
+     *
      * @ORM\OneToMany(targetEntity=AdvertPicture::class, mappedBy="advert", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $images;
 
     /**
      * @var User
+     *
+     * @Groups({"read:advert"})
      *
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="adverts")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
@@ -162,6 +191,8 @@ trait AdvertTrait
 
     /**
      * @var int
+     *
+     * @Groups({"read:advert"})
      *
      * @ORM\Column(type="integer", options={"default": 0})
      */

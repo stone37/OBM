@@ -5,37 +5,50 @@ namespace App\Entity\Traits;
 use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 trait AdvertOptionTrait
 {
     /**
      * @var boolean
      *
+     * @Groups({"read:advert"})
+     *
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $optionPhoto = false;
 
     /**
+     * @Groups({"read:advert"})
+     *
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $optionAdHeadEnd = null;
 
     /**
+     * @Groups({"read:advert"})
+     *
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $optionAdUrgentsEnd = null;
 
     /**
+     * @Groups({"read:advert"})
+     *
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $optionAdGalleryEnd = null;
 
     /**
+     * @Groups({"read:advert"})
+     *
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $optionAdVedetteEnd = null;
 
     /**
+     * @Groups({"read:advert"})
+     *
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $optionAdEncadreEnd = null;

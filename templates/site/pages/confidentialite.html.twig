@@ -1,6 +1,6 @@
 {% extends 'site/layout.html.twig' %}
 
-{% block title %}Mentions légales{% endblock %}
+{% block title %}Politique de confidentialité{% endblock %}
 
 {% block app_cart %}{% endblock %}
 {% block app_mobile_cart %}{% endblock %}
@@ -23,7 +23,7 @@
 
 {% block app_breadcrumbs %}
     <section class="pt-md-0 mt-page-n">
-        {{ breadcrumb('Mentions légales') }}
+        {{ breadcrumb('Politique de confidentialité') }}
         {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
             itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
     </section>
@@ -32,7 +32,7 @@
 {% block app_body %}
     <div class="row d-flex justify-content-center mb-4">
         <div class="col-12">
-            {% include 'site/pages/mention/_content.html.twig' %}
+            {% include 'site/pages/confidentialite/_content.html.twig' %}
         </div>
     </div>
 {% endblock %}

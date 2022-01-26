@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Centre d'aides | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/help/index/_header.html.twig' %}
+
+    {% include 'admin/help/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

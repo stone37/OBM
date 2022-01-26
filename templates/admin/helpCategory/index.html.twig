@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Catégories et sous catégories | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/helpCategory/index/_header.html.twig' %}
+
+    {% include 'admin/helpCategory/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

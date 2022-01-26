@@ -14,11 +14,8 @@ parameters:
     image_resize_key: '%env(resolve:IMAGE_RESIZE_KEY)%'
     typesense_key:    '%env(resolve:TYPESENSE_KEY)%'
     typesense_host:   '%env(resolve:TYPESENSE_HOST)%'
-    maintenance:
-        path: '%kernel.project_dir%/public/.maintenance'
-        ipAuthorized: []
-
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    maintenance_dir: '%env(resolve:MAINTENANCE_DIR)%'
 
 services:
     # default configuration for services in *this* file
@@ -50,8 +47,8 @@ services:
         arguments:
             $dkimKey: '%dkim_key%'
 
-    App\Queue\FailedJobsService:
-        arguments: ['@messenger.transport.failed']
+#    App\Queue\FailedJobsService:
+#        arguments: ['@messenger.transport.failed']
 
     App\Service\ImageResizer:
         arguments: ['%image_resize_key%']
@@ -65,13 +62,114 @@ services:
     App\Model\SearchInterface:
         class: App\Model\Typesense\TypesenseSearch
 
-    App\EventListener\MaintenanceListener:
+    App\Manager\ConfigurationFileManager:
         arguments:
-            $maintenance: '%maintenance%'
-        tags:
-            - { name: kernel.event_listener, event: kernel.request }
+            $maintenanceDirectory: '%maintenance_dir%'
 
     App\Service\CookieGenerator:
         arguments:
             $secret: '%env(resolve:MERCURE_SUBSCRIBER_KEY)%'
+
+    App\Api\OpenApi\OpenApiFactory:
+        decorates: 'api_platform.openapi.factory'
+        arguments: ['@App\Api\OpenApi\OpenApiFactory.inner']
+        autoconfigure: false
+
+    advert.category_filter:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [ { category.slug: ~, subCategory.slug: ~, subDivision.slug: ~ } ]
+        tags: ['api_platform.filter']
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    advert.price_filter:
+        parent: 'api_platform.doctrine.orm.range_filter'
+        arguments: [ { price: ~ } ]
+        tags: [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    advert.location_filter:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [ { location.name: ~, location.detail: ~ } ]
+        tags: [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    advert.type_filter:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [ { type: ~ } ]
+        tags: [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    advert.sort_filter:
+        parent: 'api_platform.doctrine.orm.order_filter'
+        arguments:
+            $properties: { price: ~, autoYear: ~, validatedAt: ~, position: ~ }
+            $orderParameterName: order
+        tags: [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    advert.data_search_filter:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [ { marque: ~, model: ~, typeCarburant: ~, immobilierState: ~, nombrePiece: ~, nombreChambre: ~, nombreSalleBain: ~, access: partial, proximite: partial, interior: partial, exterior: partial, state: ~ } ]
+        tags: [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    advert.data_range_filter:
+        parent: 'api_platform.doctrine.orm.range_filter'
+        arguments: [ { kilo: ~, autoYear: ~, surface: ~ } ]
+        tags: [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    advert.urgent_filter:
+        parent: 'api_platform.doctrine.orm.date_filter'
+        arguments: [ { optionAdUrgentsEnd: ~ } ]
+        tags: [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    city.name_filter:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [ { name: partial } ]
+        tags: [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    zone.city_filter:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [ { city.name: partial } ]
+        tags: [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    zone.name_filter:
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [ { zone: 'partial' } ]
+        tags: [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    # app/config/services.yaml
+#    App\Controller\HomeController:
+#        tags: [controller.service_arguments]
+#        bind:
+#            FOS\ElasticaBundle\Finder\TransformedFinder $finder: '@fos_elastica.finder.advert'
+
+
 

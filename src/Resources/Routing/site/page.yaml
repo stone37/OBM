@@ -10,12 +10,24 @@ app_help:
   path: /centre-daide
   controller: App\Controller\PagesController::help
 
+app_help_s:
+  path: /centre-daide/{category_slug}
+  controller: App\Controller\PagesController::help
+
+app_help_show:
+  path: /centre-daide/{category_slug}/{slug}
+  controller: App\Controller\PagesController::helpShow
+
+app_help_result_search:
+  path: /centre-daide/s/rechercher/{data}
+  controller: App\Controller\PagesController::helpResult
+
 app_mention_legale:
   path: /mentions-legales
   controller: App\Controller\PagesController::mention
 
 app_cgu:
-  path: /condition-dutilisation
+  path: /condition-d-utilisation
   controller: App\Controller\PagesController:cgu
 
 app_advertiser_charte:

@@ -5,6 +5,7 @@ namespace App\Entity\Traits;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Trait TimestampableTrait
@@ -15,6 +16,8 @@ trait TimestampableTrait
     /**
      * @var Datetime
      *
+     * @Groups({"read:advert", "read:alert"})
+     *
      * @Gedmo\Timestampable(on="create"))
      *
      * @ORM\Column(type="datetime")
@@ -23,6 +26,8 @@ trait TimestampableTrait
 
     /**
      * @var Datetime
+     *
+     * @Groups({"read:advert"})
      *
      * @Gedmo\Timestampable(on="update")
      *

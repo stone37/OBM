@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Traits\CategoryTreeTrait;
 use App\Entity\Traits\EnabledTrait;
 use App\Entity\Traits\MediaTrait;
@@ -14,6 +15,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\CategoryTrait;
 use Serializable;
+use ApiPlatform\Core\Action\NotFoundAction;
 
 /**
  * Class Category
@@ -23,6 +25,8 @@ use Serializable;
  * @Vich\Uploadable
  * @Gedmo\Tree(type="nested")
  * @ORM\MappedSuperclass
+ *
+ * ApiResource()
  */
 class Category implements Serializable
 {

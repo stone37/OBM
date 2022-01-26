@@ -5,33 +5,25 @@
 
 {% if is_mobile() %}
     <div class="d-flex justify-content-between flex-wrap d-md-none btn-gestion">
-        <a class="btn btn-outline-grey facebook" data-sharer="facebook"
+        <a class="btn btn-outline-grey facebook mb-2" data-sharer="facebook"
            data-hashtag="{{ settings.name|slug('')|lower }}" data-url="{{ url }}">
             <i class="fab fa-facebook-square"></i>
         </a>
-        <a href="{{ messenger }}" class="btn btn-outline-grey messenger">
+        <a href="{{ messenger }}" class="btn btn-outline-grey messenger mb-2">
             <i class="fab fa-facebook-messenger"></i>
         </a>
-        <a class="btn btn-outline-grey whatsapp"
+        <a class="btn btn-outline-grey whatsapp mb-2"
            data-sharer="whatsapp" data-url="{{ url }}">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <a class="btn btn-outline-grey twitter"
+        <a class="btn btn-outline-grey twitter mb-2"
            data-sharer="twitter"
            data-hashtags="{{ settings.name|slug('')|lower }}"
            data-url="{{ url }}">
             <i class="fab fa-twitter"></i>
         </a>
-        {#
-        <a href="sms://;?&body=Hello%20World">Only body</a>
-          <a href="sms://+15552345678;?&body=Hello%20World">one recipient only with body</a>
-
-        <a href="sms:?&body={{ url }}">Text Message</a>
-        <a class="btn btn-outline-grey sms" href="{{ sms }}">
-            <i class="fas fa-sms"></i>
-        </a>#}
-        <a class="btn btn-outline-grey sms" href="sms:?&body={{ url }}"><i class="fas fa-sms"></i></a>
-        <a class="btn btn-outline-deep-orange envelope"
+        <a class="btn btn-outline-grey sms mb-2" href="sms:?&body={{ url }}"><i class="fas fa-sms"></i></a>
+        <a class="btn btn-outline-deep-orange envelope mb-2"
            data-sharer="email"
            data-url="{{ url }}"
            data-subject="{{ subject }}"

@@ -1,0 +1,42 @@
+app_admin_help_category_index:
+  path: /help-categories
+  methods: [GET]
+  controller: App\Controller\Admin\HelpCategoryController::index
+
+app_admin_help_category_create:
+  path: /help-categories/create
+  methods: [GET, POST]
+  controller: App\Controller\Admin\HelpCategoryController::create
+
+app_admin_help_category_edit:
+  path: /help-categories/{id}/edit
+  methods: [GET, POST]
+  controller: App\Controller\Admin\HelpCategoryController::edit
+  requirements:
+    id: \d+
+
+app_admin_help_category_delete:
+  path: /help-categories/{id}/delete
+  methods: [GET, DELETE]
+  controller: App\Controller\Admin\HelpCategoryController::delete
+  requirements:
+    id: \d+
+  options:
+    expose: true
+
+app_admin_help_category_bulk_delete:
+  path: /help-categories/bulk/delete
+  methods: [GET, DELETE]
+  controller: App\Controller\Admin\HelpCategoryController::deleteBulk
+  options:
+    expose: true
+
+app_admin_help_category_move:
+  path: /help-categories/{id}/move
+  methods: GET
+  controller: App\Controller\Admin\HelpCategoryController::move
+  requirements:
+    id: \d+
+
+
+

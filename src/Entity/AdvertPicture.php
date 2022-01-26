@@ -6,6 +6,7 @@ use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\TimestampableTrait;
 use App\Repository\AdvertPictureRepository;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +26,8 @@ class AdvertPicture
     /**
      * @var string
      *
+     * @Groups({"read:advert", "read:picture"})
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $extension;
@@ -32,12 +35,16 @@ class AdvertPicture
     /**
      * @var string
      *
+     * @Groups({"read:advert", "read:picture"})
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
      * @var boolean
+     *
+     * @Groups({"read:advert", "read:picture"})
      *
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -181,6 +188,11 @@ class AdvertPicture
         return __DIR__ . '/../../public/' . $this->getUploadDir();
     }
 
+    /**
+     * @return string
+     *
+     * @Groups({"read:advert", "read:picture"})
+     */
     public function getWebPath()
     {
         return $this->getUploadDir() . '/' . $this->getId() . '.' . $this->getExtension();

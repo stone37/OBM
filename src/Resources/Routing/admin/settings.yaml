@@ -3,11 +3,6 @@ app_admin_settings_index:
     methods: [GET, POST]
     controller: App\Controller\Admin\SettingsController::index
 
-app_admin_settings_meta_tags_index:
-    path: /settings/meta
-    methods: [GET, POST]
-    controller: App\Controller\Admin\SettingsController::meta
-
 app_admin_settings_module_index:
     path: /settings/module
     methods: [GET, POST]

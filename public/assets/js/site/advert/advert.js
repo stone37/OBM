@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     /**
      * #########################
      * Gestion des bouton radio
@@ -47,7 +46,6 @@ $(document).ready(function() {
             $advertAutoModelSelect.materialSelect();
         }
     });
-
 });
 
 let brand = {
