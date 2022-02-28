@@ -122,7 +122,7 @@ class User implements UserInterface, Serializable
     private $confirmationToken = null;
 
     /**
-     * @Groups("read:user")
+     * @Groups("read:user", "read:advert")
      *
      * @ORM\Column(type="string", options={"default": null}, nullable=true)
      */

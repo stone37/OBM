@@ -49,7 +49,6 @@ class AlertManager
      *
      * @param Request $request
      * @param EntityManagerInterface $em
-     * @return Alert
      */
     public function createApiAlert(Alert $alert, Category $category, Category $subCategory = null, Category $subDivision = null): Alert
     {

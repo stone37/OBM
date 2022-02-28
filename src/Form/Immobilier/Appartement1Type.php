@@ -167,7 +167,7 @@ class Appartement1Type extends AbstractType
                 'required' => false,
                 'expanded' => true,
                 'multiple' => true
-            ])
+            ]) 
             ->add('serviceInclus', ChoiceType::class, [
                 'choices' => [
                     'Électricité' => 'Électricité',

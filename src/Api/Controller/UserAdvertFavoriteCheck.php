@@ -30,7 +30,7 @@ class UserAdvertFavoriteCheck extends AbstractController
 
         return ($favorite) ?
             $this->json(['code' => Response::HTTP_OK, 'message' => true], Response::HTTP_OK) :
-            $this->json(['code' => Response::HTTP_NOT_FOUND, 'message' => 'Ressource indisponible'], Response::HTTP_NOT_FOUND);
+            $this->json(['code' => Response::HTTP_OK, 'message' => false], Response::HTTP_OK);
     }
 }
 

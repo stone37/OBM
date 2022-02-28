@@ -61,11 +61,12 @@ App\Entity\User:
                 summary: Retire un utilisateur
                 security:
                     - bearerAuth: []
-        soft_delete_cancel:
+        soft_delete_cancel: 
             security: is_granted("ROLE_USER")
             denormalization_context:
                 groups: ['cancel:user']
             normalization_context:
+                skip_null_values: false
                 groups: ['read:user']
             method: PUT
             path: /users/{id}/delete/cancel
@@ -81,6 +82,7 @@ App\Entity\User:
             denormalization_context:
                 groups: ['delete:user']
             normalization_context:
+
                 groups: ['read:user']
             method: PATCH
             path: /users/{id}/password-change
@@ -95,7 +97,7 @@ App\Entity\User:
             security: is_granted("ROLE_USER")
             normalization_context:
                 groups: ['read:user']
-            method: PATCH
+            method: POST
             path: /users/{id}/image
             requirements:
                 id: \d+
@@ -115,7 +117,7 @@ App\Entity\User:
                                         format: binary
                 summary: Modifie le mot de passe d''un utilisateur
 
-
+  
 App\Entity\Advert:
     collectionOperations:
         get:
@@ -133,7 +135,7 @@ App\Entity\Advert:
                 groups: ['read:advert']
             denormalization_context:
                 groups: ['write:advert']
-            path: /adverts/create
+            path: /adverts/{id}/create
             controller: App\Api\Controller\AdvertCreate
             validation_groups:
                 - App\Entity\Advert
@@ -141,6 +143,8 @@ App\Entity\Advert:
             openapi_context:
                 security:
                     - bearerAuth: []
+                parameters:
+                    - { name: id, in: path, description: "Id de la categories", type: integer, required: true}
         image_cache_clear:
             security: is_granted("ROLE_USER")
             method: GET
@@ -188,7 +192,6 @@ App\Entity\Advert:
                 security:
                     - bearerAuth: []
         advert_active:
-            security: is_granted("ROLE_USER")
             pagination_client_items_per_page: true
             paginationMaximumItemsPerPage: 20
             paginationItemsPerPage: 10
@@ -200,10 +203,7 @@ App\Entity\Advert:
             controller: App\Api\Controller\AdvertUserEnabled
             openapi_context:
                 summary: Recupere les annonces active d'un utilisateur
-                security:
-                    - bearerAuth: []
         advert_inactive:
-            security: is_granted("ROLE_USER")
             pagination_client_items_per_page: true
             paginationMaximumItemsPerPage: 20
             paginationItemsPerPage: 10
@@ -213,10 +213,8 @@ App\Entity\Advert:
             method: GET
             path: /users/{id}/adverts
             controller: App\Api\Controller\AdvertUser
-            openapi_context:
+            openapi_context: 
                 summary: Recupere les annonces inactive d'un utilisateur
-                security:
-                    - bearerAuth: []
         advert_similar:
             pagination_client_items_per_page: true
             paginationMaximumItemsPerPage: 20
@@ -342,6 +340,7 @@ App\Entity\Favorite:
             paginationMaximumItemsPerPage: 20
             paginationItemsPerPage: 10
             normalization_context:
+                skip_null_values: false
                 groups: ['read:favorite', 'read:advert', 'read:user']
             path: /users/{id}/favorites
             requirements:
@@ -377,25 +376,33 @@ App\Entity\Favorite:
             read: false
             output: false
 
+
 App\Entity\Alert:
     collectionOperations:
-        post:
+        get:
+            pagination_client_items_per_page: true
+            paginationMaximumItemsPerPage: 30
+            paginationItemsPerPage: 15
+            normalization_context:
+                skip_null_values: false
+                groups: ['read:alert']
+        alerte_create:
             security: is_granted("ROLE_USER")
             normalization_context:
-                groups: ['read:alert', 'read:category']
+                groups: ['read:alert']
             denormalization_context:
                 groups: ['write:alert']
+            method: POST
             path: /users/alerts/{id}/create
             requirements:
                 id: \d+
-                category_id: \d+
             controller: App\Api\Controller\UserAlertCreate
             openapi_context:
-                summary: Crée une nouvelle alerte
+                summary: Créer une nouvelle alerte
                 security:
                     - bearerAuth: []
                 parameters:
-                    - { name: id, in: path, description: "Identifiant de la catégorie", type: integer, required: true }
+                    - { name: id, in: path, description: "Identifiant de la categorie", type: integer, required: true }
         alert_active:
             security: is_granted("ROLE_USER")
             pagination_client_items_per_page: true
@@ -403,7 +410,7 @@ App\Entity\Alert:
             paginationItemsPerPage: 10
             normalization_context:
                 skip_null_values: false
-                groups: ['read:alert', 'read:category']
+                groups: ['read:alert']
             method: GET
             path: /users/{id}/alerts/enabled
             controller: App\Api\Controller\UserAlertEnabled
@@ -418,7 +425,7 @@ App\Entity\Alert:
             paginationItemsPerPage: 10
             normalization_context:
                 skip_null_values: false
-                groups: ['read:alert', 'read:category']
+                groups: ['read:alert']
             method: GET
             path: /users/{id}/alerts
             controller: App\Api\Controller\UserAlert
@@ -454,7 +461,7 @@ App\Entity\Alert:
             openapi_context:
                 summary: Change le status d'une alerte d'un utilisateur
                 security:
-                    - bearerAuth: [ ]
+                    - bearerAuth: []
 
 
 App\Entity\City:
@@ -492,7 +499,26 @@ App\Entity\Zone:
             read: false
             output: false
 
-
+App\Entity\Settings:
+    collectionOperations:
+        get:
+            normalization_context:
+                groups: ['read:settings']
+        getSetting:
+            normalization_context:
+                groups: ['read:settings']
+            method: GET
+            path: /settings/get
+            controller: App\Api\Controller\AppSettings
+            openapi_context:
+                summary: Recupere la configuration du site
+    itemOperations:
+        get:
+            controller: 'NotFoundAction'
+            openapi_context:
+                summary: hidden
+            read: false
+            output: false
 
 
 

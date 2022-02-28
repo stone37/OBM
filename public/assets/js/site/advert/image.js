@@ -155,7 +155,7 @@ $(document).ready(function() {
 
         if ($(this).prop('checked')) {
             activeUPHOTO(1);
-        } else {
+        } else { 
             activeUPHOTO(0);
         }
     });

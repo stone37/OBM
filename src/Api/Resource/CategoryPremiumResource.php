@@ -65,12 +65,26 @@ class CategoryPremiumResource
                 $data['slug'] = $children->getSlug();
                 $data['icon'] = $children->getIcon();
                 $data['levelDepth'] = $children->getLevelDepth();
-                $data['parent'] = null !== $children->getParent() ? $children->getParent()->getId() : 0;
+                //$data['parent'] = null !== $children->getParent() ? $children->getParent()->getId() : 0;
+
+                if ($children->getLevelDepth() == 1) {
+                    $data['parent'] = [
+                        'id' => $children->getParent()->getId(),
+                        'slug' => $children->getParent()->getSlug()
+                    ];
+                } else if ($children->getLevelDepth() == 2) {
+                    $data['parent'] = [
+                        'id' => $children->getParent()->getParent()->getId(),
+                        'slug' => $children->getParent()->getParent()->getSlug()
+                    ];
+                } else {
+                    $data['parent_data'] = '';
+                }
 
                 if ($uploaderHelper && $children->getFileName()) {
                     $data['image'] = $uploaderHelper->asset($children, 'file');
                 } else {
-                    $data['image'] = '/images/default.png';
+                    $data['image'] = '';
                 }
 
                 $resource->categories[] = $data;

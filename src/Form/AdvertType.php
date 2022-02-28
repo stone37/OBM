@@ -42,7 +42,7 @@ class AdvertType extends AbstractType
             ->add('price', IntegerType::class, [
                 'label' => 'Prix (CFA)'
             ])
-            ->add('priceStatus', CheckboxType::class, [
+            ->add('priceStatus', CheckboxType::class, [ 
                 'label' => 'Prix négociable (facultatif)',
                 'required' => false,
             ])

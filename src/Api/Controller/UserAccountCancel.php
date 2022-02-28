@@ -3,7 +3,7 @@
 namespace App\Api\Controller;
 
 use App\Entity\User;
-
+ 
 class UserAccountCancel
 {
     /**

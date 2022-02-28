@@ -20,7 +20,7 @@ trait AdvertAchatVenteTrait
      * @Assert\NotBlank(groups={"AchatVente"})
      *
      * @ORM\Column(type="string", nullable=true)
-     */
+     */ 
     private $state;
 
     /**
@@ -30,7 +30,7 @@ trait AdvertAchatVenteTrait
      *
      * @ORM\Column(type="string", nullable=true)
      */
-    private $aType;
+    private $aType; 
 
     /**
      * @var string

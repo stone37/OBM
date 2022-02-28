@@ -10,7 +10,6 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
  * @method Alert|null find($id, $lockMode = null, $lockVersion = null)
  * @method Alert|null findOneBy(array $criteria, array $orderBy = null)
@@ -34,6 +33,7 @@ class AlertRepository extends ServiceEntityRepository
             ->addSelect('subCategory')
             ->addSelect('subDivision')
             ->where('a.user = :user')
+            ->andWhere('a.enabled = 0')
             ->setParameter('user', $user)
             ->orderBy('a.createdAt', 'desc');
 

@@ -23,7 +23,7 @@ trait AdvertImmobilierTrait
      *
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $surface;
+    private $surface; 
 
     /**
      * @var string
@@ -198,7 +198,7 @@ trait AdvertImmobilierTrait
     private $stateGenerale;
 
     /**
-     * @var array
+     * @var array 
      *
      * @Groups({"read:advert", "write:advert", "update:advert"})
      *

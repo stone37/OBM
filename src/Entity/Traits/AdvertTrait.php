@@ -33,7 +33,7 @@ trait AdvertTrait
      *
      * @ORM\Column(type="string", nullable=true)
      */
-    private $title;
+    private $title; 
 
     /**
      * @var string

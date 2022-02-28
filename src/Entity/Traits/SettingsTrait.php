@@ -5,6 +5,7 @@ namespace App\Entity\Traits;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -17,6 +18,8 @@ trait SettingsTrait
     /**
      * @var string
      *
+     * @Groups({"read:settings"})
+     *
      * @Assert\NotBlank()
      *
      * @ORM\Column(type="string", nullable=true)
@@ -25,6 +28,8 @@ trait SettingsTrait
 
     /**
      * @var string
+     *
+     * @Groups({"read:settings"})
      *
      * @Assert\NotBlank()
      * @Assert\Email()
@@ -35,6 +40,8 @@ trait SettingsTrait
 
     /**
      * @var string
+     *
+     * @Groups({"read:settings"})
      *
      * @Assert\NotBlank()
      *
@@ -87,12 +94,16 @@ trait SettingsTrait
     /**
      * @var string
      *
+     * @Groups({"read:settings"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $facebookAddress;
 
     /**
      * @var string
+     *
+     * @Groups({"read:settings"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -101,12 +112,16 @@ trait SettingsTrait
     /**
      * @var string
      *
+     * @Groups({"read:settings"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $instagramAddress;
 
     /**
      * @var string
+     *
+     * @Groups({"read:settings"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -115,12 +130,16 @@ trait SettingsTrait
     /**
      * @var string
      *
+     * @Groups({"read:settings"})
+     *
      * @ORM\Column(type="string", nullable=true)
      */
     private $linkedinAddress;
 
     /**
      * @var boolean
+     *
+     * @Groups({"read:settings"})
      *
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -129,6 +148,8 @@ trait SettingsTrait
     /**
      * @var boolean
      *
+     * @Groups({"read:settings"})
+     *
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $activeAdFavorite;
@@ -136,12 +157,16 @@ trait SettingsTrait
     /**
      * @var boolean
      *
+     * @Groups({"read:settings"})
+     *
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $activeAlert;
 
     /**
      * @var boolean
+     *
+     * @Groups({"read:settings"})
      *
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -171,12 +196,16 @@ trait SettingsTrait
     /**
      * @var boolean
      *
+     * @Groups({"read:settings"})
+     *
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $activeCredit = true;
 
     /**
      * @var boolean
+     *
+     * @Groups({"read:settings"})
      *
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -185,12 +214,16 @@ trait SettingsTrait
     /**
      * @var boolean
      *
+     * @Groups({"read:settings"})
+     *
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $activeVignette = true;
 
     /**
      * @var boolean
+     *
+     * @Groups({"read:settings"})
      *
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -199,12 +232,16 @@ trait SettingsTrait
     /**
      * @var boolean
      *
+     * @Groups({"read:settings"})
+     *
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $activeParrainage;
 
     /**
      * @var int
+     *
+     * @Groups({"read:settings"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -213,12 +250,16 @@ trait SettingsTrait
     /**
      * @var int
      *
+     * @Groups({"read:settings"})
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private $fioleCredit;
 
     /**
      * @var integer
+     *
+     * @Groups({"read:settings"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */

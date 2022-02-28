@@ -30,7 +30,7 @@ class Advert
     use IdTrait;
     use AdvertTrait;
     use AdvertStatusTrait;
-    use PositionTrait;
+    use PositionTrait; 
     use TimestampableTrait;
     use AdvertAutoTrait;
     use AdvertImmobilierTrait;

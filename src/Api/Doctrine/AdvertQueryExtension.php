@@ -6,7 +6,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInter
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Entity\Advert;
-use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\QueryBuilder;
 
@@ -28,7 +27,7 @@ final class AdvertQueryExtension implements QueryCollectionExtensionInterface, Q
 
         $rootAlias = $qb->getRootAliases()[0];
 
-        $qb->where(sprintf('%s.validated = 1', $rootAlias))
+        $qb->andWhere(sprintf('%s.validated = 1', $rootAlias))
             ->andWhere(sprintf('%s.denied = 0', $rootAlias))
             ->andWhere(sprintf('%s.deleted = 0', $rootAlias))
             ->andWhere(sprintf('%s.validatedAt >= :date', $rootAlias))
@@ -51,13 +50,13 @@ final class AdvertQueryExtension implements QueryCollectionExtensionInterface, Q
         string $operationName = null,
         array $context = [])
     {
-        if (User::class !== $resourceClass) {
+        if (Advert::class !== $resourceClass) {
             return;
         }
 
         $rootAlias = $qb->getRootAliases()[0];
 
-        $qb->where(sprintf('%s.validated = 1', $rootAlias))
+        $qb->andWhere(sprintf('%s.validated = 1', $rootAlias))
             ->andWhere(sprintf('%s.denied = 0', $rootAlias))
             ->andWhere(sprintf('%s.deleted = 0', $rootAlias))
             ->andWhere(sprintf('%s.validatedAt >= :date', $rootAlias))

@@ -158,7 +158,7 @@ class VoitureDoccasionType extends AbstractType
                 'attr' => [
                     'class' => 'mdb-select md-outline md-form dropdown-stone',
                 ],
-                'placeholder' => 'Couleur',
+                'placeholder' => 'Couleur', 
                 'required' => false,
             ])
             ->add('typeCarburant', ChoiceType::class, [

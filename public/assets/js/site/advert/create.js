@@ -284,7 +284,7 @@ $(document).ready(function() {
     function uploadRemove(id) {
 
         let pos = $ordPhoto.indexOf(id);
-        $ordPhoto.splice(pos, 1);
+        $ordPhoto.splice(pos, 1); 
 
         $.ajax({
             url: Routing.generate('app_image_upload_delete', {'pos': pos}),

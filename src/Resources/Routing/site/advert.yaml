@@ -15,7 +15,7 @@ app_advert_index_ss:
     methods: [GET, POST]
     controller: App\Controller\AdvertController::index
     options:
-        expose: true
+        expose: true 
 
 app_advert_show:
     path: /a/{category_slug}/{sub_category_slug}/{sub_division_slug}/{city}/{reference}/{slug}

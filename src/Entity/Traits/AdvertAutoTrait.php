@@ -21,7 +21,7 @@ trait AdvertAutoTrait
      *
      * @ORM\Column(type="string", nullable=true)
      */
-    private $marque;
+    private $marque;  
 
     /**
      * @var string

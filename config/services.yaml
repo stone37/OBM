@@ -73,7 +73,7 @@ services:
     App\Api\OpenApi\OpenApiFactory:
         decorates: 'api_platform.openapi.factory'
         arguments: ['@App\Api\OpenApi\OpenApiFactory.inner']
-        autoconfigure: false
+        autoconfigure: false 
 
     advert.category_filter:
         parent: 'api_platform.doctrine.orm.search_filter'

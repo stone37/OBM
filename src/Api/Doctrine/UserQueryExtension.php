@@ -26,7 +26,7 @@ final class UserQueryExtension implements QueryCollectionExtensionInterface, Que
 
         $rootAlias = $qb->getRootAliases()[0];
 
-        $qb->where(sprintf('%s.deleteAt IS NULL', $rootAlias))
+        $qb
             ->andWhere(sprintf('%s.confirmationToken IS NULL', $rootAlias))
             ->andWhere(sprintf('%s.roles LIKE :roles', $rootAlias))
             ->andWhere(sprintf('%s.roles NOT LIKE :roleA', $rootAlias))
@@ -58,8 +58,7 @@ final class UserQueryExtension implements QueryCollectionExtensionInterface, Que
 
         $rootAlias = $qb->getRootAliases()[0];
 
-        $qb->where(sprintf('%s.deleteAt IS NULL', $rootAlias))
-            ->andWhere(sprintf('%s.confirmationToken IS NULL', $rootAlias))
+        $qb->andWhere(sprintf('%s.confirmationToken IS NULL', $rootAlias))
             ->andWhere(sprintf('%s.roles LIKE :roles', $rootAlias))
             ->andWhere(sprintf('%s.roles NOT LIKE :roleA', $rootAlias))
             ->andWhere(sprintf('%s.roles NOT LIKE :roleSA', $rootAlias))

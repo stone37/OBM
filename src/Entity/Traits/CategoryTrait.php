@@ -22,7 +22,7 @@ trait CategoryTrait
     /**
      * @var string
      *
-     * @Groups({"read:category", "read:advert"})
+     * @Groups({"read:category", "read:advert", "read:alert"})
      *
      * @Assert\NotBlank()
      * @Assert\Length(min="2", max="100")
@@ -62,7 +62,7 @@ trait CategoryTrait
     /**
      * @var string
      *
-     * @Groups({"read:category", "read:advert"})
+     * @Groups({"read:category", "read:advert", "read:alert"})
      *
      * @Gedmo\Slug(fields={"name"}, unique=true)
      *

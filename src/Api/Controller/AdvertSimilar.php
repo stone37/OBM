@@ -16,11 +16,11 @@ class AdvertSimilar extends AbstractController
     }
 
     /**
-     * @param Advert $data
+     * @param Advert $advert
      */
-    public function __invoke($data)
+    public function __invoke(Advert $advert, $data)
     {
-        return $this->manager->getAdvertSimilar($data);
+        return $this->manager->getAdvertSimilar($advert);
     }
 }
 

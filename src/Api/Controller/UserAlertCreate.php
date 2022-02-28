@@ -2,7 +2,6 @@
 
 namespace App\Api\Controller;
 
-use App\Entity\Alert;
 use App\Entity\Category;
 use App\Manager\AlertManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,11 +20,10 @@ class UserAlertCreate extends AbstractController
 
     /**
      * @param Category $category
-     * @param Alert $data
      */
     public function __invoke(Category $category, $data)
     {
-        if ($category->getLevelDepth() == 0) {
+       if ($category->getLevelDepth() == 0) {
             if ($this->manager->hasAlert($category)) {
                 return $this->json(
                     ['code' => Response::HTTP_OK, 'message' => 'Vous avez deja crée une alerte de ce type'],
@@ -43,7 +41,7 @@ class UserAlertCreate extends AbstractController
                 );
             }
 
-            $data = $this->manager->createApiAlert($data, $category->getParent(), $category);
+            $data =  $this->manager->createApiAlert($data, $category->getParent(), $category);
         } else {
             if ($this->manager->hasAlert($category->getParent()->getParent(), $category->getParent(), $category)) {
                 return $this->json(
@@ -52,7 +50,7 @@ class UserAlertCreate extends AbstractController
                 );
             }
 
-            $data = $this->manager->createApiAlert($data, $category->getParent()->getParent(), $category->getParent(), $category);
+            $data =  $this->manager->createApiAlert($data, $category->getParent()->getParent(), $category->getParent(), $category);
         }
 
         return $data;

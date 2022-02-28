@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdvertImageAdd extends AbstractController
+class AdvertImageAdd extends AbstractController 
 {
     private ApiOrphanageManager $orphanageManager;
 
