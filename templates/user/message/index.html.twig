@@ -1,0 +1,70 @@
+{% extends 'user/layout.html.twig' %}
+{% import 'user/message/macro/__thread.html.twig' as __receive  %}
+
+{% block title 'Messagerie' %}
+{% block meta %}
+    <meta name="google" content="nositelinkssearchbox">
+{% endblock %}
+
+{% block app_cart %}{% endblock %}
+{% block app_mobile_cart %}{% endblock %}
+
+{% block app_breadcrumbs %}
+    <div class="mt-80 mt-md-7">
+        {{ breadcrumb('Tableau de bord', '/u/') }}
+        {{ breadcrumb('Messagerie') }}
+        {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+            itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+    </div>
+    <div class="my-0 d-flex justify-content-between">
+        <h3 class="h3-responsive font-weight-stone-600 mt-lg-2 mt-md-0 mb-md-0 mb-5">Ma messagerie</h3>
+    </div>
+{% endblock %}
+
+{% block app_body %}
+    {% if threads|length > 0 %}
+        <div class="row app-user mb-5 pb-5">
+            <div class="col-12">
+                <table class="table table-responsive-sm">
+                    <thead class="text-primary">
+                    <tr>
+                        <th scope="col" class="font-weight-stone-500 text-center">#</th>
+                        <th scope="col" class="font-weight-stone-500 text-center">Débuté par</th>
+                        <th scope="col" class="font-weight-stone-500 text-center">Débuté le</th>
+                        <th scope="col" class="font-weight-stone-500 text-center">Messages</th>
+                        <th scope="col" class="font-weight-stone-500 text-center">Dernier message</th>
+                        <th scope="col" class="font-weight-stone-500 text-center"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="list-checkbook-container">
+                        {% for thread in threads %}
+                            {{ __receive.thread_list(thread, user, loop.index) }}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 d-flex justify-content-start mt-2">
+                <div class="font-weight-stone-500 text-secondary">{{ threads|length }} conversations</div>
+            </div>
+        </div>
+    {% else %}
+        <div class="col-12 text-center my-5">
+            <h3 class="text-primary h3-responsive font-weight-stone-600">
+                Vous n'avez aucune conversation !
+            </h3>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+
+
+
+

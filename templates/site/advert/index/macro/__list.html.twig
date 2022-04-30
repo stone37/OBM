@@ -14,14 +14,14 @@
     {% endif %}
 
 <div id="advert_{{ advert.id }}" class="card app-advert-list-block mb-4
-    {% if urgent %}urgent{% endif %} {% if encadre %}encadre{% endif %}">
+    {% if urgent %}urgent{% endif %} {% if encadre %}encadre{% endif %} z-depth-2">
     {% if urgent %}<div class="ur-banner animated flash infinite">Urgent</div>{% endif %}
     <div class="row no-gutters">
-        <div class="col-6 col-md-4 pr-md-4">
+        <div class="col-5 col-lg-3 col-md-4 pr-md-4 pr-lg-0">
             {% if photo_principale %}
                 <img src="{{ asset(photo_principale.webPath) }}" class="img-fluid advert-image" alt="{{ photo_principale.name }}" />
             {% else %}
-                <img src="{{ asset('images/no_image.png') }}" class="img-fluid advert-image" alt="" />
+                <img src="{{ asset('images/no_photo.png') }}" class="img-fluid advert-image" alt="" />
             {% endif %}
             
             {% if settings.activeAdFavorite %}
@@ -38,24 +38,23 @@
                 <i class="fas fa-camera-retro"></i> {{ advert.images|length }}
             </div>
         </div>
-        <div class="col-6 col-md-8">
+        <div class="col-7 col-md-8 col-lg-9 pl-lg-3">
             {# Petit telephone #}
             <div class="card-body py-1 px-1 d-block d-md-none">
-                <div class="font-weight-stone-600 price d-flex justify-content-center text-default
-                        border border-default text-center mx-1 mb-2"
-                     style="border-top-right-radius: 20px !important; border-width: 1.6px !important">
-                    <div class="number d-inline-block">{{ advert.price }}</div>
-                    <img src="{{ asset('images/devise.png') }}" class="devise d-inline-block" alt="devise">
+                <div class="font-weight-stone-600 price d-flex justify-content-center text-danger text-center">
+                    <div class="number d-inline-block">{{ advert.price }}<span>CFA</span></div>
                 </div>
-                <div class="text-muted font-weight-stone-500 location mx-1">
-                    <div class="my-1">
+                <div class="font-weight-stone-500 location">
+                    <div class="grey-text">
                         <i class="fas fa-map-marker-alt text-primary"></i> {{ advert.location.name }}
                         {% if advert.location.detail %}({{ advert.location.detail }}){% endif %}
                     </div>
-                   {#  <div class=""><i class="far fa-clock text-primary font-weight-bold"></i> {{ advert.validatedAt|ago }}</div> #}
+                   <div class="mt-1 grey-text">
+                       <i class="far fa-clock text-primary"></i> {{ advert.validatedAt|ago }}
+                   </div>
 
                     <div class="data-info">
-                        <ul class="list-inline indigo-text">
+                        <ul class="list-inline text-default">
                             {% if advert.marque %}<li class="list-inline-item" title="Marque" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.marque }}</li>{% endif %}
                             {% if advert.model %}<li class="list-inline-item" title="Modèle" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.model }}</li>{% endif %}
                             {% if advert.autoYear %}<li class="list-inline-item" title="Année" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.autoYear }}</li>{% endif %}
@@ -72,19 +71,19 @@
             {# Petit telephone #}
             <div class="card-body px-2 pl-md-0 pr-md-2 pt-2 pt-md-1 pb-0 d-none d-md-block">
                 <div class="d-flex">
-                    <h6 class="font-weight-stone-600 title text-dark">{{ advert.title|u.truncate(30, '...') }}</h6>
-                    <div class="ml-auto font-weight-stone-500 d-flex price text-default">
-                        <div class="number">{{ advert.price }}</div><img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                    <h6 class="font-weight-stone-600 title">{{ advert.title|u.truncate(30, '...') }}</h6>
+                    <div class="ml-auto font-weight-stone-500 d-flex price text-danger">
+                        <div class="number">{{ advert.price }}<span>CFA</span></div>
                     </div>
                 </div>
-                <div class="font-weight-stone-500 small location text-muted mt-1">
-                    <i class="fas fa-map-marker-alt mr-1 text-primary"></i> {{ advert.location.name }}
+                <div class="font-weight-stone-500 small location grey-text mt-1">
+                    <i class="fas fa-map-marker-alt text-primary"></i> {{ advert.location.name }}
                     {% if advert.location.detail %}({{ advert.location.detail }}){% endif %}
                     <span class="px-1 mb-0"> | </span>
-                    <i class="far fa-clock mr-1 text-primary"></i> {{ advert.validatedAt|ago }}
+                    <i class="far fa-clock text-primary"></i> {{ advert.validatedAt|ago }}
                 </div>
                 <div class="data-info">
-                    <ul class="list-inline indigo-text">
+                    <ul class="list-inline text-default">
                         {% if advert.marque %}<li class="list-inline-item" title="Marque" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.marque }}</li>{% endif %}
                         {% if advert.model %}<li class="list-inline-item" title="Modèle" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.model }}</li>{% endif %}
                         {% if advert.autoYear %}<li class="list-inline-item" title="Année" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.autoYear }}</li>{% endif %}
@@ -96,15 +95,14 @@
                         {% if advert.state %}<li class="list-inline-item" title="Etat" data-toggle="tooltip"><i class="fas fa-circle"></i> {{ advert.state }}</li>{% endif %}
                     </ul>
                 </div>
-                <div class="content grey-text font-weight-stone-500 small-9 mt-2">
-                    {{ advert.description|u.truncate(125, ' ...') }}
+                <div class="content font-weight-stone-500 small-9">
+                    {{ advert.description|u.truncate(85, ' ...') }}
                 </div>
             </div>
         </div>
         <div class="col-12 pr-md-3 info {% if not advert.shop|length > 0 %}user{% endif %}">
             {# Petit telephone #}
             <div class="d-block d-md-none px-2">
-                <div class="small-8 text-dark font-weight-stone-500 mb-1">{{ advert.title|u.truncate(40, '...') }}</div>
                 <div class="d-flex {% if advert.traitement %}justify-content-between{% else %}justify-content-end{% endif %} text-right pb-2">
                     {% if advert.traitement %}
                         <div class="traitement text-center small rounded">{{ advert.traitement }}</div>
@@ -137,13 +135,13 @@
                             </div>
                         </div>
                     {% else %}
-                        <div class="ad text-center small rounded"><span>Particulier</span></div>
+                        <div class="ad text-center small"><span>Particulier</span></div>
                     {% endif %}
                 </div>
 
                 {% if advert.traitement %}
                     <div class="">
-                        <div class="traitement text-center small rounded">{{ advert.traitement }}</div>
+                        <div class="traitement text-center small">{{ advert.traitement }}</div>
                     </div>
                 {% endif %}
 

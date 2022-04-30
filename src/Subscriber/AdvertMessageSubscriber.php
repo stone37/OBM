@@ -2,31 +2,22 @@
 
 namespace App\Subscriber;
 
+use ApiPlatform\Core\Api\UrlGeneratorInterface;
+use App\Entity\ThreadMessage;
 use App\Event\MessageCreatedEvent;
-use App\Mailing\Mailer;
-use App\Manager\AdvertManager;
-use App\Manager\SettingsManager;
+use App\Event\ThreadMessageEvent;
 use App\Service\NotificationService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AdvertMessageSubscriber implements EventSubscriberInterface
 {
     private $service;
-    private $manager;
-    private $mailer;
-    private $settings;
+    private UrlGeneratorInterface $url;
 
-    public function __construct(
-        NotificationService $service,
-        AdvertManager $manager,
-        SettingsManager $settingsManager,
-        Mailer $mailer
-    )
+    public function __construct(NotificationService $service, UrlGeneratorInterface $url)
     {
         $this->service = $service;
-        $this->manager = $manager;
-        $this->mailer = $mailer;
-        $this->settings = $settingsManager->get();
+        $this->url = $url;
     }
 
     /**
@@ -35,7 +26,7 @@ class AdvertMessageSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            MessageCreatedEvent::class => 'onMessageCreated',
+            ThreadMessageEvent::class => 'onMessageCreated',
         ];
     }
 
@@ -43,38 +34,34 @@ class AdvertMessageSubscriber implements EventSubscriberInterface
      * @param MessageCreatedEvent $event
      * @throws \Doctrine\ORM\ORMException
      */
-    public function onMessageCreated(MessageCreatedEvent $event): void
+    public function onMessageCreated(ThreadMessageEvent $event): void
     {
+        /** @var ThreadMessage $message */
         $message = $event->getMessage();
-        $advert = $message->getAdvert();
 
-        $userName = htmlentities($message->getFirstname());
+        $userName = htmlentities($message->getSender()->getUsername());
 
-        $advertTitle = htmlentities($advert->getTitle());
+        $messageText = htmlentities($message->getBody());
         $wording = '%s vous a envoyé un message %s';
 
-        $this->service->notifyUser(
-            $advert->getUser(),
-            sprintf($wording, "<strong>{$userName}</strong>", "« $advertTitle »"),
-            $advert
-        );
+        $user = null;
 
-        if ($message->isAdSimilar()) {
-            $adverts = $this->manager->getAdvertSimilar($advert);
-
-            if (!$adverts) {
-                return;
+        foreach($message->getThread()->getParticipants() as $participant) {
+            if ($message->getSender()->getId() != $participant->getId()) {
+                $user = $participant;
             }
-
-            $email = $this->mailer->createEmail('mails/advert/similar.twig', [
-                'adverts' => $adverts,
-                'advert' => $advert,
-                'message' => $message,
-            ])->to($message->getEmail())
-                ->subject($this->settings->getName().' | Annonces similaires '.$advert->getCategory());
-
-            $this->mailer->send($email);
         }
+
+        if ($user == null) {
+            return;
+        }
+
+        $this->service->notifyUser(
+            $user,
+            sprintf($wording, "<strong>{$userName}</strong>", "« $messageText »"),
+            $message->getThread()->getAdvert(),
+            $this->url->generate('app_message_thread_view', ['threadId' => $message->getThread()->getId()])
+        );
     }
 
 }

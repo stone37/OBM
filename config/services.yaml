@@ -7,13 +7,13 @@ parameters:
     app.path.category: /uploads/images/categories
     app.path.settings: /uploads/images/logo
     app.path.user: /uploads/images/users
-    app.path.pub: /uploads/images/pubs
+    app.path.pub: /uploads/images/pubs 
     app.path.vignette: /uploads/images/vignettes
     app.path.image_orphanage: '%kernel.cache_dir%/uploader/orphanage'
     dkim_key: '%env(resolve:default::MAILER_DKIM)%'
     image_resize_key: '%env(resolve:IMAGE_RESIZE_KEY)%'
     typesense_key:    '%env(resolve:TYPESENSE_KEY)%'
-    typesense_host:   '%env(resolve:TYPESENSE_HOST)%'
+    typesense_host:   '%env(resolve:TYPESENSE_HOST)%' 
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     maintenance_dir: '%env(resolve:MAINTENANCE_DIR)%'
 
@@ -119,8 +119,8 @@ services:
 
     advert.data_search_filter:
         parent: 'api_platform.doctrine.orm.search_filter'
-        arguments: [ { marque: ~, model: ~, typeCarburant: ~, immobilierState: ~, nombrePiece: ~, nombreChambre: ~, nombreSalleBain: ~, access: partial, proximite: partial, interior: partial, exterior: partial, state: ~ } ]
-        tags: [ 'api_platform.filter' ]
+        arguments: [{ marque: ~, model: ~, typeCarburant: ~, immobilierState: ~, nombrePiece: ~, nombreChambre: ~, nombreSalleBain: ~, access: partial, proximite: partial, interior: partial, exterior: partial, state: ~ } ]
+        tags: ['api_platform.filter']
         autowire: false
         autoconfigure: false
         public: false
@@ -151,7 +151,7 @@ services:
 
     zone.city_filter:
         parent: 'api_platform.doctrine.orm.search_filter'
-        arguments: [ { city.name: partial } ]
+        arguments: [ { city.name: ~ } ]
         tags: [ 'api_platform.filter' ]
         autowire: false
         autoconfigure: false
@@ -159,7 +159,7 @@ services:
 
     zone.name_filter:
         parent: 'api_platform.doctrine.orm.search_filter'
-        arguments: [ { zone: 'partial' } ]
+        arguments: [ { zone: partial } ]
         tags: [ 'api_platform.filter' ]
         autowire: false
         autoconfigure: false

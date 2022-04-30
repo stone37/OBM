@@ -2,6 +2,8 @@ app_admin_advert_index:
     path: /adverts/{type}
     methods: [GET, POST]
     controller: App\Controller\Admin\AdvertController::index
+    requirements:
+        type: \d+
 
 app_admin_advert_show:
     path: /adverts/{type}/show/{id}

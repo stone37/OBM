@@ -1,6 +1,6 @@
 {% if settings.activeAdSimilar %}
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 col-lg-11">
         {% if adverts|length > 0 %}
             <h5 class="h5-responsive font-weight-stone-500 text-primary mb-4 mb-md-3 text-center text-md-left">
                 {% if reference.subDivision %}{{ reference.subDivision.name|capitalize }}{% else %}{{ reference.subCategory.name|capitalize }}{% endif %}
@@ -25,7 +25,7 @@
                     {% endif %}
 
                     <div class="col-10 col-md-6 col-lg-4">
-                        <div id="advert_{{ advert.id }}" class="card app-advert-similar-block mb-4">
+                        <div id="advert_{{ advert.id }}" class="card app-advert-similar-block mb-4 z-depth-2">
                             <div class="view overlay">
                                 {% if photo_principale %}
                                     <img class="card-img-top" src="{{ asset(photo_principale.webPath) }}" alt="Card image cap" />
@@ -37,19 +37,19 @@
                                 </a>
                             </div>
 
-                            <div class="card-body px-2 py-2 py-md-3">
+                            <div class="card-body px-2 py-2 pt-md-3 pb-md-2">
                                 <h5 class="font-weight-stone-500 text-primary mb-1 h5-responsive">
                                     {{ advert.title|u.truncate(20, '...') }}
                                 </h5>
 
-                                <div class="font-weight-stone-600 text-default mb-1 h5-responsive">
-                                    {{ advert.price }} <span class="small font-weight-stone-600">CFA</span>
+                                <div class="font-weight-stone-500 text-default mb-1 h5-responsive">
+                                    {{ advert.price }}<span class="small font-weight-stone-500" style="margin-left: 2px ;">CFA</span>
                                 </div>
                                 <div class="small grey-text font-weight-stone-500 mb-2">
                                     <i class="fas fa-map-marker-alt"></i> {{ advert.location.name }} ({{ advert.location.detail }})
                                 </div>
 
-                                <div class="text-right">
+                                <div class="text-right mt-3">
                                     <a href="{{ route }}" class="btn btn-sm btn-primary btn-advert-show">Voir</a>
                                 </div>
                             </div>
@@ -66,10 +66,10 @@
         <h5 class="h5-responsive font-weight-stone-500 text-primary">
             {{ reference.category.name }} à {{ reference.location.name|lower }}
         </h5>
-        <div class="d-flex text-secondary data">
-            <div class=""><i class="fas fa-angle-right mr-2 d-inline-block" style="font-size: 1.3rem; position: relative; top: 1.3px;"></i></div>
+        <div class="d-flex amber-text data">
+            <div class=""><i class="fas fa-long-arrow-alt-right mr-2 d-inline-block" style="font-size: 1rem; position: relative; top: 1.3px;"></i></div>
             <div>
-                <a href="{{ path('app_advert_index', {'category_slug': reference.category.slug, 'city': reference.location.name|lower}) }}" class="link">
+                <a href="{{ path('app_advert_index', {'category_slug': reference.category.slug, 'city': reference.location.name|lower}) }}" class="amber-text">
                     Annonces {{ reference.category.name|lower }} à {{ reference.location.name|lower }}
                 </a>
             </div>
@@ -81,8 +81,8 @@
             {% if reference.subDivision|length > 0 %}{{ reference.subDivision.name }}{% else %}{{ reference.subCategory.name }}{% endif %}
              à {{ reference.location.name|lower }}
         </h5>
-        <div class="d-flex text-secondary data">
-            <div class=""><i class="fas fa-angle-right mr-2 d-inline-block" style="font-size: 1.3rem; position: relative; top: 1.3px;"></i></div>
+        <div class="d-flex amber-text data">
+            <div class=""><i class="fas fa-long-arrow-alt-right mr-2 d-inline-block" style="font-size: 1rem; position: relative; top: 1.3px;"></i></div>
             <div>
                 {% if reference.subDivision|length > 0 %}
                     {% set d_route = path('app_advert_index_ss',
@@ -97,7 +97,7 @@
                             'city': reference.location.name|lower}) %}
                 {% endif %}
 
-                <a href="{{ d_route }}" class="link">
+                <a href="{{ d_route }}" class="amber-text">
                     Annonces {% if reference.subDivision|length > 0 %}{{ reference.subDivision.name }}{% else %}{{ reference.subCategory.name }}{% endif %}
                     à {{ reference.location.name|lower }}
                 </a>

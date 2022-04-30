@@ -1,18 +1,21 @@
-<section class="row show-header mb-3 mb-md-4">
+<section class="row show-header mx-1 mx-md-2 mx-lg-0 mb-3 mb-md-4 px-1 px-md-2 pt-2 z-depth-2 bg-white">
     <div class="col-12 col-md-8 col-lg-9">
-        <h2 class="h2-responsive text-primary font-weight-stone-600" style="line-height: normal!important;">{{ advert.title }}</h2>
-        <h4 class="h4-responsive font-weight-stone-600 price d-flex text-default">
-            <div class="number">{{ advert.price }}</div>
-            <div class="">
+        <h4 class="h4-responsive font-weight-stone-600 mb-0 mb-md-1" style="line-height: normal!important;">{{ advert.title }}</h4>
+        <h5 class="h5-responsive font-weight-stone-600 price d-flex justify-content-start pt-0 pt-md-0 text-default">
+            <div class="number">
+                {{ advert.price }}<span class="d-inline-block">CFA</span>
+            </div>
+
+            {#<div class="">
                 <img src="{{ asset('images/devise.png') }}" class="devise" alt="">
                 {% if advert.priceStatus %}<span class="font-weight-stone-500 small"
                     style="position: relative; top: 5px">- à débattre</span>{% endif %}
-            </div>
-        </h4>
+            </div>#}
+        </h5>
     </div>
     <div class="col-12 col-md-4 col-lg-3">
-        <div class="d-flex justify-content-md-end data pt-lg-2 pt-3 pt-md-0 pr-md-0 mr-md-0">
-            <div class="pr-3 text-primary data-icon">
+        <div class="d-flex justify-content-md-end data pt-md-0 pb-2 pb-md-0 pr-md-0 mr-md-0">
+            <div class="pr-md-2 pr-1 text-primary data-icon">
                 <i class="fas fa-map-marker-alt"></i>
             </div>
             <div class="location">
@@ -37,15 +40,15 @@
             </div>
         </section>
         <section class="row mt-lg-3 mb-4 advert-info-detail">
-            <div class="col-12 col-lg-10">
+            <div class="col-12">
                 {% include 'site/advert/show/_detail.html.twig' %}
             </div>
         </section>
         <section class="row mb-5">
             <div class="col-12">
                 <h4 class="h4-responsive font-weight-stone-600 text-primary mb-2">Description</h4>
-                <div class="grey-text">{{ advert.description }}</div>
-                <div class="mt-3 font-weight-stone-500 small-8">
+                <div>{{ advert.description }}</div>
+                <div class="mt-3 font-weight-stone-600 small black-text">
                     <span class="">RÉFÉRENCE:</span>
                     <span class="">{{ advert.reference}}</span>
                     - <span class="">Dernière mise à jour:</span>
@@ -85,14 +88,18 @@
     </div>
 </section>
 {% if is_mobile() and not is_granted('create', advert) %}
-    <div class="navbar fixed-bottom d-block d-md-none py-3" style="background-color: rgba(255, 255, 255, .8)">
+    <div class="navbar fixed-bottom d-block d-md-none py-2"
+         style="background-color: #0032FF; border-top-right-radius: 40px; border-top-left-radius: 40px;">
         <div class="d-flex">
-            <a href="" class="btn btn-outline-primary btn-sm mr-2 pt-3 pb-2" data-toggle="modal" data-target="#addPhoneContactModalSm">
+            <a href="" class="btn btn-outline-white btn-sm mr-2 pt-3 pb-2" data-toggle="modal" data-target="#addPhoneContactModalSm">
                 <i class="fas fa-phone-alt" style="font-size: 1rem; position:relative; bottom: 3px;"></i>
             </a>
 
             {% if settings.activeMessage %}
-                <a href="#app-advert-message-form" class="btn btn-primary btn-block btn-sm pt-3 pb-2"><i class="fas fa-envelope mr-2"></i> Message</a>
+                <a href="#app-advert-message-form" class="btn btn-white text-primary btn-block btn-sm pt-3 pb-2"
+                   style="font-size: 1.1rem !important;">
+                    <i class="fas fa-envelope mr-2"></i> Message
+                </a>
             {% endif %}
         </div>
     </div>

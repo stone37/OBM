@@ -6,7 +6,6 @@ use App\Twig\CacheExtension\CacheableInterface;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Parsedown;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 

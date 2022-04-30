@@ -7,18 +7,16 @@ $(document).ready(function() {
 
     $('.children-0').click(function (e) {
         e.preventDefault();
-        //let $this = $(this);
 
         $.ajax({
             url: Routing.generate('app_category_by_parent', {id: $(this).attr('id')}),
             type: 'GET',
             beforeSend: function() {
-                $('#loader .preloader-wrapper').addClass('active');
-                $(".page-content").addClass('disabled');
+                showLoading();
             },
             success: function(data){
-                $('#loader .preloader-wrapper').removeClass('active');
-                $(".page-content").removeClass('disabled');
+
+                hideLoading();
 
                 let $result = $.parseJSON(data);
 
@@ -56,12 +54,10 @@ $(document).ready(function() {
             url: Routing.generate('app_category_by_parent', {id: $(this).attr('id')}),
             type: 'GET',
             beforeSend: function() {
-                $('#loader .preloader-wrapper').addClass('active');
-                $(".page-content").addClass('disabled');
+                showLoading;
             },
             success: function(data){
-                $('#loader .preloader-wrapper').removeClass('active');
-                $(".page-content").removeClass('disabled');
+                hideLoading();
 
                 let $result = $.parseJSON(data);
 

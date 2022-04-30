@@ -31,7 +31,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez accepter nos conditions.',
                     ]),
                 ],
-            ]);
+            ]); 
 
         /** @var ?User $user */
         $user = $builder->getData();

@@ -1,48 +1,48 @@
 <div class="row app-advert-show-info mt-md-3">
     {% if advert.surface %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Surface</div>
             <div class="grey-text">{{ advert.surface }} m²</div>
         </div>
     {% endif %}
 
     {% if advert.nombrePiece %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Nombre de pièces</div>
             <div class="grey-text">{{ advert.nombrePiece }}</div>
         </div>
     {% endif %}
 
     {% if advert.immobilierState %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Etat</div>
             <div class="grey-text">{{ advert.immobilierState }} m²</div>
         </div>
     {% endif %}
 
     {% if advert.nombreChambre %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Nombre de chambre(s)</div>
             <div class="grey-text">{{ advert.nombreChambre }}</div>
         </div>
     {% endif %}
 
     {% if advert.nombreSalleBain %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Nombre de salle(s) de bain</div>
             <div class="grey-text">{{ advert.nombreSalleBain }}</div>
         </div>
     {% endif %}
 
     {% if advert.surfaceBalcon %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Surface du balcon</div>
             <div class="grey-text">{{ advert.surfaceBalcon }} m²</div>
         </div>
     {% endif %}
 
     {% if advert.access %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Accès</div>
             <div class="grey-text">
                 {% for data in advert.access %}
@@ -53,7 +53,7 @@
     {% endif %}
 
     {% if advert.exterior %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Extérieures</div>
             <div class="grey-text">
                 {% for data in advert.exterior %}
@@ -64,49 +64,49 @@
     {% endif %}
 
     {% if advert.dateConstruction %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Date de construction</div>
             <div class="grey-text">{{ advert.dateConstruction }}</div>
         </div>
     {% endif %}
 
     {% if advert.situation %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Situation</div>
             <div class="grey-text">{{ advert.situation }}</div>
         </div>
     {% endif %}
 
     {% if advert.standing %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Standing</div>
             <div class="grey-text">{{ advert.standing }}</div>
         </div>
     {% endif %}
 
     {% if advert.cuisine %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Cuisine</div>
             <div class="grey-text">{{ advert.cuisine }}</div>
         </div>
     {% endif %}
 
     {% if advert.salleManger %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Salle à manger</div>
             <div class="grey-text">{{ advert.salleManger }}</div>
         </div>
     {% endif %}
 
     {% if advert.nombrePlacard %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Nombre de placard(s)</div>
             <div class="grey-text">{{ advert.nombrePlacard }}</div>
         </div>
     {% endif %}
 
     {% if advert.interior %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Intérieur</div>
             <div class="grey-text">
                 {% for data in advert.interior %}
@@ -117,7 +117,7 @@
     {% endif %}
 
     {% if advert.typeSol %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Type de sol</div>
             <div class="grey-text">
                 {% for data in advert.typeSol %}
@@ -128,7 +128,7 @@
     {% endif %}
 
     {% if advert.proximite %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Proximité</div>
             <div class="grey-text">
                 {% for data in advert.proximite %}
@@ -139,7 +139,7 @@
     {% endif %}
 
     {% if advert.stateGenerale %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Etat général</div>
             <div class="grey-text">
                 {{ advert.stateGenerale }}
@@ -148,7 +148,7 @@
     {% endif %}
 
     {% if advert.serviceInclus %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Services inclus</div>
             <div class="grey-text">
                 {% for data in advert.serviceInclus %}
@@ -159,7 +159,7 @@
     {% endif %}
 
     {% if advert.facade %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Façade</div>
             <div class="grey-text">
                 {% for data in advert.facade %}
@@ -170,7 +170,7 @@
     {% endif %}
 
     {% if advert.toiture %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Toiture</div>
             <div class="grey-text">
                 {% for data in advert.toiture %}
@@ -181,7 +181,7 @@
     {% endif %}
 
     {% if advert.state %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Etat du produit</div>
             <div class="grey-text">
                 {{ advert.state }}
@@ -190,7 +190,7 @@
     {% endif %}
 
     {% if advert.traitement %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Traitement</div>
             <div class="grey-text">
                 {{ advert.traitement }}
@@ -199,7 +199,7 @@
     {% endif %}
 
     {% if advert.brand %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Marque</div>
             <div class="grey-text">
                 {{ advert.brand }}
@@ -208,7 +208,7 @@
     {% endif %}
 
     {% if advert.marque %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Marque</div>
             <div class="grey-text">
                 {{ advert.marque }}
@@ -217,7 +217,7 @@
     {% endif %}
 
     {% if advert.model %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Modèle</div>
             <div class="grey-text">
                 {{ advert.model }}
@@ -226,7 +226,7 @@
     {% endif %}
 
     {% if advert.autoYear %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Année</div>
             <div class="grey-text">
                 {{ advert.autoYear }}
@@ -235,7 +235,7 @@
     {% endif %}
 
     {% if advert.autoType %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Type de véhicule</div>
             <div class="grey-text">
                 {{ advert.autoType }}
@@ -244,7 +244,7 @@
     {% endif %}
 
     {% if advert.autoState %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Etat du véhicule</div>
             <div class="grey-text">
                 {{ advert.autoState }}
@@ -253,7 +253,7 @@
     {% endif %}
 
     {% if advert.kilo %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Kilométrage</div>
             <div class="grey-text">
                 {{ advert.kilo }} Km
@@ -262,7 +262,7 @@
     {% endif %}
 
     {% if advert.boiteVitesse %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Boite à vitesse</div>
             <div class="grey-text">
                 {{ advert.boiteVitesse }}
@@ -271,7 +271,7 @@
     {% endif %}
 
     {% if advert.transmission %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Transmission</div>
             <div class="grey-text">
                 {{ advert.transmission }}
@@ -280,7 +280,7 @@
     {% endif %}
 
     {% if advert.autoColor %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Couleur</div>
             <div class="grey-text">
                 {{ advert.autoColor }}
@@ -289,7 +289,7 @@
     {% endif %}
 
     {% if advert.typeCarburant %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Type de carburant</div>
             <div class="grey-text">
                 {{ advert.typeCarburant }}
@@ -298,7 +298,7 @@
     {% endif %}
 
     {% if advert.nombrePorte %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Nombre de portes</div>
             <div class="grey-text">
                 {{ advert.nombrePorte }}
@@ -307,7 +307,7 @@
     {% endif %}
 
     {% if advert.nombrePlace %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Nombre de places</div>
             <div class="grey-text">
                 {{ advert.nombrePlace }}
@@ -316,7 +316,7 @@
     {% endif %}
 
     {% if advert.cylindree %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Cylindrée</div>
             <div class="grey-text">
                 {{ advert.cylindree }} Cm3
@@ -325,7 +325,7 @@
     {% endif %}
 
     {% if advert.autreInformation %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Autres informations</div>
             <div class="grey-text">
                 {% for data in advert.autreInformation %}
@@ -336,7 +336,7 @@
     {% endif %}
 
     {% if advert.autoSecurity %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Sécurité et confort</div>
             <div class="grey-text">
                 {% for data in advert.autoSecurity %}
@@ -347,7 +347,7 @@
     {% endif %}
 
     {% if advert.informationExterieur %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Elements extérieurs</div>
             <div class="grey-text">
                 {% for data in advert.informationExterieur %}
@@ -358,16 +358,10 @@
     {% endif %}
 
     {% if advert.price %}
-        <div class="col-6 col-md-4 font-weight-stone-500 text-center mb-2 mb-md-3">
+        <div class="col-6 col-md-4 col-lg-3 font-weight-stone-500 text-left mb-2 mb-md-3">
             <div class="text-primary">Prix</div>
-            <div class="text-default d-flex flex-wrap justify-content-center price">
-                <div class="number">{{ advert.price }}</div>
-                <div>
-                    <img src="{{ asset('images/devise.png') }}" class="devise" alt="">
-                    {% if advert.priceStatus %}
-                        <span class="font-weight-stone-500">- à débattre</span>
-                    {% endif %}
-                </div>
+            <div class="grey-text">
+                {{ advert.price }} <span class="small-8">CFA</span>
             </div>
         </div>
     {% endif %}

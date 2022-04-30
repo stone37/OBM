@@ -2,6 +2,7 @@
 
 namespace App\Subscriber;
 
+use ApiPlatform\Core\Api\UrlGeneratorInterface;
 use App\Entity\Advert;
 use App\Entity\Settings;
 use App\Event\AdminCRUDEvent;
@@ -19,19 +20,22 @@ class AdvertStatusSubscriber implements EventSubscriberInterface
     /** @var Settings */
     private $settings;
     private $mailer;
-    private $service;
-    private $session;
+    private NotificationService $service;
+    private SessionInterface $session;
+    private UrlGeneratorInterface $url;
 
     public function __construct(
         Mailer $mailer,
         SettingsManager $manager,
         SessionInterface $session,
-        NotificationService $service)
+        NotificationService $service,
+        UrlGeneratorInterface $url)
     {
         $this->mailer = $mailer;
         $this->settings = $manager->get();
         $this->service = $service;
         $this->session = $session;
+        $this->url = $url;
     }
 
     /**
@@ -76,7 +80,8 @@ class AdvertStatusSubscriber implements EventSubscriberInterface
         $this->service->notifyUser(
             $event->getAdvert()->getUser(),
             sprintf($wording, "<strong>{$userName}</strong>", "« $advertTitle »"),
-            $advert
+            $advert,
+            $this->url->generate('app_dashboard_advert_index_active')
         );
     }
 

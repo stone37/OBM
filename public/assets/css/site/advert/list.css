@@ -46,15 +46,15 @@
     border-radius: 30px !important;
 }
 
-.skin-light .app-advert-list-block:hover {
+/*.skin-light .app-advert-list-block:hover {
     -webkit-box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
     box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
     border-radius: 30px !important;
-}
+}*/
 
 .skin-light .app-advert-list-block img {
     width: 100%;
-    height: 150px;
+    height: 140px;
 }
 
 .skin-light .app-advert-list-block img.advert-image {
@@ -63,14 +63,14 @@
 
 @media (max-width: 767px) {
     .skin-light .app-advert-list-block img {
-        height: 110px;
+        height: 100px;
     }
 
     .skin-light .app-advert-list-block .nbr-photo {
         position: absolute;
         right: 0 !important;
-        top: 5.4rem !important;
-        font-size: .888rem;
+        top: 5rem !important;
+        font-size: .8rem;
         font-weight: 600;
     }
 
@@ -79,24 +79,40 @@
         top: 0;
         right: 0;
         background-color: #ffffff;
+        width: 25px;
+        height: 25px;
+    }
+
+    .skin-light .app-advert-list-block .favoris i {
+        position: relative;
+        right: 2.8px;
+        bottom: 2.1px;
+        font-size: .9rem;
     }
 
     .skin-light .app-advert-list-block .price {
-        margin-top: 2px !important;
-        border-width: 1.5px !important;
-    }
-
-    .skin-light .app-advert-list-block .price span {
-        font-size: .8rem !important;
+        margin: .8px !important;
+        border: 1.6px solid #ff3547 !important;
+        border-top-right-radius: 30px !important;
+        padding: 2px 8px 0 8px;
     }
 
     .skin-light .app-advert-list-block .location {
-        font-size: .75rem !important;
+        font-size: .65rem !important;
         line-height: normal;
+        margin: 8px 1px 2px 1px;
     }
 
     .skin-light .app-advert-list-block .location i {
-        font-size: .85rem !important;
+        font-size: .7rem !important;
+        position: relative;
+        bottom: 1.2px;
+    }
+
+    .skin-light .app-advert-list-block .location i.fa-clock {
+        font-size: .7rem !important;
+        position: relative;
+        bottom: .2px;
     }
 
     .skin-light .app-advert-list-block .info {
@@ -151,7 +167,7 @@
 
 
     .skin-light .app-advert-list-block .data-info {
-        font-size: .75rem !important;
+        font-size: .68rem !important;
         font-weight: 500;
         margin-top: 4px;
     }
@@ -167,6 +183,7 @@
         font-weight: 500;
         color: #0032FF !important;
         background-color: #bbdefb;
+        border-radius: 30px;
         height: 20px;
         margin-right: 3px;
         padding: 2px 8px 0 8px;
@@ -177,7 +194,7 @@
     .skin-light .app-advert-list-block .favoris {
         position: absolute;
         top: 0;
-        right: 10px;
+        right: -17px;
         background-color: #ffffff;
     }
 
@@ -193,8 +210,8 @@
 
     .skin-light .app-advert-list-block .nbr-photo {
         position: absolute;
-        right: 10px;
-        top: 7.8rem;
+        right: -17px;
+        top: 7.2rem;
         font-size: .888rem;
         font-weight: 600;
     }
@@ -205,7 +222,7 @@
 
     .skin-light .app-advert-list-block .title {
         padding-top: 11px;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 
     .skin-light .app-advert-list-block .location {
@@ -234,6 +251,7 @@
     .skin-light .app-advert-list-block .info .ad {
         font-weight: 500;
         border: 1.5px solid #d81b60 !important;
+        border-radius: 30px;
         color: #d81b60 !important;
         height: 25px;
         margin-top: 10px;
@@ -283,18 +301,35 @@
     }
 
     .skin-light .app-advert-list-block .location i {
-        font-size: .9rem !important;
+        font-size: .8rem !important;
     }
 
     .skin-light .app-advert-list-block .data-info {
-        font-size: .77rem !important;
+        font-size: .8rem !important;
         font-weight: 600;
     }
 
     .skin-light .app-advert-list-block .data-info i {
-        font-size: .3rem !important;
+        font-size: .4rem !important;
         position: relative;
-        bottom: 2px;
+        bottom: 1px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .skin-light .app-advert-list-block .favoris {
+        position: absolute;
+        top: 0;
+        right: 8px;
+        background-color: #ffffff;
+    }
+
+    .skin-light .app-advert-list-block .nbr-photo {
+        position: absolute;
+        right: 8px;
+        top: 7.2rem;
+        font-size: .888rem;
+        font-weight: 600;
     }
 }
 
@@ -372,35 +407,37 @@
 }
 
 .skin-light .app-advert-list-block .price .number {
-    position:relative;
-    font-size: 1.8rem !important;
+    position: relative;
+    font-size: 1.5rem !important;
     font-weight: 600 !important;
     left: 0;
 }
 
-.skin-light .app-advert-list-block .price img.devise {
+.skin-light .app-advert-list-block .price .number span {
+    font-size: 1.1rem !important;
+    margin-left: 3px !important;
+}
+
+/*.skin-light .app-advert-list-block .price img.devise {
     width: 29.8px !important;
     height: 28px !important;
     position: relative;
     top: 7.5px;
-}
+}*/
 
 @media (max-width: 767px) {
     .skin-light .app-advert-list-block .price .number {
-        position:relative;
-        font-size: 1.1rem !important;
+        position: relative;
+        font-size: 1.05rem !important;
         font-weight: 600 !important;
-        left: 0;
+        /*left: 0;
         padding-left: 10px;
-        padding-top: 3px;
+        padding-top: 3px;*/
     }
 
-    .skin-light .app-advert-list-block .price img.devise {
-        width: 19px !important;
-        height: 17.2px !important;
-        position: relative;
-        top: 7px;
-        margin-left: 2.5px;
+    .skin-light .app-advert-list-block .price .number span {
+        font-size: .8rem !important;
+        font-weight: 700 !important;
     }
 }
 

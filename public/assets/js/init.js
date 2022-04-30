@@ -62,3 +62,10 @@ $(document).ready(function() {
     new WOW().init();
 });
 
+function showLoading() {
+    $("body .loader").show();
+}
+
+function hideLoading() {
+    $("body .loader").hide();
+}

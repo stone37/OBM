@@ -222,6 +222,7 @@ class UserController extends AbstractController
                 'form' => $form->createView(),
                 'data' => $users,
                 'message' => $message,
+                'type' => 'modal-danger',
                 'configuration' => $this->configuration(),
             ]);
 

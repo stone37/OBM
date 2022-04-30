@@ -76,13 +76,6 @@
     border-radius: 0 !important;
 }
 
-.skin-light .app-advert-list-block:hover {
-    -webkit-box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
-    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
-    border-radius: 0 !important;
-}
-
-
 .skin-light .app-advert-list-block img {
     height: 150px;
     width: 100%;
@@ -214,7 +207,12 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 
 .skin-light .price .number {
     position: relative;
-    font-size: 2rem !important;
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+}
+
+.skin-light .price .number span {
+    font-size: 1.2rem !important;
     font-weight: 600 !important;
 }
 
@@ -224,28 +222,6 @@ label.btn input[type="radio"].with-gap:checked+label:after {
         position:relative;
         font-size: 1.4rem !important;
         font-weight: 600 !important;
-    }
-
-    .skin-light img.devise {
-        width: 21px !important;
-        height: 22px !important;
-        padding: 0 !important;
-        position: relative;
-        top: -3.5px;
-        right: 5px;
-    }
-
-    .skin-light img.one.devise {
-        right: 4.8px;
-    }
-
-    .skin-light img.two.devise {
-        width: 20px !important;
-        height: 20px !important;
-        padding: 0 !important;
-        position: relative;
-        top: 1px;
-        right: 6px;
     }
 }
 
@@ -318,21 +294,15 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     border-radius: 30px !important;
 }
 
-.skin-light .app-user-advert-block:hover {
-    -webkit-box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
-    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
-    border-radius: 30px !important;
-}
-
 .skin-light .app-user-advert-block img {
     width: 100%;
-    height: 150px;
+    height: 140px;
     border-top-left-radius: 30px !important;
 }
 
 @media (max-width: 767px) {
     .skin-light .app-user-advert-block img {
-        height: 110px;
+        height: 90px;
         border-top-left-radius: 30px !important;
     }
 
@@ -352,12 +322,12 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     }
 
     .skin-light .app-user-advert-block .location {
-        font-size: .75rem !important;
+        font-size: .65rem !important;
         line-height: normal;
     }
 
     .skin-light .app-user-advert-block .location i {
-        font-size: .85rem !important;
+        font-size: .7rem !important;
     }
 
     .skin-light .app-user-advert-block .info {
@@ -407,45 +377,29 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 
 }
 
-.skin-light .app-user-advert-block img.devise {
-    padding: 0 !important;
-}
-
 .skin-light .app-user-advert-block .price {
     position: relative;
 }
 
 .skin-light .app-user-advert-block .price .number {
     position:relative;
-    font-size: 1.8rem !important;
+    font-size: 1.5rem !important;
     font-weight: 600 !important;
     left: 0;
 }
 
-.skin-light .app-user-advert-block .price img.devise {
-    width: 29.8px !important;
-    height: 28px !important;
-    position: relative;
-    top: 7.5px;
-}
-
 @media (max-width: 767px) {
+    .skin-light .app-user-advert-block .price {
+        border-width: 1.8px !important;
+        border-top-right-radius: 30px !important
+    }
+
     .skin-light .app-user-advert-block .price .number {
         position:relative;
         font-size: 1.1rem !important;
         font-weight: 600 !important;
-        left: 0;
-        padding-left: 10px;
-        padding-top: 3px;
     }
 
-    .skin-light .app-user-advert-block .price img.devise {
-        width: 19px !important;
-        height: 17.2px !important;
-        position: relative;
-        top: 7px;
-        margin-left: 2.5px;
-    }
 }
 
 #app-parrainage .gestion {
@@ -602,5 +556,31 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     cursor: pointer;
 }
 
+.skin-light .app-thread-bulk .message-data {
+    width: 80%;
+    border-radius: 30px;
+    padding: 6px 18px 6px 18px;
+}
 
+.skin-light .app-thread-bulk .message-data .message {
+    font-size: .9rem;
+}
+
+.skin-light .app-thread-bulk .avatar img {
+    width: 30px !important;
+}
+
+.skin-light .app-thread-bulk .message-info {
+    font-size: .67rem !important;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.skin-light .app-thread-bulk .message-info.justify-content-end {
+    padding-right: 10px;
+}
+
+.skin-light .app-thread-bulk .message-info.justify-content-start {
+    padding-left: 37px;
+}
 

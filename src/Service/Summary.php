@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Command;
+use App\Entity\OrderItem;
 
 class Summary
 {
@@ -91,5 +92,21 @@ class Summary
     public function getOrder(): Command
     {
         return $this->order;
+    }
+
+    /**
+     * @return OrderItem|null
+     */
+    public function getFirstItem()
+    {
+        return $this->getItems()->first();
+    }
+
+    /**
+     * @return \App\Entity\Product|null
+     */
+    public function getFirstProduct()
+    {
+        return $this->getFirstItem()->getProduct();
     }
 }

@@ -25,21 +25,13 @@
                                             <input type="radio" class="form-check-input with-gap" id="credit{{ product.id }}"
                                                    value="{{ product.id }}" name="credit"/>
                                             <label class="form-check-label price pl-4" for="credit{{ product.id }}">
-                                                <div class="number d-inline-block">{{ product.price }}</div>
-                                                <img src="{{ asset('images/devise_dark.png') }}" class="devise d-inline-block one" alt="">
-
-                                                {#  <span class="h5-responsive font-weight-stone-500">{{ product.price }}</span>
-                                                <span class="font-weight-stone-500">CFA</span>#}
+                                                <div class="number d-inline-block">{{ product.price }}<span>CFA</span></div>
                                             </label>
                                         </div>
                                         {% if product.credit %}
                                             <div class="offre text-center mx-0">
                                                 <div class="price-small d-flex justify-content-center">
-                                                    + <div class="number d-inline-block">{{ product.credit }}</div>
-                                                    <img src="{{ asset('images/devise_dark.png') }}" class="devise d-inline-block two" alt="">
-
-                                                    {# + <span class="font-weight-stone-500">{{ product.credit }}</span>
-                                                    <span class="font-weight-stone-500 small-8">CFA</span>#}
+                                                    + <div class="number d-inline-block">{{ product.credit }}<span class="small-9" style="margin-left: 2px;">CFA</span></div>
                                                 </div>
                                                 <div class="text small-8 font-weight-stone-500">offerts</div>
                                             </div>

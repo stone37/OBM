@@ -9,6 +9,7 @@ use App\Entity\Favorite;
 use App\Entity\Location;
 use App\Entity\Message;
 use App\Entity\Command;
+use App\Entity\Thread;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -221,7 +222,16 @@ trait AdvertTrait
      */
     private $reads;
 
+    /**
+     * @var Thread|Collection
+     *
+     * @ORM\OneToMany(targetEntity=Thread::class, mappedBy="advert")
+     */
+    private $threads;
+
     private $shop;
+
+
 
     public function __constructAdvert()
     {
@@ -230,6 +240,7 @@ trait AdvertTrait
         $this->favorites = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->reads = new ArrayCollection();
+        $this->threads = new ArrayCollection();
     }
 
     /**
@@ -642,6 +653,36 @@ trait AdvertTrait
     {
         if ($this->reads->contains($read)) {
             $this->reads->removeElement($read);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Thread[]
+     */
+    public function getThreads(): ?Collection
+    {
+        return $this->threads;
+    }
+
+    /**
+     * @param Thread $thread
+     * @return $this
+     */
+    public function addThread(Thread $thread): self
+    {
+        if (!$this->threads->contains($thread)) {
+            $this->threads->add($thread);
+        }
+
+        return $this;
+    }
+
+    public function removeThread(Thread $thread): self
+    {
+        if ($this->threads->contains($thread)) {
+            $this->threads->removeElement($thread);
         }
 
         return $this;

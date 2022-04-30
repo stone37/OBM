@@ -2,7 +2,7 @@
 {# pixel facebook ici #}
 
 {% block title 'Acheter et vendre sur le site de petites annonces pour particuliers et pros' %}
-
+ 
 {% block meta %}
     {% set content = "O'blackmarket: petites annonces en Côte d'Ivoire. Achetez un véhicule, trouvez un emploi, une maison ou un appartement, des meubles, appareils électroménagers et plus !" %}
     <meta name="description" content="{{ content }}"/>
@@ -19,8 +19,9 @@
             {# Pub #}
         </div>
         <section class="col-12">
-            <div class="font-weight-stone-500 text-center dark-grey-text small-9 mb-3 d-block d-lg-none">
-                Trouvez la bonne affaire parmi des milliers de petites annonces {{ settings.name }}
+            <div class="font-weight-stone-500 text-center small-9 mb-3 d-block d-lg-none">
+                Trouvez la bonne affaire parmi des milliers de petites annonces
+                <span class="text-primary font-weight-bold">{{ settings.name }}</span>.
             </div>
             <div class="text-center mb-4 d-block d-md-none">
                 <a href="{{ path('app_advert_category') }}" class="btn btn-block btn-sm btn-primary">
@@ -33,9 +34,10 @@
                 </a>
             </div>
 
-            <h4 class="font-weight-stone-600 dark-grey-text text-center mb-3 d-none d-lg-block">
-                Trouvez la bonne affaire parmi des milliers de petites annonces {{ settings.name }}
-            </h4>
+            <h3 class="h3-responsive font-weight-bold text-center mb-3 d-none d-lg-block">
+                Trouvez la bonne affaire parmi des milliers de petites annonces
+                <span class="text-primary font-weight-bold">{{ settings.name }}</span>.
+            </h3>
             <div class="text-center mb-4 d-none d-lg-block">
                 <a href="{{ path('app_advert_category') }}" class="btn btn-lg btn-primary">
                     Déposer une annonce <i class="fas fa-sign-in-alt ml-2"></i>

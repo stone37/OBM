@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Controller\Traits\ControllerTrait;
+use App\Entity\Advert;
+use App\Entity\User;
+use App\Manager\ThreadManager;
 use App\Service\SettingsManager;
 use App\Storage\OrderSessionStorage;
 /*use DateTime;
@@ -13,6 +16,9 @@ use Elastica\Query\Range;
 use Elastica\Query\Terms;
 use Elastica\Util;
 use FOS\ElasticaBundle\Finder\TransformedFinder;*/
+
+use Doctrine\ORM\EntityManagerInterface;
+use Gedmo\Tree\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
@@ -26,7 +32,7 @@ class HomeController extends AbstractController
         $this->settings = $settings->get();
     }
 
-    public function index(OrderSessionStorage $storage)
+    public function index(OrderSessionStorage $storage, ThreadManager $manager, EntityManagerInterface $em)
     {
         /*$storage->remove();
 
@@ -90,7 +96,11 @@ class HomeController extends AbstractController
 
         dump($data);*/
 
+       /* $advert = $em->getRepository(Advert::class)->find(1);
+        $user = $em->getRepository(User::class)->find(8);
 
+        dump($advert, $user);
+        dump($manager->nbThreadsCreatedByAdvert($advert, $user));*/
 
         return $this->render('site/home/index.html.twig', [
             'settings' => $this->settings

@@ -26,9 +26,11 @@
                                     {% block app_cart %}{% endblock %}
 
                                     {% block app_notify %}
-                                        <li class="nav-item notification pl-2 pr-2 d-none">
+                                        <li class="nav-item notification pl-2 pr-2">
                                             <a href="{{ path('app_notification_index') }}" class="text-center">
-                                                <span class="badge badge-secondary">4</span>
+                                                {% if app_notification_nb_unread() > 0 %}
+                                                    <span class="badge badge-danger">{{ app_notification_nb_unread() }}</span>
+                                                {% endif %}
                                                 <i class="far fa-bell grey-text"></i>
                                             </a>
                                         </li>
@@ -90,6 +92,16 @@
                 <div class="d-flex">
                     <div>
                         {% block app_mobile_cart %}{% endblock %}
+
+                        {% block app_mobile_notify %}
+                            <a href="{{ path('app_notification_index') }}"
+                               class="text-center grey-text mr-3 mt-2 d-inline-block">
+                                {% if app_notification_nb_unread() > 0 %}
+                                    <span class="badge badge-danger" style="position:relative; bottom: 3px;">{{ app_notification_nb_unread() }}</span>
+                                {% endif %}
+                                <i class="far fa-bell grey-text" style="font-size: 1.4rem;"></i>
+                            </a>
+                        {% endblock %}
                     </div>
                     <ul class="navbar-nav ml-auto">
                         {{ render(controller('App\\Controller\\MenuController::dropdownMenu')) }}
@@ -109,7 +121,7 @@
     {{ render(controller('App\\Controller\\MenuController::megaNavBar', {'request': app.request})) }}
 
     <div class="jumbotron mobile color-primary d-block d-lg-none noPrint"
-         style="border-bottom-right-radius: 25px">
+         style="border-bottom-right-radius: 40px">
         <div class="d-flex align-items-center h-100">
             <div class="container text-center mx-2">
                 {% block app_mobile_search_form %}

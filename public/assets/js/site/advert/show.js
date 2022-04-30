@@ -18,12 +18,16 @@ $(document).ready(function() {
      */
     messageAjax($('#app-advert-message-form'));
 
+    $('.btn-message-no-connection').click(function(e) {
+        e.preventDefault;
+    });
+
     let messageData = {
-        1: "Bonjour, je souhaiterais avoir des informations complémentaires concernant votre annonce, merci de me recontacter aux coordonnées indiquées",
+        1: "Bonjour, je souhaiterais avoir des informations complémentaires concernant votre annonce, merci de me recontacter.",
 
-        2: "Bonjour, je souhaiterais recevoir d'autres photos concernant votre annonce, merci de me recontacter aux coordonnées indiquées",
+        2: "Bonjour, je souhaiterais recevoir d'autres photos concernant votre annonce, merci de me recontacter.", //  aux coordonnées indiquées
 
-        3: "Bonjour, je souhaiterais prendre rendez-vous avec vous, merci de me recontacter aux coordonnées indiquées"
+        3: "Bonjour, je souhaiterais prendre rendez-vous avec vous, merci de me recontacter."
     };
 
     $('#app-advert-message-motif').change(function () {
@@ -102,7 +106,7 @@ function messageAjax(element) {
     element.submit(function (e) {
         e.preventDefault();
 
-        loader(true);
+        showLoading();
 
         $.ajax({
             url: $(element).attr('action'),
@@ -132,7 +136,7 @@ function messageAjax(element) {
                     notification("Messagerie", "Erreur de validation, votre message n'a pas pu etre envoyer", {}, 'error')
                 }
 
-                loader(false);
+                hideLoading();
             }
         })
     });
@@ -142,8 +146,7 @@ function reportAjax(element) {
     element.submit(function (e) {
         e.preventDefault();
 
-        $('#loader .preloader-wrapper').addClass('active');
-        $(".page-content").addClass('disabled');
+        showLoading();
 
         $.ajax({
             url: $(element).attr('action'),
@@ -177,8 +180,7 @@ function reportAjax(element) {
                     notification("Messagerie", "Erreur de validation, votre signalement n'a pas pu etre envoyer", {}, 'error')
                 }
 
-                $('#loader .preloader-wrapper').removeClass('active');
-                $(".page-content").removeClass('disabled');
+                hideLoading();
             }
         })
     });
@@ -194,6 +196,7 @@ function printit(){
     }
 }
 
+/*
 function loader(status) {
     if (status) {
         $('#loader .preloader-wrapper').addClass('active');
@@ -203,6 +206,7 @@ function loader(status) {
         $(".page-content").removeClass('disabled');
     }
 }
+*/
 
 
 

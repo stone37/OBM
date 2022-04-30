@@ -801,7 +801,8 @@ class AdvertRepository extends ServiceEntityRepository
             ->andWhere('a.denied = 0')
             ->andWhere('a.deleted = 0')
             ->andWhere('a.user = :user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+            ->orderBy('a.validatedAt', 'desc');
 
         $qb->andWhere('a.validatedAt >= :date')
             ->setParameter('date', (new DateTime())->modify('-6 month'));
@@ -822,7 +823,8 @@ class AdvertRepository extends ServiceEntityRepository
             ->andWhere('a.denied = 0')
             ->andWhere('a.deleted = 0')
             ->andWhere('a.user = :user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+            ->orderBy('a.createdAt', 'desc');
 
         return $qb->getQuery()->getResult();
     }

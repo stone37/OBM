@@ -14,17 +14,26 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Notification
 {
     /**
+     * @Groups({"read:notification"})
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
-    private $id = null;
+    private $id = null; 
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(name="user_id", onDelete="CASCADE", nullable=true)
      */
     private $user = null;
+
+    /**
+     * @Groups({"read:notification"})
+     *
+     * @ORM\ManyToOne(targetEntity=Advert::class)
+     */
+    private $advert = null;
 
     /**
      * @ORM\Column(type="string")
@@ -34,10 +43,9 @@ class Notification
     private $message;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank()
-     * @Assert\Url()
      * @Groups({"read:notification", "create:notification"})
+     *
+     * @ORM\Column(type="string", nullable=true)
      */
     private $url = null;
 
@@ -57,6 +65,7 @@ class Notification
      * @ORM\Column(type="string", nullable=true)
      */
     private $target = null;
+
 
     public function __construct()
     {
@@ -83,6 +92,18 @@ class Notification
     public function setUser(?User $user): Notification
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAdvert(): ?Advert
+    {
+        return $this->advert;
+    }
+
+    public function setAdvert(?Advert $advert): Notification
+    {
+        $this->advert = $advert;
 
         return $this;
     }
@@ -152,6 +173,7 @@ class Notification
         if (null === $this->user) {
             return false;
         }
+
         $notificationsReadAt = $this->user->getNotificationsReadAt();
 
         return $notificationsReadAt ? ($this->createdAt > $notificationsReadAt) : false;

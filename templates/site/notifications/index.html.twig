@@ -39,19 +39,33 @@
                             <h2 class="h2-responsive font-weight-stone-600 text-primary mb-4">Mes notifications</h2>
                         </div>
 
-                        <div class="col-12 text-center">
+                        <div class="col-12 text-center mb-5">
                             {% if notifications|length > 0 %}
-                                {% for notification in notifications %}
-                                    <div class="card mb-4">
-                                        <div class="card-body">
-                                            <p>
-                                                <a class="btn btn-outline-grey btn-block" style="line-height: normal !important"
-                                                   href="{{ notification.url }}">{{ notification.message|raw }}</a>
-                                            </p>
-                                            <div class="text-muted text-small">{{ notification.createdAt | ago }}</div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
+                                <table class="table table-responsive-sm">
+                                    <thead class="text-primary">
+                                    <tr>
+                                        <th scope="col" class="font-weight-stone-500 text-center">Date</th>
+                                        <th scope="col" class="font-weight-stone-500 text-center">Sujet</th>
+                                        <th scope="col" class="font-weight-stone-500 text-center">Type</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for notification in notifications %}
+                                            <tr>
+                                                <td class="text-center">{{ notification.createdAt|date('d/m/Y') }}</td>
+                                                <td class="text-center">{{ notification.message|raw }}</td>
+                                                <td class="text-center py-2">
+                                                    {% if notification.url|length %}
+                                                        <a href="{{ notification.url }}"
+                                                           class="btn btn-sm btn-default">
+                                                            Afficher
+                                                        </a>
+                                                    {% else %}Information{% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             {% else %}
                                 <div class="h3-responsive font-weight-stone-600 my-5">
                                     Aucune nouvelle notification.

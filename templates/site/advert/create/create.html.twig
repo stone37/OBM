@@ -9,6 +9,7 @@
 {% block app_advert_btn_post %}{% endblock %}
 {% block app_navbar_second %}{% endblock %}
 {% block app_notify %}{% endblock %}
+{% block app_mobile_notify %}{% endblock %}
 
 {% block app_cart %}
     <li class="nav-item icon cart pt-2 pr-2">
@@ -55,13 +56,12 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
+    {{ parent() }} 
 
 
     <script>
         let photoFree = parseInt('{{ optionPhoto.photoFree }}'),
-            photoPay = parseInt('{{ optionPhoto.photoPaying }}'),
-            deviseImg = '{{ asset('images/devise.png') }}';
+            photoPay = parseInt('{{ optionPhoto.photoPaying }}');
     </script>
 
     {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/location.js'} %}

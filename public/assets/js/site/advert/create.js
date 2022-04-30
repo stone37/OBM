@@ -4,7 +4,7 @@ $(document).ready(function() {
      * Upload File
      * ##############
      */
-
+ 
     let $ordPhoto = [];
     let $nbPhotos = photoFree;
     let $body = $('body');
@@ -18,7 +18,7 @@ $(document).ready(function() {
         maxFileSize: 8388608, // 8 Megs max
         extFilter: ['jpg', 'jpeg','png','gif'],
         url: Routing.generate('app_image_upload_add'),
-        onFallbackMode: function(){
+        onFallbackMode: function() {
             //console.log('Callback: onFallbackMode');
             //afficherAlertePourQuitterLaPage = false;
             //window.location.href+='&imgv=1';
@@ -164,7 +164,7 @@ $(document).ready(function() {
     $('#option_PHOTO').click(function () {
         let $this = $(this);
 
-        loader(true);
+        showLoading();
 
         if ($(this).prop('checked')) {
             $.ajax({
@@ -179,7 +179,7 @@ $(document).ready(function() {
                         notification("Panier", "Erreur: Option déjà dans le panier", {}, 'error')
                     }
 
-                    loader(false);
+                    hideLoading();
                 }
             });
         } else {
@@ -195,7 +195,7 @@ $(document).ready(function() {
                         notification("Panier", "Erreur: Option n'est pas dans le panier", {}, 'error')
                     }
 
-                    loader(false);
+                    hideLoading();
                 }
             });
         }
@@ -283,6 +283,8 @@ $(document).ready(function() {
      */
     function uploadRemove(id) {
 
+        showLoading();
+
         let pos = $ordPhoto.indexOf(id);
         $ordPhoto.splice(pos, 1); 
 
@@ -306,6 +308,8 @@ $(document).ready(function() {
                 }
 
                 $('#nbPhoto-ac').html(Math.min($ordPhoto.length, $nbPhotos));
+
+                hideLoading();
             }
         });
 
@@ -335,6 +339,8 @@ $(document).ready(function() {
      * @param id
      */
     function changePrincipale(id) {
+        showLoading();
+
         var el = $('#'+id);
         if(el.hasClass('disabled')) return;
 
@@ -345,6 +351,8 @@ $(document).ready(function() {
             success: function() {
                 $('#imgUpload-list .imgUpload-add > div').removeClass('principale');
                 el.addClass('principale');
+
+                hideLoading();
             }
         });
     }
@@ -383,7 +391,8 @@ $(document).ready(function() {
     let $btnSubmit = $('.app-ad-submit-btn');
 
     $btnSubmit.click(() => {
-        loader(true);
+        //loader(true);
+        showLoading();
     })
 
     // Option visual
@@ -396,7 +405,8 @@ $(document).ready(function() {
             $price = $this.parents('.app-option-data-bulk').find('div.number');
 
         if ($input.prop('checked')) {
-            loader(true);
+
+            showLoading();
 
             $.ajax({
                 url: Routing.generate('app_cart_replace', {'id': $input.val(), 'newId': $id}),
@@ -407,7 +417,7 @@ $(document).ready(function() {
                         notification("Panier", "Erreur: Option n'est pas dans le panier", {}, 'error')
                     }
 
-                    loader(false);
+                    hideLoading();
                 }
             });
         }
@@ -420,7 +430,7 @@ $(document).ready(function() {
 
         let $this = $(this);
 
-        loader(true);
+        showLoading();
 
         if ($this.prop('checked')) {
             $.ajax({
@@ -437,7 +447,7 @@ $(document).ready(function() {
                         notification("Panier", "Erreur: Option déjà dans le panier", {}, 'error')
                     }
 
-                    loader(false);
+                    hideLoading();
                 }
             });
         } else {
@@ -455,7 +465,7 @@ $(document).ready(function() {
                         notification("Panier", "Erreur: Option n'est pas dans le panier", {}, 'error')
                     }
 
-                    loader(false);
+                    hideLoading();
                 }
             });
         }
@@ -469,7 +479,7 @@ $(document).ready(function() {
             $type = $this.attr('data-type'),
             $option = $('#option'+$type);
 
-        loader(true);
+        showLoading();
 
         if (!$this.hasClass('hasCart')) {
             $.ajax({
@@ -486,7 +496,7 @@ $(document).ready(function() {
                         notification("Panier", "Erreur: Option déjà dans le panier", {}, 'error')
                     }
 
-                    loader(false);
+                    hideLoading();
                 }
             });
         } else {
@@ -504,16 +514,19 @@ $(document).ready(function() {
                         notification("Panier", "Erreur: Option n'est pas dans le panier", {}, 'error')
                     }
 
-                    loader(false);
+                    hideLoading();
                 }
             });
         }
     });
 
     $('.app-cart').click(function (e) {
+
         e.preventDefault();
 
         if ($productNumber) {
+            showLoading();
+
             $.ajax({
                 url: Routing.generate('app_cart_index'),
                 success: function(data) {
@@ -526,9 +539,8 @@ $(document).ready(function() {
                         $productContainer.append('<tr>' +
                             '<th scope="row">'+(i+1)+'</th>' +
                             '<td>'+productName(val)+'</td> ' +
-                            '<td class="font-weight-stone-500 text-default d-flex price-small pt-3">' +
-                            '<span class="d-block number">'+val.price+'</span>' +
-                            '<img src="'+deviseImg+'" class="devise" alt="">' +
+                            '<td class="font-weight-stone-500 text-danger d-flex price-small pt-3">' +
+                            '<span class="d-block number">'+val.price+'<span class="small-8" style="margin-left: 2px;">CFA</span></span>' +
                             '</tr>');
 
                         $total += parseInt(val.price);
@@ -537,12 +549,13 @@ $(document).ready(function() {
                     $productContainer.append('<tr>' +
                         '<th scope="row"></th>' +
                         '<td>Total</td> ' +
-                        '<td class="h5-responsive font-weight-stone-600 price text-default d-flex pt-1">'+
-                        '<span class="d-block number">'+$total+'</span>' +
-                        '<img src="'+deviseImg+'" class="devise" alt="">' +
+                        '<td class="h5-responsive font-weight-stone-600 price text-danger d-flex pt-3">'+
+                        '<span class="d-block number">'+$total+'<span class="small-9" style="margin-left: 2px;">CFA</span></span></span>' +
                         '</tr>');
 
                     $('#modalCart').modal();
+
+                    hideLoading();
                 }
             });
         } else {
@@ -573,9 +586,6 @@ $(document).ready(function() {
             return 'Photos supplémentaires';
         }
     }
-
-
-
 });
 
 /**
@@ -591,16 +601,6 @@ function notification (titre, message, options, type) {
     if(typeof type == 'undefined') type = "info";
 
     toastr[type](message, titre, options);
-}
-
-function loader(status) {
-    if (status) {
-        $('#loader .preloader-wrapper').addClass('active');
-        $(".page-content").addClass('disabled');
-    } else {
-        $('#loader .preloader-wrapper').removeClass('active');
-        $(".page-content").removeClass('disabled');
-    }
 }
 
 

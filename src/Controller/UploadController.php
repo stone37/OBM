@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class UploadController extends AbstractController
 {
     use ControllerTrait;
-    use UploadTrait;
+    use UploadTrait; 
 
     /**
      * @param Request $request
@@ -61,7 +61,7 @@ class UploadController extends AbstractController
         $system = new Filesystem();
         $finder = new Finder();
 
-        try {
+        try { 
             $finder->in($this->getFindPath($session))->name(''.key($data[$pos]).'');
         } catch (InvalidArgumentException $e) {
             $finder->append([]);

@@ -47,7 +47,7 @@
                                     {% if not loop.last %}<br>{% endif %}
                                 {% endfor %}
                             </td>
-                            <td class="text-center">{{ payment.price }} CFA</td>
+                            <td class="text-center">{{ payment.price }} <span class="small-8">CFA</span></td>
                             <td>
                                 <a target="_blank" href="{{ path('app_dashboard_invoice_show', {id: payment.id}) }}" class="btn btn-amber btn-sm">Télécharger&nbsp;<span class="d-none d-md-inline-block">la facture</span></a>
                             </td>

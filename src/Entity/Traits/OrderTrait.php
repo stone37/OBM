@@ -24,7 +24,7 @@ trait OrderTrait
      */
     private $validated = false;
 
-    /**
+    /** 
      * @var int
      *
      * @ORM\Column(type="integer", nullable=true)

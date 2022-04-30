@@ -2,13 +2,12 @@
 
 namespace App\Service;
 
+use App\Entity\Advert;
 use App\Entity\User;
-use App\Entity\Message;
 use App\Entity\Notification;
 use App\Event\NotificationCreatedEvent;
 use App\Event\NotificationReadEvent;
 use App\Repository\NotificationRepository;
-use App\Encoder\PathEncoder;
 use App\Security\ChannelVoter;
 use DateTime;
 use DateTimeImmutable;
@@ -16,23 +15,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class NotificationService
 {
     private $em;
-    private $serializer;
     private $dispatcher;
     private $security;
 
     public function __construct(
-        SerializerInterface $serializer,
         EntityManagerInterface $em,
         EventDispatcherInterface $dispatcher,
         Security $security
     ) {
         $this->em = $em;
-        $this->serializer = $serializer;
         $this->dispatcher = $dispatcher;
         $this->security = $security;
     }
@@ -40,10 +35,10 @@ class NotificationService
     /**
      * Envoie une notification sur un canal particulier.
      */
-    public function notifyChannel(string $channel, string $message, ?object $entity = null): Notification
+    public function notifyChannel(string $channel, string $message, ?object $entity = null, string $url = null): Notification
     {
-        /** @var string $url */
-        $url = $entity ? $this->serializer->serialize($entity, PathEncoder::FORMAT) : null;
+        /**
+        //$url = $entity ? $this->serializer->serialize($entity, PathEncoder::FORMAT) : null;*/
         $notification = (new Notification())
             ->setMessage($message)
             ->setUrl($url)
@@ -63,29 +58,23 @@ class NotificationService
      *
      * @param User $user
      * @param string $message
-     * @param object $entity
      * @return Notification
      * @throws \Doctrine\ORM\ORMException
      */
-    public function notifyUser(User $user, string $message, object $entity): Notification
+    public function notifyUser(User $user, string $message, Advert $entity, string $url = null): Notification
     {
-        /** @var string $url */
-        $url = $this->serializer->serialize($entity, PathEncoder::FORMAT);
-        /** @var NotificationRepository $repository */
-        $repository = $this->em->getRepository(Notification::class);
-
-        if ($entity instanceof Message) {
-            $entity = $entity->getAdvert();
-        }
+       /* /** @var NotificationRepository $repository
+        $repository = $this->em->getRepository(Notification::class);*/
 
         $notification = (new Notification())
             ->setMessage($message)
             ->setUrl($url)
             ->setTarget($this->getHashForEntity($entity))
             ->setCreatedAt(new DateTime())
-            ->setUser($user);
+            ->setUser($user)
+            ->setAdvert($entity);
 
-        $repository->persistOrUpdate($notification);
+        $this->em->persist($notification);
         $this->em->flush();
         $this->dispatcher->dispatch(new NotificationCreatedEvent($notification));
 
@@ -104,11 +93,31 @@ class NotificationService
         return $repository->findRecentForUser($user, $this->getChannelsForUser($user));
     }
 
+    /**
+     * @param User|UserInterface $user
+     */
     public function readAll(User $user): void
     {
         $user->setNotificationsReadAt(new DateTimeImmutable());
         $this->em->flush();
         $this->dispatcher->dispatch(new NotificationReadEvent($user));
+    }
+
+    /**
+     * @param \Symfony\Component\Security\Core\User\UserInterface|User  $user
+     * @return int
+     */
+    public function nbUnread(User $user)
+    {
+        $count = 0;
+        $notifications = $this->em->getRepository(Notification::class)
+            ->findRecentForUser($user, $this->getChannelsForUser($user));
+
+        foreach($notifications as $notification) {
+            if ($notification->isRead()) $count++;
+        }
+
+        return $count;
     }
 
     /**

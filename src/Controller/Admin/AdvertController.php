@@ -4,8 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Advert;
 use App\Event\AdminCRUDEvent;
-use App\Event\AdvertValidateEvent;
 use App\Event\AdvertDeniedEvent;
+use App\Event\AdvertValidateEvent;
 use App\Form\Filter\AdminAdvertType;
 use App\Model\Admin\AdvertSearch;
 use App\Service\UserBanService;
@@ -562,9 +562,9 @@ class AdvertController extends AbstractController
         EntityManagerInterface $em,
         EventDispatcherInterface $dispatcher, $type)
     {
-        if ($type === 1) {
+        if ($type == 1) {
             $adverts = $em->getRepository(Advert::class)->getDenied();
-        } elseif ($type === 2) {
+        } elseif ($type == 2) {
             $adverts = $em->getRepository(Advert::class)->getExpired();
         } else {
             $adverts = $em->getRepository(Advert::class)->getDeleted();
@@ -611,6 +611,7 @@ class AdvertController extends AbstractController
                 'form' => $form->createView(),
                 'data' => $adverts,
                 'message' => $message,
+                'type' => 'modal-danger',
                 'configuration' => $this->configuration(),
             ]);
 
@@ -635,10 +636,10 @@ class AdvertController extends AbstractController
      */
     public function reload(
         Request $request,
-        EntityManagerInterface $em,
-        EventDispatcherInterface $dispatcher)
+        EntityManagerInterface $em)
     {
         $adverts = $em->getRepository(Advert::class)->getExpired();
+
         $form = $this->createFormBuilder()
             ->setAction($this->generateUrl('app_admin_advert_reload'))
             ->setMethod('POST')
@@ -650,10 +651,7 @@ class AdvertController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
 
                 foreach ($adverts as $advert) {
-
-                    $dispatcher->dispatch(new AdminCRUDEvent($advert), AdminCRUDEvent::PRE_EDIT);
-
-                    $em->remove($advert);
+                    $advert->setValidatedAt(new DateTime());
                 }
 
                 $em->flush();

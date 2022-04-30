@@ -103,7 +103,7 @@ class AdvertController extends AbstractController
         $dispatcher->dispatch(new AdvertCreatedInitializeEvent($advert, $request));
 
         $form = $this->createForm($manager->createFormType(), $advert);
-        $form->handleRequest($request);
+        $form->handleRequest($request); 
 
         if ($form->isSubmitted() && $form->isValid()) {
             $event = new AdvertPreCreatedEvent($advert, $request);

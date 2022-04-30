@@ -82,7 +82,6 @@ App\Entity\User:
             denormalization_context:
                 groups: ['delete:user']
             normalization_context:
-
                 groups: ['read:user']
             method: PATCH
             path: /users/{id}/password-change
@@ -157,7 +156,7 @@ App\Entity\Advert:
         image_add:
             security: is_granted("ROLE_USER")
             method: POST
-            path: /adverts/image/add
+            path: /adverts/image/add/{id}
             controller: App\Api\Controller\AdvertImageAdd
             deserialize: false
             openapi_context:
@@ -173,24 +172,6 @@ App\Entity\Advert:
                                     file:
                                         type: string
                                         format: binary
-        image_delete:
-            security: is_granted("ROLE_USER")
-            method: DELETE
-            path: /adverts/image/{position}/delete
-            controller: App\Api\Controller\AdvertImageDelete
-            openapi_context:
-                summary: Supprime une image du serveur
-                security:
-                    - bearerAuth: []
-        image_principale:
-            security: is_granted("ROLE_USER")
-            method: GET
-            path: /adverts/image/{position}/principale
-            controller: App\Api\Controller\AdvertImagePrincipale
-            openapi_context:
-                summary: Definis une image comme principale
-                security:
-                    - bearerAuth: []
         advert_active:
             pagination_client_items_per_page: true
             paginationMaximumItemsPerPage: 20
@@ -248,7 +229,7 @@ App\Entity\Advert:
             validation_groups:
                 - App\Entity\Advert
                 - validationGroups
-        soft_delete:
+        soft_delete: 
             security: is_granted("ROLE_USER")
             denormalization_context:
                 groups: ['delete:advert']
@@ -262,6 +243,52 @@ App\Entity\Advert:
             controller: App\Api\Controller\AdvertDelete
             openapi_context:
                 summary: Retire une annonce
+                security:
+                    - bearerAuth: []
+#        add_image:
+#            security: is_granted("ROLE_USER")
+#            method: POST
+#            normalization_context:
+#                skip_null_values: false
+#                groups: ['read:advert']
+#            deserialize: false
+#            path: /adverts/{id}/images/add
+#            requirements:
+#                id: \d+
+#            controller: App\Api\Controller\AdvertImageAdd
+#            openapi_context:
+#                summary: Ajouter des images à une annonce
+#                security:
+#                    - bearerAuth: []
+#                requestBody:
+#                    content:
+#                        multipart/form-data:
+#                            schema:
+#                                type: object
+#                                properties:
+#                                    file:
+#                                        type: string
+#                                        format: binary
+        check_user_thread_nb:
+            security: is_granted("ROLE_USER")
+            method: GET
+            path: /adverts/user/{id}/thread
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\CheckUserThreadByAdvert
+            openapi_context:
+                summary: Retourne le nombre de consersation d'un utilisateur sur un annonce
+                security:
+                    - bearerAuth: []
+        check_user_advert:
+            security: is_granted("ROLE_USER")
+            method: GET
+            path: /adverts/{id}/check
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\CheckUserAdvert
+            openapi_context:
+                summary: Verifie si l'annonce est de l'utilisateur connecter
                 security:
                     - bearerAuth: []
         delete_favoris:
@@ -425,7 +452,7 @@ App\Entity\Alert:
             paginationItemsPerPage: 10
             normalization_context:
                 skip_null_values: false
-                groups: ['read:alert']
+                groups: ['read:alert'] 
             method: GET
             path: /users/{id}/alerts
             controller: App\Api\Controller\UserAlert
@@ -520,6 +547,118 @@ App\Entity\Settings:
             read: false
             output: false
 
+App\Entity\Thread:
+    collectionOperations:
+        get:
+            normalization_context:
+                groups: ['read:thread']
+        userThread:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:thread', 'read:advert', 'read:user']
+            method: GET
+            path: /threads/user
+            controller: App\Api\Controller\UserThread
+            openapi_context:
+                summary: Recupere les conversation d'un utilisateur
+                security:
+                    - bearerAuth: []
+        getUserThread:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:thread', 'read:advert', 'read:user']
+            method: GET
+            path: /threads/user/{id}
+            controller: App\Api\Controller\UserThreadByAdvert
+            openapi_context:
+                summary: Recupere un conversation d'un utilisateur
+                security:
+                    - bearerAuth: []
+        createThread:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:thread']
+            denormalization_context:
+                groups: ['write:thread']
+            method: POST
+            path: /threads/{id}/create
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserThreadCreate
+            openapi_context:
+                summary: Créer une nouvelle conversation
+                security:
+                    - bearerAuth: []
+                parameters:
+                    - { name: id, in: path, description: "Identifiant de l'annonce", type: integer, required: true }
+    itemOperations:
+        get:
+            controller: 'NotFoundAction'
+            openapi_context:
+                summary: hidden
+            read: false
+            output: false
+        replyThread:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:thread']
+            denormalization_context:
+                groups: ['write:thread']
+            method: PUT
+            path: /threads/{id}/reply
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserThreadReply
+            openapi_context:
+                summary: Repond a une conversation
+                security:
+                    - bearerAuth: []
+        delete_thread:
+            security: is_granted("ROLE_USER")
+            method: GET
+            path: /threads/{id}/delete
+            requirements:
+                id: \d+
+            controller: App\Api\Controller\UserThreadDelete
+            openapi_context:
+                summary: Supprime une conversation d'un utilisateur
+                security:
+                    - bearerAuth: []
 
+
+App\Entity\Notification:
+    collectionOperations:
+        get:
+            normalization_context:
+                groups: ['read:notification']
+        userNotification:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:notification', 'read:advert']
+            method: GET
+            path: /notifications/user
+            controller: App\Api\Controller\UserNotification
+            openapi_context:
+                summary: Recupere les notifications d'un utilisateur
+                security:
+                    - bearerAuth: []
+        userNotificationUnread:
+            security: is_granted("ROLE_USER")
+            normalization_context:
+                groups: ['read:notification']
+            method: GET
+            path: /notifications/user/unread
+            controller: App\Api\Controller\UserNotificationUnread
+            openapi_context:
+                summary: Recupere les notifications non lu d'un utilisateur
+                security:
+                    - bearerAuth: []
+    itemOperations:
+        get:
+            controller: 'NotFoundAction'
+            openapi_context:
+                summary: hidden
+            read: false
+            output: false
 
 

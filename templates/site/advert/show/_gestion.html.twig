@@ -4,40 +4,54 @@
 {% set favoris = hasFavoris(advert) %}
 
 {% if is_mobile() %}
-    <div class="d-flex justify-content-between flex-wrap d-md-none btn-gestion">
-        <a class="btn btn-outline-grey facebook mb-2" data-sharer="facebook"
-           data-hashtag="{{ settings.name|slug('')|lower }}" data-url="{{ url }}">
-            <i class="fab fa-facebook-square"></i>
-        </a>
-        <a href="{{ messenger }}" class="btn btn-outline-grey messenger mb-2">
-            <i class="fab fa-facebook-messenger"></i>
-        </a>
-        <a class="btn btn-outline-grey whatsapp mb-2"
-           data-sharer="whatsapp" data-url="{{ url }}">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a class="btn btn-outline-grey twitter mb-2"
-           data-sharer="twitter"
-           data-hashtags="{{ settings.name|slug('')|lower }}"
-           data-url="{{ url }}">
-            <i class="fab fa-twitter"></i>
-        </a>
-        <a class="btn btn-outline-grey sms mb-2" href="sms:?&body={{ url }}"><i class="fas fa-sms"></i></a>
-        <a class="btn btn-outline-deep-orange envelope mb-2"
-           data-sharer="email"
-           data-url="{{ url }}"
-           data-subject="{{ subject }}"
-           data-to=""
-           data-title="">
-            <i class="fas fa-envelope"></i>
-        </a>
+    <div class="d-flex justify-content-start flex-wrap d-md-none btn-gestion mt-2">
+        <div class="mr-2">
+            <a class="btn btn-outline-grey facebook mb-2" data-sharer="facebook"
+               data-hashtag="{{ settings.name|slug('')|lower }}" data-url="{{ url }}">
+                <i class="fab fa-facebook-square"></i>
+            </a>
+        </div>
+        <div class="mr-2">
+            <a href="{{ messenger }}" class="btn btn-outline-grey messenger mb-2">
+                <i class="fab fa-facebook-messenger"></i>
+            </a>
+        </div>
+        <div class="mr-2">
+            <a class="btn btn-outline-grey whatsapp mb-2"
+               data-sharer="whatsapp" data-url="{{ url }}">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+        <div class="mr-2">
+            <a class="btn btn-outline-grey twitter mb-2"
+               data-sharer="twitter"
+               data-hashtags="{{ settings.name|slug('')|lower }}"
+               data-url="{{ url }}">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+        <div class="mr-2">
+            <a class="btn btn-outline-grey sms mb-2" href="sms:?&body={{ url }}"><i class="fas fa-sms"></i></a>
+        </div>
+        <div class="mr-2">
+            <a class="btn btn-outline-deep-orange envelope mb-2"
+               data-sharer="email"
+               data-url="{{ url }}"
+               data-subject="{{ subject }}"
+               data-to=""
+               data-title="">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
         {% if settings.activeAdFavorite %}
             {% if not is_granted('create', advert) %}
-                <a id="{{ advert.id }}" href="" class="ad-favorite btn btn-outline-grey
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-favoris{% endif %}
-                    {% if favoris %}active{% endif %}">
-                    <i class="{% if favoris %}fas{% else %}far{% endif %} fa-heart"></i>
-                </a>
+                <div class="">
+                    <a id="{{ advert.id }}" href="" class="ad-favorite favoris btn btn-outline-grey
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}btn-favoris{% endif %}
+                        {% if favoris %}active{% endif %}">
+                        <i class="{% if favoris %}fas{% else %}far{% endif %} fa-heart"></i>
+                    </a>
+                </div>
             {% endif %}
         {% endif %}
     </div>

@@ -15,14 +15,6 @@
 }
 
 /* Devise */
-.skin-light img.devise {
-    width: 30px !important;
-    height: 32px !important;
-    padding: 0 !important;
-    position:relative;
-    top: -4px;
-    right: 14px;
-}
 
 .skin-light .price {
     position: relative;
@@ -35,6 +27,8 @@
 }
 
 @media (max-width: 767px) {
+
+
     .skin-light .price .number {
         position:relative;
         font-size: 2rem !important;
@@ -42,13 +36,9 @@
         left: 5px;
     }
 
-    .skin-light img.devise {
-        width: 30px !important;
-        height: 32px !important;
-        padding: 0 !important;
-        position:relative;
-        top: -4px;
-        right: 10px;
+    .skin-light .price .number span {
+        font-size: 1.6rem !important;
+        font-weight: 600 !important;
     }
 }
 
@@ -59,41 +49,16 @@
     font-weight: 600 !important;
 }
 
-.skin-light .price.item img.devise {
-    width: 18px !important;
-    height: 20px !important;
-    padding: 0 !important;
-    position:relative;
-    top: 5px;
-    right: 5px;
-}
-
-.skin-light .price.item {
+.skin-light .price.item .number span {
     position: relative;
-    top: -8px;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .skin-light .price.item {
-        position: relative;
-        top: -4px;
-    }
 }
 
 @media (max-width: 767px) {
-    .skin-light .price.item img.devise {
-        width: 18px !important;
-        height: 20px !important;
-        padding: 0 !important;
-        position:relative;
-        top: 6px !important;
-        right: 0 !important;
-    }
-
-    .skin-light .price.item {
-        position: relative;
-        top: 0;
-    }
 }
 /* <<<<< Item price */
 
@@ -105,34 +70,12 @@
     padding: 0 !important;
 }
 
-.skin-light .price.total img.devise {
-    width: 22px !important;
-    height: 24px !important;
-    padding: 0 !important;
-    position:relative;
-    top: 8px;
-    right: 6px;
-}
-
-.skin-light .price.total {
-    position: relative;
-    top: -8px;
+.skin-light .price.total .number span {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
 }
 
 @media (max-width: 767px) {
-    .skin-light .price.total img.devise {
-        width: 22px !important;
-        height: 24px !important;
-        padding: 0 !important;
-        position:relative;
-        top: 8px !important;
-        right: 1px;
-    }
-
-    .skin-light .price.total {
-        position: relative;
-        top: -5px;
-    }
 }
 /* <<<<< Total price */
 
@@ -144,35 +87,9 @@
     padding: 0 !important;
 }
 
-.skin-light .price.ttc img.devise {
-    width: 30px !important;
-    height: 32px !important;
-    padding: 0 !important;
-    position:relative;
-    top: 10px;
-    right: 7px;
-}
-
-.skin-light .price.ttc {
-    position: relative;
-    top: -18px;
-}
-
 @media (max-width: 767px) {
-    .skin-light .price.ttc img.devise {
-        width: 30px !important;
-        height: 32px !important;
-        padding: 0 !important;
-        position:relative;
-        top: 11px;
-        right: 3px;
-    }
-
-    .skin-light .price.ttc {
-        position: relative;
-        top: -13px;
-    }
 }
+
 /* <<<<< TTC price */
 
 /* >>>>> Payment */
@@ -204,24 +121,18 @@
 /* <<<<< Payment */
 
 /* >>>>> Wallet data */
-.skin-light .app-payment-type .price {
-    margin-right: -16px !important;
-}
 
 .skin-light .app-payment-type .price .number {
     position: relative;
-    font-size: 1.8rem !important;
+    font-size: 1.6rem !important;
     font-weight: 600 !important;
     padding: 0 !important;
     margin: 0 !important;
 }
 
-.skin-light .app-payment-type .price img.devise {
-    width: 26px !important;
-    height: 28px !important;
-    padding: 0 !important;
-    position:relative;
-    top: -5px;
-    right: 11px;
+.skin-light .app-payment-type .price .number span {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
 }
+
 /* <<<<< Wallet data */

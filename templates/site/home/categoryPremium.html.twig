@@ -1,7 +1,7 @@
 <section>
     {% if premiums|length > 0 %}
         {% for premium in premiums %}
-            <div class="row premium mb-5">
+            <div class="row premium mb-4">
                 <div class="col-12 d-flex justify-content-between title">
                     <h5 class="text-primary h5-responsive">Populaire dans {{ premium.name|lower }}</h5>
                     <div class="d-none d-md-block">
@@ -21,7 +21,7 @@
 
                 {% for category in premium.categories %}
                     {% if category.parent.parent %}
-                        <div class="col-lg-3 col-md-4 col-6 content mt-3">
+                        <div class="col-lg-3 col-md-4 col-6 content mt-md-2 mb-3">
                             <a href="{{ path('app_advert_index_ss',
                                 {'category_slug': category.parent.parent.slug,
                                     'sub_category_slug': category.parent.slug,
@@ -38,7 +38,7 @@
                                     <img src="{{ image_url(category, 200, 135) }}"
                                          class="img-fluid wow fadeInRight z-depth-2" alt="{{ category.name }}">
                                 </div>#}
-                                <div class="view wow fadeInRight">
+                                <div class="view wow fadeInRight z-depth-3">
                                     <img src="{{ vich_uploader_asset(category, 'file') }}" class="img-fluid" alt="">
                                     <div class="mask flex-center">
                                         <p class="text-center z-depth-2 mx-2">{{ category.name }}</p>
@@ -47,7 +47,7 @@
                             </a>
                         </div>
                     {% else %}
-                        <div class="col-lg-3 col-md-4 col-6 content mt-3">
+                        <div class="col-lg-3 col-md-4 col-6 content mt-md-2 mb-3">
                             <a href="{{ path('app_advert_index_s',
                                 {'category_slug': category.parent.slug, 'sub_category_slug': category.slug}) }}">
                                 {#  <div class="card card-image text-center z-depth-2 px-3 d-flex justify-content-center
@@ -58,7 +58,7 @@
                                     </div>
                                 </div>#}
 
-                                <div class="view wow fadeInRight">
+                                <div class="view wow fadeInRight z-depth-3">
                                     <img src="{{ vich_uploader_asset(category, 'file') }}" class="img-fluid" alt="">
                                     <div class="mask flex-center">
                                         <p class="text-center z-depth-3 mx-2">{{ category.name }}</p>

@@ -8,7 +8,7 @@
                             aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body pt-1 mb-0">
-                <div class="small-9 font-weight-stone-500 grey-text text-center">
+                <div class="font-weight-stone-500 grey-text text-center">
                     <span class="font-weight-stone-600">
                         {% if advert.type == "j'offre" %}Vente
                         {% elseif advert.type == 'je recherche' %}Recherche
@@ -18,8 +18,9 @@
                     à {{ advert.location.name }} -
 
                     <div class="d-inline-block price">
-                        <div class="number d-inline-block text-default font-weight-stone-600">{{ advert.price }}</div>
-                        <img src="{{ asset('images/devise.png') }}" class="devise d-inline-block" alt="">
+                        <div class="number d-inline-block text-default font-weight-stone-600">
+                            {{ advert.price }}<span class="small-8" style="margin-left: 2px;">CFA</span>
+                        </div>
                     </div>
                 </div>
                 <div class="font-weight-stone-600 mt-2 text-center">
@@ -28,16 +29,16 @@
                     {% endif %} (PARTICULIER)
                 </div>
 
-                <div class="small mt-3 text-center">
+                <div class="small my-3 text-center">
                     Appelez de la part de {{ settings.name }} (réf: {{ advert.reference }} )
                 </div>
 
-                <div class="text-center mt-4 h1-responsive font-weight-stone-600 text-primary">
+                <div class="text-center h1-responsive font-weight-stone-600 text-primary">
                     <strong>{{ advert.user.phone }}</strong>
 
                     {% if advert.user.phoneStatus %}
                         <span class="d-inline-block" style="position: relative; bottom: 1.6rem; right: 10px;"
-                              data-toggle="tooltip" title="Numero whatsapp">
+                              data-toggle="tooltip" title="Cet numéro est sur whatsapp">
                             <i class="fab fa-whatsapp" style="color: #25d366 !important; font-size: 1.8rem !important;"></i>
                         </span>
                     {% endif %}

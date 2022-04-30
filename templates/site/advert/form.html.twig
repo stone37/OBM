@@ -121,7 +121,7 @@
                                     <i class="fas fa-camera-retro mr-md-2 mr-1"></i> Télécharger des photos
                                 </button>
                                 <div class="h5-responsive grey-text font-weight-stone-600 d-md-block d-none mt-3">
-                                    ou Glisser directement vos photos ici
+                                   ou Glisser directement vos photos ici
                                 </div>
                                 <div class="grey-text font-weight-stone-600 d-md-none d-block mt-3">
                                     ou Glisser directement vos photos ici
@@ -150,9 +150,10 @@
                                         </div>
                                         <div class="my-2">
                                             Ajoutez <strong class="font-weight-stone-600 text-primary">jusqu'à {{ optionPhoto.photoPaying }} photos</strong> pour valoriser votre bien</div>
-                                        <div class="font-weight-stone-600 d-flex price h3-responsive text-right text-default">
-                                            <div class="number">{{ optionPhoto.price }}</div>
-                                            <img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                                        <div class="font-weight-stone-600 d-flex price h3-responsive text-right text-danger">
+                                            <div class="number">
+                                                {{ optionPhoto.price }}<span>CFA</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

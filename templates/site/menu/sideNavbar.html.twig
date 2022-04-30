@@ -28,8 +28,8 @@
         {# advert #}
 
         {# message #}
-        {% set msg_send = isActive('app_dashboard_message_send') %}
-        {% set msg_receive = isActive('app_dashboard_message_receive') %}
+        {% set msg = isActive('app_message_thread') %}
+        {% set msg_show = isActive('app_message_thread_view') %}
         {# message #}
 
         {# alerte #}
@@ -91,20 +91,15 @@
 
                 {% if settings.activeMessage %}
                     <li>
-                        <a class="collapsible-header waves-effect arrow-r {% if msg_send or msg_receive %}active{% endif %}">
-                            <i class="sv-slim-icon far fa-envelope"></i> Mes messages
+                        <a class="collapsible-header waves-effect arrow-r {% if msg or msg_show %}active{% endif %}">
+                            <i class="sv-slim-icon far fa-envelope"></i> Ma messagerie
                             <i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a href="{{ path('app_dashboard_message_receive') }}" class="waves-effect {% if msg_receive %}active{% endif %}">
-                                        <span class="sv-normal">Messages reçu</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('app_dashboard_message_send') }}" class="waves-effect {% if msg_send %}active{% endif %}">
-                                        <span class="sv-normal">Messages envoyés</span>
+                                    <a href="{{ path('app_message_thread') }}" class="waves-effect {% if msg or msg_show %}active{% endif %}">
+                                        <span class="sv-normal">Mes conversations</span>
                                     </a>
                                 </li>
                             </ul>

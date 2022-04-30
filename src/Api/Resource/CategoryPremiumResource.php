@@ -70,12 +70,24 @@ class CategoryPremiumResource
                 if ($children->getLevelDepth() == 1) {
                     $data['parent'] = [
                         'id' => $children->getParent()->getId(),
-                        'slug' => $children->getParent()->getSlug()
+                        'name' => $children->getParent()->getName(),
+                        'slug' => $children->getParent()->getSlug(),
+                        'levelDepth' => $children->getParent()->getLevelDepth(),
+                        'current_id' => $children->getParent()->getId(),
+                        'current_name' => $children->getParent()->getName(),
+                        'current_slug' => $children->getParent()->getSlug(),
+                        'current_level_depth' => $children->getParent()->getLevelDepth(),
                     ];
                 } else if ($children->getLevelDepth() == 2) {
                     $data['parent'] = [
                         'id' => $children->getParent()->getParent()->getId(),
-                        'slug' => $children->getParent()->getParent()->getSlug()
+                        'name' => $children->getParent()->getParent()->getName(),
+                        'slug' => $children->getParent()->getParent()->getSlug(),
+                        'levelDepth' => $children->getParent()->getParent()->getLevelDepth(),
+                        'current_id' => $children->getParent()->getId(),
+                        'current_name' => $children->getParent()->getName(),
+                        'current_slug' => $children->getParent()->getSlug(),
+                        'current_level_depth' => $children->getParent()->getLevelDepth(),
                     ];
                 } else {
                     $data['parent_data'] = '';

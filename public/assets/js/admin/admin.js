@@ -199,15 +199,19 @@ $(document).ready(function() {
     $('.advert-clean').click(function (e) {
         e.preventDefault();
 
+        showLoading();
+
         $.ajax({
             url: Routing.generate('app_admin_advert_clean', {'type': $(this).attr('data-type')}),
             type: 'GET',
             success: function(data) {
+                hideLoading();
+
                 if (data.status) {
-                    $(elementRacine).html(data.html);
+                    $($container).html(data.html);
                     $('#confirmClean').modal()
                 } else {
-                    notification('error', 'Aucune annonce disponible', {}, 'error')
+                    notification('Pas de données', 'Aucune annonce disponible', {}, 'info')
                 }
             }
         });
@@ -217,15 +221,19 @@ $(document).ready(function() {
     $('#advert-reload').click(function (e) {
         e.preventDefault();
 
+        showLoading();
+
         $.ajax({
             url: Routing.generate('app_admin_advert_reload'),
             type: 'GET',
             success: function(data) {
+                hideLoading();
+
                 if (data.status) {
-                    $(elementRacine).html(data.html);
+                    $($container).html(data.html);
                     $('#confirmReload').modal()
                 } else {
-                    notification('Not data', 'Aucune annonce disponible', {}, 'info')
+                    notification('Pas de données', 'Aucune annonce disponible', {}, 'info')
                 }
             }
         });
@@ -235,15 +243,19 @@ $(document).ready(function() {
     $('#user-clean').click(function (e) {
         e.preventDefault();
 
+        showLoading();
+
         $.ajax({
             url: Routing.generate('app_admin_user_clean'),
             type: 'GET',
             success: function(data) {
+                hideLoading();
+
                 if (data.status) {
-                    $(elementRacine).html(data.html);
+                    $($container).html(data.html);
                     $('#confirmClean').modal()
                 } else {
-                    notification('Not data', 'Aucune annonce disponible', {}, 'info')
+                    notification('Pas de données', 'Aucune annonce disponible', {}, 'info')
                 }
             }
         });
@@ -427,9 +439,12 @@ let options = {
     "hideMethod": "fadeOut"
 };
 
+
 function simpleModals(element, route, elementRacine) {
     element.click(function (e) {
         e.preventDefault();
+
+        showLoading();
 
         let $id = $(this).attr('id'), $modal = '#confirm'+$id;
 
@@ -437,6 +452,8 @@ function simpleModals(element, route, elementRacine) {
             url: Routing.generate(route, {id: $id}),
             type: 'GET',
             success: function(data) {
+                hideLoading();
+
                 $(elementRacine).html(data.html);
                 $($modal).modal()
             }
@@ -447,6 +464,8 @@ function simpleModals(element, route, elementRacine) {
 function bulkModals(element, container, route, elementRacine) {
     element.click(function (e) {
         e.preventDefault();
+
+        showLoading();
 
         let ids = [];
 
@@ -464,9 +483,11 @@ function bulkModals(element, container, route, elementRacine) {
                 data: {'data': ids},
                 type: 'GET',
                 success: function(data) {
+                    hideLoading();
+
                     $(elementRacine).html(data.html);
                     $($modal).modal()
-                }
+                },
             });
         }
     });

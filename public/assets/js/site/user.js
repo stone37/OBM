@@ -2,6 +2,8 @@ var modal = (element, route, elementRacine) => {
     element.click((e) => {
         e.preventDefault();
 
+        showLoading();
+
         let $id    = element.attr('data-id');
         let $modal = '#confirm'+$id;
 
@@ -11,6 +13,8 @@ var modal = (element, route, elementRacine) => {
             success: function(data) {
                 $(elementRacine).html(data.html);
                 $($modal).modal()
+
+                hideLoading();
             }
         });
     });
@@ -28,7 +32,7 @@ var modal = (element, route, elementRacine) => {
     /**
      * Suppression des messages
      */
-    modal($('.app-advert-message-delete'), 'app_dashboard_message_delete', $container);
+    modal($('.app-advert-thread-delete'), 'app_message_thread_delete', $container);
 
     /**
      * Suppression des alertes
@@ -186,4 +190,84 @@ var modal = (element, route, elementRacine) => {
     });
 
 
+    /**
+     * Envoie de message d'annonce en ajax
+     *
+     * @type {jQuery|HTMLElement}
+     */
+    messageAjax($('#app-advert-message-form'));
+
 })();
+
+function messageAjax(element) {
+    element.submit(function (e) {
+        e.preventDefault();
+
+        showLoading();
+
+        $.ajax({
+            url: $(element).attr('action'),
+            type: $(element).attr('method'),
+            data: element.serialize(),
+            success: function(data) {
+                if (data.success) {
+                    let errorContent = $('#app-advert-message-form-error');
+
+                    errorContent.html("").removeClass("mt-3");
+
+                    $('textarea#content').val("")
+
+                    var content = $('<div class="d-flex justify-content-end">' +
+                        '<div class="text-left message-in message-data blue lighten-4">' +
+                        '   <div id="message_{{ message.id }}" class="message font-weight-normal">' +data.data.content + '</div>' +
+                        '</div>' +
+                     '</div>' +
+                        ' <div class="d-flex justify-content-end message-info grey-text mb-3">' +
+                            formatDate(data.data.createdAt['date']) +' . '+ formatTime(data.data.createdAt['date'])
+                        + '</div>')
+
+                    $('.message-list-bulk').append(content);
+
+                    notification("", data.message, {}, 'success')
+                } else {
+                    let errors = $.parseJSON(data.errors), errorContent = $('#app-advert-message-form-error');
+
+                    errorContent.html("").addClass("mt-3");
+
+                    $(errors).each(function (key, value) {
+                        errorContent.append('<div class="small text-danger font-weight-stone-500">'+value+'</div>');
+                    });
+
+                    notification("Messagerie", "Erreur de validation, votre message n'a pas pu etre envoyer", {}, 'error')
+                }
+
+                hideLoading();
+            }
+        })
+    });
+}
+
+
+function formatDate(date) {
+    var d = new Date(date),
+        day = ''+d.getDay(),
+        month = ''+d.getMonth(),
+        year = ''+d.getFullYear();
+
+    if (day.length < 2) day = '0'+day;
+    if (month.length < 2) month = '0'+month;
+
+    return [day, month, year].join('/');
+}
+
+function formatTime(date) {
+    var d = new Date(date),
+        hour = ''+d.getHours(),
+        minute = ''+d.getMinutes();
+
+    if (hour.length < 2) hour = '0'+hour;
+    if (minute.length < 2) minute = '0'+minute;
+
+    return [hour, minute].join(':');
+}
+

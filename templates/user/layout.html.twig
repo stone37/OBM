@@ -8,8 +8,8 @@
 {% set al = isActive('app_dashboard_alert_index') %}
 {% set al_active = isActive('app_dashboard_alert_index_active') %}
 
-{% set msg_send = isActive('app_dashboard_message_send') %}
-{% set msg_receive = isActive('app_dashboard_message_receive') %}
+{% set msg = isActive('app_message_thread') %}
+{% set msg_show = isActive('app_message_thread_view') %}
 
 {% set favoris = isActive('app_dashboard_favorite_index') %}
 
@@ -21,7 +21,7 @@
 
 {% block app_navbar_second %}
     {% if not is_mobile() %}
-        <nav class="navbar navbar-expand-md navbar-light second user nav-black d-none d-lg-block py-0 mb-4 ">
+        <nav class="navbar navbar-expand-md navbar-light second user nav-black d-none d-lg-block py-0 z-depth-2  ">
             <div class="collapse navbar-collapse" id="{{ settings.name }}_navbarSecond">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item mega-dropdown {% if dashboard %}active{% endif %}">
@@ -36,9 +36,9 @@
                         </a>
                     </li>
                     {% if settings.activeMessage %}
-                        <li class="nav-item mega-dropdown {% if msg_send or msg_receive %}active{% endif %}">
-                            <a href="{{ path('app_dashboard_message_receive') }}" class="nav-link dropdown-toggle"
-                               aria-haspopup="true" aria-expanded="false"> Mes messages
+                        <li class="nav-item mega-dropdown {% if msg or msg_show %}active{% endif %}">
+                            <a href="{{ path('app_message_thread') }}" class="nav-link dropdown-toggle"
+                               aria-haspopup="true" aria-expanded="false"> Ma messagerie
                             </a>
                         </li>
                     {% endif %}

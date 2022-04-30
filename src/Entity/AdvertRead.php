@@ -6,9 +6,10 @@ use App\Entity\Traits\IdTrait;;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
+use App\Repository\AdvertReadRepository;
 
 /**
- * Class Advert
+ * Class AdvertRead
  * @package App\Entity
  *
  * @ORM\Entity(repositoryClass=AdvertReadRepository::class)

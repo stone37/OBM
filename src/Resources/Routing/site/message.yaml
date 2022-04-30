@@ -1,0 +1,11 @@
+app_message_thread_new:
+    path: /messages/{id}/new
+    methods: [GET, POST]
+    controller: App\Controller\MessageController::newThread
+    options:
+        expose: true
+    requirements:
+        id: \d+
+
+
+

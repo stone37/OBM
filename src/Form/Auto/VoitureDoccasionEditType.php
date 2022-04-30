@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VoitureDoccasionEditType extends AbstractType
+class VoitureDoccasionEditType extends AbstractType 
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -203,7 +203,7 @@ class VoitureDoccasionEditType extends AbstractType
                 'placeholder' => 'Nombre de places',
                 'required' => false,
             ])
-            ->add('autreInformation', ChoiceType::class, [
+            ->add('autreInformation', ChoiceType::class, [ 
                 'choices' => [
                     'Première main' => 'Première main',
                     'Véhicule non fumeur' => 'Véhicule non fumeur',
@@ -217,7 +217,7 @@ class VoitureDoccasionEditType extends AbstractType
                     'Régulateur de vitesse' => 'Régulateur de vitesse',
                     'Attache-remorque' => 'Attache-remorque',
                     'Air conditionné' => 'Air conditionné'
-                ],
+                ], 
                 'choice_attr' => function($choice, $key, $value) {
                     return ['class' => 'form-check-input filled-in'];
                 },

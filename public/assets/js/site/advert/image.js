@@ -237,8 +237,7 @@ $(document).ready(function() {
      */
     function uploadRemove(id) {
 
-        $('#loader .preloader-wrapper').addClass('active');
-        $(".page-content").addClass('disabled');
+        showLoading();
 
         let pos = $ordPhoto.indexOf(id);
         $ordPhoto.splice(pos, 1);
@@ -264,8 +263,8 @@ $(document).ready(function() {
 
                 $('#nbPhoto-ac').html(Math.min($ordPhoto.length, $nbPhotos));
 
-                $('#loader .preloader-wrapper').removeClass('active');
-                $(".page-content").removeClass('disabled');
+
+                hideLoading();
             }
         });
 
@@ -336,8 +335,7 @@ $(document).ready(function() {
     let $btnSubmit = $('.app-ad-submit-btn');
 
     $btnSubmit.click(() => {
-        $('#loader .preloader-wrapper').addClass('active');
-        $(".page-content").addClass('disabled');
+        showLoading();
     })
 
 

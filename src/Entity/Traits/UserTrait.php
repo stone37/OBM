@@ -7,6 +7,7 @@ use App\Entity\Alert;
 use App\Entity\Favorite;
 use App\Entity\Command;
 use App\Entity\Invitation;
+use App\Entity\Thread;
 use App\Entity\Wallet;
 use DateTime;
 use DateTimeImmutable;
@@ -290,6 +291,13 @@ trait UserTrait
      */
     private $parrainageDrift = false;
 
+    /**
+     * @var Thread|Collection
+     *
+     * @ORM\OneToMany(targetEntity=Thread::class, mappedBy="createdBy")
+     */
+    private $threads;
+
     public function __constructUser()
     {
         $this->createdAt = new DateTime();
@@ -298,6 +306,7 @@ trait UserTrait
         $this->favorites = new ArrayCollection();
         $this->alerts  = new ArrayCollection();
         $this->wallet = new Wallet();
+        $this->threads = new ArrayCollection();
     }
 
     /**
@@ -840,6 +849,36 @@ trait UserTrait
     public function setParrainageDrift(?bool $parrainageDrift): self
     {
         $this->parrainageDrift = $parrainageDrift;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Thread[]
+     */
+    public function getThreads(): ?Collection
+    {
+        return $this->threads;
+    }
+
+    /**
+     * @param Thread $thread
+     * @return $this
+     */
+    public function addThread(Thread $thread): self
+    {
+        if (!$this->threads->contains($thread)) {
+            $this->threads->add($thread);
+        }
+
+        return $this;
+    }
+
+    public function removeThread(Thread $thread): self
+    {
+        if ($this->threads->contains($thread)) {
+            $this->threads->removeElement($thread);
+        }
 
         return $this;
     }

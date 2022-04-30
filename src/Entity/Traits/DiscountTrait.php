@@ -31,7 +31,7 @@ trait DiscountTrait
      */
     private $type;
 
-    /**
+    /** 
      * @var int
      *
      * @ORM\Column(type="integer", nullable=true)

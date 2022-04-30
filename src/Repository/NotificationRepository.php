@@ -36,6 +36,18 @@ class NotificationRepository extends AbstractRepository implements CleanableRepo
             ->getResult());
     }
 
+    public function findForUser(User $user, array $channels = ['public']): array
+    {
+        return array_map(fn ($n) => (clone $n)->setUser($user), $this->createQueryBuilder('notif')
+            ->orderBy('notif.createdAt', 'DESC')
+            ->where('notif.user = :user')
+            ->orWhere('notif.user IS NULL AND notif.channel IN (:channels)')
+            ->setParameter('user', $user)
+            ->setParameter('channels', $channels)
+            ->getQuery()
+            ->getResult());
+    }
+
     /**
      * Persiste une nouvelle notification ou met à jour une notification précédente.
      *

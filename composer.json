@@ -20,7 +20,6 @@
         "dompdf/dompdf": "^1.0",
         "erusev/parsedown": "^1.7",
         "friendsofsymfony/ckeditor-bundle": "^2.3",
-        "friendsofsymfony/elastica-bundle": "^6.0",
         "friendsofsymfony/jsrouting-bundle": "^2.7",
         "geertw/ip-anonymizer": "^1.1",
         "gesdinet/jwt-refresh-token-bundle": "^0.12.0",
@@ -75,7 +74,8 @@
         "twig/markdown-extra": "^3.3",
         "twig/string-extra": "^3.3",
         "twig/twig": "^2.12|^3.0",
-        "vich/uploader-bundle": "1.13"
+        "vich/uploader-bundle": "1.13",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "symfony/browser-kit": "^5.2",

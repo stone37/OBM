@@ -121,7 +121,7 @@ class AdvertSubscriber implements EventSubscriberInterface
      */
     public function onUpload(AdvertPreCreatedEvent $event)
     {
-        $advert  = $event->getAdvert();
+        $advert  = $event->getAdvert(); 
 
         $files = $this->uploadService->getFilesUpload($this->session);
 

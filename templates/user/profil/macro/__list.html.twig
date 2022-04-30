@@ -10,12 +10,12 @@
             'city': advert.location.name, 'reference': advert.reference, 'slug': advert.slug}) %}
     {% endif %}
 
-    <div class="card card-cascade narrower mb-4 mb-md-4">
+    <div class="card card-cascade narrower mb-4 mb-md-4 z-depth-1">
         <div class="view view-cascade overlay bg-white">
             {% if photo_principale %}
                 <img class="card-img-top" src="{{ image_ad_url(photo_principale, 200, 130) }}" alt="{{ photo_principale.name }}" />
             {% else %}
-                <img class="card-img-top" src="{{ asset('images/no_image.png') }}"  alt="" />
+                <img class="card-img-top" src="{{ asset('images/no_photo.png') }}"  alt="" />
             {% endif %}
             <a href="#">
                 <div class="mask rgba-white-slight"></div>
@@ -23,8 +23,8 @@
         </div>
 
         <!-- Card content -->
-        <div class="card-body card-body-cascade pb-3 px-3">
-            <h5 class="font-weight-stone-600 text-primary mb-2 h5-responsive">
+        <div class="card-body card-body-cascade pb-2 px-3">
+            <h5 class="font-weight-stone-600 mb-2 h5-responsive">
                 {% if advert.subDivision %}{{ advert.subDivision }}
                 {% else %}{{ advert.subCategory }}
                 {% endif %}
@@ -32,23 +32,22 @@
             <p class="card-text small-9">
                 {{ advert.description|u.truncate(100, ' ...') }}
             </p>
-            <div class="my-3">
+            <div class="my-2">
                 <div class="small grey-text">
-                    <i class="far fa-clock mr-1"></i> {{ advert.validatedAt|ago }} | <i class="fas fa-map-marker-alt mr-1"></i> {{ advert.location.name }}
+                    <i class="far fa-clock"></i> {{ advert.validatedAt|ago }} | <i class="fas fa-map-marker-alt"></i> {{ advert.location.name }}
                 </div>
             </div>
             <div class="d-flex justify-content-between">
                 <div class="font-weight-stone-500 d-flex price text-default">
-                    <div class="number font-weight-stone-600">{{ advert.price }}</div><img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                    <div class="number font-weight-stone-600">
+                        {{ advert.price }}<span class="small-9" style="margin-left: 2px;">CFA</span>
+                    </div>
                 </div>
                 <div class="">
                     <a href="{{ route }}" class="btn btn-primary btn-sm advert-show">Voir</a>
                 </div>
             </div>
         </div>
-
     </div>
-
-
 {% endmacro %}
 

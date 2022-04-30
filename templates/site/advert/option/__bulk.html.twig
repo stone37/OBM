@@ -5,7 +5,7 @@
     {% set data = app_product_data(type) %}
 
     <div class="row d-flex justify-content-start justify-content-md-between mb-3 mb-md-2 app-option-data-bulk">
-        <div class="col-8 col-md-8 col-lg-7">
+        <div class="col-8 col-md-8 col-lg-6">
             <div class="app-option-data d-flex">
                 <div class="form-check pl-0">
                     <input type="checkbox" class="form-check-input filled-in ov"
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-md-2 col-lg-2 ">
+        <div class="col-6 col-md-2 col-lg-2">
             <div class="d-flex flex-wrap durante">
                 {% if products|length == 1 %}
                     {% for product in products %}
@@ -44,11 +44,12 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-6 col-md-2 col-lg-2">
-            <div class="font-weight-stone-600 h4-responsive text-right d-flex price text-default option-price
+        <div class="col-6 col-md-2 col-lg-3">
+            <div class="font-weight-stone-600 h4-responsive text-right d-flex justify-content-lg-end price text-danger option-price
                 {% if products|length > 1 %}select{% endif %}">
                 
-                <div class="number">{{ firstPrice }}</div><img src="{{ asset('images/devise.png') }}" class="devise" alt="">
+                <div class="number">{{ firstPrice }}<span>CFA</span></div>
+                {#<img src="{{ asset('images/devise.png') }}" class="devise" alt="">#}
             </div>
         </div>
     </div> 

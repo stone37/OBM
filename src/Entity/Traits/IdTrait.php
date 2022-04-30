@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 trait IdTrait
 {
     /**
-     * @Groups({"read:category", "read:user", "read:premium", "read:advert",
+     * @Groups({"read:category", "read:user", "read:premium", "read:advert", "read:thread",
      *          "read:picture", "read:favorite", "read:city", "read:zone", "read:alert"})
      *
      * @ORM\Id()

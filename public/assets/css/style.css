@@ -5,7 +5,6 @@
 }
 
 body.skin-light {
-    /*color: #4f4f4f !important;*/
     color: #212529 !important;
     font-weight: 400 !important;
 
@@ -3876,13 +3875,8 @@ form.search-sec {
 #loader {
     z-index: 1030;
     position: fixed;
-    top: calc(50% - 26px); 
+    top: calc(50% - 26px);
     left: calc(50% - 26px);
-}
-
-.page-content.disabled {
-    pointer-events: none;
-    opacity: 0.5;
 }
 
 .carousel-inner.vv-3 .carousel-item.active,
@@ -4248,28 +4242,39 @@ form.search-sec {
 
 .skin-light .price {
     position: relative;
+    line-height: 22px !important;
 }
 
 .skin-light .price .number {
     position:relative;
-    font-size: 2rem !important;
+    font-size: 1.8rem !important;
     font-weight: 600 !important;
+}
+
+.skin-light .price .number span {
+    display: inline-block;
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    margin-left: 2px !important;
 }
 
 @media (max-width: 767px) {
     .skin-light .price .number {
         position:relative;
-        font-size: 1.3rem !important;
+        font-size: 1.7rem !important;
         font-weight: 600 !important;
-        left: 5px;
     }
 
-    .skin-light img.devise {
-        width: 19px !important;
-        height: 21px !important;
-        padding: 0 !important;
-        position:relative;
-        top: 5px;
+    .skin-light .price .number span {
+        display: inline-block;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        margin-left: 2px !important;
+    }
+
+    .skin-light .price.option-price {
+        margin-right: 50px !important;
+        line-height: 16px !important;
     }
 }
 
@@ -4556,11 +4561,11 @@ form.search-sec {
     border-radius: 30px !important;
 }
 
-.skin-light .user-profil .app-advert-bulk .card.narrower:hover {
+/*.skin-light .user-profil .app-advert-bulk .card.narrower:hover {
     -webkit-box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
     box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
     border-radius: 30px !important;
-}
+}*/
 
 .skin-light .user-profil .app-advert-bulk .card.narrower .view,
 .skin-light .user-profil .app-advert-bulk .card.narrower .view img {
@@ -4830,7 +4835,7 @@ form.search-sec {
 }
 
 .skin-light .card.card-cascade .view.view-cascade {
-    border-radius: 30px;
+    border-radius: 50px;
 }
 
 .skin-light .btn-group > .btn:not(:last-child):not(.dropdown-toggle),
@@ -4877,5 +4882,39 @@ form.search-sec {
     #cookieConsent div {
         margin-top: 10px;
     }
+}
+
+/** Loading */
+
+
+.skin-light .loader {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, .8)
+}
+
+.skin-light .loader img {
+    width: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading .modal {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
 }
 

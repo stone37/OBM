@@ -10,52 +10,52 @@
 						<div class="">
 							<i class="fas fa-eye"></i>
 						</div>
-						<div class="pl-3 small-9 grey-text font-weight-stone-600">Nombres de vue</div>
-						<div class="pl-3 text-default font-weight-stone-600 data">{{ advert.reads|length }}</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-500">Nombres de vue</div>
+						<div class="pl-3 text-default font-weight-stone-500 data">{{ advert.reads|length }}</div>
 					</div>
 
 					<div class="d-flex mb-3">
 						<div class="">
 							<i class="fas fa-image"></i>
 						</div>
-						<div class="pl-3 small-9 grey-text font-weight-stone-600">Nombres de photos</div>
-						<div class="pl-3 text-default font-weight-stone-600 data">{{ advert.images|length }}</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-500">Nombres de photos</div>
+						<div class="pl-3 text-default font-weight-stone-500 data">{{ advert.images|length }}</div>
 					</div>
 					<div class="d-flex mb-3">
 						<div class="">
 							<i class="fas fa-heart"></i>
 						</div>
-						<div class="pl-3 small-9 grey-text font-weight-stone-600">Nombres de favoris</div>
-						<div class="pl-3 text-default font-weight-stone-600 data">{{ advert.favorites|length }}</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-500">Nombres de favoris</div>
+						<div class="pl-3 text-default font-weight-stone-500 data">{{ advert.favorites|length }}</div>
 					</div>
 					<div class="d-flex mb-3">
 						<div class="">
 							<i class="fas fa-envelope"></i>
 						</div>
-						<div class="pl-3 small-9 grey-text font-weight-stone-600">Nombres de message</div>
-						<div class="pl-3 text-default font-weight-stone-600 data">{{ advert.messageCount }}</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-500">Nombres de message</div>
+						<div class="pl-3 text-default font-weight-stone-500 data">{{ advert.messageCount }}</div>
 					</div>
 					<div class="d-flex flex-wrap mb-3">
 						<div class="">
 							<i class="fas fa-calendar-alt"></i>
 						</div>
-						<div class="pl-3 small-9 grey-text font-weight-stone-600">Modification</div>
-						<div class="pl-3 text-default font-weight-stone-600 data date">{{ advert.updatedAt|date('d/m/Y à h:i')}}</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-500">Modification</div>
+						<div class="pl-3 text-default font-weight-stone-500 data date">{{ advert.updatedAt|date('d/m/Y à h:i')}}</div>
 					</div>
 					<div class="d-flex flex-wrap mb-3">
 						<div class="">
 							<i class="fas fa-calendar"></i>
 						</div>
-						<div class="pl-3 small-9 grey-text font-weight-stone-600">Date de création</div>
-						<div class="pl-3 text-default font-weight-stone-600 data date">{{ advert.createdAt|date('d/m/Y à h:i')}}</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-500">Date de création</div>
+						<div class="pl-3 text-default font-weight-stone-500 data date">{{ advert.createdAt|date('d/m/Y à h:i')}}</div>
 					</div>
 					{% if advert.validated %}
 						<div class="d-flex flex-wrap mb-3">
 						<div class="">
 							<i class="fas fa-calendar-check"></i>
 						</div>
-						<div class="pl-3 small-9 grey-text font-weight-stone-600">Date de validation</div>
-						<div class="pl-3 text-default font-weight-stone-600 data date">{{ advert.validatedAt|date('d/m/Y à h:i')}}</div>
+						<div class="pl-3 small-9 grey-text font-weight-stone-500">Date de validation</div>
+						<div class="pl-3 text-default font-weight-stone-500 data date">{{ advert.validatedAt|date('d/m/Y à h:i')}}</div>
 					</div>
 					{% endif %}
 				</div>
@@ -73,7 +73,7 @@
 							<div class="">
 								<i class="fas fa-camera"></i>
 							</div>
-							<a class="pl-3 grey-text font-weight-stone-600 data"
+							<a class="pl-3 grey-text font-weight-stone-500 data"
 							   data-toggle="modal" data-target="#adOptionPhoto">
 								Option photo
 								{% if advert.optionPhoto %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
@@ -86,7 +86,7 @@
 							<div class="">
 								<i class="fas fa-sort-numeric-up"></i>
 							</div>
-							<a class="pl-3 grey-text font-weight-stone-600 data"
+							<a class="pl-3 grey-text font-weight-stone-500 data"
 							   data-toggle="modal" data-target="#adOptionDetail{{ headers[0].type }}">
 								Annonce en tête
 								{% if advert.optionAdHead %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
@@ -99,7 +99,7 @@
 							<div class="">
 								<i class="fas fa-house-damage"></i>
 							</div>
-							<a class="pl-3 grey-text font-weight-stone-600 data"
+							<a class="pl-3 grey-text font-weight-stone-500 data"
 							   data-toggle="modal" data-target="#adOptionDetail{{ gallery[0].type }}">
 								Galerie accueil
 								{% if advert.optionAdGallery %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
@@ -112,7 +112,7 @@
 							<div class="">
 								<i class="far fa-minus-square"></i>
 							</div>
-							<a class="pl-3 grey-text font-weight-stone-600 data"
+							<a class="pl-3 grey-text font-weight-stone-500 data"
 							   data-toggle="modal" data-target="#adOptionDetail{{ vedettes[0].type }}">
 								Annonce en vedette
 								{% if advert.optionAdVedette %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
@@ -125,7 +125,7 @@
 							<div class="">
 								<i class="fas fa-bullhorn"></i>
 							</div>
-							<a class="pl-3 grey-text font-weight-stone-600 data"
+							<a class="pl-3 grey-text font-weight-stone-500 data"
 							   data-toggle="modal" data-target="#adOptionDetail{{ urgents[0].type }}">
 								Logo urgent
 								{% if advert.optionAdUrgents %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
@@ -138,7 +138,7 @@
 							<div class="">
 								<i class="fas fa-border-style"></i>
 							</div>
-							<a class="pl-3 grey-text font-weight-stone-600 data"
+							<a class="pl-3 grey-text font-weight-stone-500 data"
 							   data-toggle="modal" data-target="#adOptionDetail{{ encadres[0].type }}" >
 								Annonce encadrée
 								{% if advert.optionAdEncadre %}<i class="fas fa-check text-success ml-2"></i>{% endif %}
@@ -153,6 +153,7 @@
 	</section>
 
 {% else %}
+
 	<section class="row">
 		<div class="col-12 mb-4">
 			<div class="card card-cascade narrower mt-md-0 z-depth-3">
@@ -185,7 +186,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="text-lg-right mt-4">
-								<a href="" class="small signal font-weight-stone-600 text-default"
+								<a href="" class="small signal font-weight-stone-500 text-default"
 								   data-toggle="modal" data-target="#addReportModalSm">
 									<span class="border rounded-circle mr-1" style="padding: 5px;">
 										<i class="fas fa-flag" style="position: relative; left: 2px"></i>
@@ -211,7 +212,7 @@
 							<div class="">
 								<i class="fas fa-audio-description"></i>
 							</div>
-							<div class="pl-3 small-9 grey-text font-weight-stone-600">Annonceur particulier</div>
+							<div class="pl-2 small-9 grey-text font-weight-stone-500">Annonceur particulier</div>
 						</div>
 					{% endif %}
 
@@ -219,7 +220,7 @@
 						<div class="">
 							<i class="far fa-calendar-minus"></i>
 						</div>
-						<div class="pl-3 small-9 grey-text font-weight-stone-600">
+						<div class="pl-2 small-9 grey-text font-weight-stone-500">
 							Membre de {{ config.get.name }} {{ advert.user.createdAt|ago('depuis') }}
 						</div>
 					</div>
@@ -228,7 +229,7 @@
 						<div class="">
 							<i class="fas fa-clipboard-check"></i>
 						</div>
-						<div class="pl-3 small-9 font-weight-stone-600">
+						<div class="pl-2 small-9 font-weight-stone-500">
 							<a href="{{ path('app_user_show', {'id': advert.user.id}) }}" class="link">
 							{% if advertiserAdNumber == 1 %}
 								Afficher son unique annonce
@@ -244,13 +245,13 @@
 						<div class="">
 							<i class="fas fa-globe"></i>
 						</div>
-						<div class="pl-3 small-9 font-weight-stone-600">
+						<div class="pl-3 small-9 font-weight-stone-500">
 							<a href="" class="link">Site web</a>
 						</div>
 					</div>#}
 
 					<div class="">
-						<a href="" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPhoneContactModalSm">
+						<a href="" class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#addPhoneContactModalSm">
 							<i class="fas fa-phone-alt text-white mr-2 d-none d-lg-inline-block"></i>
 							Contacter par téléphone
 						</a>

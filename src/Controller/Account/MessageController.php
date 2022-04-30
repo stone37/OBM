@@ -3,18 +3,25 @@
 namespace App\Controller\Account;
 
 use App\Controller\Traits\ControllerTrait;
+use App\Entity\Advert;
 use App\Entity\Message;
 use App\Entity\Settings;
+use App\Entity\Thread;
+use App\Manager\ThreadManager;
+use App\Provider\ThreadProvider;
+use App\Service\Composer;
+use App\Service\Sender;
 use App\Service\SettingsManager;
+use App\Service\ThreadDeleter;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
+use ReCaptcha\ReCaptcha;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class MessageController
@@ -37,26 +44,17 @@ class MessageController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      *
-     * @param Request $request
-     * @param PaginatorInterface $paginator
+     * @param ThreadProvider $provider
      * @param EntityManagerInterface $em
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function messageSend(Request $request, PaginatorInterface $paginator, EntityManagerInterface $em)
+    public function index(ThreadProvider $provider, EntityManagerInterface $em)
     {
-        if (!$this->settings->isActiveMessage()) throw $this->createNotFoundException('Page introuvable');
+        $threads = $provider->getThreads();
 
-        $messages = $em->getRepository(Message::class)->getByUserSend($this->getUser());
-        $messages = $paginator->paginate($messages, $request->query->getInt('page', 1), 15);
-
-        $messageSendN = $em->getRepository(Message::class)->getByUserSendNumber($this->getUser());
-        $messageReceiveN = $em->getRepository(Message::class)->getByUserReceiveNumber($this->getUser());
-
-        return $this->render('user/message/send.html.twig', [
+        return $this->render('user/message/index.html.twig', [
+            'threads' => $threads,
             'settings' => $this->settings,
-            'messages' => $messages,
-            'messageSendN' => $messageSendN,
-            'messageReceiveN' => $messageReceiveN,
             'user' => $this->getUsers($em, $this->getUser()->getId()),
         ]);
     }
@@ -65,25 +63,19 @@ class MessageController extends AbstractController
      * @IsGranted("ROLE_USER")
      *
      * @param Request $request
-     * @param PaginatorInterface $paginator
+     * @param ThreadProvider $provider
      * @param EntityManagerInterface $em
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param $threadId
+     * @return Response
      */
-    public function messageReceive(Request $request, PaginatorInterface $paginator, EntityManagerInterface $em)
+    public function show(Request $request, ThreadProvider $provider, EntityManagerInterface $em, $threadId)
     {
-        if (!$this->settings->isActiveMessage()) throw $this->createNotFoundException('Page introuvable');
+        $thread = $provider->getThread($threadId);
 
-        $messages = $em->getRepository(Message::class)->getByUserReceive($this->getUser());
-        $messages = $paginator->paginate($messages, $request->query->getInt('page', 1), 15);
-
-        $messageSendN = $em->getRepository(Message::class)->getByUserSendNumber($this->getUser());
-        $messageReceiveN = $em->getRepository(Message::class)->getByUserReceiveNumber($this->getUser());
-
-        return $this->render('user/message/receive.html.twig', [
+        return $this->render('user/message/show.html.twig', [
+            'thread' => $thread,
             'settings' => $this->settings,
-            'messages' => $messages,
-            'messageSendN' => $messageSendN,
-            'messageReceiveN' => $messageReceiveN,
+            'index' => $request->query->get('index'),
             'user' => $this->getUsers($em, $this->getUser()->getId()),
         ]);
     }
@@ -91,23 +83,76 @@ class MessageController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      *
+     * @param Advert $advert
      * @param Request $request
-     * @param EntityManagerInterface $em
-     * @param EventDispatcherInterface $dispatcher
-     * @param $id
-     * @return JsonResponse|Response|RedirectResponse
-     * @throws \Exception
+     * @param Composer $composer
+     * @param Sender $sender
+     * @param ValidatorInterface $validator
+     * @param ReCaptcha $reCaptcha
+     * @return JsonResponse
      */
-    public function delete(
+    public function replyThread(
+        Thread $thread,
         Request $request,
-        EntityManagerInterface $em,
-        $id)
+        Composer $composer,
+        Sender $sender,
+        ValidatorInterface $validator
+        //ReCaptcha $reCaptcha
+    )
     {
         if (!$request->isXmlHttpRequest()) $this->createNotFoundException('Resource introuvable');
 
-        $msg = $em->getRepository(Message::class)->find($id);
+        $message = $composer->reply($thread)
+                ->setSender($this->getUser())
+                ->setBody($request->request->get('content'))
+                ->getMessage();
 
-        $form = $this->deleteForm($msg);
+        $errors = $validator->validate($message);
+
+        if (!$this->isCsrfTokenValid('advert-message', $request->request->get('_token'))) {
+            $errors[] = 'Le jeton CSRF est invalide.';
+        }
+
+        /*if (!$reCaptcha->verify($request->request->get('recaptchaToken'))->isSuccess()) {
+            $errors[] = 'Erreur pendant l\'envoi de votre message';
+        }*/
+
+        if (!count($errors)) {
+            $sender->send($message);
+
+            return new JsonResponse([
+                'success' => true,
+                'message' => 'Votre message a été envoyer',
+                'data' => [
+                    'content' => $message->getBody(),
+                    'createdAt' => $message->getCreatedAt(),
+                ]
+            ]);
+        }
+
+        $data = [];
+
+        foreach ($errors as $error) {
+            $data[] = $error->getMessage();
+        }
+
+        return new JsonResponse(['success' => false, 'errors' => json_encode($data)]);
+    }
+
+
+    public function delete(
+        Request $request,
+        ThreadProvider $provider,
+        ThreadDeleter $deleter,
+        ThreadManager  $manager,
+        $id
+    )
+    {
+        if (!$request->isXmlHttpRequest()) $this->createNotFoundException('Resource introuvable');
+
+        $thread = $provider->getThread($id);
+
+        $form = $this->deleteForm($thread);
 
         if ($request->getMethod() == 'DELETE') {
 
@@ -115,21 +160,12 @@ class MessageController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
 
-                if ($msg->getEmail() == $this->getUser()->getEmail()) {
-                    $msg->setDeleted(true);
-                } else {
-                    $msg->setRecepDeleted(true);
-                }
+                $deleter->markAsDeleted($thread);
+                $manager->saveThread($thread);
 
-                if ($msg->isDeleted() && $msg->isRecepDeleted()) {
-                    $em->remove($msg);
-                }
-
-                $em->flush();
-
-                $this->addFlash('success', 'Le message a été supprimé');
+                $this->addFlash('success', 'La conversation a été supprimée');
             } else {
-                $this->addFlash('error', 'Désolé, le message n\'a pas pu être supprimée!');
+                $this->addFlash('error', 'Désolé, la conversation n\'a pas pu être supprimée !');
             }
 
             $url = $request->request->get('referer');
@@ -139,11 +175,11 @@ class MessageController extends AbstractController
             return $response;
         }
 
-        $message = 'Être vous sur de vouloir supprimer cet message ?';
+        $message = 'Être vous sur de vouloir supprimer cette conversation ?';
 
         $render = $this->render('Ui/Modal/_delete.html.twig', [
             'form' => $form->createView(),
-            'data' => $msg,
+            'data' => $thread,
             'message' => $message,
             'configuration' => $this->deleteConfig(),
         ]);
@@ -157,10 +193,10 @@ class MessageController extends AbstractController
      * @param Message $message
      * @return \Symfony\Component\Form\FormInterface
      */
-    private function deleteForm(Message $message)
+    private function deleteForm(Thread $thread)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('app_dashboard_message_delete', ['id' => $message->getId()]))
+            ->setAction($this->generateUrl('app_message_thread_delete', ['id' => $thread->getId()]))
             ->setMethod('DELETE')
             ->getForm();
     }

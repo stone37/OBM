@@ -1,8 +1,6 @@
 {% form_theme setDiscountForm 'Ui/Form/theme.html.twig' %}
 
-{% if order.items %}
-
-    {% set first = order.items.first() %}
+{% if order.items|length > 0 %}
 
 <section class="mb-4 mx-2 mx-md-3">
     <div class="row">
@@ -23,9 +21,9 @@
                                   aria-expanded="false" aria-controls="collapse2">
                                    <h4 class="h5-responsive mb-0 dark-grey-text font-weight-stone-500 text-center font-thin">
                                        Montant à payer:
-                                       <span class="text-default h4-responsive price font-weight-stone-600">
-                                           <div class="number d-inline-block py-0 my-0">{{ order.amountPaid }}</div>
-                                           <img src="{{ asset('public/images/devise.png') }}" alt="" class="devise d-inline-block">
+                                       <span class="text-danger h4-responsive price font-weight-stone-600">
+                                           <div class="number d-inline-block py-0 my-0">{{ order.amountPaid }}<span>CFA</span></div>
+                                           {#<img src="{{ asset('public/images/devise.png') }}" alt="" class="devise d-inline-block">#}
                                        </span>
                                        <i class="fas fa-angle-down rotate-icon blue-grey-text mt-2" style=""></i>
                                    </h4>
@@ -40,8 +38,7 @@
                                        <div class="d-flex justify-content-between">
                                            <div>{{ app_product_name(item.product) }}:</div>
                                            <div class="font-weight-stone-600 price item d-flex">
-                                               <div class="number">{{ item.priceTotal }}</div>
-                                               <img src="{{ asset('public/images/devise_dark.png') }}" class="devise item" alt="" />
+                                               <div class="number">{{ item.priceTotal }}<span class="small">CFA</span></div>
                                            </div>
                                        </div>
                                    {% endfor %}
@@ -49,31 +46,27 @@
                                    <div class="d-flex justify-content-between mt-3">
                                        <div class="font-weight-stone-600 h5-responsive">Total HT: </div>
                                        <div class="h4-responsive font-weight-stone-600 price total d-flex">
-                                           <div class="number">{{ order.priceItemsBeforeDiscount }}</div>
-                                           <img src="{{ asset('public/images/devise_dark.png') }}" class="devise" alt="" />
+                                           <div class="number">{{ order.priceItemsBeforeDiscount }}<span>CFA</span></div>
                                        </div>
                                    </div>
-                                   <div class="d-flex justify-content-between">
+                                   <div class="d-flex justify-content-between mt-2">
                                        <div class="font-weight-stone-600 h5-responsive">Total des taxes: </div>
                                        <div class="h4-responsive font-weight-stone-600 price total d-flex">
-                                           <div class="number">{{ order.tvaPriceTotal }}</div>
-                                           <img src="{{ asset('public/images/devise_dark.png') }}" class="devise" alt="" />
+                                           <div class="number">{{ order.tvaPriceTotal }}<span>CFA</span></div>
                                        </div>
                                    </div>
 
-                                   <div class="d-flex justify-content-between">
+                                   <div class="d-flex justify-content-between mt-2">
                                        <div class="font-weight-stone-600 h5-responsive">Reduction: </div>
                                        <div class="h4-responsive font-weight-stone-600 price total d-flex">
-                                           <div class="number">{{ order.discount }}</div>
-                                           <img src="{{ asset('public/images/devise_dark.png') }}" class="devise" alt="" />
+                                           <div class="number">{{ order.discount }}<span>CFA</span></div>
                                        </div>
                                    </div>
 
-                                   <div class="d-flex justify-content-between">
+                                   <div class="d-flex justify-content-between mt-2">
                                        <div class="font-weight-stone-600 h5-responsive">Total TTC: </div>
-                                       <div class="h4-responsive font-weight-stone-600 text-default price ttc d-flex">
-                                           <div class="number">{{ order.amountPaid }}</div>
-                                           <img src="{{ asset('public/images/devise.png') }}" class="devise" alt="" />
+                                       <div class="h4-responsive font-weight-stone-600 text-danger price ttc d-flex">
+                                           <div class="number">{{ order.amountPaid }}<span>CFA</span></div>
                                        </div>
                                    </div>
                                </div>
@@ -144,13 +137,13 @@
                                                 </div>
                                             </div>
                                             <div class="app-brand-logo text-center mt-3">
-                                                <img src="{{ asset('images/brand/mtn.png') }}" class="img-fluid mb-2 z-depth-2" alt="MTN mobile money logo">
-                                                <img src="{{ asset('images/brand/orange.png') }}" class="img-fluid mx-2 mb-2 orange z-depth-2" alt="Orange money logo">
-                                                <img src="{{ asset('images/brand/moov.png') }}" class="img-fluid mx-2 mb-2 moov z-depth-2" alt="Moov money logo">
-                                                <img src="{{ asset('images/brand/visa.png') }}" class="img-fluid mx-2 mb-2 visa z-depth-2" alt="Visa logo">
-                                                <img src="{{ asset('images/brand/masterCard.png') }}" class="img-fluid mx-2 mb-2 mastercard z-depth-2" alt="Mastercard logo">
-                                                <img src="{{ asset('images/brand/wari.png') }}" class="img-fluid mx-2 mb-2 wari z-depth-2" alt="wari logo">
-                                                <img src="{{ asset('images/brand/yup.png') }}" class="img-fluid yup mb-2 z-depth-2" alt="Yup logo">
+                                                <img src="{{ asset('images/brand/mtn.png') }}" class="img-fluid mb-2" alt="MTN mobile money logo">
+                                                <img src="{{ asset('images/brand/orange.png') }}" class="img-fluid mx-2 mb-2 orange" alt="Orange money logo">
+                                                <img src="{{ asset('images/brand/moov.png') }}" class="img-fluid mx-2 mb-2 moov" alt="Moov money logo">
+                                                <img src="{{ asset('images/brand/visa.png') }}" class="img-fluid mx-2 mb-2 visa" alt="Visa logo">
+                                                <img src="{{ asset('images/brand/masterCard.png') }}" class="img-fluid mx-2 mb-2 mastercard" alt="Mastercard logo">
+                                                <img src="{{ asset('images/brand/wari.png') }}" class="img-fluid mx-2 mb-2 wari" alt="wari logo">
+                                                <img src="{{ asset('images/brand/yup.png') }}" class="img-fluid yup mb-2" alt="Yup logo">
                                             </div>
                                         </div>
                                     </div>
@@ -158,8 +151,8 @@
                             {% endif %}
 
                             {% if settings.activeCredit %}
-                                {% if not (first.product.category == 'credit') %}
-                                    {% if order.order.user.wallet.balance >= order.amountPaid %}
+                                {% if not (order.getFirstProduct().category == 'credit') %}
+                                    {% if (order.order.user.wallet.balance >= order.amountPaid) %}
                                         <div class="col-12 col-md-6">
                                             <div class="card app-payment-type method mb-4">
                                                 <div class="card-body">
@@ -175,9 +168,9 @@
                                                     </div>
                                                     <p class="grey-text text-center mt-3">
                                                         Vous avez
-                                                        <span class="h4-responsive font-weight-stone-600 text-default h4-responsive price">
-                                                            <span class="number d-inline-block py-0 my-0">{{ app.user.wallet.balance }}</span>
-                                                            <img src="{{ asset('public/images/devise.png') }}" alt="" class="devise d-inline-block">
+                                                        <span class="h4-responsive font-weight-stone-600 text-danger h4-responsive price">
+                                                            <span class="number d-inline-block py-0 my-0">{{ app.user.wallet.balance }}<span>CFA</span></span>
+                                                            {#<img src="{{ asset('public/images/devise.png') }}" alt="" class="devise d-inline-block">#}
                                                         </span>
                                                         sur votre compte
                                                     </p>
@@ -191,9 +184,9 @@
                                                     <h5 class="h5-responsive font-weight-stone-600 grey-text mb-3">Paiement par crédit</h5>
                                                     <p class="grey-text">
                                                         Vous avez
-                                                        <span class="h4-responsive font-weight-stone-600 text-default h4-responsive price">
-                                                            <span class="number d-inline-block py-0 my-0">{{ app.user.wallet.balance }}</span>
-                                                            <img src="{{ asset('public/images/devise.png') }}" alt="" class="devise d-inline-block">
+                                                        <span class="h4-responsive font-weight-stone-600 text-danger h4-responsive price">
+                                                            <span class="number d-inline-block py-0 my-0">{{ app.user.wallet.balance }}<span>CFA</span></span>
+                                                            {#<img src="{{ asset('public/images/devise.png') }}" alt="" class="devise d-inline-block">#}
                                                         </span>
                                                         sur votre compte
                                                     </p>

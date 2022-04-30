@@ -1,0 +1,37 @@
+{% macro thread_list(thread, user, index) %}
+    <tr>
+        <td class="text-center">{{ index }}</td>
+        <td class="text-center">
+            {% if user.id == thread.createdBy.id %}
+                <span class="badge badge-primary">Moi</span>
+            {% else %}
+                <a href="{{ path('app_user_show', {'id': thread.createdBy.id}) }}" class="text-danger">
+                    @{{ thread.createdBy.username|lower }}
+                </a>
+            {% endif %}
+        </td>
+        <td class="text-center font-weight-stone-500 small-9">
+            {{ thread.createdAt|date_french(0, 1) }} . {{ thread.createdAt|date('H:i') }}
+        </td>
+        <td class="text-center">
+            {{ thread.messages|length }}
+        </td>
+        <td class="text-center py-2">
+            {% if thread.lastMessage %}
+                <a href="{{ path('app_message_thread_view', {'threadId': thread.id, 'index': index}) }}#message_{{ thread.lastMessage.id }}"
+                   class="btn btn-sm btn-default">
+                    Afficher <i class="fas fa-long-arrow-alt-right ml-1"></i>
+                </a>
+            {% else %}
+                ----
+            {% endif %}
+        </td>
+        <td  class="text-center py-2">
+            {% if app_message_can_delete_thread(thread) %}
+                <a href="" class="btn btn-sm btn-danger app-advert-thread-delete" data-id="{{ thread.id }}">
+                    Supprimer <i class="fas fa-trash ml-1"></i>
+                </a>
+            {% endif %}
+        </td>
+    </tr>
+{% endmacro %}
